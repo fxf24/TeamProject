@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="./">
 <body>
 <h1>로그인입니다.</h1>
 </body>
