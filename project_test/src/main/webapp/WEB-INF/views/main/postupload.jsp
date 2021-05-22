@@ -21,7 +21,9 @@ $(document).ready(function(){
 			processData:false,
 			contentType:false,
 			success: function(response){
-				var json = JSON.parse(response)
+				var responseSplit = response.split("|")
+				var filename = responseSplit[0]
+				var json = JSON.parse(responseSplit[1])
 
 				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
 				var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
@@ -33,7 +35,7 @@ $(document).ready(function(){
 				
 				//이미지 로드
 				var image = new Image()
-				image.src = "/upload/" + $("#selectedFile")[0].files[0]
+				image.src = "/upload/" + filename
 				image.onload = function(){
 					context.drawImage(image, 10, 10, image.width, image.height)
 					var names = json.predictions[0].detection_names
@@ -69,8 +71,8 @@ $(document).ready(function(){
 </head>
 <body>
 <form id="fileForm" method=post enctype="multipart/form-data">
-파일 <input id="selectedFile" type = file name="file"><br>
-<button id="fileUpload">파일전송</button>
+이미지 <input id="selectedFile" type = file name="file"><br>
+<button id="fileUpload">이미지 분석</button>
 </form>
 
 <canvas id="imagecanvas" width=500 height=500 style="border: 2px solid pink"></canvas>

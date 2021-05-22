@@ -34,7 +34,7 @@ public class MainController {
 		String result = naverService.getObjectDetectionService(filename);
 		System.out.println(filename +":" + result);
 		
-		return result; 
+		return filename +"|" +result; 
 	}
 	
 	@RequestMapping("/")
