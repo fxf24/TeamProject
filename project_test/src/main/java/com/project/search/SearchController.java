@@ -17,6 +17,7 @@ public class SearchController {
 		return "/search/test";
 	}
 		
+<<<<<<< HEAD
 	@RequestMapping("/search")
 	public String hastagsearch() {
 		return "/search/search";
@@ -60,6 +61,27 @@ public class SearchController {
 			event = "(hashtag)검색어를 입력해주세요.";
 		} else {
 			event = "(hashtag)검색결과가 없습니다.";
+=======
+	@RequestMapping(value="/hashtagsearch", method=RequestMethod.GET)
+	public String hastagsearch() {
+		return "/search/hashtagsearch";
+	}
+	
+	
+	@RequestMapping(value="/profilesearch", method=RequestMethod.GET)
+	public String profilesearch() {
+		return "/search/profilesearch";
+	}
+	
+	@RequestMapping(value="/idsearch")
+	@ResponseBody
+	public String idsearch(String searchmessage) {
+		String event = null;
+		if(searchmessage == "") {
+			event = "검색어를 입력해주세요.";
+		} else {
+			event = "검색결과가 없습니다.";
+>>>>>>> 63b6a9d52b0d3f29eca00be66c7cd9597e793f3e
 		}
 		//String response >> 추후 DB업데이트시 연결
 		return event; //DB업데이트 시 response 로 변경
