@@ -26,7 +26,7 @@ function search(){
 			} // success end
 		}) // ajax end
 	})// function end
-}
+}  
 </script>
 </head>
 <body>
