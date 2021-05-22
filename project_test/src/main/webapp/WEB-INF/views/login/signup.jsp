@@ -5,14 +5,14 @@
 <html>
 <head>
 <!-- px834 -->
-<link href="/resources/css/signup834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
+<link href="/css/signup834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
 <!-- px1440 -->
-<link href="/resources/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
+<link href="/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
 <!-- px1920 -->
-<link href="/resources/css/signup1980.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
+<link href="/css/signup1980.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="<%=request.getContextPath()%>/resources/jquery-3.2.1.min.js"></script>
+<script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
 	
