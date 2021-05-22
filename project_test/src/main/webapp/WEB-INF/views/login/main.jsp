@@ -21,17 +21,17 @@ $(document).ready(function(){
 <body>
 
 <div id="login">
-		<img id="hashhersheImg8341194" src="hashhersheImg8341194.png" srcset="hashhersheImg8341194.png 1x, hashhersheImg8341194@2x.png 2x">
-		<img id="cardigan" src="cardigan.png" srcset="cardigan.png 1x, cardigan@2x.png 2x">
-		<img id="head" src="head.png" srcset="head.png 1x, head@2x.png 2x">
-		<img id="pants" src="pants.png" srcset="pants.png 1x, pants@2x.png 2x">
-		<img id="scarf" src="scarf.png" srcset="scarf.png 1x, scarf@2x.png 2x">
-		<img id="help" src="help.png" srcset="help.png 1x, help@2x.png 2x">
+		<img id="hashhersheImg8341194" src="/resources/loginimage/hashhersheImg8341194.png" srcset="hashhersheImg8341194.png 1x, hashhersheImg8341194@2x.png 2x">
+		<img id="cardigan" src="/resources/loginimage/cardigan.png" srcset="cardigan.png 1x, cardigan@2x.png 2x">
+		<img id="head" src="/resources/loginimage/head.png" srcset="head.png 1x, head@2x.png 2x">
+		<img id="pants" src="/resources/loginimage/pants.png" srcset="pants.png 1x, pants@2x.png 2x">
+		<img id="scarf" src="/resources/loginimage/scarf.png" srcset="scarf.png 1x, scarf@2x.png 2x">
+		<img id="help" src="/resources/loginimage/help.png" srcset="help.png 1x, help@2x.png 2x">
 		<div id="hashhershe">
 			<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
 		</div>
-		<img id="hashLine1" src="hashhash.png" srcset="hashhash.png 1x, hashhash@2x.png 2x">
-		<img id="hashLine2" src="underhashhash.png" srcset="underhashhash.png 1x, underhashhash@2x.png 2x">
+		<img id="hashLine1" src="/resources/loginimage/hashhash.png" srcset="hashhash.png 1x, hashhash@2x.png 2x">
+		<img id="hashLine2" src="/resources/loginimage/underhashhash.png" srcset="underhashhash.png 1x, underhashhash@2x.png 2x">
 		<div id="naverLoginPBox">
 			<svg class="naverLoginBox1">
 				<rect id="naverLoginBox1" rx="0" ry="0" x="0" y="0" width="286" height="62">
