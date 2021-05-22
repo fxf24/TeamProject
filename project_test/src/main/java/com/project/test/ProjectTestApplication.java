@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import com.project.search.SearchController;
 
 @SpringBootApplication
+@ComponentScan
 @ComponentScan(basePackageClasses = SearchController.class)
 public class ProjectTestApplication {
 
