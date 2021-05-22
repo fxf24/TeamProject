@@ -25,8 +25,10 @@ function search(){
 				console.log(searchval);
 			} // success end
 		}) // ajax end
-	})// function end
-}  
+	})// onclick function end
+}// search function end
+
+
 </script>
 </head>
 <body>
