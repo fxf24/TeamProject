@@ -59,9 +59,4 @@ public class MainController {
 //		return "search/main";
 //	}
 
-	@RequestMapping("/search")
-	public String search() {
-		return "search/main";
-	}
-
 }
