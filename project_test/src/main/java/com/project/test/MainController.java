@@ -52,8 +52,16 @@ public class MainController {
 		return "profile/main";
 	}
 
+
+	// 중복 방지를 위해 블록처리
+//	@RequestMapping("/search")
+//	public String search() {
+//		return "search/main";
+//	}
+
 	@RequestMapping("/search")
 	public String search() {
 		return "search/main";
 	}
+
 }
