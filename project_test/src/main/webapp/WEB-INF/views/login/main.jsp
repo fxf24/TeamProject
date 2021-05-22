@@ -33,7 +33,6 @@ $(document).ready(function(){
 		<img id="hashLine2" src="/loginimage/underhashhash.png" >
 		<div id="naverLoginPBox">
 			<svg class="naverLoginBox1">
-				
 				<rect id="naverLoginBox1" rx="0" ry="0" x="0" y="0" width="286" height="62"/>
 			</svg>
 			<div id="naverLoginBox2">
