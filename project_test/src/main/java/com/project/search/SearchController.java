@@ -27,5 +27,18 @@ public class SearchController {
 	public String profilesearch() {
 		return "/search/profilesearch";
 	}
-	 
+	
+	@RequestMapping(value="/idsearch")
+	@ResponseBody
+	public String idsearch(String searchmessage) {
+		String event = null;
+		if(searchmessage == "") {
+			event = "검색어를 입력해주세요.";
+		} else {
+			event = "검색결과가 없습니다.";
+		}
+		//String response >> 추후 DB업데이트시 연결
+		return event; //DB업데이트 시 response 로 변경
+	}
+
 }
