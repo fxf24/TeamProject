@@ -42,6 +42,7 @@ $(document).ready(function(){
 					var names = odjson.predictions[0].detection_names
 					var confidence = odjson.predictions[0].detection_scores
 					var boxes = odjson.predictions[0].detection_boxes
+					var faces = cfrjson.faces 
 					
 					for(var i = 0; i < names.length; i++){
 						//if(confidence[i]>=0.9){
@@ -60,6 +61,15 @@ $(document).ready(function(){
 							}
 							
 						//}//if end
+					}//for end
+					
+					for(var i = 0; i<faces.length; i++){
+						var celebrity = faces[i].celebrity.value
+						var confidence = faces[i].celebrity.confidence
+						
+						if(confidence>0.5){
+							$("#names").append("<a href='https://search.shopping.naver.com/search/all?query="+celebrity+"&cat_id=&frm=NVSHATC'>#" + celebrity + " </a>")
+						}//if end
 					}//for end
 				}//image onload end
 			}
