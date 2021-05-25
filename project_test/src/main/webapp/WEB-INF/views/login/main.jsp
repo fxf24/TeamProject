@@ -4,11 +4,11 @@
 <html>
 <head>
 <!-- px834 -->
-<link href="/resources/static/css/login834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
+<link href="/css/login834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
 <!-- px1440 -->
-<link href="/resources/static/css/login1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
+<link href="/css/login1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
 <!-- px1920 -->
-<link href="/resources/static/css/login1980.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
+<link href="/css/login1920.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/jquery-3.2.1.min.js"></script>
@@ -20,17 +20,17 @@ $(document).ready(function(){
 <body>
 
 <div id="login">
-		<img id="hashhersheImg8341194" src="/resources/static//loginimage/hashhersheImg8341194.png" >
-		<img id="cardigan" src="/resources/static//loginimage/cardigan.png" >
-		<img id="head" src="/resources/static//loginimage/head.png" >
-		<img id="pants" src="/resources/static//loginimage/pants.png" >
-		<img id="scarf" src="/resources/static//loginimage/scarf.png" >
-		<img id="help" src="/resources/static//loginimage/help.png" >
+		<img id="hashhersheImg8341194" src="/loginimage/hashhersheImg8341194.png" >
+		<img id="cardigan" src="/loginimage/cardigan.png" >
+		<img id="head" src="/loginimage/head.png" >
+		<img id="pants" src="/loginimage/pants.png" >
+		<img id="scarf" src="/loginimage/scarf.png" >
+		<img id="help" src="/loginimage/help.png" >
 		<div id="hashhershe">
 			<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
 		</div>
-		<img id="hashLine1" src="/resources/static//loginimage/hashhash.png" >
-		<img id="hashLine2" src="/resources/static//loginimage/underhashhash.png" >
+		<img id="hashLine1" src="/loginimage/hashhash.png" >
+		<img id="hashLine2" src="/loginimage/underhashhash.png" >
 		<div id="naverLoginPBox">
 			<svg class="naverLoginBox1">
 				<rect id="naverLoginBox1" rx="0" ry="0" x="0" y="0" width="286" height="62"/>
@@ -39,7 +39,7 @@ $(document).ready(function(){
 				<svg class="naverLoginBox3">
 					<rect id="naverLoginBox3" rx="0" ry="0" x="0" y="0" width="270" height="44"/>
 				</svg>
-				<img id="naverIcon" src="/resources/static//loginimage/naverIcon.png" >
+				<img id="naverIcon" src="/loginimage/naverIcon.png" >
 				<div id="naverLoginFont">
 					<span>네이버로 로그인하기</span>
 				</div>
@@ -90,7 +90,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<div id="signup">
-					<span>계정만들기</span>
+					<span><a href="/login/signup">계정만들기</a></span>
 				</div>
 			<div id="findIdPass">
 				<span>아이디/비밀번호 찾기</span>

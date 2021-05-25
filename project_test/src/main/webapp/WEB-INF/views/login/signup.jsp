@@ -9,7 +9,7 @@
 <!-- px1440 -->
 <link href="/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
 <!-- px1920 -->
-<link href="/css/signup1980.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
+<link href="/css/signup1920.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/jquery-3.2.1.min.js"></script>
@@ -60,10 +60,12 @@ $(document).ready(function(){
 						<span>가입하기</span>
 					</div>
 					<div class="signupButtonClick">
-						<button id="signupButtonClick" >
+						<button id="signupButtonClick" ></button>
 					</div>
 				</div>
 			</div>
+			
+			<form>
 			<div id="idPBox">
 				<div id="idBox1">
 					<svg class="idBox2">
@@ -108,7 +110,7 @@ $(document).ready(function(){
 					<input id="passwordInput"  type="password">
 				</div>
 			</div>
-				<div id="confirmPassPBox">
+			<div id="confirmPassPBox">
 				<div id="confirmPassBox1">
 					<svg class="confirmPassBox2">
 						<rect id="confirmPassBox2" rx="10" ry="10" x="0" y="0" width="372" height="52">
@@ -119,6 +121,8 @@ $(document).ready(function(){
 					<input id="confirmPassInput"  type="password">
 				</div>
 			</div>
+			</form>
+			
 			<div id="signupTitle">
 				<span>회원가입</span>
 			</div>
@@ -127,9 +131,9 @@ $(document).ready(function(){
 	<div id="hashhershe">
 		<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
 	</div>
-	<img id="hashLine1" src="/resources/loginimage/hashhash.png" srcset="hashhash.png 1x,hashhash@2x.png 2x">
+	<img id="hashLine1" src="/loginimage/hashhash.png" >
 		
-	<img id="hashLine2" src="/resources/loginimage/underhashhash.png" srcset="underhashhash.png 1x, underhashhash@2x.png 2x">
-	
+	<img id="hashLine2" src="/loginimage/underhashhash.png" >
+</div>	
 </body>
 </html>

@@ -47,6 +47,12 @@ public class MainController {
 		return "login/main";
 	}
 
+	@RequestMapping("/login/signup")
+	public String signup() {
+		return "login/signup";
+	}
+	
+	
 	@RequestMapping("/profile")
 	public String profile() {
 		return "profile/main";
