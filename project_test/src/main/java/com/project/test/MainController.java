@@ -49,13 +49,22 @@ public class MainController {
 		return "login/main";
 	}
 
+	@RequestMapping("/login/signup")
+	public String signup() {
+		return "login/signup";
+	}
+	
+	
 	@RequestMapping("/profile")
 	public String profile() {
 		return "profile/main";
 	}
 
-	@RequestMapping("/search")
-	public String search() {
-		return "search/main";
-	}
+
+	// 중복 방지를 위해 블록처리
+//	@RequestMapping("/search")
+//	public String search() {
+//		return "search/main";
+//	}
+
 }
