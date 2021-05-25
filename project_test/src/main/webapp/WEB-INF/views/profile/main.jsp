@@ -31,35 +31,40 @@ function changeValue(obj){
 
 <!-- 상단 고정 스타일 css 연결  -->
 <header>
-	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
+	<link href="./css/HHhead.css" rel="stylesheet" type="text/css">
 </header>
 
 <main>
 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
+
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
       
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
       <div> 
-      	<img id="profileimage" style="border-radius:70px;" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
+      	<img id="profileimage" style="border-radius:70px;text-align: center;" src="./image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
       </div>
         
-      <form name="imageform" method="POST" ENCTYPE="multipart/form-data">
+      <form name="imageform" method="POST" ENCTYPE="multipart/form-data" action="imageform.jsp" style="text-align: center;">
     		<input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
     		<input type="hidden" name = "target_url">
 	</form>
+	 
 
-        <div class="fw-light" style="float:left;">회원 아이디</div>
+        <div class="fw-light" style="float: left; width: 20%; text-align: center;">회원 아이디</div>
+        <div style="float: left; width: 20%; text-align: center;"><button onclick="location='editform.jsp'">프로필 편집</button></div>
         
-        <!-- 프로필 편집 클릭 시, 새로운 창으로 이동 - js 구현 --> 
-        <form name="editform" ENCTYPE="multipart/form-data" action="/editform.jsp"> 
-        	<input name="profileedit" type="button" value="프로필 편집" style="float:right;"/>
-       </form>
+<!--         프로필 편집 클릭 시, 새로운 창으로 이동 - js 구현  -->
+<!--         <form name="editform" ENCTYPE="multipart/form-data" action="editform.jsp">  -->
+<!--         	<input name="profileedit" type="button" value="프로필 편집"/> -->
+<!--        </form> -->
+       
       </div>
     </div>
   </section>
+
 
   <div class="album py-5 bg-light">
     <div class="container">
