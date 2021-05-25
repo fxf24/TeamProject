@@ -31,7 +31,7 @@ function changeValue(obj){
 
 <!-- 상단 고정 스타일 css 연결  -->
 <header>
-	<link href="./css/HHhead.css" rel="stylesheet" type="text/css">
+	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
 </header>
 
 <main>
@@ -44,7 +44,7 @@ function changeValue(obj){
       
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
       <div> 
-      	<img id="profileimage" style="border-radius:70px;text-align: center;" src="./image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
+      	<img id="profileimage" style="border-radius:70px;text-align: center;" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
       </div>
         
       <form name="imageform" method="POST" ENCTYPE="multipart/form-data" action="imageform.jsp" style="text-align: center;">
