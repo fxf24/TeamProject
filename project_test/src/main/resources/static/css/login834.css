@@ -1,0 +1,417 @@
+@charset "UTF-8";
+
+	#login{
+		margin: -8px;
+		position: absolute;
+		width: 104.5vh;
+		height: 100%;
+		overflow: hidden;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	#hashhersheImg8341194 {
+		position: absolute;
+		width: 834px;
+		height: 1194px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#loginBox {
+		position: absolute;
+		width: 428px;
+		height: 644px;
+		left: 200px;
+		top: 276px;
+		overflow: visible;
+	}
+	#loginBox1 {
+		position: absolute;
+		width: 428px;
+		height: 644px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+		#loginBut{
+		position: absolute;
+		width: 344px;
+		height: 40px;
+		left: 41px;
+		top: 385px;
+		overflow: visible;
+		border:none;
+		background: transparent; 
+		z-index: 9999;
+	}
+	#loginBox2{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-opacity: 0.3;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.loginBox2{
+		position: absolute;
+		overflow: visible;
+		width: 428px;
+		height: 644px;
+		left: 0px;
+		top: 0px;
+		border: none;
+		background: transparent;
+	}
+	#loginText{
+		left: 176px;
+		top: 136px;
+		position: absolute;
+		overflow: visible;
+		width: 62px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 22px;
+		color: rgba(0,0,0,1);
+		letter-spacing: 1.2px;
+		text-transform: uppercase;
+	}
+	#loginCheckBox1 {
+		position: absolute;
+		width: 344px;
+		height: 40px;
+		left: 41px;
+		top: 385px;
+		overflow: visible;
+	}
+
+	#loginCheckBox3{
+		fill: rgba(214,214,214,1);
+		stroke: rgba(0,0,0,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.loginCheckBox3{
+		position: absolute;
+		overflow: visible;
+		width: 344px;
+		height: 40px;
+		left: 2px;
+		top: 0px;
+	}
+	#loginCheckBoxText{
+		left: 142px;
+		top: 10px;
+		position: absolute;
+		overflow: visible;
+		width: 52px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(0,0,0,1);
+		letter-spacing: 1.2px;
+	}
+	#pwTextBox {
+		position: absolute;
+		width: 344px;
+		height: 40px;
+		left: 43px;
+		top: 317px;
+		overflow: visible;
+	}
+		#pwInput {
+		position: absolute;
+		width: 342px;
+		height: 40px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+		z-index: 9999;
+		border: none;
+		background: transparent;
+		text-align: center;
+	}
+	#pwTextBox4 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.pwTextBox4{
+		position: absolute;
+		overflow: visible;
+		width: 344px;
+		height: 42px;
+		left: 0px;
+		top: 0px;
+		border: none;
+		background: transparent;
+		text-align: center;
+		}
+	#pwText{
+		position: absolute;
+		width: 60px;
+		height: 18px;
+		left: 142px;
+		top: 11px;
+		overflow: visible;
+	}
+	#pwText1 {
+		position: absolute;
+		width: 60px;
+		height: 18px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#pwText2{
+		opacity:0.8;
+		left: 0px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 62px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(100,100,100,1);
+		letter-spacing: 1.2px;
+	}
+	#idTextBox {
+		position: absolute;
+		width: 344px;
+		height: 40px;
+		left: 43px;
+		top: 247px;
+		overflow: visible;
+	}
+	#idInput {
+		position: absolute;
+		width: 344px;
+		height: 40px;
+		left: -30px;
+		top: 120px;
+		overflow: visible;
+		z-index: 9999;
+		border: none;
+		background: transparent;
+		text-align: center;
+	}
+	#idTextBox2 {
+		fill: rgba(255,255,255,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.idTextBox2 {
+		position: absolute;
+		overflow: visible;
+		width: 344px;
+		height: 40px;
+		left: -28px;
+		top: 120px;
+	}
+	#idTextBox{
+		opacity: 0.8;
+		left: 70px;
+		top: 132px;
+		position: absolute;
+		overflow: visible;
+		width: 158px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(100,100,100,1);
+		letter-spacing: 1.2px;
+	}
+	#signup{
+		left: 305px;
+		top: 457px;
+		position: absolute;
+		overflow: visible;
+		width: 77px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px;
+		color: rgba(0,135,255,1);
+		letter-spacing: 1.2px;
+	}
+	#findIdPass{
+		left: 43px;
+		top: 457px;
+		position: absolute;
+		overflow: visible;
+		width: 155px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 16px;
+		color: rgba(0,135,255,1);
+		letter-spacing: 1.2px;
+	}
+	#naverLoginPBox{
+		position: absolute;
+		width: 286px;
+		height: 62px;
+		left: 270px;
+		top: 800px;
+		overflow: visible;
+		z-index: 9995;
+	}
+	#naverLoginBox1{
+		fill: rgba(255,255,255,1);
+	}
+	.naverLoginBox1{
+		position: absolute;
+		overflow: visible;
+		width: 286px;
+		height: 62px;
+		left: 0px;
+		top: 0px;
+	}
+	#naverLoginBox2{
+		position: absolute;
+		width: 270px;
+		height: 44px;
+		left: 6px;
+		top: 7px;
+		overflow: visible;
+	}
+	#naverLoginBox3{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.naverLoginBox3{
+		position: absolute;
+		overflow: visible;
+		width: 270px;
+		height: 44px;
+		left: 0px;
+		top: 0px;
+	}
+	#naverIcon{
+		position: absolute;
+		width: 44px;
+		height: 44px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#naverLoginFont{
+		left: 70px;
+		top: 10px;
+		position: relative;
+		overflow: visible;
+		width: 171px;
+		white-space: nowrap;
+		line-height: 62px;
+		margin-top: -21px;
+		text-align: left;
+		font-family: Noto Sans CJK KR;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+		color: rgba(0,191,24,1);
+	}
+		#cardigan {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}
+	#head {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}
+	#pants {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}
+	#scarf {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}
+	#help {
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}
+	#hashhershe {
+		left: -500px;
+		top: -500px;
+		position: absolute;
+		overflow: visible;
+		width: 0px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 0px;
+		color: rgba(255,255,255,0);
+	}
+	#hashLine1{
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}
+	#hashLine2{
+		position: absolute;
+		width: 0px;
+		height: 0px;
+		left: 834px;
+		top: 834px;
+		overflow: visible;
+	}

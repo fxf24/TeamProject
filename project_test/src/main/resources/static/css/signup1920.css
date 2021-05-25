@@ -1,0 +1,496 @@
+@charset "UTF-8";
+	#signup {
+		margin: -8px;
+		position: absolute;
+		width: 240vh;
+		height: 100%;
+		background-color: rgba(255,236,72,1);
+		overflow: hidden;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	#signupPBox1{
+		position: absolute;
+		width: 1090px;
+		height: 770px;
+		left: 415px;
+		top: 198px;
+		overflow: visible;
+	}
+	#signupPBox2{
+		position: absolute;
+		width: 592px;
+		height: 604px;
+		left: 359px;
+		top: 60px;
+		overflow: visible;
+	}
+	#signupBox1{
+		position: absolute;
+		width: 1090px;
+		height: 644px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#signupBox2{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(210,210,210,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.signupBox2{
+		position: absolute;
+		overflow: visible;
+		width: 1090px;
+		height: 644px;
+		left: 0px;
+		top: 0px;
+	}
+	#idBoxFont{
+		left: 0px;
+		top: 93px;
+		position: absolute;
+		overflow: visible;
+		width: 67px;
+		white-space: nowrap;
+		line-height: 73px;
+		margin-top: -25.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 22px;
+		color: rgba(128,128,128,1);
+	}
+	#idTerm{
+		left: 98px;
+		top: 93px;
+		position: absolute;
+		overflow: visible;
+		width: 212px;
+		white-space: nowrap;
+		line-height: 70px;
+		margin-top: -24.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(255,0,0,1);
+	}
+	#emailFont {
+		left: 0px;
+		top: 194px;
+		position: absolute;
+		overflow: visible;
+		width: 66px;
+		white-space: nowrap;
+		line-height: 73px;
+		margin-top: -25.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 22px;
+		color: rgba(128,128,128,1);
+	}
+	#passwordFont{
+		left: 0px;
+		top: 295px;
+		position: absolute;
+		overflow: visible;
+		width: 88px;
+		white-space: nowrap;
+		line-height: 73px;
+		margin-top: -25.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 22px;
+		color: rgba(128,128,128,1);
+	}
+	#emailTerm{
+		left: 98px;
+		top: 194px;
+		position: absolute;
+		overflow: visible;
+		width: 281px;
+		white-space: nowrap;
+		line-height: 70px;
+		margin-top: -24.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(255,0,0,1);
+	}
+	#passwordTerm{
+		left: 98px;
+		top: 295px;
+		position: absolute;
+		overflow: visible;
+		width: 494px;
+		white-space: nowrap;
+		line-height: 70px;
+		margin-top: -24.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(191,191,191,1);
+	}
+	#confirmPassFont{
+		left: 0px;
+		top: 395px;
+		position: absolute;
+		overflow: visible;
+		width: 132px;
+		white-space: nowrap;
+		line-height: 73px;
+		margin-top: -25.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 22px;
+		color: rgba(128,128,128,1);
+	}
+	#signupPButton{
+		position: absolute;
+		width: 260px;
+		height: 60px;
+		/* left: 58x; */
+		top: 544px;
+		overflow: visible;
+	}
+	#signupButton1{
+		position: absolute;
+		width: 260px;
+		height: 60px;
+		left: 58px;
+		top: 0px;
+		overflow: visible;
+	}
+	#signupButton2{
+		fill: rgba(0,0,0,1);
+		stroke: rgba(128,128,128,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.signupButton2{
+		position: absolute;
+		overflow: visible;
+		width: 200px;
+		height: 48px;
+		left: 30px;
+		top: 6px;
+	}
+	#signupFont {
+		left: 93px;
+		top: 18px;
+		position: absolute;
+		overflow: visible;
+		width: 71px;
+		white-space: nowrap;
+		line-height: 63px;
+		margin-top: -22px;
+		text-align: left;
+		font-family: Noto Sans CJK KR;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 19px;
+		color: rgba(241,168,187,1);
+	}
+	.signupButtonClick{
+		fill: transparent;
+	}
+	#signupButtonClick{
+		opacity:0;
+		position: absolute;
+		overflow: visible;
+		width: 260px;
+		height: 60px;
+		left: 0px;
+		top: 0px;
+		z-index: 9999;
+	}
+	#idPBox{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 132px;
+		overflow: visible;
+	}
+	#idBox1 {
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#idBox2 {
+		fill: transparent;
+	}
+	.idBox2 {
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+	}
+	#idBox3{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(188,188,188,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.idBox3{
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+	}
+	#idFont1 {
+		left: 9px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 32px;
+		white-space: nowrap;
+		line-height: 126px;
+		margin-top: -46px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 34px;
+		color: rgba(129,129,129,1);
+	}
+	.idBoxInput{
+		fill: transparent;
+	}
+	#idBoxInput{
+		opacity:0;
+		stroke-opacity: 0;
+		position: absolute;
+		overflow: visible;
+		width: 309px;
+		height: 52px;
+		left: 44px;
+		top: 0px;
+		z-index: 9999;
+	}
+	#emailPBox{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 233px;
+		overflow: visible;
+	}
+	#emailBox1{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#emailBox2 {
+		fill: transparent;
+	}
+	.emailBox2 {
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+	}
+	#emailBox3{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(188,188,188,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.emailBox3{
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+	}
+	.emailInput{
+		fill: transparent;
+	}
+	#emailInput{
+		opacity:0;
+		stroke-opacity: 0;
+		position: absolute;
+		overflow: visible;
+		width: 335px;
+		height: 52px;
+		left: 18px;
+		top: 0px;
+		z-index: 9999;
+	}
+	#passwordPBox{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 334px;
+		overflow: visible;
+	}
+	#passwordBox1{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#passwordBox2{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(188,188,188,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.passwordBox2{
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+	}
+	.passwordInput {
+		fill: transparent;
+	}
+	#passwordInput{
+		opacity:0;
+		stroke-opacity: 0;
+		position: absolute;
+		overflow: visible;
+		width: 335px;
+		height: 52px;
+		left: 18px;
+		top: 0px;
+		z-index: 9999;
+	}
+	#confirmPassPBox{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 434px;
+		overflow: visible;
+	}
+	#confirmPassBox1{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+		overflow: visible;
+	}
+	#confirmPassBox2{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(188,188,188,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.confirmPassBox2{
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+	}
+	.confirmPassInput {
+		fill: transparent;
+	}
+	#confirmPassInput{
+		opacity:0;
+		stroke-opacity: 0;
+		position: absolute;
+		overflow: visible;
+		width: 335px;
+		height: 52px;
+		left: 18px;
+		top: 0px;
+		z-index: 9999;
+	}
+	#signupTitle {
+		left: 142px;
+		top: 0px;
+		position: absolute;
+		overflow: visible;
+		width: 89px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Noto Sans CJK KR;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 24px;
+		color: rgba(0,0,0,1);
+	}
+	#hashhershe {
+		left: 744px;
+		top: 16px;
+		position: absolute;
+		overflow: visible;
+		width: 507px;
+		white-space: nowrap;
+		text-align: left;
+		font-family: Arial;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 30px;
+		color: rgba(255,0,66,1);
+	}
+	#hashLine1{
+		position: absolute;
+		width: 487.316px;
+		height: 116px;
+		left: 737px;
+		top: 13px;
+		overflow: visible;
+	}
+	#hashLine2{
+		position: absolute;
+		width: 491px;
+		height: 23px;
+		left: 737px;
+		top: 148px;
+		overflow: visible;
+	}

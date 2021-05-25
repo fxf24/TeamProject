@@ -12,20 +12,57 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SearchController {
 
 	// 테스트용
-	@RequestMapping(value="/test", method=RequestMethod.GET)
+	@RequestMapping(value="/searchtest", method=RequestMethod.GET)
 	public String test() {
-		return "/search/test";
+		return "/search/mainsearchtest";
 	}
 		
-	@RequestMapping(value="/hashtagsearch", method=RequestMethod.GET)
+	@RequestMapping("/search")
 	public String hastagsearch() {
-		return "/search/hashtagsearch";
+		return "/search/search";
+	}
+
+	// 아래 내용은 DB연결 시 변경 필요
+	// id 검색시 반환 
+	@RequestMapping("/idsearch") //(value="/idsearch", method=RequestMethod.GET)
+	@ResponseBody
+	public String idsearch(String searchmessage) {
+		String event = null;
+		if(searchmessage == "") {
+		event = "(id)검색어를 입력해주세요.";
+	} else {
+		event = searchmessage+"(id)검색결과가 없습니다.";
+	}
+	//String response >> 추후 DB업데이트시 연결
+	return event; //DB업데이트 시 response 로 변경
 	}
 	
-	
-	@RequestMapping(value="/profilesearch", method=RequestMethod.GET)
-	public String profilesearch() {
-		return "/search/profilesearch";
+	// name 검색시 반환 
+	@RequestMapping("/namesearch")
+	@ResponseBody
+	public String namesearch(String searchmessage) {
+		String event = null;
+		if(searchmessage == "") {
+			event = "(name)검색어를 입력해주세요.";
+		} else {
+			event = searchmessage+"(name)검색결과가 없습니다.";
+		}
+		//String response >> 추후 DB업데이트시 연결
+		return event; //DB업데이트 시 response 로 변경
 	}
-	 
+	
+	// hashtag 검색시 반환 
+	@RequestMapping("/hashtagsearch")
+	@ResponseBody
+	public String hashtagsearch(String searchmessage) {
+		String event = null;
+		if(searchmessage == "") {
+			event = "(hashtag)검색어를 입력해주세요.";
+		} else {
+			event = searchmessage+"(hashtag)검색결과가 없습니다.";
+		}
+		//String response >> 추후 DB업데이트시 연결
+		return event; //DB업데이트 시 response 로 변경
+	}
+
 }
