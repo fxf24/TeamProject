@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String searchword = request.getParameter("searchWord");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,8 @@
 <title>Insert title here</title>
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
-$(document).ready(function(){
+$(document).ready(function(){ 
+	//id, name, hashtag 버튼 클릭시 각각의 화면 출력
 	$("#idbutton").on('click', function(){
 		$('#idSearch').css("display", "block");
 		$('#nameSearch').css("display", "none");
@@ -26,9 +31,47 @@ $(document).ready(function(){
 		$('#nameSearch').css("display", "none");
 		$('#hashtagSearch').css("display", "block");
 	})
+	
+		// main에서 넘어오는 searchWord 검색
+		var testMessage = $("#searchbar").val();
+		// id 검색결과
+		$.ajax({
+			url :"/idsearch",
+			type : "get",
+			data : {"searchmessage" : testMessage},
+			//dataType : "json",
+			success : function(idresponse){
+				var searchval = idresponse;
+				$("#idSearch").text(searchval);
+			} // success end
+		}) // ajax end	
+		
+		// name 검색결과		
+		$.ajax({
+			url :"/namesearch",
+			type : "get",
+			data : {"searchmessage" : testMessage},
+			success : function(idresponse){
+				var searchval = idresponse;
+				$("#nameSearch").text(searchval);
+			} // success end
+		})// ajax end
+		
+		// hashtag 검색결과
+		$.ajax({ 
+			url :"/hashtagsearch",
+			type : "get",
+			data : {"searchmessage" : testMessage},
+			success : function(idresponse){
+				var searchval = idresponse;
+				$("#hashtagSearch").text(searchval);
+			} // success end
+		})// ajax end
 }); //ready end
 
-function search(){
+
+//search버튼 클릭 시 검색결과 반환 함수
+function search(){ 
 	var searchMessage = $("#searchbar").val();
 		// id 검색결과
 		$.ajax({
@@ -66,14 +109,11 @@ function search(){
 }// search function end
 
 
-
-
-
 </script>
 </head>
 <body>
 <h1>검색페이지</h1>
-<input type="text" id="searchbar">
+<input type="text" id="searchbar" value=<%=searchword%>>
 <input type="submit" id="searchbutton" value="검색" onclick="search()"><br>
 <div id="searchlist">
 	<button id="idbutton">아이디</button>&nbsp;&nbsp;

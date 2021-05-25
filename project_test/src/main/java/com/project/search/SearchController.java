@@ -31,7 +31,7 @@ public class SearchController {
 		if(searchmessage == "") {
 		event = "(id)검색어를 입력해주세요.";
 	} else {
-		event = "(id)검색결과가 없습니다.";
+		event = searchmessage+"(id)검색결과가 없습니다.";
 	}
 	//String response >> 추후 DB업데이트시 연결
 	return event; //DB업데이트 시 response 로 변경
@@ -45,7 +45,7 @@ public class SearchController {
 		if(searchmessage == "") {
 			event = "(name)검색어를 입력해주세요.";
 		} else {
-			event = "(name)검색결과가 없습니다.";
+			event = searchmessage+"(name)검색결과가 없습니다.";
 		}
 		//String response >> 추후 DB업데이트시 연결
 		return event; //DB업데이트 시 response 로 변경
@@ -59,7 +59,7 @@ public class SearchController {
 		if(searchmessage == "") {
 			event = "(hashtag)검색어를 입력해주세요.";
 		} else {
-			event = "(hashtag)검색결과가 없습니다.";
+			event = searchmessage+"(hashtag)검색결과가 없습니다.";
 		}
 		//String response >> 추후 DB업데이트시 연결
 		return event; //DB업데이트 시 response 로 변경
