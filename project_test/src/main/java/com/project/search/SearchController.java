@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class SearchController {
 
 	// 테스트용
-	@RequestMapping(value="/test", method=RequestMethod.GET)
+	@RequestMapping(value="/searchtest", method=RequestMethod.GET)
 	public String test() {
-		return "/search/test";
+		return "/search/mainsearchtest";
 	}
 		
 	@RequestMapping("/search")
