@@ -1,0 +1,298 @@
+@charset "UTF-8";
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
+	#mainBarBox{
+	position: absolute;
+	}
+	.mainBarBox{
+	height: 100000vh;
+	position: absolute;
+	}
+	#topbar1{
+		fill:rgba(0,0,0,1);
+			}
+	.topbar1{
+		position: sticky;
+		overflow: scroll;
+		width: 1920px;
+		height: 68px;
+		top: 0px;
+	    right: 0px;
+	    left: 0px;
+	    z-index: 9998;
+	    display: flex;
+	    margin: 0;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+	
+	#mainBarBox2{
+	position: absolute;
+
+	}
+	.mainBarBox2{
+	top: 0vh;
+	height: 10000vh;
+	position: absolute;
+	}
+	.titleHH{
+		position: sticky;
+		width: 180px;
+		height: 140.5px;
+		top: 0px;
+	    right: 0px;
+	    left: 0px;
+	    z-index: 9999;
+	    display: flex;
+	    margin-left: 476px;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	    background-image:url("titleHH.jpg") ;
+	    background-size: 180px 140.5px;
+		background-repeat:no-repeat ;
+	}
+
+	#iconPBox{
+		position: sticky;
+		display:flex;
+		width: 50px;
+		height: 50px;
+		left: 0px;
+		top: 0px;
+		padding-left:1670px;
+		padding-top:10px;
+	    z-index: 9998;
+	}
+	#searchIconBox{
+		position: sticky;
+		display:flex;
+		width: 50px;
+		height: 50px;
+		left: 89.5%;
+		top: 39px;
+	    z-index: 9998;
+	}
+	#loginIconBox{
+		left: 85.52083%;
+		top: 39px;
+	    z-index: 9998;
+		width: 50px;
+		height: 50px;
+
+	}
+		#searchIconBox{
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 50px;
+		height: 50px;
+		transform: matrix(1,0,0,1,0,0);
+		padding-right: 15px;
+	}
+		#searchIcon{
+		fill: rgba(255,255,255,1);
+	}
+	.searchIcon{
+
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 40px;
+		height: 55px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,-20,0);
+		margin-left: 5px;
+		}
+	#loginIcon{
+		fill: rgba(255,255,255,1);
+	}
+	.loginIcon{
+		justify-content:flex-end;
+		display:inline;
+	    z-index: 9998;
+		position: sticky;
+		width: 58px;
+		height: 52px;
+		left: 85.52083%;
+		top: 39px;
+		transform: matrix(1,0,0,1,0,0);
+		padding-right: 15px;
+	}
+	#langueIconBox {
+
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 50px;
+		height: 50px;
+		left: 90.10416%;
+		top: 38px;
+	}
+	#langueIcon{
+		fill: rgba(255,255,255,1);
+	}
+	.langueIcon{
+
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 50px;
+		height: 50px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,11,5);
+		padding-right: 10px;
+		margin-top: -5px;
+	}
+		#subIconPBox{
+		display:none;
+		position: absolute;
+		width: 342px;
+		height: 91px;
+		left: -200px;
+		top: 60px;
+		overflow: visible;
+	}
+	#subIconPBox1{
+		position: absolute;
+		width: 342px;
+		height: 79px;
+		left: 0px;
+		top: 12px;
+		overflow: visible;
+	}
+	#subIconBox{
+		fill: rgba(0,0,0,1);
+	}
+	.subIconBox{
+		overflow: visible;
+		position: absolute;
+		width: 342px;
+		height: 79px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#writeIcon{
+		fill: rgba(241,168,187,1);
+		z-index: 9995;
+	}
+	.writeIcon{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 34px;
+		left: 26px;
+		top: 23px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#sendMessageIcon{
+		fill: rgba(241,168,187,1);
+		z-index: 9995;
+	}
+	.sendMessageIcon{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 28px;
+		left: 90px;
+		top: 27px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#messageBoxIcon{
+		fill: rgba(241,168,187,1);
+		z-index: 9999;
+	}
+	.messageBoxIcon{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 32px;
+		left: 154px;
+		top: 25px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+
+	#bookmark{
+		fill: rgba(241,168,187,1);
+		z-index: 9995;
+	}
+	.bookmark{
+		overflow: visible;
+		position: absolute;
+		width: 20px;
+		height: 32px;
+		left: 218px;
+		top: 25px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#optionIconPBox{
+		position: absolute;
+		width: 34px;
+		height: 34.001px;
+		left: 268px;
+		top: 23px;
+		overflow: visible;
+		z-index: 9995;
+	}
+	#optionIconBox1{
+		fill: rgba(241,168,187,1);
+	}
+	.optionIconBox1{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 34.001px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#optionIconBox2{
+		fill: transparent;
+		stroke: rgba(241,168,187,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.optionIconBox2{
+		overflow: visible;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		left: 9px;
+		top: 9px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#boxVertex{
+		fill: rgba(0,0,0,1);
+	}
+	.boxVertex{
+		overflow: visible;
+		position: absolute;
+		width: 16px;
+		height: 16.81px;
+		left: 163px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	.main{
+	position: relative;
+    width: 1920px;
+    height: 10000vh;
+    background-color: rgba(244,238,238,1);
+    overflow: hidden;
+    --web-scale-on-resize: true;
+    --web-enable-deep-linking: true;
+	}
