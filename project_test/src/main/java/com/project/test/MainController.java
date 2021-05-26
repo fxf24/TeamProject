@@ -31,10 +31,12 @@ public class MainController {
 		//서버 저장
 		file.transferTo(savefile);
 		
-		String result = naverService.getObjectDetectionService(filename);
-		System.out.println(filename +":" + result);
+		String odResult = naverService.getObjectDetectionService(filename);
+		String cfrResult = naverService.getCFRService(filename);
+		System.out.println(filename +":" + odResult);
+		System.out.println(cfrResult);
 		
-		return filename +"|" +result; 
+		return filename +"|" + odResult + "|" + cfrResult; 
 	}
 	
 	@RequestMapping("/")
@@ -47,13 +49,22 @@ public class MainController {
 		return "login/main";
 	}
 
+	@RequestMapping("/login/signup")
+	public String signup() {
+		return "login/signup";
+	}
+	
+	
 	@RequestMapping("/profile")
 	public String profile() {
 		return "profile/main";
 	}
 
-	@RequestMapping("/search")
-	public String search() {
-		return "search/main";
-	}
+
+	// 중복 방지를 위해 블록처리
+//	@RequestMapping("/search")
+//	public String search() {
+//		return "search/main";
+//	}
+
 }

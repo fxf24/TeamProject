@@ -23,8 +23,9 @@ $(document).ready(function(){
 			success: function(response){
 				var responseSplit = response.split("|")
 				var filename = responseSplit[0]
-				var json = JSON.parse(responseSplit[1])
-
+				var odjson = JSON.parse(responseSplit[1])
+				var cfrjson = JSON.parse(responseSplit[2])
+				
 				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
 				var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 				var context = imagecanvas.getContext("2d")
@@ -38,9 +39,10 @@ $(document).ready(function(){
 				image.src = "/upload/" + filename
 				image.onload = function(){
 					context.drawImage(image, 10, 10, image.width, image.height)
-					var names = json.predictions[0].detection_names
-					var confidence = json.predictions[0].detection_scores
-					var boxes = json.predictions[0].detection_boxes
+					var names = odjson.predictions[0].detection_names
+					var confidence = odjson.predictions[0].detection_scores
+					var boxes = odjson.predictions[0].detection_boxes
+					var faces = cfrjson.faces 
 					
 					for(var i = 0; i < names.length; i++){
 						//if(confidence[i]>=0.9){
@@ -59,6 +61,15 @@ $(document).ready(function(){
 							}
 							
 						//}//if end
+					}//for end
+					
+					for(var i = 0; i<faces.length; i++){
+						var celebrity = faces[i].celebrity.value
+						var confidence = faces[i].celebrity.confidence
+						
+						if(confidence>0.5){
+							$("#names").append("<a href='https://search.shopping.naver.com/search/all?query="+celebrity+"&cat_id=&frm=NVSHATC'>#" + celebrity + " </a>")
+						}//if end
 					}//for end
 				}//image onload end
 			}
