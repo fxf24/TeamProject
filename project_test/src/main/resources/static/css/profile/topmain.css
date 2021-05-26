@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+/* 프로필 메인 상단 - 고정 정보 (프로필사진, 회원아이디, 프로필편집) */
+#profileimage {
+	position:absolute;
+  	top:10%;
+    left:5%;
+    margin:20px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 20%; 
+	height: 20%;
+	border-radius:70px; 
+	text-align: center;
+}
+
+#img {
+	position:absolute;
+  	top:10%;
+    left:40%;
+    margin:20px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 100%; 
+	height: 150%;
+	border-radius:100px; 
+	text-align: center;
+}
+
+#account_id {
+	position:absolute;
+	top:20%;
+    left:50%;
+	text-align: center;
+}
+
+#profile_edit {
+	position:absolute;
+	top:20%;
+    left:60%;
+	text-align: center;
+	cursor:pointer;
+}
+
+#post_upload_btn {
+	cursor:pointer;
+}
+
+
+#secondline1 {
+	position:absolute;
+	top:30%;
+    left:50%;
+	text-align: center;
+}
+
+#secondline2 {
+	position:absolute;
+	top:30%;
+    left:60%;
+	text-align: center;
+}
+
+#secondline3 {
+	position:absolute;
+	top:30%;
+    left:70%;
+	text-align: center;
+}
+
+#post_upload_btn {
+	position:absolute;
+	top:40%;
+    left:50%;
+	text-align: center;
+}
+
+#introduction {
+	position:absolute;
+	top: 50%;
+    left: 50%;
+	text-align: center;
+}
+
+
+
+
+
+/* 게시물 */
+
+#main-container {
+	position: relative;
+  	top: 200%;
+	width: 300px; 
+	height: 300px;
+	padding: 10px;
+	margin: auto;
+  	
+} 
+
+#card-body1 {
+	position: absolute;
+	border: 3px solid gray;
+	margin:100px;
+	top: 100%;
+	clear: both;
+	float: left; 
+	width: 100px;
+	height: 50px;
+	padding: 10px;
+}
+
+#card-body2{
+	position: absolute;
+	border: 3px solid gray;
+	margin:100px;
+	top: 100%;
+	clear: both;
+	float: left; 
+	width: 100px;
+	height: 50px;
+	padding: 10px;
+}
+
+#card-body3 {
+	position: absolute;
+	border: 10px solid gray;
+	margin:100px;
+	top: 100%;
+	clear: both;
+	float: right; 
+	width: 100px;
+	height: 50px;
+	padding: 10px;
+}
+
+
