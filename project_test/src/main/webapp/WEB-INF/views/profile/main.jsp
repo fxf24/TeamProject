@@ -90,7 +90,7 @@ $(function(){
         					<input type="file" id="postuploadfile" name="postuploadfile" style="display:none;" onchange="changeValue(this)">
     						<input type="hidden" name = "upload_url">
         					<!-- 게시물 업로드 카메라와 연결 -->
-        					<input type="file" id="camera" name="camera" capture="camera" accept="image/*">
+        					<input type="file" id="upload_camera" name="camera" value="카메라에서 업로드" capture="camera" accept="image/*">
         					<img id="pic" style="width:100%;" >
         			</form>
 			<tr> 

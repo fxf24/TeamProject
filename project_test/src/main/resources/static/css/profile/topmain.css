@@ -38,10 +38,10 @@
 	cursor:pointer;
 }
 
-#post_upload_btn {
-	cursor:pointer;
-}
 
+
+/* 게시물 | 팔로워 | 팔로우 
+게시물 업로드 (카메라, 앨범, (폰, pc))*/
 
 #secondline1 {
 	position:absolute;
@@ -69,8 +69,18 @@
 	top:40%;
     left:50%;
 	text-align: center;
+	cursor:pointer;
 }
 
+#upload_camera {
+	position:absolute;
+	top:40%;
+    left:70%;
+    text-align: center;
+	cursor:pointer;
+}
+
+/* 소개 */
 #introduction {
 	position:absolute;
 	top: 50%;
@@ -82,7 +92,7 @@
 
 
 
-/* 게시물 */
+/* 프로필 메인 하단 - 업로드 정보 (게시물 목록들) */
 
 #main-container {
 	position: relative;
