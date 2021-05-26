@@ -122,7 +122,7 @@
 		top: 317px;
 		overflow: visible;
 	}
-		#pwInput {
+/* 	#pwInput {
 		position: absolute;
 		width: 342px;
 		height: 40px;
@@ -133,7 +133,7 @@
 		border: none;
 		background: transparent;
 		text-align: center;
-	}
+	} */
 	#pwTextBox4 {
 		fill: rgba(255,255,255,1);
 		stroke: rgba(112,112,112,1);
@@ -194,7 +194,7 @@
 		top: 247px;
 		overflow: visible;
 	}
-	#idInput {
+/* 	#idInput {
 		position: absolute;
 		width: 344px;
 		height: 40px;
@@ -205,7 +205,7 @@
 		border: none;
 		background: transparent;
 		text-align: center;
-	}
+	} */
 	#idTextBox2 {
 		fill: rgba(255,255,255,1);
 		stroke: rgba(112,112,112,1);
@@ -239,6 +239,22 @@
 		color: rgba(100,100,100,1);
 		letter-spacing: 1.2px;
 	}
+	#idTextBoxText{
+		left: -8px;
+		top: 0px;
+		opacity: 0.5;
+		width: 158px;
+		position: absolute;
+		overflow: visible;
+		white-space: nowrap;
+		text-align: left;
+		font-family: NanumSquare_ac;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 16px;
+		color: rgba(100,100,100,1);
+		letter-spacing: 1.2px;
+		}
 	#signup{
 		left: 305px;
 		top: 457px;
@@ -412,4 +428,95 @@
 		font-weight: normal;
 		font-size: 20px;
 		color: rgba(0,191,24,1);
+	}
+	
+	
+	#idInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+	}
+	.idInput{
+		position: absolute;
+		overflow: visible;
+		width: 342px;
+		height: 41px;
+		left: 42px;
+		top: 246px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+/* 	#passwordInput{
+	} */
+	.passwordInput{
+		position: absolute;
+		overflow: visible;
+		width: 342px;
+		height: 41px;
+		left: 42px;
+		top: 316px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#loginButton{
+		fill: rgba(0,0,0,0);
+	}
+	.loginButton{
+		position: absolute;
+		overflow: visible;
+		width: 342px;
+		height: 41px;
+		left: 42px;
+		top: 383px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#findIdPassButton{
+		fill: rgba(0,0,0,0);
+	}
+	.findIdPassButton{
+		position: absolute;
+		overflow: visible;
+		width: 158px;
+		height: 35px;
+		left: 42px;
+		top: 448px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#signupButton{
+		fill: rgba(0,0,0,0);
+	}
+	.signupButton{
+		position: absolute;
+		overflow: visible;
+		width: 90px;
+		height: 35px;
+		left: 297px;
+		top: 448px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#naverLoginButton{
+		fill: rgba(0,0,0,0);
+	}
+	.naverLoginButton{
+		position: absolute;
+		overflow: visible;
+		width: 270px;
+		height: 46px;
+		left: 79px;
+		top: 534px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
 	}

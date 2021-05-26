@@ -5,18 +5,77 @@
 <html>
 <head>
 <!-- px834 -->
-<link href="/resources/css/signup834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
+<link href="/css/signup834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
 <!-- px1440 -->
-<link href="/resources/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
+<link href="/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
 <!-- px1920 -->
-<link href="/resources/css/signup1980.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
+<link href="/css/signup1920.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="<%=request.getContextPath()%>/resources/jquery-3.2.1.min.js"></script>
+<script src="/jquery-3.2.1.min.js"></script>
 <script>
+//특수문자 정규식 변수(공백 미포함)
+var replaceChar = /[!@\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
+var replaceChar2 = /[!\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
 $(document).ready(function(){
-	
+$("#signupIdInput").on("focusout", function() {
+        var x = $(this).val();
+        if (x.length > 0) {
+            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+            }
+            $(this).val(x);
+        }
+        }).on("keyup", function() {
+            $(this).val($(this).val().replace(replaceChar, ""));
+   });   
+	$("#signupIdInput").on("focusout", function() {
+	        var x = $(this).val();
+	        if (x.length > 0) {
+	            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
+	                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
+	            }
+	            $(this).val(x);
+	        }
+	        }).on("keyup", function() {
+	            $(this).val($(this).val().replace(replaceChar2, ""));
+	   });
+$("#signupIdInput").on("focusout", function() {
+    var x = $(this).val();
+    if (x.length > 0) {
+        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+        }
+        $(this).val(x);
+    }
+    }).on("keyup", function() {
+        $(this).val($(this).val().replace(replaceChar, ""));
+}); 
+$("#signupPassInput").on("focusout", function() {
+        var x = $(this).val();
+        if (x.length > 0) {
+            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+            }
+            $(this).val(x);
+        }
+        }).on("keyup", function() {
+            $(this).val($(this).val().replace(replaceChar, ""));
+   });
+});       
+$("#signupPassConfirmInput").on("focusout", function() {
+    var x = $(this).val();
+    if (x.length > 0) {
+        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+        }
+        $(this).val(x);
+    }
+    }).on("keyup", function() {
+        $(this).val($(this).val().replace(replaceChar, ""));
 });
+});       
+
 </script>
 </head>
 <body>
@@ -60,7 +119,7 @@ $(document).ready(function(){
 						<span>가입하기</span>
 					</div>
 					<div class="signupButtonClick">
-						<button id="signupButtonClick" >
+						<button id="signupButtonClick" ></button>
 					</div>
 				</div>
 			</div>
@@ -78,10 +137,10 @@ $(document).ready(function(){
 				<div id="idFont1">
 					<span>@</span>
 				</div>
-				<div class="idBoxInput">
+<!-- 				<div class="idBoxInput">
 					<input id="idBoxInput"  type="text" >
 				</div>
-			</div>
+ -->			</div>
 			<div id="emailPBox">
 				<div id="emailBox1">
 					<svg class="emailBox2">
@@ -93,10 +152,10 @@ $(document).ready(function(){
 						</rect>
 					</svg>
 				</div>
-					<div class="emailnput" >
+<!-- 					<div class="emailnput" >
 						<input id="emailInput"  type="text" >
 					</div>
-			</div>
+ -->			</div>
 			<div id="passwordPBox">
 				<div id="passwordBox1">
 					<svg class="passwordBox2">
@@ -104,32 +163,39 @@ $(document).ready(function(){
 						</rect>
 					</svg>
 				</div>
-				<div class="passwordInput">
+<!-- 	 				<div class="passwordInput">
 					<input id="passwordInput"  type="password">
 				</div>
-			</div>
-				<div id="confirmPassPBox">
+ -->			</div>
+			<div id="confirmPassPBox">
 				<div id="confirmPassBox1">
 					<svg class="confirmPassBox2">
 						<rect id="confirmPassBox2" rx="10" ry="10" x="0" y="0" width="372" height="52">
 						</rect>
 					</svg>
 				</div>
-				<div class="confirmPassInput">
+<!-- 				<div class="confirmPassInput">
 					<input id="confirmPassInput"  type="password">
 				</div>
-			</div>
+ -->			</div>
 			<div id="signupTitle">
 				<span>회원가입</span>
 			</div>
 		</div>
+			<form action="/signup/" method="post" class="signup">
+				<input type="text" class="signupIdInput" id="signupIdInput"   maxlength='50'>
+				<input type="text" class="signupEmailInput"  id="signupEmailInput"  maxlength='50'>
+				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'>
+				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'>
+				<input type="submit" class="newSignupButton" id="newSignupButton" value="">
+			</form>
 	</div>
 	<div id="hashhershe">
 		<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
 	</div>
-	<img id="hashLine1" src="/resources/loginimage/hashhash.png" srcset="hashhash.png 1x,hashhash@2x.png 2x">
+	<img id="hashLine1" src="/loginimage/hashhash.png" >
 		
-	<img id="hashLine2" src="/resources/loginimage/underhashhash.png" srcset="underhashhash.png 1x, underhashhash@2x.png 2x">
-	
+	<img id="hashLine2" src="/loginimage/underhashhash.png" >
+</div>	
 </body>
 </html>
