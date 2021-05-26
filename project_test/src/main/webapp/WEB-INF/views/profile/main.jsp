@@ -5,7 +5,7 @@
 <head>
 <!-- 상단 고정 스타일 css 연결  -->
 
-<!-- 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css"> -->
+	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
 	<link href="/css/profile/topmain.css" rel="stylesheet" type="text/css">
 	
 <meta charset="UTF-8">
@@ -45,15 +45,14 @@ $(function(){
 </head>
 
 <body>
-<h1>프로필입니다.</h1>
+
 <main> 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
 	<div id="info-container"> 
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 	      <div id="profileimage"> 
 	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
-				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" 
-					style="text-align: center;">
+				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" >
     				<input type="file" id="imgaefile" name="imagefile" style="display:none;" onchange="changeValue(this)">
     				<input type="hidden" name = "target_url">
 				</form>
@@ -94,7 +93,7 @@ $(function(){
 				<td> 
 			        <!-- 프로필 편집 창에서 입력한 소개글 DB 저장 그대로 불러와 -->
 			        	<div id="introduction">소개 
-			        		<p> 회원이 작성한 소개글 </p> 
+			        		<div> 회원이 작성한 소개글 </div> 
 			        	</div>
 			     </td>
 			</tr>

@@ -4,33 +4,25 @@
 - 고정 정보 (프로필사진, 회원아이디, 프로필편집) */
 
 #info-container {
-	background: yellow;
+	z-index: 1;
+	background: silver;
 	position: relative;
 	margin: auto;
-	width: 1150px;
+	width: 1110px;
 	height: 300px;
 }
 
-#profileimage {
-	background: yellow;
-	position:absolute;
-  	top:10%;
-    left:5%;
-    margin: auto; /* (위 오른쪽 아래 왼쪽 순) */
-	width: 20%; 
-	height: 20%;
-	text-align: center;
-}
 
 #img {
 	position:absolute;
-  	top:10%;
-    left:40%;
-    margin:20px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
-	width: 100%; 
-	height: 150%;
-	border-radius:100px; 
-	text-align: center;
+  	top: 30px;
+  	right: 1100px;
+    left: 300px;
+    bottom: 100px;
+    margin: 20px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 150px; 
+	height: 150px;
+	border-radius:300px; 
 }
 
 #account_id {
@@ -48,54 +40,55 @@
 	cursor:pointer;
 }
 
-
-
 /* 게시물 | 팔로워 | 팔로우 
 게시물 업로드 (카메라, 앨범, (폰, pc))*/
 
 #secondline1 {
 	position:absolute;
-	top:30%;
+	top:32%;
     left:50%;
 	text-align: center;
 }
 
 #secondline2 {
 	position:absolute;
-	top:30%;
+	top:32%;
     left:60%;
 	text-align: center;
 }
 
 #secondline3 {
 	position:absolute;
-	top:30%;
+	top:32%;
     left:70%;
 	text-align: center;
 }
 
 #post_upload_btn {
 	position:absolute;
-	top:40%;
-    left:50%;
+	top: 40%;
+    left: 50%;
 	text-align: center;
 	cursor:pointer;
 }
 
 #upload_camera {
 	position:absolute;
-	top:150%;
-    left:70%;
+	top: 45%;
+    left: 200%;
     text-align: center;
 	cursor:pointer;
+	display: none;
+	
 }
 
 /* 소개 */
 #introduction {
 	position:absolute;
-	top: 50%;
+	top: 55%;
     left: 50%;
-	text-align: center;
+	text-align: left;
+	z-index: 2;
 }
 
 
@@ -108,7 +101,7 @@
 	background: pink;
 	border: 3px solid pink;
 	position: relative;
-	width: 1150px; 
+	width: 1110px; 
 	height: 1150px;
   	margin: auto; /* (위 오른쪽 아래 왼쪽 순) 50px 20px 0 30px*/
 } 
