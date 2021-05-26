@@ -5,77 +5,18 @@
 <html>
 <head>
 <!-- px834 -->
-<link href="/css/signup834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
+<link href="/resources/css/signup834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
 <!-- px1440 -->
-<link href="/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
+<link href="/resources/css/signup1440.css" media="screen and (min-width: 834px) and (max-width: 1920px) "rel="stylesheet">
 <!-- px1920 -->
-<link href="/css/signup1920.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
+<link href="/resources/css/signup1980.css" media="screen and (min-width: 1920px) and" rel="stylesheet">
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="/jquery-3.2.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/jquery-3.2.1.min.js"></script>
 <script>
-//특수문자 정규식 변수(공백 미포함)
-var replaceChar = /[!@\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
-var replaceChar2 = /[!\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
 $(document).ready(function(){
-$("#signupIdInput").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-            }
-            $(this).val(x);
-        }
-        }).on("keyup", function() {
-            $(this).val($(this).val().replace(replaceChar, ""));
-   });   
-	$("#signupIdInput").on("focusout", function() {
-	        var x = $(this).val();
-	        if (x.length > 0) {
-	            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
-	                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
-	            }
-	            $(this).val(x);
-	        }
-	        }).on("keyup", function() {
-	            $(this).val($(this).val().replace(replaceChar2, ""));
-	   });
-$("#signupIdInput").on("focusout", function() {
-    var x = $(this).val();
-    if (x.length > 0) {
-        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-        }
-        $(this).val(x);
-    }
-    }).on("keyup", function() {
-        $(this).val($(this).val().replace(replaceChar, ""));
-}); 
-$("#signupPassInput").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-            }
-            $(this).val(x);
-        }
-        }).on("keyup", function() {
-            $(this).val($(this).val().replace(replaceChar, ""));
-   });
-});       
-$("#signupPassConfirmInput").on("focusout", function() {
-    var x = $(this).val();
-    if (x.length > 0) {
-        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-        }
-        $(this).val(x);
-    }
-    }).on("keyup", function() {
-        $(this).val($(this).val().replace(replaceChar, ""));
+	
 });
-});       
-
 </script>
 </head>
 <body>
@@ -122,6 +63,7 @@ $("#signupPassConfirmInput").on("focusout", function() {
 						<button id="signupButtonClick" ></button>
 					</div>
 				</div>
+
 			</div>
 			<div id="idPBox">
 				<div id="idBox1">
@@ -192,6 +134,7 @@ $("#signupPassConfirmInput").on("focusout", function() {
 	</div>
 	<div id="hashhershe">
 		<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
+
 	</div>
 	<img id="hashLine1" src="/loginimage/hashhash.png" >
 		
