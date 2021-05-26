@@ -31,20 +31,6 @@ $(document).ready(function(){
 		</div>
 		<img id="hashLine1" src="/loginimage/hashhash.png" >
 		<img id="hashLine2" src="/loginimage/underhashhash.png" >
-		<div id="naverLoginPBox">
-			<svg class="naverLoginBox1">
-				<rect id="naverLoginBox1" rx="0" ry="0" x="0" y="0" width="286" height="62"/>
-			</svg>
-			<div id="naverLoginBox2">
-				<svg class="naverLoginBox3">
-					<rect id="naverLoginBox3" rx="0" ry="0" x="0" y="0" width="270" height="44"/>
-				</svg>
-				<img id="naverIcon" src="/loginimage/naverIcon.png" >
-				<div id="naverLoginFont">
-					<span>네이버로 로그인하기</span>
-				</div>
-			</div>
-		</div>
 		<div id="loginBox">
 			<div class="loginBox1">
 				<svg class="loginBox2">
@@ -94,6 +80,20 @@ $(document).ready(function(){
 			<div id="findIdPass">
 				<span>아이디/비밀번호 찾기</span>
 			</div>
+		<div id="naverLoginPBox">
+			<svg class="naverLoginBox1">
+				<rect id="naverLoginBox1" rx="0" ry="0" x="0" y="0" width="286" height="62"/>
+			</svg>
+			<div id="naverLoginBox2">
+				<svg class="naverLoginBox3">
+					<rect id="naverLoginBox3" rx="0" ry="0" x="0" y="0" width="270" height="44"/>
+				</svg>
+				<img id="naverIcon" src="/loginimage/naverIcon.png" >
+				<div id="naverLoginFont">
+					<span>네이버로 로그인하기</span>
+				</div>
+			</div>
+		</div>
 			<form action="/login/" method="post" class="loginHome">
 			<input type="text"id="idInput" class="idInput">
 			<input type="password" id="passwordInput" class="passwordInput">

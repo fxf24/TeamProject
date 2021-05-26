@@ -1,9 +1,9 @@
 @charset "UTF-8";
 	#signup {
-		margin: -8px;
 		position: absolute;
-		width: 104.5vh;
-		height: 100%;
+		margin: -8px;
+		width: 100.0000vw;
+		height: 143.1655vw;
 		background-color: rgba(255,236,72,1);
 		overflow: hidden;
 		--web-scale-on-resize: true;
@@ -13,8 +13,9 @@
 		position: absolute;
 		width: 1090px;
 		height: 770px;
-		left: -128px;
+		left: 50%;
 		top: 212px;
+		transform:translateX(-50%);
 		overflow: visible;
 	}
 	#signupPBox2{
@@ -544,8 +545,8 @@
 		z-index: 9999;
 	}
 	#hashhershe {
-		left: 168px;
-		top: 3px;
+		left: 296px;
+		top: -195px;
 		position: absolute;
 		overflow: visible;
 		width: 507px;
@@ -561,16 +562,16 @@
 		position: absolute;
 		width: 487.316px;
 		height: 116px;
-		left: 161.32px;
-		top: 0px;
+		left: 289.32px;
+		top: -198px;
 		overflow: visible;
 	}
 	#hashLine2{
 		position: absolute;
 		width: 491px;
 		height: 23px;
-		left: 161px;
-		top: 135px;
+		left: 296px;
+		top: -63px;
 		overflow: visible;
 	}
 	 	.signupIdInput{

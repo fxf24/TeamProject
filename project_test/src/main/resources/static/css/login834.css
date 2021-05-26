@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 	#login{
-		margin: -8px;
 		position: absolute;
-		width: 104.5vh;
-		height: 100%;
+		margin: -8px;
+		width: 100.0000vw;
+		height: 143.1655vw;
 		overflow: hidden;
 		--web-scale-on-resize: true;
 		--web-enable-deep-linking: true;
@@ -13,16 +13,18 @@
 		position: absolute;
 		width: 834px;
 		height: 1194px;
-		left: 0px;
 		top: 0px;
+		left: 50%;
+		transform:translateX(-50%);
 		overflow: visible;
 	}
 	#loginBox {
 		position: absolute;
 		width: 428px;
 		height: 644px;
-		left: 200px;
 		top: 276px;
+		left: 50%;
+		transform:translateX(-50%);
 		overflow: visible;
 	}
 	#loginBox1 {
@@ -296,8 +298,8 @@
 		position: absolute;
 		width: 286px;
 		height: 62px;
-		left: 270px;
-		top: 800px;
+		left: 73px;
+		top: 503px;
 		overflow: visible;
 		z-index: 9995;
 	}
@@ -316,8 +318,8 @@
 		position: absolute;
 		width: 270px;
 		height: 44px;
-		left: 6px;
-		top: 7px;
+		left: 0px;
+		top: 0px;
 		overflow: visible;
 	}
 	#naverLoginBox3{
