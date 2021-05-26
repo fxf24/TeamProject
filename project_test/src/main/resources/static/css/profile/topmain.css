@@ -2,13 +2,13 @@
 
 /* 프로필 메인 상단 - 고정 정보 (프로필사진, 회원아이디, 프로필편집) */
 #profileimage {
+	background: yellow;
 	position:absolute;
   	top:10%;
     left:5%;
-    margin:20px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
+    margin: auto; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 20%; 
 	height: 20%;
-	border-radius:70px; 
 	text-align: center;
 }
 
@@ -74,7 +74,7 @@
 
 #upload_camera {
 	position:absolute;
-	top:40%;
+	top:150%;
     left:70%;
     text-align: center;
 	cursor:pointer;
@@ -90,54 +90,124 @@
 
 
 
-
-
-/* 프로필 메인 하단 - 업로드 정보 (게시물 목록들) */
+/* 프로필 메인 가운데 단 - 업로드 정보 (게시물 목록들) */
 
 #main-container {
+	z-index: 1;
+	background: pink;
+	border: 3px solid pink;
 	position: relative;
-  	top: 200%;
-	width: 300px; 
-	height: 300px;
-	padding: 10px;
-	margin: auto;
-  	
+	width: 1150px; 
+	height: 1150px;
+  	margin: 500px 20px 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
 } 
 
-#card-body1 {
+#card-body3-1 {
+	z-index: 2;
+	background: gray;
 	position: absolute;
 	border: 3px solid gray;
-	margin:100px;
-	top: 100%;
-	clear: both;
-	float: left; 
-	width: 100px;
-	height: 50px;
+	margin: 30px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
 	padding: 10px;
+	text-align: center;
 }
 
-#card-body2{
+#card-body3-2{
+	z-index: 2;
+	background: gray;
 	position: absolute;
 	border: 3px solid gray;
-	margin:100px;
-	top: 100%;
-	clear: both;
-	float: left; 
-	width: 100px;
-	height: 50px;
+	margin: 30px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
 	padding: 10px;
+	text-align: center;
 }
 
-#card-body3 {
+#card-body3-3 {
+	z-index: 2;
+	background: gray;
 	position: absolute;
-	border: 10px solid gray;
-	margin:100px;
-	top: 100%;
-	clear: both;
-	float: right; 
-	width: 100px;
-	height: 50px;
+	border: 3px solid gray;
+	margin: 30px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
 	padding: 10px;
+	text-align: center;
 }
 
 
+#card-body2-1 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 400px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body2-2{
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 400px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body2-3 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 400px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+
+#card-body1-1 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 770px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body1-2{
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 770px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body1-3 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 770px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}

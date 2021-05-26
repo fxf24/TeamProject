@@ -90,8 +90,9 @@ $(function(){
         					<input type="file" id="postuploadfile" name="postuploadfile" style="display:none;" onchange="changeValue(this)">
     						<input type="hidden" name = "upload_url">
         					<!-- 게시물 업로드 카메라와 연결 -->
-        					<input type="file" id="upload_camera" name="camera" value="카메라에서 업로드" capture="camera" accept="image/*">
+        					<input type="file" id="upload_camera" name="camera" capture="camera" accept="image/*">
         					<img id="pic" style="width:100%;" >
+        					<input type="hidden" name = "camera_url">
         			</form>
 			<tr> 
 				<td> 
@@ -101,10 +102,15 @@ $(function(){
 			        	</div>
 			     </td>
 			</tr>
+	</table>
 
 <!-- 게시물 -->
+<!-- 목록은 최근에 업로드한 것이 위에 위치하도록 (순서는 거꾸로 - 3(첫째 줄), 2(둘째 줄), 1(셋째 줄))
+'-1, 2, 3' 은 왼쪽에서 오른쪽으로의 순서  -->
+
 		<div id="main-container">
-            <span id="card-body1">
+		 <!-- 게시물 첫째 줄 -->
+            <div id="card-body3-1">
             	<p class="card-text">게시물 내용</p>
               		<div class="d-flex justify-content-between align-items-center">
                 		<div class="btn-group">
@@ -113,11 +119,11 @@ $(function(){
                 		</div>
                 		<small class="text-muted">9 mins</small>
               		</div>
-            	</span>
+            	</div>
 
 
 
-            <span id="card-body2" >
+            <span id="card-body3-2" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -130,7 +136,89 @@ $(function(){
 
         
 
-            <span id="card-body3" >
+            <span id="card-body3-3" >
+              <p class="card-text">게시물 내용</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </span>
+		</div>       
+		
+
+		<!-- 게시물 둘째 줄 -->
+		<div id="second-contatiner">
+            <div id="card-body2-1">
+            	<p class="card-text">게시물 내용</p>
+              		<div class="d-flex justify-content-between align-items-center">
+                		<div class="btn-group">
+                			<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                		</div>
+                		<small class="text-muted">9 mins</small>
+              		</div>
+            	</div>
+
+
+
+            <span id="card-body2-2" >
+              <p class="card-text">게시물 내용</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </span>
+
+        
+
+            <span id="card-body2-3" >
+              <p class="card-text">게시물 내용</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </span>
+		</div>       
+	</div>
+	</div>
+		
+		<!-- 게시물 셋째 줄 -->
+            <div id="card-body1-1">
+            	<p class="card-text">게시물 내용</p>
+              		<div class="d-flex justify-content-between align-items-center">
+                		<div class="btn-group">
+                			<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                		</div>
+                		<small class="text-muted">9 mins</small>
+              		</div>
+            	</div>
+
+
+
+            <span id="card-body1-2" >
+              <p class="card-text">게시물 내용</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </span>
+
+        
+
+            <span id="card-body1-3" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -142,7 +230,7 @@ $(function(){
             </span>
 		</div>       
 
-
+		
 
 </main>
 </body>
