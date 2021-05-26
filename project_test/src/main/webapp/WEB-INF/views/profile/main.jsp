@@ -3,44 +3,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="description" content="HTML, CSS">
+<meta name="author" content="Practice">
+<meta name="keywords" content="WebPortfolio">
+<title>Insert title here</title>
+<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <!-- 상단 고정 스타일 css 연결  -->
 
 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
 	<link href="/css/profile/topmain.css" rel="stylesheet" type="text/css">
 	
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="/jquery-3.2.1.min.js"></script>
 <script>
-$(document).ready(function(){
-	/* 프로필 사진 업로드  */
-	$('#profileimage').click(function (e){
-		document.imageform.target_url.value = document.getElementById('profileimage').src;
-		e.preventDefault();
-	    $('#imagefile').click();
+window.onload = function() {
+	$(document).ready(function(){
+		/* 프로필 사진 업로드  */
+		$('#profileimage').click(function(i){
+			document.imageform.target_url.value = document.getElementById('profileimage').src;
+			i.preventDefault();
+		    $('#imagefile').click();
+		});
 	});
-});
+	
+	function changeValue(obj){
+		document.imageform.submit();
+	};
+	
+	/* 게시물 업로드 - test1 */
+	$('#post_upload_btn').click(function(p){
+		document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
+		p.preventDefault();
+	    $('#file').click();
+	});
+	
+	/* 게시물 업로드 카메라와 연결 */ 
+	$(function(){
+	    $('#camera').change(function(c){
+	        $('#pic').attr('src', URL.createObjectURL(c.target.files[0]));
+	    });
+	});//document ready 함수 end
 
-function changeValue(obj){
-	document.imageform.submit();
-};
-
-/* 게시물 업로드 - test1 */
-$('#post_upload_btn').click(function (e){
-	document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
-	e.preventDefault();
-    $('#postuploadfile').click();
-});
-
-/* 게시물 업로드 카메라와 연결 */ 
-$(function(){
-    $('#camera').change(function(e){
-        $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
-    });
-});
-
-
-출처: https://cofs.tistory.com/180 [CofS]
+}; //window onload 함수 end 
 </script>
 </head>
 
