@@ -464,6 +464,86 @@
 		font-size: 24px;
 		color: rgba(0,0,0,1);
 	}
+	 	.signupIdInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+ 	#signupIdInput{
+		position: absolute;
+		overflow: visible;
+		width: 324px;
+		height: 49px;
+		left: 403px;
+		top: 192px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupEmailInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+	#signupEmailInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 293px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassInput{
+		font-size: 21px;
+	}
+	#signupPassInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 394px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassConfirmInput{
+		font-size: 21px;
+	}
+	#signupPassConfirmInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 494px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#newSignupButton{
+		position: absolute;
+		overflow: visible;
+		width: 254px;
+		height: 60px;
+		left: 418px;
+		top: 604px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	
 	#hashhershe {
 		left: 471px;
 		top: 3px;
@@ -493,4 +573,83 @@
 		left: 464px;
 		top: 135px;
 		overflow: visible;
+	}
+	 	.signupIdInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+ 	#signupIdInput{
+		position: absolute;
+		overflow: visible;
+		width: 324px;
+		height: 49px;
+		left: 403px;
+		top: 192px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupEmailInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+	#signupEmailInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 293px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassInput{
+		font-size: 21px;
+	}
+	#signupPassInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 394px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassConfirmInput{
+		font-size: 21px;
+	}
+	#signupPassConfirmInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 494px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#newSignupButton{
+		position: absolute;
+		overflow: visible;
+		width: 254px;
+		height: 60px;
+		left: 418px;
+		top: 604px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
 	}

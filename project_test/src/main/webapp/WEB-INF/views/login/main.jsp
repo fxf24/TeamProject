@@ -45,14 +45,13 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-	<form action="/login/" method="post" class="loginHome">
 		<div id="loginBox">
 			<div class="loginBox1">
 				<svg class="loginBox2">
 					<rect id="loginBox2" x="0" y="0" width="428" height="644"/>
 				</svg>
-				<button id="loginBut" onclick="button()">
-				</button>
+<!-- 				<button id="loginBut" onclick="button()">
+				</button> -->
 				<div id="loginText">
 					<span>로그인</span>
 				</div>
@@ -66,8 +65,8 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div id="pwTextBox" class="pwBox1">
-			<input type="password" id="pwInput" class="pw">
-			<svg class="pwTextBox4">
+<!-- 			<input type="password" id="pwInput" class="pw">
+ -->			<svg class="pwTextBox4">
 				<rect id="pwTextBox4" rx="10" ry="10" x="0" y="0" width="344" height="40"/>
 			</svg>
 			<div id="pwText">
@@ -79,8 +78,8 @@ $(document).ready(function(){
 			</div>
 		</div>
 					<div id="idTextBox" class="idBox">
-						<input type="text" id="idInput" class="id">
-							<svg class="idTextBox2">
+<!-- 						<input type="text" id="idInput" class="id">
+ -->							<svg class="idTextBox2">
 								<rect id="idTextBox2" rx="10" ry="10" x="0" y="0" width="344" height="40"/>
 							</svg>
 						<div id="idTextBox">
@@ -90,13 +89,21 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<div id="signup">
-					<span><a href="/login/signup">계정만들기</a></span>
+					<span><!-- <a href="/login/signup"> -->계정만들기</a></span>
 				</div>
 			<div id="findIdPass">
 				<span>아이디/비밀번호 찾기</span>
 			</div>
+			<form action="/login/" method="post" class="loginHome">
+			<input type="text"id="idInput" class="idInput">
+			<input type="password" id="passwordInput" class="passwordInput">
+			<input type="submit" id="loginButton" class="loginButton" value = "">
+			<button id="findIdPassButton"  class="findIdPassButton"  onclick="location.href = ""></button>
+			<button id="signupButton" class="signupButton"  onclick="location.href = "signup.jsp"></button>
+			<button id="naverLoginButton" class="naverLoginButton"  onclick="location.href = ""></button>
+			</form>
 		</div>
-	</form>
+
 </div>
 </body>
 </html>

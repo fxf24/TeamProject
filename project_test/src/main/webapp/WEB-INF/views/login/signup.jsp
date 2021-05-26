@@ -14,9 +14,68 @@
 <title>Insert title here</title>
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
+//특수문자 정규식 변수(공백 미포함)
+var replaceChar = /[!@\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
+var replaceChar2 = /[!\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
 $(document).ready(function(){
-	
+$("#signupIdInput").on("focusout", function() {
+        var x = $(this).val();
+        if (x.length > 0) {
+            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+            }
+            $(this).val(x);
+        }
+        }).on("keyup", function() {
+            $(this).val($(this).val().replace(replaceChar, ""));
+   });   
+	$("#signupIdInput").on("focusout", function() {
+	        var x = $(this).val();
+	        if (x.length > 0) {
+	            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
+	                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
+	            }
+	            $(this).val(x);
+	        }
+	        }).on("keyup", function() {
+	            $(this).val($(this).val().replace(replaceChar2, ""));
+	   });
+$("#signupIdInput").on("focusout", function() {
+    var x = $(this).val();
+    if (x.length > 0) {
+        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+        }
+        $(this).val(x);
+    }
+    }).on("keyup", function() {
+        $(this).val($(this).val().replace(replaceChar, ""));
+}); 
+$("#signupPassInput").on("focusout", function() {
+        var x = $(this).val();
+        if (x.length > 0) {
+            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+            }
+            $(this).val(x);
+        }
+        }).on("keyup", function() {
+            $(this).val($(this).val().replace(replaceChar, ""));
+   });
+});       
+$("#signupPassConfirmInput").on("focusout", function() {
+    var x = $(this).val();
+    if (x.length > 0) {
+        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+        }
+        $(this).val(x);
+    }
+    }).on("keyup", function() {
+        $(this).val($(this).val().replace(replaceChar, ""));
 });
+});       
+
 </script>
 </head>
 <body>
@@ -64,8 +123,6 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			
-			<form>
 			<div id="idPBox">
 				<div id="idBox1">
 					<svg class="idBox2">
@@ -80,10 +137,10 @@ $(document).ready(function(){
 				<div id="idFont1">
 					<span>@</span>
 				</div>
-				<div class="idBoxInput">
+<!-- 				<div class="idBoxInput">
 					<input id="idBoxInput"  type="text" >
 				</div>
-			</div>
+ -->			</div>
 			<div id="emailPBox">
 				<div id="emailBox1">
 					<svg class="emailBox2">
@@ -95,10 +152,10 @@ $(document).ready(function(){
 						</rect>
 					</svg>
 				</div>
-					<div class="emailnput" >
+<!-- 					<div class="emailnput" >
 						<input id="emailInput"  type="text" >
 					</div>
-			</div>
+ -->			</div>
 			<div id="passwordPBox">
 				<div id="passwordBox1">
 					<svg class="passwordBox2">
@@ -106,10 +163,10 @@ $(document).ready(function(){
 						</rect>
 					</svg>
 				</div>
-				<div class="passwordInput">
+<!-- 	 				<div class="passwordInput">
 					<input id="passwordInput"  type="password">
 				</div>
-			</div>
+ -->			</div>
 			<div id="confirmPassPBox">
 				<div id="confirmPassBox1">
 					<svg class="confirmPassBox2">
@@ -117,16 +174,21 @@ $(document).ready(function(){
 						</rect>
 					</svg>
 				</div>
-				<div class="confirmPassInput">
+<!-- 				<div class="confirmPassInput">
 					<input id="confirmPassInput"  type="password">
 				</div>
-			</div>
-			</form>
-			
+ -->			</div>
 			<div id="signupTitle">
 				<span>회원가입</span>
 			</div>
 		</div>
+			<form action="/signup/" method="post" class="signup">
+				<input type="text" class="signupIdInput" id="signupIdInput"   maxlength='50'>
+				<input type="text" class="signupEmailInput"  id="signupEmailInput"  maxlength='50'>
+				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'>
+				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'>
+				<input type="submit" class="newSignupButton" id="newSignupButton" value="">
+			</form>
 	</div>
 	<div id="hashhershe">
 		<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
