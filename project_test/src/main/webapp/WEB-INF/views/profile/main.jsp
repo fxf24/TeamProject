@@ -9,10 +9,6 @@
 	<link href="/css/profile/topmain.css" rel="stylesheet" type="text/css">
 	
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.83.1">
 <title>Insert title here</title>
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
@@ -52,7 +48,7 @@ $(function(){
 <h1>프로필입니다.</h1>
 <main> 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
-
+	<div id="info-container"> 
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 	      <div id="profileimage"> 
 	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
@@ -103,6 +99,7 @@ $(function(){
 			     </td>
 			</tr>
 	</table>
+</div>
 
 <!-- 게시물 -->
 <!-- 목록은 최근에 업로드한 것이 위에 위치하도록 (순서는 거꾸로 - 3(첫째 줄), 2(둘째 줄), 1(셋째 줄))
@@ -146,7 +143,7 @@ $(function(){
                 <small class="text-muted">9 mins</small>
               </div>
             </span>
-		</div>       
+		       
 		
 
 		<!-- 게시물 둘째 줄 -->
@@ -188,8 +185,7 @@ $(function(){
               </div>
             </span>
 		</div>       
-	</div>
-	</div>
+
 		
 		<!-- 게시물 셋째 줄 -->
             <div id="card-body1-1">
@@ -229,7 +225,7 @@ $(function(){
               </div>
             </span>
 		</div>       
-
+</div>
 		
 
 </main>
