@@ -5,7 +5,7 @@
 <head>
 <!-- 상단 고정 스타일 css 연결  -->
 
-	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
+<!-- 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css"> -->
 	<link href="/css/profile/topmain.css" rel="stylesheet" type="text/css">
 	
 <meta charset="UTF-8">
@@ -21,44 +21,57 @@ $(document).ready(function(){
 	$('#profileimage').click(function (e){
 		document.imageform.target_url.value = document.getElementById('profileimage').src;
 		e.preventDefault();
-	    $('#file').click();
+	    $('#imagefile').click();
 	});
 });
 
 function changeValue(obj){
 	document.imageform.submit();
 };
+
+/* 게시물 업로드 - test1 */
+$('#post_upload_btn').click(function (e){
+	document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
+	e.preventDefault();
+    $('#postuploadfile').click();
+});
+
+/* 게시물 업로드 카메라와 연결 */ 
+$(function(){
+    $('#camera').change(function(e){
+        $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
+    });
+});
+
+
+출처: https://cofs.tistory.com/180 [CofS]
 </script>
 </head>
 
 <body>
 <h1>프로필입니다.</h1>
-
+<main> 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
-	      <div id="profileimage" style="border: 1px solid gray;float: left; width: 30%; padding:10px;"> 
-	      	<img src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
-				<form name="imageform" method="POST" ENCTYPE="multipart/form-data" action="imageform.jsp" 
+	      <div id="profileimage"> 
+	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
+				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" 
 					style="text-align: center;">
-    				<input type="file" id="file" name="file" style="display:none;" onchange="changeValue(this)">
+    				<input type="file" id="imgaefile" name="imagefile" style="display:none;" onchange="changeValue(this)">
     				<input type="hidden" name = "target_url">
 				</form>
 			</div>
 
-        	<table style="border: 1px solid gray;float: left; width: 30%; padding:10px;">
+        	<table>
         		<tr>
         			<td>
 						<span id="account_id"> 회원 아이디 &nbsp; </span>
 							<!--         프로필 편집 클릭 시, 새로운 창으로 이동 - js 구현  -->
-<!--         				<div id="profile_edit" style="cursor:pointer;">
-        					<button onclick="location='editform.jsp'">프로필 편집</button></div> -->
-        					<form id="profile_edit" name="editform" ENCTYPE="multipart/form-data" action="editform.jsp"> 
+        					<button id="profile_edit" onclick="location='editform.jsp'">프로필 편집</button>
+        					<!-- <form id="profile_edit" name="editform" ENCTYPE="multipart/form-data" action="editform.jsp"> 
         						<input name="profile_edit" type="button" value="프로필 편집">
-       						</form>
+       						</form> -->
         				<br>
 					</td>
 				</tr>
@@ -72,35 +85,26 @@ function changeValue(obj){
 				</tr>
 			<tr>
 				<td> 
-					<form id="post" name="postform" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
-        					<input name="post" type="button" value="게시물 업로드">
-       				</form>
+					<form id="post_upload_btn" name="post_upload_btn" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
+        					<input id="post_upload_btn" name="post_upload_btn" type="button" value="게시물 업로드">
+        					<input type="file" id="postuploadfile" name="postuploadfile" style="display:none;" onchange="changeValue(this)">
+    						<input type="hidden" name = "upload_url">
+        					<!-- 게시물 업로드 카메라와 연결 -->
+        					<input type="file" id="camera" name="camera" capture="camera" accept="image/*">
+        					<img id="pic" style="width:100%;" >
+        			</form>
 			<tr> 
 				<td> 
 			        <!-- 프로필 편집 창에서 입력한 소개글 DB 저장 그대로 불러와 -->
-			        	<div class="introduction">소개 </div>
+			        	<div id="introduction">소개 
 			        		<p> 회원이 작성한 소개글 </p> 
+			        	</div>
 			     </td>
 			</tr>
-      </div>
-    </div>
-  </section>
 
- <main> 
-  <div class="posts py-5 bg-light">
-    <div class="main-container">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      
-        <div class="col">
-          <div class="card shadow-sm">
-<!--             <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img"  -->
-<!--             aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"> -->
-<!--             <title>Placeholder</title> -->
-<!--             <rect width="100%" height="100%" fill="#55595c"/> -->
-<!--             <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text> -->
-<!--             </svg> -->
-
-            <div class="card-body">
+<!-- 게시물 -->
+		<div id="main-container">
+            <span id="card-body1">
             	<p class="card-text">게시물 내용</p>
               		<div class="d-flex justify-content-between align-items-center">
                 		<div class="btn-group">
@@ -109,13 +113,11 @@ function changeValue(obj){
                 		</div>
                 		<small class="text-muted">9 mins</small>
               		</div>
-            	</div>
-          	</div>
-        </div>
+            	</span>
 
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body" >
+
+
+            <span id="card-body2" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -124,13 +126,11 @@ function changeValue(obj){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </div>
-          </div>
-        </div>
+            </span>
+
         
-        <div class="col">
-          <div class="card shadow-sm">
-            <div class="card-body" >
+
+            <span id="card-body3" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -139,15 +139,11 @@ function changeValue(obj){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
+            </span>
+		</div>       
+
+
+
 </main>
-
-
 </body>
 </html>
