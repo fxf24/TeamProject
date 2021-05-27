@@ -3,22 +3,28 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="description" content="HTML, CSS">
+<meta name="author" content="Practice">
+<meta name="keywords" content="WebPortfolio">
+<title>Insert title here</title>
+<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <!-- 상단 고정 스타일 css 연결  -->
 
 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
 	<link href="/css/profile/topmain.css" rel="stylesheet" type="text/css">
 	
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="/jquery-3.2.1.min.js"></script>
 <script>
-$(document).ready(function(){
-	/* 프로필 사진 업로드  */
-	$('#profileimage').click(function (e){
-		document.imageform.target_url.value = document.getElementById('profileimage').src;
-		e.preventDefault();
-	    $('#imagefile').click();
+window.onload = function() {
+	$(document).ready(function(){
+		/* 프로필 사진 업로드  */
+		$('#img').click(function(i){
+			document.imageform.target_url.value = document.getElementById('img').src;
+			i.preventDefault();
+		    $('#file').click();
+		});
 	});
+<<<<<<< HEAD
 });
 
 function changeValue(obj){
@@ -39,6 +45,28 @@ $(function(){
     });
 });
 
+=======
+	
+	function changeValue(obj){
+		document.imageform.submit();
+	};
+	
+	/* 게시물 업로드 - test1 */
+	$('#postupload').click(function(p){
+		document.postform.upload_url.value = document.getElementById('postupload').src;
+		p.preventDefault();
+	    $('#file').click();
+	});
+	
+	/* 게시물 업로드 카메라와 연결 */ 
+	$(function(){
+	    $('#camera').change(function(c){
+	        $('#pic').attr('src', URL.createObjectURL(c.target.files[0]));
+	    });
+	});//document ready 함수 end
+
+}; //window onload 함수 end 
+>>>>>>> 0e77bd6d14354bed2c06cae4e32cd9d38ad4db38
 </script>
 </head>
 
@@ -51,7 +79,7 @@ $(function(){
 	      <div id="profileimage"> 
 	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
 				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" >
-    				<input type="file" id="imgaefile" name="imagefile" style="display:none;" onchange="changeValue(this)">
+    				<input type="file" id="file"  style="display:none;" onchange="changeValue(this)">
     				<input type="hidden" name = "target_url">
 				</form>
 			</div>
@@ -78,15 +106,21 @@ $(function(){
 				</tr>
 			<tr>
 				<td> 
-					<form id="post_upload_btn" name="post_upload_btn" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
-        					<input id="post_upload_btn" name="post_upload_btn" type="button" value="게시물 업로드">
-        					<input type="file" id="postuploadfile" name="postuploadfile" style="display:none;" onchange="changeValue(this)">
+				<div id="postupload"> 
+					<form id="postform" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
+        					<label id="postfont" for="input-file"> 게시물 업로드 </label>
+        				<div id="postuploadbtn"> 
+        					<input type="file" id="input-file" onchange="changeValue(this)">
     						<input type="hidden" name = "upload_url">
-        					<!-- 게시물 업로드 카메라와 연결 -->
-        					<input type="file" id="upload_camera" name="camera" capture="camera" accept="image/*">
-        					<img id="pic" style="width:100%;" >
-        					<input type="hidden" name = "camera_url">
-        			</form>
+    					</div>
+    				</form>
+    			</div>
+<!--         			게시물 업로드 카메라와 연결
+        			<input type="file" id="file" name="camera" capture="camera" accept="image/*">
+        			<img id="pic" style="width:100%;" >
+        			<input type="hidden" name = "camera_url"> -->
+        			
+        			
 			<tr> 
 				<td> 
 			        <!-- 프로필 편집 창에서 입력한 소개글 DB 저장 그대로 불러와 -->
