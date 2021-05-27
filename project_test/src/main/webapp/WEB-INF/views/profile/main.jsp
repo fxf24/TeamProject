@@ -39,8 +39,6 @@ $(function(){
     });
 });
 
-
-출처: https://cofs.tistory.com/180 [CofS]
 </script>
 </head>
 
