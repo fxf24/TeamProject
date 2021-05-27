@@ -18,10 +18,10 @@
 window.onload = function() {
 	$(document).ready(function(){
 		/* 프로필 사진 업로드  */
-		$('#profileimage').click(function(i){
-			document.imageform.target_url.value = document.getElementById('profileimage').src;
+		$('#img').click(function(i){
+			document.imageform.target_url.value = document.getElementById('img').src;
 			i.preventDefault();
-		    $('#imagefile').click();
+		    $('#file').click();
 		});
 	});
 	
@@ -30,8 +30,8 @@ window.onload = function() {
 	};
 	
 	/* 게시물 업로드 - test1 */
-	$('#post_upload_btn').click(function(p){
-		document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
+	$('#postupload').click(function(p){
+		document.postform.upload_url.value = document.getElementById('postupload').src;
 		p.preventDefault();
 	    $('#file').click();
 	});
@@ -56,7 +56,7 @@ window.onload = function() {
 	      <div id="profileimage"> 
 	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
 				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" >
-    				<input type="file" id="imgaefile" name="imagefile" style="display:none;" onchange="changeValue(this)">
+    				<input type="file" id="file"  style="display:none;" onchange="changeValue(this)">
     				<input type="hidden" name = "target_url">
 				</form>
 			</div>
@@ -83,15 +83,21 @@ window.onload = function() {
 				</tr>
 			<tr>
 				<td> 
-					<form id="post_upload_btn" name="post_upload_btn" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
-        					<input id="post_upload_btn" name="post_upload_btn" type="button" value="게시물 업로드">
-        					<input type="file" id="postuploadfile" name="postuploadfile" style="display:none;" onchange="changeValue(this)">
+				<div id="postupload"> 
+					<form id="postform" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
+        					<label id="postfont" for="input-file"> 게시물 업로드 </label>
+        				<div id="postuploadbtn"> 
+        					<input type="file" id="input-file" onchange="changeValue(this)">
     						<input type="hidden" name = "upload_url">
-        					<!-- 게시물 업로드 카메라와 연결 -->
-        					<input type="file" id="upload_camera" name="camera" capture="camera" accept="image/*">
-        					<img id="pic" style="width:100%;" >
-        					<input type="hidden" name = "camera_url">
-        			</form>
+    					</div>
+    				</form>
+    			</div>
+<!--         			게시물 업로드 카메라와 연결
+        			<input type="file" id="file" name="camera" capture="camera" accept="image/*">
+        			<img id="pic" style="width:100%;" >
+        			<input type="hidden" name = "camera_url"> -->
+        			
+        			
 			<tr> 
 				<td> 
 			        <!-- 프로필 편집 창에서 입력한 소개글 DB 저장 그대로 불러와 -->
