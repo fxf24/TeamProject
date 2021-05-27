@@ -45,14 +45,13 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
-	<form action="/login/" method="post" class="loginHome">
 		<div id="loginBox">
 			<div class="loginBox1">
 				<svg class="loginBox2">
 					<rect id="loginBox2" x="0" y="0" width="428" height="644"/>
 				</svg>
-				<button id="loginBut" onclick="button()">
-				</button>
+<!-- 				<button id="loginBut" onclick="button()">
+				</button> -->
 				<div id="loginText">
 					<span>로그인</span>
 				</div>
@@ -66,8 +65,8 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div id="pwTextBox" class="pwBox1">
-			<input type="password" id="pwInput" class="pw">
-			<svg class="pwTextBox4">
+<!-- 			<input type="password" id="pwInput" class="pw">
+ -->			<svg class="pwTextBox4">
 				<rect id="pwTextBox4" rx="10" ry="10" x="0" y="0" width="344" height="40"/>
 			</svg>
 			<div id="pwText">
@@ -79,8 +78,8 @@ $(document).ready(function(){
 			</div>
 		</div>
 					<div id="idTextBox" class="idBox">
-						<input type="text" id="idInput" class="id">
-							<svg class="idTextBox2">
+<!-- 						<input type="text" id="idInput" class="id">
+ -->							<svg class="idTextBox2">
 								<rect id="idTextBox2" rx="10" ry="10" x="0" y="0" width="344" height="40"/>
 							</svg>
 						<div id="idTextBox">
@@ -95,8 +94,38 @@ $(document).ready(function(){
 			<div id="findIdPass">
 				<span>아이디/비밀번호 찾기</span>
 			</div>
+		<div id="naverLoginPBox">
+			<svg class="naverLoginBox1">
+				<rect id="naverLoginBox1" rx="0" ry="0" x="0" y="0" width="286" height="62"/>
+			</svg>
+			<div id="naverLoginBox2">
+				<svg class="naverLoginBox3">
+					<rect id="naverLoginBox3" rx="0" ry="0" x="0" y="0" width="270" height="44"/>
+				</svg>
+				<img id="naverIcon" src="/loginimage/naverIcon.png" >
+				<div id="naverLoginFont">
+					<span>네이버로 로그인하기</span>
+				</div>
+			</div>
+			<form action="/login/" method="post" class="loginHome">
+			<input type="text"id="idInput" class="idInput">
+			<input type="password" id="passwordInput" class="passwordInput">
+			<input type="submit" id="loginButton" class="loginButton" value = "">
+			<button id="findIdPassButton"  class="findIdPassButton"  onclick="location.href = ""></button>
+			<button id="signupButton" class="signupButton"  onclick="location.href = "signup.jsp"></button>
+			<button id="naverLoginButton" class="naverLoginButton"  onclick="location.href = ""></button>
+			</form>
 		</div>
-	</form>
+			<form action="/login/" method="post" class="loginHome">
+			<input type="text"id="idInput" class="idInput">
+			<input type="password" id="passwordInput" class="passwordInput">
+			<input type="submit" id="loginButton" class="loginButton" value = "">
+			<button id="findIdPassButton"  class="findIdPassButton"  onclick="location.href = ""></button>
+			<button id="signupButton" class="signupButton"  onclick="location.href = "signup.jsp"></button>
+			<button id="naverLoginButton" class="naverLoginButton"  onclick="location.href = ""></button>
+			</form>
+		</div>
+
 </div>
 </body>
 </html>

@@ -39,9 +39,13 @@ $(document).ready(function(){
 				image.src = "/upload/" + filename
 				image.onload = function(){
 					context.drawImage(image, 10, 10, image.width, image.height)
+					
+					//od json
 					var names = odjson.predictions[0].detection_names
 					var confidence = odjson.predictions[0].detection_scores
 					var boxes = odjson.predictions[0].detection_boxes
+					
+					//cfr json 
 					var faces = cfrjson.faces 
 					
 					for(var i = 0; i < names.length; i++){
@@ -63,6 +67,7 @@ $(document).ready(function(){
 						//}//if end
 					}//for end
 					
+					//cfr데이터를 해쉬태그로 추가해주기
 					for(var i = 0; i<faces.length; i++){
 						var celebrity = faces[i].celebrity.value
 						var confidence = faces[i].celebrity.confidence

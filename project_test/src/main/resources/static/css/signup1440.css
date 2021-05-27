@@ -1,9 +1,10 @@
 @charset "UTF-8";
+
 	#signup {
-		margin: -8px;
 		position: absolute;
-		width: 180vh;
-		height: 100%;
+		margin: -8px;
+		width: 100vw;
+		height: 66.6667vw;
 		background-color: rgba(255,236,72,1);
 		overflow: hidden;
 		--web-scale-on-resize: true;
@@ -13,7 +14,8 @@
 		position: absolute;
 		width: 1090px;
 		height: 770px;
-		left: 175px;
+		left: 50%;
+		transform:translateX(-50%);
 		top: 158px;
 		overflow: visible;
 	}
@@ -464,9 +466,89 @@
 		font-size: 24px;
 		color: rgba(0,0,0,1);
 	}
+	 	.signupIdInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+ 	#signupIdInput{
+		position: absolute;
+		overflow: visible;
+		width: 324px;
+		height: 49px;
+		left: 403px;
+		top: 192px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupEmailInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+	#signupEmailInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 293px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassInput{
+		font-size: 21px;
+	}
+	#signupPassInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 394px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassConfirmInput{
+		font-size: 21px;
+	}
+	#signupPassConfirmInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 494px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#newSignupButton{
+		position: absolute;
+		overflow: visible;
+		width: 254px;
+		height: 60px;
+		left: 418px;
+		top: 604px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	
 	#hashhershe {
-		left: 471px;
-		top: 3px;
+		left: 296px;
+		top: -155px;
 		position: absolute;
 		overflow: visible;
 		width: 507px;
@@ -482,15 +564,94 @@
 		position: absolute;
 		width: 487.316px;
 		height: 116px;
-		left: 464.32px;
-		top: 0px;
+		left: 289.32px;
+		top: -158px;
 		overflow: visible;
 	}
 	#hashLine2{
 		position: absolute;
 		width: 491px;
 		height: 23px;
-		left: 464px;
-		top: 135px;
+		left: 296px;
+		top: -23px;
 		overflow: visible;
+	}
+	 	.signupIdInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+ 	#signupIdInput{
+		position: absolute;
+		overflow: visible;
+		width: 324px;
+		height: 49px;
+		left: 403px;
+		top: 192px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupEmailInput{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+	#signupEmailInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 293px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassInput{
+		font-size: 21px;
+	}
+	#signupPassInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 394px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+ 	.signupPassConfirmInput{
+		font-size: 21px;
+	}
+	#signupPassConfirmInput{
+		position: absolute;
+		overflow: visible;
+		width: 368px;
+		height: 49px;
+		left: 359px;
+		top: 494px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+	}
+	#newSignupButton{
+		position: absolute;
+		overflow: visible;
+		width: 254px;
+		height: 60px;
+		left: 418px;
+		top: 604px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
 	}

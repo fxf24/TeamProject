@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <!-- mybatis db 연결정보 세팅 파일 -->
+<configuration>
+	<!-- 1.타입 alias : 
+	mybatis.EmpVO : SQL결과 데이터 저장 
+	별명 : emp 
+	-->
+	<typeAliases>
+		<typeAlias type="com.project.test.PostVO" alias="postVO"/>
+		<typeAlias type="com.project.test.UserVO" alias="userVO"/>
+	</typeAliases> 
+	
+	<!--3. sql mapping 파일 설정-->
+	<mappers>
+		<mapper resource = "mybatis/sql-mapping.xml"/>
+	</mappers> 
+	 
+</configuration>
+
+

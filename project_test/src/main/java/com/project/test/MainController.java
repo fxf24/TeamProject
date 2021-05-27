@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class MainController {
 	@Autowired
 	NaverService naverService;
+	@Autowired
+	HHserviceImpl hhService;
 	
 	@RequestMapping("/postupload")
 	public String uploadform() {
