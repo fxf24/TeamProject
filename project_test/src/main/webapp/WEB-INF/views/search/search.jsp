@@ -32,101 +32,213 @@ $(document).ready(function(){
 		$('#hashtagSearch').css("display", "block");
 	})
 			
-
-		//main에서 넘어오는 search값 전달, id검색만 현재 테스트중
-		var testMessage = $("#searchbar").val();
- 		$.ajax({
+	//main에서 넘어오는 search값 전달, id 검색
+	var searchMessage = $("#searchbar").val(); 
+	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
+		$("#idSearch").text("검색어를 입력하세요.");
+	} else {
+		$.ajax({
 			url :"/idsearch",
 			type : "get",
-			data : {"id" : testMessage},
+			data : {"id" : searchMessage},
+			dataType : "json",
+			success : function(response){
+				//console.log(response)
+				var list = response;
+				if(list.length==0){ //검색 결과가 없을 때
+					$("#idSearch").text("검색 결과가 없습니다.");
+				} else {
+					for(var i in list){ //결과 반환
+						$("#idSearch").append
+						("<a href='profile?name="+list[i].id+"'>"+list[i].id+"</a><br>");				
+					}// for end
+				} 
+			}, // success end
+			error : function(e){
+				console.log(e)
+			} // error end
+		}) // ajax end
+	} //else end
+ 			 
+	
+	//main에서 넘어오는 search값 전달, name 검색
+	if(searchMessage==null||searchMessage==""){ //검색어가 없을때
+		$("#nameSearch").text("검색어를 입력하세요.");
+	} else {
+		$.ajax({
+			url :"/namesearch",
+			type : "get",
+			data : {"name" : searchMessage},
+			dataType : "json",
+			success : function(response){
+				//console.log(response)
+				var list = response;
+				if(list.length==0){ // 검색결과가 없을때
+					$("#nameSearch").text("검색 결과가 없습니다.");
+				} else {
+					for(var i in list){ //결과 반환
+						$("#nameSearch").append
+						("<a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
+					}// for end
+				} 
+			}, // success end
+			error : function(e){
+				console.log(e)
+			} // error end
+		}) // ajax end
+	} //else end
+	
+	
+	// main에서 넘어오는 search값 전달, hashtag 검색
+	var length = searchMessage.length; //검색어의 길이
+	var hashtagArr = []; //검색어의 중복을 방지하기 위한 array
+	if(searchMessage==null||searchMessage==""){ //검색어가 없을때
+		$("#hashtagSearch").text("검색어를 입력하세요.");
+	} else {
+		$.ajax({
+			url :"/hashtagsearch",
+			type : "get",
+			data : {"hashtag" : searchMessage},
 			dataType : "json",
 			success : function(response){
 				console.log(response)
 				var list = response;
-				console.log(list);
-				for(var i in list){
-					$("#idSearch").append(list[i].id+"<br>");	
-				}
-			} // success end
-		}) // ajax end	 
-		
-		var testMessage = $("#searchbar").val();
-		// name 검색결과		
-		$.ajax({
-			url :"/namesearch",
-			type : "get",
-			data : {"searchmessage" : testMessage},
-			success : function(idresponse){
-				var searchval = idresponse;
-				$("#nameSearch").text(searchval);
-			} // success end
-		})// ajax end
-		
-		// hashtag 검색결과
-		$.ajax({ 
-			url :"/hashtagsearch",
-			type : "get",
-			data : {"searchmessage" : testMessage},
-			success : function(idresponse){
-				var searchval = idresponse;
-				$("#hashtagSearch").text(searchval);
-			} // success end
-		})// ajax end
+				if(list.length==0){ //검색 결과가 없을 때
+					$("#hashtagSearch").text("검색 결과가 없습니다.");
+				} else {
+					for(var i in list){
+						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
+						//console.log("HASHTAG = "+hashtag)
+						for(var tag in hashtag){
+							if(!hashtagArr.includes(hashtag[tag]) && //중복된 태그 검사 && 검색어와 태그 일치 여부 검사
+								searchMessage == hashtag[tag].substring(0, length)){
+									hashtagArr.push(hashtag[tag]);
+									hashtagArr.sort();																	
+							} // if end								
+						}// for tag end
+					} // for i end
+					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
+						$("#hashtagSearch").append("검색 결과가 없습니다.");
+					} else {
+						for(var i in hashtagArr){ //결과 반환
+							$("#hashtagSearch").append("#"+hashtagArr[i]+"<br>");
+						}// for end
+					}// else end
+				}// else
+			}, // success end
+			error : function(e){
+						console.log(e)
+					} // error end
+			}) // ajax end
+		} //else end
 }); //ready end
 
 
 //search버튼 클릭 시 검색결과 반환 함수
 function search(){ 
-	var searchMessage = $("#searchbar").val();
+	var searchMessage = $("#searchbar").val(); // 검색어 입력
+	// 검색결과 초기화
+	$("#idSearch").text(""); 
+	$("#nameSearch").text("");
+	$("#hashtagSearch").text(""); 
 	
-// 		// id 검색결과
-// 		$.ajax({
-// 			url :"/idsearch",
-// 			type : "get",
-// 			data : {"searchmessage" : searchMessage},
-// 			//dataType : "json",
-// 			success : function(idresponse){
-// 				var searchval = idresponse;
-// 				$("#idSearch").text(searchval);
-// 			} // success end
-// 		}) // ajax end	
-		
-		
-		// 테스트용 id검색결과
+	// id 검색결과
+	if(searchMessage==null || searchMessage==""){ //검색어가 없을 때
+		$("#idSearch").text("검색어를 입력하세요.");
+	} else {
 		$.ajax({
 			url :"/idsearch",
 			type : "get",
-			data : {"searchmessage" : searchMessage},
-			//dataType : "json",
-			success : function(idresponse){
-				for(var result in idresponse){
-					$("#idSearch").text(result+"<br>");	
-				}//for end
-			} // success end
-		}) // ajax end	
-		
-		// name 검색결과		
+			data : {"id" : searchMessage},
+			dataType : "json",
+			success : function(response){
+				console.log(response)
+				var list = response;
+				if(list.length==0){ //검색 결과가 없을 때
+					$("#idSearch").text("검색 결과가 없습니다.");
+				} else {
+					for(var i in list){ //결과 반환
+						$("#idSearch").append
+						("<a href='profile?name="+list[i].id+"'>"+list[i].id+"</a><br>");				
+					}// for end
+				} 
+			}, // success end
+			error : function(e){
+				console.log(e)
+			} // error end
+		}) // ajax end
+	} //else end	
+	
+	// name 검색 결과
+	if(searchMessage==null || searchMessage==""){ //검색어가 없을 때
+		$("#nameSearch").text("검색어를 입력하세요.");
+	} else {
 		$.ajax({
 			url :"/namesearch",
 			type : "get",
-			data : {"searchmessage" : searchMessage},
-			success : function(idresponse){
-				var searchval = idresponse;
-				$("#nameSearch").text(searchval);
-			} // success end
-		})// ajax end
-		
-		// hashtag 검색결과
-		$.ajax({ 
+			data : {"name" : searchMessage},
+			dataType : "json",
+			success : function(response){
+				console.log(response)
+				var list = response;
+				if(list.length==0){ //검색 결과가 없을 때
+					$("#nameSearch").text("검색 결과가 없습니다.");
+				} else {
+					for(var i in list){ //결과 반환
+						$("#nameSearch").append
+						("<a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
+					}// for end
+				} // else end
+			}, // success end
+			error : function(e){
+				console.log(e)
+			} // error end
+		}) // ajax enda
+	} //else end
+	
+	// hashtag 검색결과
+	var length = searchMessage.length; //검색어의 길이
+	var hashtagArr = []; //검색어의 중복을 방지하기 위한 array
+	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
+		$("#hashtagSearch").text("검색어를 입력하세요.");
+	} else {
+		$.ajax({
 			url :"/hashtagsearch",
 			type : "get",
-			data : {"searchmessage" : searchMessage},
-			success : function(idresponse){
-				var searchval = idresponse;
-				$("#hashtagSearch").text(searchval);
-			} // success end
-		})// ajax end
-}// search function end
+			data : {"hashtag" : searchMessage},
+			dataType : "json",
+			success : function(response){
+				console.log(response)
+				var list = response;
+				if(list.length==0){ //검색 결과가 없을 때
+					$("#hashtagSearch").text("검색 결과가 없습니다.");
+				} else {
+					for(var i in list){
+						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
+						//console.log("HASHTAG = "+hashtag)
+						for(var tag in hashtag){
+							if(!hashtagArr.includes(hashtag[tag]) &&
+								searchMessage == hashtag[tag].substring(0, length)){ //중복된 태그 검사 && 검색어와 태그 일치 여부 검사
+									hashtagArr.push(hashtag[tag]);
+									hashtagArr.sort();																	
+							} // if end								
+						}// for tag end
+					} // for i end
+					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
+						$("#hashtagSearch").append("검색 결과가 없습니다.");
+					} else {
+						for(var i in hashtagArr){ //결과 반환
+							$("#hashtagSearch").append("#"+hashtagArr[i]+"<br>");
+						}// for end
+					}// else end
+				}// else
+			}, // success end
+			error : function(e){
+						console.log(e)
+					} // error end
+			}) // ajax end
+		} //else end
+	}// search function end
 
 
 </script>

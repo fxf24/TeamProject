@@ -12,14 +12,24 @@ public class HHserviceImpl implements HHservice{
 
 	@Override
 	public UserVO getOneUser(String id) {
-		// TODO Auto-generated method stub
 		UserVO result = hhdao.getOneUser(id);
 		return result;
 	}
 
-	@Override
+	@Override // id 검색 리스트 반환
 	public List<UserVO> getUserID(String id) {
 		return hhdao.getUserID(id);
 	}
+	
+	@Override // name 검색 리스트 반환
+	public List<UserVO> getUserName(String name) {
+		return hhdao.getUserName(name);
+	}
+
+	@Override // hashtag 검색 리스트 반환
+	public List<PostVO> getHashtag(String hashtag) {
+		return hhdao.getHashtag(hashtag);
+	}
+	
 	
 }
