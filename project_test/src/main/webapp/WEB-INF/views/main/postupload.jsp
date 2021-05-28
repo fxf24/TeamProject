@@ -9,7 +9,7 @@
 <script>
 $(document).ready(function(){
 	var user = sessionStorage.getItem("user")
-	
+	sessionStorage.setItem("user", "admin")
 	
 	$("#fileUpload").on('click', function(event){
 		event.preventDefault()
@@ -111,12 +111,26 @@ function saveImage(){
         processData : false,	// data 파라미터 강제 string 변환 방지!!
         contentType : false,	// application/x-www-form-urlencoded; 방지!!
         success : function (data) {
-        	alert(data)
+        	console.log(data)
         }
 
     });
     
-    alert($("#hashtags").html())
+  	console.log($("#hashtags").html())
+  	
+  	var user = sessionStorage.getItem("user")
+  	$.ajax({
+  		type: 'post',
+  		url: '/saveData',
+  		data: {'id': user,'content':$("#contents").val(), 'image':fileName,
+  			'hashtag':$("#hashtags").text()+$("#names").val()},
+  		dataType: 'json',
+  		
+  		success: function(server){
+  			console.log(server)
+  			window.location.href = "/"
+  		}
+  	})
 }
 </script>
 </head>
@@ -131,8 +145,8 @@ function saveImage(){
 <div id="hashtags"></div>
 <form>
 <input type="text" id="names" style=""></input><br>
-내용 입력
-<textarea id="contents" rows="3" cols="100"></textarea>
+내용 입력<br>
+<textarea id="contents" rows="3" cols="100"></textarea><br>
 </form>
 <button id="postUpload" onclick="saveImage()">작성하기</button>
 </body>

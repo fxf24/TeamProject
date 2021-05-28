@@ -35,6 +35,19 @@ public class MainController {
 		file.transferTo(savefile);
 		return "저장했습니다!";
 	}
+	@RequestMapping(value="/saveData", method=RequestMethod.POST)
+	@ResponseBody
+	public String saveData(String id, String content, String image, String hashtag) {
+		System.out.println(id + "|"+ content + "|"+ image + "|"+ hashtag);
+		PostVO pvo = new PostVO();
+		pvo.setId(id);
+		pvo.setContents(content);
+		pvo.setImagepath(image);
+		pvo.setHashtag(hashtag);
+		hhService.insertPostData(pvo);
+		return "저장완료";
+	}
+	
 	
 	@RequestMapping(value="/getODjson", method=RequestMethod.POST)
 	@ResponseBody
