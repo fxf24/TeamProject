@@ -14,5 +14,11 @@ public class HHserviceImpl implements HHservice{
 		UserVO result = hhdao.getOneUser(id);
 		return result;
 	}
+
+	@Override
+	public void insertPostData(PostVO pvo) {
+		// TODO Auto-generated method stub
+		hhdao.insertPostData(pvo);
+	}
 	
 }

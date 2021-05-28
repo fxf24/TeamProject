@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository("hhDAO")
 public interface HHDAO {
 	UserVO getOneUser(String id);
+	void insertPostData(PostVO pvo);
 }

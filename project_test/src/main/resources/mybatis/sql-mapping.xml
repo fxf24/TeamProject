@@ -6,6 +6,13 @@
 select * from users where id= #{id}
 </select>
 
+<insert id="insertPostData" parameterType="postVO">
+<selectKey resultType="int" keyProperty="postNum" order="BEFORE">
+	select posts_seq.nextval from dual
+</selectKey>
+insert into posts values(#{postNum}, #{id}, #{contents},
+ #{imagepath}, #{hashtag}, 0, sysdate)
+</insert>
 </mapper>
 
 

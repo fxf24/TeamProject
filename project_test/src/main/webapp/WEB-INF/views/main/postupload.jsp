@@ -115,6 +115,8 @@ function saveImage(){
         }
 
     });
+    
+    alert($("#hashtags").html())
 }
 </script>
 </head>
@@ -132,7 +134,6 @@ function saveImage(){
 내용 입력
 <textarea id="contents" rows="3" cols="100"></textarea>
 </form>
-
 <button id="postUpload" onclick="saveImage()">작성하기</button>
 </body>
 </html>
