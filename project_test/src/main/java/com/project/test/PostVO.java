@@ -7,10 +7,18 @@ public class PostVO {
 	int postNum;
 	String id, contents, imagepath, hashtag, date;
 	int thumbsup;
-		
+	String postDate;
+	
 	public PostVO() {}
 	
+<<<<<<< HEAD
 	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, String date, int thumbsup) {
+=======
+	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, int thumbsup,
+			String postDate) {
+		super();
+
+>>>>>>> 96525dae8baaafa0c883fe60093893f008f6f1c0
 		this.postNum = postNum;
 		this.id = id;
 		this.contents = contents;
@@ -18,7 +26,9 @@ public class PostVO {
 		this.hashtag = hashtag;
 		this.date = date;
 		this.thumbsup = thumbsup;
+		this.postDate = postDate;
 	}
+	
 	public int getPostNum() {
 		return postNum;
 	}
@@ -56,6 +66,7 @@ public class PostVO {
 		this.thumbsup = thumbsup;
 	}
 	
+<<<<<<< HEAD
 	public String getDate() {
 		return date;
 	}
@@ -64,9 +75,19 @@ public class PostVO {
 		this.date = date;
 	}
 
+=======
+	public String getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+	}
+	
+>>>>>>> 96525dae8baaafa0c883fe60093893f008f6f1c0
 	@Override
 	public String toString() {
 		return "PostVO [postNum=" + postNum + ", id=" + id + ", contents=" + contents + ", imagepath=" + imagepath
-				+ ", hashtag=" + hashtag + ", thumbsup=" + thumbsup + "]";
+				+ ", hashtag=" + hashtag + ", thumbsup=" + thumbsup + ", postDate=" + postDate + "]";
 	}
+	
 }

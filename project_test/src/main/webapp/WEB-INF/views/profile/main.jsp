@@ -24,6 +24,28 @@ window.onload = function() {
 		    $('#file').click();
 		});
 	});
+<<<<<<< HEAD
+});
+
+function changeValue(obj){
+	document.imageform.submit();
+};
+
+/* 게시물 업로드 - test1 */
+$('#post_upload_btn').click(function (e){
+	document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
+	e.preventDefault();
+    $('#postuploadfile').click();
+});
+
+/* 게시물 업로드 카메라와 연결 */ 
+$(function(){
+    $('#camera').change(function(e){
+        $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
+    });
+});
+
+=======
 	
 	function changeValue(obj){
 		document.imageform.submit();
@@ -44,6 +66,7 @@ window.onload = function() {
 	});//document ready 함수 end
 
 }; //window onload 함수 end 
+>>>>>>> 0e77bd6d14354bed2c06cae4e32cd9d38ad4db38
 </script>
 </head>
 

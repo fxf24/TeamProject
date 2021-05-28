@@ -29,18 +29,7 @@ $("#signupIdInput").on("focusout", function() {
         }).on("keyup", function() {
             $(this).val($(this).val().replace(replaceChar, ""));
    });   
-	$("#signupIdInput").on("focusout", function() {
-	        var x = $(this).val();
-	        if (x.length > 0) {
-	            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
-	                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
-	            }
-	            $(this).val(x);
-	        }
-	        }).on("keyup", function() {
-	            $(this).val($(this).val().replace(replaceChar2, ""));
-	   });
-$("#signupIdInput").on("focusout", function() {
+$("#signupNameInput").on("focusout", function() {
     var x = $(this).val();
     if (x.length > 0) {
         if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
@@ -51,6 +40,17 @@ $("#signupIdInput").on("focusout", function() {
     }).on("keyup", function() {
         $(this).val($(this).val().replace(replaceChar, ""));
 }); 
+$("#signupEmailInput").on("focusout", function() {
+	        var x = $(this).val();
+	        if (x.length > 0) {
+	            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
+	                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
+	            }
+	            $(this).val(x);
+	        }
+	        }).on("keyup", function() {
+	            $(this).val($(this).val().replace(replaceChar2, ""));
+	   });
 $("#signupPassInput").on("focusout", function() {
         var x = $(this).val();
         if (x.length > 0) {
@@ -73,14 +73,24 @@ $("#signupPassConfirmInput").on("focusout", function() {
 	    }
     }).on("keyup", function() {
         $(this).val($(this).val().replace(replaceChar, ""));
+});
+});       
+function numberMaxLength(e){
+    if(e.value.length > e.maxLength){
+        e.value = e.value.slice(0, e.maxLength);
+    }
+}
     });
-     
-
 </script>
 </head>
 <body>
 <div id="signup">
 	<div id="signupPBox1">
+		<div id="hashhershe">
+			<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
+		</div>
+		<img id="hashLine1" src="/loginimage/hashhash.png" >
+		<img id="hashLine2" src="/loginimage/underhashhash.png" >
 			<div id="signupBox1">
 				<svg class="signupBox2">
 					<rect id="signupBox2" rx="0" ry="0" x="0" y="0" width="1090" height="770">
@@ -88,27 +98,6 @@ $("#signupPassConfirmInput").on("focusout", function() {
 				</svg>
 			</div>
 		<div id=signupPBox2>
-			<div id="idBoxFont">
-				<span>아이디</span>
-			</div>
-			<div id="idTerm">
-				<span>※중복된 아이디입니다.</span>
-			</div>
-			<div id="emailFont">
-				<span>이메일</span>
-			</div>
-			<div id="passwordFont">
-				<span>비밀번호</span>
-			</div>
-			<div id="confirmPassFont">
-				<span>비밀번호확인</span>
-			</div>
-			<div id="emailTerm">
-				<span>※존재하지 않는 이메일입니다.</span>
-			</div>
-			<div id="passwordTerm">
-				<span>※a-z, A-Z, 0-9 + 특수기호 ~,#,^,&,*  10자~16자 만 가능</span>
-			</div>
 			<div id="signupPButton">
 				<div id="signupButton1">
 					<svg class="signupButton2">
@@ -122,9 +111,13 @@ $("#signupPassConfirmInput").on("focusout", function() {
 						<button id="signupButtonClick" ></button>
 					</div>
 				</div>
-
 			</div>
 			<div id="idPBox">
+				<div id="idBoxFont">
+					<span>아이디</span>
+						<div id="idTerm">
+							<span>※중복된 아이디입니다.</span>
+						</div>
 				<div id="idBox1">
 					<svg class="idBox2">
 						<rect id="idBox2" rx="0" ry="0" x="0" y="0" width="372" height="52">
@@ -135,29 +128,33 @@ $("#signupPassConfirmInput").on("focusout", function() {
 						</rect>
 					</svg>
 				</div>
-				<div id="idFont1">
-					<span>@</span>
-				</div>
-<!-- 				<div class="idBoxInput">
-					<input id="idBoxInput"  type="text" >
-				</div>
- -->			</div>
-			<div id="emailPBox">
-				<div id="emailBox1">
-					<svg class="emailBox2">
-						<rect id="emailBox2" rx="0" ry="0" x="0" y="0" width="372" height="52">
-						</rect>
-					</svg>
-					<svg class="emailBox3">
-						<rect id="emailBox3" rx="10" ry="10" x="0" y="0" width="372" height="52">
-						</rect>
-					</svg>
-				</div>
-<!-- 					<div class="emailnput" >
-						<input id="emailInput"  type="text" >
+					<div id="idFont1">
+						<span>@</span>
 					</div>
- -->			</div>
-			<div id="passwordPBox">
+				</div>
+			 </div>
+			 <div id="namePBox">
+				<div id="nameBoxFont">
+					<span>이름</span>
+				<div id="nameBox1">
+					<svg class="nameBox2">
+						<rect id="nameBox2" rx="0" ry="0" x="0" y="0" width="372" height="52">
+						</rect>
+					</svg>
+					<svg class="nameBox3">
+						<rect id="nameBox3" rx="10" ry="10" x="0" y="0" width="372" height="52">
+						</rect>
+					</svg>
+				</div>
+				</div>
+			 </div>
+			 	<div id="passwordPBox">
+					<div id="passwordFont">
+						<span>비밀번호</span>
+							<div id="passwordTerm">
+								<span>※a-z, A-Z, 0-9 + 특수기호 ~,#,^,&,*  10자~16자 만 가능</span>
+							</div>
+					</div>
 				<div id="passwordBox1">
 					<svg class="passwordBox2">
 						<rect id="passwordBox2" rx="10" ry="10" x="0" y="0" width="372" height="52">
@@ -169,35 +166,63 @@ $("#signupPassConfirmInput").on("focusout", function() {
 				</div>
  -->			</div>
 			<div id="confirmPassPBox">
-				<div id="confirmPassBox1">
-					<svg class="confirmPassBox2">
-						<rect id="confirmPassBox2" rx="10" ry="10" x="0" y="0" width="372" height="52">
+						<div id="confirmPassFont">
+							<span>비밀번호확인</span>
+						</div>
+					<div id="confirmPassBox1">
+						<svg class="confirmPassBox2">
+							<rect id="confirmPassBox2" rx="10" ry="10" x="0" y="0" width="372" height="52">
+							</rect>
+						</svg>
+					</div>
+				</div>
+			<div id="emailPBox">
+				<div id="emailFont">
+					<span>이메일</span>
+						<div id="emailTerm">
+							<span>※존재하지 않는 이메일입니다.</span>
+						</div>
+				</div>
+				<div id="emailBox1">
+					<svg class="emailBox2">
+						<rect id="emailBox2" rx="0" ry="0" x="0" y="0" width="372" height="52">
+						</rect>
+					</svg>
+					<svg class="emailBox3">
+						<rect id="emailBox3" rx="10" ry="10" x="0" y="0" width="372" height="52">
 						</rect>
 					</svg>
 				</div>
-<!-- 				<div class="confirmPassInput">
-					<input id="confirmPassInput"  type="password">
+			</div>
+			<div id="phonenumPBox">
+				<div id="phonenumFont">
+					<span>전화번호</span>
 				</div>
- -->			</div>
+				<div id="phonenumBox1">
+					<svg class="phonenumBox2">
+						<rect id="phonenumBox2" rx="0" ry="0" x="0" y="0" width="372" height="52">
+						</rect>
+					</svg>
+					<svg class="phonenumBox3">
+						<rect id="phonenumBox3" rx="10" ry="10" x="0" y="0" width="372" height="52">
+						</rect>
+					</svg>
+				</div>
+			</div>
 			<div id="signupTitle">
 				<span>회원가입</span>
 			</div>
 		</div>
 			<form action="/signup/" method="post" class="signup">
 				<input type="text" class="signupIdInput" id="signupIdInput"   maxlength='50'>
+ 				<input type="text" class="signupNameInput"  id="signupNameInput"  maxlength='16'>
 				<input type="text" class="signupEmailInput"  id="signupEmailInput"  maxlength='50'>
 				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'>
 				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'>
+ 				<input type="number" class="signupPhonenumInput"  id="signupPhonenumInput"  maxlength="11" oninput="numberMaxLength(this);"/>
 				<input type="submit" class="newSignupButton" id="newSignupButton" value="">
 			</form>
 	</div>
-	<div id="hashhershe">
-		<span>H</span><span style="font-size:34px;">A</span><span style="font-size:40px;">S</span><span style="font-size:48px;">H</span><span style="font-size:58px;">H</span><span style="font-size:70px;">E</span><span style="font-size:84px;">R</span><span style="font-size:104px;">S</span><span style="font-size:118px;">H</span><span style="font-size:142px;">E</span>
-
-	</div>
-	<img id="hashLine1" src="/loginimage/hashhash.png" >
-		
-	<img id="hashLine2" src="/loginimage/underhashhash.png" >
 </div>	
 </body>
 </html>
