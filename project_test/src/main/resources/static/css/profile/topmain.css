@@ -12,9 +12,18 @@
 	height: 300px;
 }
 
+/* #profileiamge { 
+	z-index: 2;
+	background: blue;
+	position: absolute;
+	clear: both; 
+	width: 500px;
+	height: 200px;
+	margin: 20px;
+} */
 
 #img {
-	position:absolute;
+	position: absolute;
   	top: 30px;
   	right: 1100px;
     left: 300px;
@@ -23,6 +32,7 @@
 	width: 150px; 
 	height: 150px;
 	border-radius:300px; 
+	cursor:pointer;
 }
 
 #account_id {
@@ -64,15 +74,31 @@
 	text-align: center;
 }
 
-#post_upload_btn {
+#postupload {
 	position:absolute;
-	top: 40%;
+	top: 45%;
     left: 50%;
-	text-align: center;
-	cursor:pointer;
 }
 
-#upload_camera {
+#postfont {
+	z-index: 2;
+	position:absolute;
+	top: 55%;
+    left: 0;
+	cursor:pointer;
+	background: silver;
+	font-size: medium;
+	width: 180px;
+}
+
+#postuploadbtn {
+	position:absolute;
+	top: 30%;
+    left: 0;
+    display: none;
+}
+
+/* #upload_camera {
 	position:absolute;
 	top: 45%;
     left: 200%;
@@ -80,7 +106,7 @@
 	cursor:pointer;
 	display: none;
 	
-}
+} */
 
 /* 소개 */
 #introduction {

@@ -7,10 +7,9 @@ public class PostVO {
 	int postNum;
 	String id, contents, imagepath, hashtag;
 	int thumbsup;
+		
+	public PostVO() {}
 	
-	
-	public PostVO() {
-	}
 	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, int thumbsup) {
 		this.postNum = postNum;
 		this.id = id;
