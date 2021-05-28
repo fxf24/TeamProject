@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HashHershe</title>
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){ 
@@ -50,7 +50,8 @@ $(document).ready(function(){
 				} else {
 					for(var i in list){ //결과 반환
 						$("#idSearch").append
-						("<a href='profile?name="+list[i].id+"'>"+list[i].id+"</a><br>");				
+						("<img src='#' class='profileimage'><a href='profile?id="+list[i].id+"'>"+list[i].id+"</a><br>");		
+						// 이미지 경로 및 css 수정 필요
 					}// for end
 				} 
 			}, // success end
@@ -78,9 +79,9 @@ $(document).ready(function(){
 				} else {
 					for(var i in list){ //결과 반환
 						$("#nameSearch").append
-						("<a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
+						("<img src='#' class='profileimage'><a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
 					}// for end
-				} 
+				}  //else end
 			}, // success end
 			error : function(e){
 				console.log(e)
@@ -121,7 +122,8 @@ $(document).ready(function(){
 						$("#hashtagSearch").append("검색 결과가 없습니다.");
 					} else {
 						for(var i in hashtagArr){ //결과 반환
-							$("#hashtagSearch").append("#"+hashtagArr[i]+"<br>");
+							$("#hashtagSearch").append
+							("<a href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a><br>");
 						}// for end
 					}// else end
 				}// else
@@ -159,7 +161,7 @@ function search(){
 				} else {
 					for(var i in list){ //결과 반환
 						$("#idSearch").append
-						("<a href='profile?name="+list[i].id+"'>"+list[i].id+"</a><br>");				
+						("<img src='#' class='profileimage'><a href='profile?id="+list[i].id+"'>"+list[i].id+"</a><br>");				
 					}// for end
 				} 
 			}, // success end
@@ -186,7 +188,7 @@ function search(){
 				} else {
 					for(var i in list){ //결과 반환
 						$("#nameSearch").append
-						("<a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
+						("<img src='#' class='profileimage'><a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
 					}// for end
 				} // else end
 			}, // success end
@@ -228,7 +230,8 @@ function search(){
 						$("#hashtagSearch").append("검색 결과가 없습니다.");
 					} else {
 						for(var i in hashtagArr){ //결과 반환
-							$("#hashtagSearch").append("#"+hashtagArr[i]+"<br>");
+							$("#hashtagSearch").append
+							("<a href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a><br>");
 						}// for end
 					}// else end
 				}// else
@@ -240,12 +243,18 @@ function search(){
 		} //else end
 	}// search function end
 
+function enterkey(){
+	//  엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
+	if(window.event.keyCode == 13){
+		search();
+	}
+}	
 
 </script>
 </head>
 <body>
 <h1>검색페이지</h1>
-<input type="text" id="searchbar" value=<%=searchword%>>
+<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey()">
 <input type="submit" id="searchbutton" value="검색" onclick="search()"><br>
 <div id="searchlist">
 	<button id="idbutton">아이디</button>&nbsp;&nbsp;

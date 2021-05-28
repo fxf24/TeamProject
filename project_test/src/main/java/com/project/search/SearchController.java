@@ -62,4 +62,19 @@ public class SearchController {
 		}
 		return list;
 	}
+	
+	// hashtagresult.jsp
+	@RequestMapping("/hashtagresult")
+	public String oneHashtag() {
+		return "/search/hashtagresult";
+	}
+	
+	@RequestMapping(value="/hashtagresult", method=RequestMethod.POST)
+	public List<PostVO> oneHashtagResult(String hashtag){
+		List<PostVO> list = null;
+		if(hashtag!=null || hashtag!="") {
+			list = (List<PostVO>)service.getHashtag(hashtag);	
+		}
+		return list;
+	}
 }

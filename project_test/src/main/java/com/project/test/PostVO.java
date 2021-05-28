@@ -5,17 +5,18 @@ import org.springframework.stereotype.Component;
 @Component("postVO")
 public class PostVO {
 	int postNum;
-	String id, contents, imagepath, hashtag;
+	String id, contents, imagepath, hashtag, date;
 	int thumbsup;
 		
 	public PostVO() {}
 	
-	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, int thumbsup) {
+	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, String date, int thumbsup) {
 		this.postNum = postNum;
 		this.id = id;
 		this.contents = contents;
 		this.imagepath = imagepath;
 		this.hashtag = hashtag;
+		this.date = date;
 		this.thumbsup = thumbsup;
 	}
 	public int getPostNum() {
@@ -54,6 +55,15 @@ public class PostVO {
 	public void setThumbsup(int thumbsup) {
 		this.thumbsup = thumbsup;
 	}
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
 		return "PostVO [postNum=" + postNum + ", id=" + id + ", contents=" + contents + ", imagepath=" + imagepath
