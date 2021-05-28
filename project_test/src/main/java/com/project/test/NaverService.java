@@ -18,8 +18,8 @@ public class NaverService {
 	
 	//Naver Object Detection 서비스
 	public String getObjectDetectionService(String image) {
-		String clientId = "5e4u5ybjxl";
-		String clientSecret = "eAMFbHX7cgk0P2fOO9tYtEjic1IeeJcPeCfstqGK";
+		String clientId = "atk803phxv";
+		String clientSecret = "Ik5FNTdCVSbsB61Vsez1B4NZSfiLsGRDGZ2xOOh7";
 
 		StringBuffer response = new StringBuffer();//OD 값 저장공간
 
@@ -84,8 +84,8 @@ public class NaverService {
 	//Naver CFR service
 	public String getCFRService(String image) {
 		StringBuffer reqStr = new StringBuffer();
-		String clientId = "5e4u5ybjxl";
-		String clientSecret = "eAMFbHX7cgk0P2fOO9tYtEjic1IeeJcPeCfstqGK";
+		String clientId = "atk803phxv";
+		String clientSecret = "Ik5FNTdCVSbsB61Vsez1B4NZSfiLsGRDGZ2xOOh7";
 		
 	    StringBuffer response = new StringBuffer();
 	    
