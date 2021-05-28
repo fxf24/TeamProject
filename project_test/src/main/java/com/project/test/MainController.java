@@ -33,7 +33,7 @@ public class MainController {
 		File savefile = new File(savePath + filename);
 		//서버 저장
 		file.transferTo(savefile);
-		return "저장했습니다!";
+		return "{\"data\":\"저장했습니다!\"}";
 	}
 	@RequestMapping(value="/saveData", method=RequestMethod.POST)
 	@ResponseBody
@@ -45,7 +45,7 @@ public class MainController {
 		pvo.setImagepath(image);
 		pvo.setHashtag(hashtag);
 		hhService.insertPostData(pvo);
-		return "저장완료";
+		return "{\"data\":\"저장완료\"}";
 	}
 	
 	

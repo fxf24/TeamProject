@@ -110,8 +110,8 @@ function saveImage(){
         data : formdata,
         processData : false,	// data 파라미터 강제 string 변환 방지!!
         contentType : false,	// application/x-www-form-urlencoded; 방지!!
-        success : function (data) {
-        	console.log(data)
+        success : function (response) {
+        	console.log(response.data)
         }
 
     });
@@ -126,10 +126,15 @@ function saveImage(){
   			'hashtag':$("#hashtags").text()+$("#names").val()},
   		dataType: 'json',
   		
-  		success: function(server){
-  			console.log(server)
-  			window.location.href = "/"
-  		}
+  		success: function(response){
+  			console.log(response.data)
+  			location.href = "/"
+  		},
+  			
+  		error:function(request,status,error){
+ 			alert("success에 실패 했습니다.");
+ 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		}
   	})
 }
 </script>
