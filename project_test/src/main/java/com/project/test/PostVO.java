@@ -7,17 +7,23 @@ public class PostVO {
 	int postNum;
 	String id, contents, imagepath, hashtag;
 	int thumbsup;
-		
+	String postDate;
+	
 	public PostVO() {}
 	
-	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, int thumbsup) {
+	public PostVO(int postNum, String id, String contents, String imagepath, String hashtag, int thumbsup,
+			String postDate) {
+		super();
+
 		this.postNum = postNum;
 		this.id = id;
 		this.contents = contents;
 		this.imagepath = imagepath;
 		this.hashtag = hashtag;
 		this.thumbsup = thumbsup;
+		this.postDate = postDate;
 	}
+	
 	public int getPostNum() {
 		return postNum;
 	}
@@ -54,9 +60,18 @@ public class PostVO {
 	public void setThumbsup(int thumbsup) {
 		this.thumbsup = thumbsup;
 	}
+	
+	public String getPostDate() {
+		return postDate;
+	}
+	public void setPostDate(String postDate) {
+		this.postDate = postDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "PostVO [postNum=" + postNum + ", id=" + id + ", contents=" + contents + ", imagepath=" + imagepath
-				+ ", hashtag=" + hashtag + ", thumbsup=" + thumbsup + "]";
+				+ ", hashtag=" + hashtag + ", thumbsup=" + thumbsup + ", postDate=" + postDate + "]";
 	}
+	
 }

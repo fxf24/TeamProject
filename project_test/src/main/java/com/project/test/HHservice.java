@@ -7,4 +7,6 @@ public interface HHservice {
 	List<UserVO> getUserID(String id);
 	List<UserVO> getUserName(String id);
 	List<PostVO> getHashtag(String hashtag);
+	void insertPostData(PostVO pvo);
+
 }
