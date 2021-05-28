@@ -111,7 +111,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<div id="signup">
-					<span><!-- <a href="/login/signup"> -->계정만들기</a></span>
+					<span><a href="/login/signup">계정만들기</a></span>
 				</div>
 			<div id="findIdPass">
 				<span>아이디/비밀번호 찾기</span>

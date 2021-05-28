@@ -64,13 +64,13 @@ $("#signupPassInput").on("focusout", function() {
    });
 });       
 $("#signupPassConfirmInput").on("focusout", function() {
-    var x = $(this).val();
-    if (x.length > 0) {
-        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-        }
-        $(this).val(x);
-    }
+	    var x = $(this).val();
+	    if (x.length > 0) {
+	        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+	            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+	        }
+	        $(this).val(x);
+	    }
     }).on("keyup", function() {
         $(this).val($(this).val().replace(replaceChar, ""));
 });
@@ -80,6 +80,7 @@ function numberMaxLength(e){
         e.value = e.value.slice(0, e.maxLength);
     }
 }
+    });
 </script>
 </head>
 <body>

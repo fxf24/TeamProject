@@ -31,21 +31,26 @@ $(document).ready(function(){
 		$('#nameSearch').css("display", "none");
 		$('#hashtagSearch').css("display", "block");
 	})
-	
-		// main에서 넘어오는 searchWord 검색
+			
+
+		//main에서 넘어오는 search값 전달, id검색만 현재 테스트중
 		var testMessage = $("#searchbar").val();
-		// id 검색결과
-		$.ajax({
+ 		$.ajax({
 			url :"/idsearch",
 			type : "get",
-			data : {"searchmessage" : testMessage},
-			//dataType : "json",
-			success : function(idresponse){
-				var searchval = idresponse;
-				$("#idSearch").text(searchval);
+			data : {"id" : testMessage},
+			dataType : "json",
+			success : function(response){
+				console.log(response)
+				var list = response;
+				console.log(list);
+				for(var i in list){
+					$("#idSearch").append(list[i].id+"<br>");	
+				}
 			} // success end
-		}) // ajax end	
+		}) // ajax end	 
 		
+		var testMessage = $("#searchbar").val();
 		// name 검색결과		
 		$.ajax({
 			url :"/namesearch",
@@ -73,15 +78,30 @@ $(document).ready(function(){
 //search버튼 클릭 시 검색결과 반환 함수
 function search(){ 
 	var searchMessage = $("#searchbar").val();
-		// id 검색결과
+	
+// 		// id 검색결과
+// 		$.ajax({
+// 			url :"/idsearch",
+// 			type : "get",
+// 			data : {"searchmessage" : searchMessage},
+// 			//dataType : "json",
+// 			success : function(idresponse){
+// 				var searchval = idresponse;
+// 				$("#idSearch").text(searchval);
+// 			} // success end
+// 		}) // ajax end	
+		
+		
+		// 테스트용 id검색결과
 		$.ajax({
 			url :"/idsearch",
 			type : "get",
 			data : {"searchmessage" : searchMessage},
 			//dataType : "json",
 			success : function(idresponse){
-				var searchval = idresponse;
-				$("#idSearch").text(searchval);
+				for(var result in idresponse){
+					$("#idSearch").text(result+"<br>");	
+				}//for end
 			} // success end
 		}) // ajax end	
 		
