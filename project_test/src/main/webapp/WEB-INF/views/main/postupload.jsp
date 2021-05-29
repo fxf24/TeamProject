@@ -8,6 +8,9 @@
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
+	var user = sessionStorage.getItem("user")
+	sessionStorage.setItem("user", "admin")
+	
 	$("#fileUpload").on('click', function(event){
 		event.preventDefault()
 		
@@ -61,7 +64,7 @@ $(document).ready(function(){
 								
 								//사각형 그려서 출력
 								context.strokeRect(x1+10, y1+10, x2-x1, y2-y1)
-								$("#names").append("<a href='https://search.shopping.naver.com/search/all?query="+names[i]+"&cat_id=&frm=NVSHATC'>#" + names[i] + " </a>")
+								$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query="+names[i]+"&cat_id=&frm=NVSHATC'>#" + names[i] + " </a>")
 							}
 							
 						//}//if end
@@ -73,9 +76,10 @@ $(document).ready(function(){
 						var confidence = faces[i].celebrity.confidence
 						
 						if(confidence>0.5){
-							$("#names").append("<a href='https://search.shopping.naver.com/search/all?query="+celebrity+"&cat_id=&frm=NVSHATC'>#" + celebrity + " </a>")
+							$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query="+celebrity+"&cat_id=&frm=NVSHATC'>#" + celebrity + " </a>")
 						}//if end
 					}//for end
+					
 				}//image onload end
 			}
 		})
@@ -83,6 +87,56 @@ $(document).ready(function(){
 		
 	})//fileUpload onclick end
 })//document ready end
+
+function saveImage(){
+	var $canvas = document.getElementById('imagecanvas');
+    var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
+
+    var blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
+    var array = [];
+    for (var i = 0; i < blobBin.length; i++) {
+        array.push(blobBin.charCodeAt(i));
+    }
+    var file = new Blob([new Uint8Array(array)], {name:'$("#selectedFile")[0].files[0]',type: 'image/png'});	// Blob 생성
+    var formdata = new FormData();	// formData 생성
+    var fileValue = $("#selectedFile").val().split("\\");
+    var fileName = fileValue[fileValue.length-1];
+
+    formdata.append("file", file, fileName);	// file data 추가
+    
+    $.ajax({
+        type : 'post',
+        url : '/saveImage',
+        data : formdata,
+        processData : false,	// data 파라미터 강제 string 변환 방지!!
+        contentType : false,	// application/x-www-form-urlencoded; 방지!!
+        success : function (response) {
+        	console.log(response.data)
+        }
+
+    });
+    
+  	console.log($("#hashtags").html())
+  	
+  	var user = sessionStorage.getItem("user")
+  	$.ajax({
+  		type: 'post',
+  		url: '/saveData',
+  		data: {'id': user,'content':$("#contents").val(), 'image':fileName,
+  			'hashtag':$("#hashtags").text()+$("#names").val()},
+  		dataType: 'json',
+  		
+  		success: function(response){
+  			console.log(response.data)
+  			location.href = "/"
+  		},
+  			
+  		error:function(request,status,error){
+ 			alert("success에 실패 했습니다.");
+ 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		}
+  	})
+}
 </script>
 </head>
 <body>
@@ -92,6 +146,13 @@ $(document).ready(function(){
 </form>
 
 <canvas id="imagecanvas" width=500 height=500 style="border: 2px solid pink"></canvas>
-<div id="names"></div>
+<h5>해쉬태그 입력</h5>
+<div id="hashtags"></div>
+<form>
+<input type="text" id="names" style=""></input><br>
+내용 입력<br>
+<textarea id="contents" rows="3" cols="100"></textarea><br>
+</form>
+<button id="postUpload" onclick="saveImage()">작성하기</button>
 </body>
 </html>

@@ -22,6 +22,33 @@ public class MainController {
 		return "/main/postupload";
 	}
 	
+	@RequestMapping(value="/saveImage", method=RequestMethod.POST)
+	@ResponseBody
+	public String saveImage(MultipartFile file) throws IOException{
+		String filename = file.getOriginalFilename();
+		System.out.println(filename);
+		//서버 저장 경로 설정
+		String savePath="c:/upload/";
+		//저장할 경로와 파일 이름 완성
+		File savefile = new File(savePath + filename);
+		//서버 저장
+		file.transferTo(savefile);
+		return "{\"data\":\"저장했습니다!\"}";
+	}
+	@RequestMapping(value="/saveData", method=RequestMethod.POST)
+	@ResponseBody
+	public String saveData(String id, String content, String image, String hashtag) {
+		System.out.println(id + "|"+ content + "|"+ image + "|"+ hashtag);
+		PostVO pvo = new PostVO();
+		pvo.setId(id);
+		pvo.setContents(content);
+		pvo.setImagepath(image);
+		pvo.setHashtag(hashtag);
+		hhService.insertPostData(pvo);
+		return "{\"data\":\"저장완료\"}";
+	}
+	
+	
 	@RequestMapping(value="/getODjson", method=RequestMethod.POST)
 	@ResponseBody
 	public String uploadresult(MultipartFile file) throws IOException {
