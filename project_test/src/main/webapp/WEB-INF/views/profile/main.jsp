@@ -12,7 +12,7 @@
 <!-- 상단 고정 스타일 css 연결  -->
 
 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
-	<link href="/css/profile/topmain.css" rel="stylesheet" type="text/css">
+	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
 	
 <script>
 window.onload = function() {
@@ -24,7 +24,7 @@ window.onload = function() {
 		    $('#file').click();
 		});
 	});
-<<<<<<< HEAD
+
 });
 
 function changeValue(obj){
@@ -45,10 +45,9 @@ $(function(){
     });
 });
 
-=======
 	
 	function changeValue(obj){
-		document.imageform.submit();
+		document.post_upload_btn.submit();
 	};
 	
 	/* 게시물 업로드 - test1 */
@@ -66,9 +65,16 @@ $(function(){
 	});//document ready 함수 end
 
 }; //window onload 함수 end 
->>>>>>> 0e77bd6d14354bed2c06cae4e32cd9d38ad4db38
+
 </script>
 </head>
+
+<!-- ㅋㅋㅋmerge할때 충돌 수정해주시는겁니다
+head가 원본파일에 어떻게 되어있는지 보여주는거고
+======표시 밑으로 merge한 파일이 어떻게 되어있는지 보여줘서
+git add .
+git commit -m '머지했다'
+git push origin develop -->
 
 <body>
 
@@ -89,7 +95,7 @@ $(function(){
         			<td>
 						<span id="account_id"> 회원 아이디 &nbsp; </span>
 							<!--         프로필 편집 클릭 시, 새로운 창으로 이동 - js 구현  -->
-        					<button id="profile_edit" onclick="location='editform.jsp'">프로필 편집</button>
+        					<button type="button" id=profileedit onclick="location.href='profile/editform'">프로필 편집</button>
         					<!-- <form id="profile_edit" name="editform" ENCTYPE="multipart/form-data" action="editform.jsp"> 
         						<input name="profile_edit" type="button" value="프로필 편집">
        						</form> -->

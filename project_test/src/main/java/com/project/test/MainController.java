@@ -56,12 +56,15 @@ public class MainController {
 		return "login/signup";
 	}
 	
-	
 	@RequestMapping("/profile")
 	public String profile() {
 		return "profile/main";
 	}
 
+	@RequestMapping("/profile/editform")
+	public String editform() {
+		return "profile/editform";
+	}
 
 	// 중복 방지를 위해 블록처리
 //	@RequestMapping("/search")

@@ -1,0 +1,261 @@
+@charset "UTF-8";
+
+/* 왼쪽 상단 메뉴들(항목들) 상시 고정 */
+#editlist {
+	background: silver;
+	width: 200px; 
+	height: 830px;
+	text-align: center;
+	margin: 0;
+	left: 0;
+	position: absolute;
+	line-height: 800%;
+}
+
+#editenter {
+	text-decoration: none;
+	color: black;
+}	
+
+#changeenter {
+	text-decoration: none;
+	color: black;
+}	
+
+#pushenter {
+	text-decoration: none;
+	color: black;
+}	
+
+#settingenter {
+	text-decoration: none;
+	color: black;
+}	
+
+#profilelistdescription {
+	position: absolute;
+	text-align: center;
+	width: 180px;
+	height: 70px;
+	top: 650px;
+	left: 10px;
+	font-style: italic;
+}
+
+/* 프로필 편집 */
+/* div */
+#profileinfo { 
+	background: pink;
+	position: relative;
+	width: 900px;
+	height: 830px;
+	left: 10%;
+	display: none;
+}
+
+/* form */
+#profileeditbox {
+	background: pink;
+	position: absolute;
+	width: 700px; 
+	height: 650px;
+	top: 100px;
+	left: 10%;
+	display: none;
+}
+
+/* div1 - form */
+#formdesign {
+	background: pink;
+	width: 660px;
+	height: 600px;
+	top: 0;
+	display: none;
+}
+
+#profileedittitle {
+	background: pink;
+	text-align: justify;
+	width: 200px;
+	height: 100px;
+	position: absolute;
+	top: 0;
+}
+
+/* img */
+#img {
+	position: absolute;
+  	top: 10%;
+    left: 20%;
+	width: 150px; 
+	height: 150px;
+	border-radius:300px; 
+	cursor: pointer; 
+}
+
+/* div2 - form */
+#formdesign2 {
+	background: pink;
+	width: 580px;
+	height: 580px;
+	margin-left: 70px;
+	text-align: left;
+	line-height: 400%;
+	display: none;
+}
+
+#accountid {
+	background: pink;
+	width: 150px;
+	height: 50px;
+	margin-left: 45%;
+	top: 10px;
+/* 	padding-top: 60px; */
+}
+
+/* label 프로필 사진 바꾸기 - input */
+#profileimgchange { 
+	cursor: pointer;
+	background: white;
+	margin-left: 260px;
+	top: 60px;
+
+}
+
+/* 프로필 사진 파일 업로드 */ 
+#input-profileimg {
+	left: 30%;
+	margin-left: 80px;
+	margin-bottom: 40px;
+    vertical-align: middle;
+    display: none;
+	
+}
+
+#introduction {
+	width: 500px;
+	height: 70px;
+}
+
+#submit {
+	margin-left: 320px;
+	margin-bottom: 40px;
+    vertical-align: middle;
+    cursor: pointer; 
+}
+
+/* 비밀번호 변경 */
+
+#passwordchange {
+	background: pink;
+	position: absolute;
+	z-index: auto;
+	width: 900px;
+	height: 830px;
+	left: 10%;
+	text-align: left;
+	line-height: 280%;
+	display: none;
+}
+
+#passwordinfo {
+	margin-top: 15%;
+	margin-left: 20%;
+	background: pink;
+	width: 500px;
+	height: 350px;
+	text-align: center;
+	line-height: 400%;
+	padding-top: 10%;
+	padding-bottom: 20%;
+}
+
+#pwchgtitle {
+	text-align: justify;
+}
+
+#pwchgbtn {
+	margin-left: 200px;
+	bottom: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#forgotpw {
+	text-decoration: none;
+	color: black; 
+	font-weight: bold;
+	margin-left: 120px;
+	cursor: pointer;
+}
+
+/* 푸시 알림 */
+
+#pushnotification {
+	background: pink;
+	position: absolute;
+	z-index: auto;
+	width: 900px;
+	height: 830px;
+	left: 10%;
+	display: none;
+}
+
+#pushsttitle {
+	text-align: justify;
+	margin-left: 20%;
+}
+
+/* form */
+#pushsubmit {
+	margin-left: 200px;
+	line-height: 200%;
+}
+
+#comments {
+	margin-left: 200px;
+	line-height: 200%;
+}
+
+#follow {
+	margin-left: 200px;
+	line-height: 200%;
+}
+
+#notice {
+	margin-left: 200px;
+	line-height: 200%;
+}
+
+#reset {
+	margin-left: 20px;
+	bottom: 50%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#done {
+	margin-left: 50%;
+	margin-bottom: 100%;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+/* 공개범위 및 보안 */
+
+#accountopen {
+	background: pink;
+	position: absolute;
+	width: 900px;
+	height: 830px;
+	left: 10%;
+	display: none;
+}
+
+#opensetting {
+	margin-left: 10%;
+	margin-top: 1%;
+	margin-bottom: 100%;
+	vertical-align: middle;
+	cursor: pointer;
+}
