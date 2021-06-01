@@ -14,5 +14,5 @@ public interface HHDAO {
 	List<UserVO> getUserName(String name); // 이름 검색 리스트 반환
 	List<PostVO> getHashtag(String hashtag); // 해시태그 검색 리스트 반환
 	void insertPostData(PostVO pvo);
-
+	List<PostVO> getPostNum(int postNum);  // 포스트번호 검색, 리스트 반환
 }
