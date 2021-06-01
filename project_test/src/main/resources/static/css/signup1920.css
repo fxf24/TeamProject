@@ -117,7 +117,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		height: 60px;
 		left: 0px;
 		top: 0px;
-		z-index: 9998;
+		z-index: 9999;
 }
 	#idPBox{
 		position: absolute;

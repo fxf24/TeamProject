@@ -149,9 +149,9 @@ function login(){
 			</div>
 		</div>
 		<form action="" method="post" class="loginHome">
-		<input type="text"id="idInput" class="idInput">
-		<input type="password" id="passwordInput" class="passwordInput">
-		<input type="button" id="loginButton" class="loginButton" onclick="login()">
+		<input type="text"id="idInput" class="idInput"/>
+		<input type="password" id="passwordInput" class="passwordInput"/>
+		<input type="button" id="loginButton" class="loginButton" onclick="login()"/>
 		<button type=button id="findIdPassButton"  class="findIdPassButton"  onclick="location.href = "></button>
 		<button type=button id="signupButton" class="signupButton"  onclick='signup()'></button>
 		<button type=button id="naverLoginButton" class="naverLoginButton"  onclick="location.href = "></button>

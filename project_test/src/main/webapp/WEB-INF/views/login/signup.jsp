@@ -16,7 +16,9 @@
 <script>
 //특수문자 정규식 변수(공백 미포함)
 var replaceChar = /[!@\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
-var replaceChar2 = /[!\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
+var replaceChar2 = /[!\$%\()\-=+_'\;<>\/\`:\"\\,\[\]?|{}]/gi;
+var replaceNotFullKorean = !
+
 $(document).ready(function(){
 	$("#signupIdInput").on("focusout", function() {
 	        var x = $(this).val();
@@ -81,14 +83,36 @@ $(document).ready(function(){
 	    }
 	}
 	    
-	$("#newSignupButton").on('click', function(e){
-		e.preventDefault();
-		location.href = "/login"
-	})
+// 	$("#newSignupButton").on('click', function(e){
+// 		e.preventDefault();
+// 		location.href = "/login"
+// 	})
 		
 });//document ready end    
-	
 
+function signup(){
+	console.log($("#signupPhonenumInput").val())
+	
+	$.ajax({
+  		type: 'post',
+  		url: '/login/signup',
+  		data: {'id': $("#signupIdInput").val(),'name':$("#signupNameInput").val(), 'email':$("#signupEmailInput").val(),
+  			'password':$("#signupPassInput").val(),'telephone':$("#signupPhonenumInput").val()},
+  		dataType: 'json',
+  		
+  		success: function(response){
+  			console.log(response.data)
+  			alert(response.data)
+  			location.href = "/login"
+  			
+  		},
+  			
+  		error:function(request,status,error){
+ 			alert("success에 실패 했습니다.");
+ 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		}
+  	})
+}
 </script>
 </head>
 <body>
@@ -115,9 +139,9 @@ $(document).ready(function(){
 					<div id="signupFont">
 						<span>가입하기</span>
 					</div>
-<!-- 					<div class="signupButtonClick"> -->
-<!-- 						<button id="signupButtonClick" ></button> -->
-<!-- 					</div> -->
+					<div class="signupButtonClick">
+						<button id="signupButtonClick" ></button>
+					</div>
 				</div>
 			</div>
 			<div id="idPBox">
@@ -222,13 +246,13 @@ $(document).ready(function(){
 			</div>
 		</div>
 			<form action="" method="post" class="signup">
-				<input type="text" class="signupIdInput" id="signupIdInput"   maxlength='50'>
- 				<input type="text" class="signupNameInput"  id="signupNameInput"  maxlength='16'>
-				<input type="text" class="signupEmailInput"  id="signupEmailInput"  maxlength='50'>
-				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'>
-				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'>
- 				<input type="number" class="signupPhonenumInput"  id="signupPhonenumInput"  maxlength="11" oninput="numberMaxLength(this);"/>
-				<button type="button" class="newSignupButton" id="newSignupButton" value="가입하기"></button>
+				<input type="text" class="signupIdInput" id="signupIdInput"   maxlength='50'/>
+ 				<input type="text" class="signupNameInput"  id="signupNameInput"  maxlength='16'/>
+				<input type="text" class="signupEmailInput"  id="signupEmailInput"  maxlength='50'/>
+				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'/>
+				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'/>
+ 				<input type="text" class="signupPhonenumInput"  id="signupPhonenumInput"  oninput=""/>
+				<button type="button" class="newSignupButton" id="newSignupButton" value="가입하기" onclick="signup()"></button>
 			</form>
 			
 	</div>

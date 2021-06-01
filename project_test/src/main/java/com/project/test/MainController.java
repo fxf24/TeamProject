@@ -45,7 +45,7 @@ public class MainController {
 		pvo.setImagepath(image);
 		pvo.setHashtag(hashtag);
 		hhService.insertPostData(pvo);
-		return "{\"data\":\"저장완료\"}";
+		return "{\"data\":\"포스트 저장 완료\"}";
 	}
 	
 	
@@ -100,6 +100,19 @@ public class MainController {
 	@RequestMapping("/login/signup")
 	public String signup() {
 		return "login/signup";
+	}
+	@RequestMapping(value="/login/signup", method=RequestMethod.POST)
+	@ResponseBody
+	public String signupService(String id, String name, String email, String password, String telephone) {
+		UserVO user = new UserVO();
+		user.setId(id);
+		user.setName(name);
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setTelephone(telephone);
+
+		hhService.insertUserData(user);
+		return "{\"data\":\"유저 저장 완료\"}";
 	}
 	
 	@RequestMapping("/profile")

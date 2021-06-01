@@ -4,14 +4,14 @@ import org.springframework.stereotype.Component;
 
 @Component("userVO")
 public class UserVO {
-	int userno;
+	int userNum;
 	String id, password, email, name, telephone;
 	
 	
 	public UserVO() {
 	}
 	public UserVO(int userno, String id, String password, String email, String name, String telephone) {
-		this.userno = userno;
+		this.userNum = userno;
 		this.id = id;
 		this.password = password;
 		this.email = email;
@@ -19,10 +19,10 @@ public class UserVO {
 		this.telephone = telephone;
 	}
 	public int getUserno() {
-		return userno;
+		return userNum;
 	}
 	public void setUserno(int userno) {
-		this.userno = userno;
+		this.userNum = userno;
 	}
 	public String getId() {
 		return id;
@@ -56,7 +56,7 @@ public class UserVO {
 	}
 	@Override
 	public String toString() {
-		return "UserVO [userno=" + userno + ", id=" + id + ", password=" + password + ", email=" + email + ", name="
+		return "UserVO [userno=" + userNum + ", id=" + id + ", password=" + password + ", email=" + email + ", name="
 				+ name + ", telephone=" + telephone + "]";
 	}
 	
