@@ -26,6 +26,10 @@ insert into posts values(#{postNum}, #{id}, #{contents},
  #{imagepath}, #{hashtag}, 0, sysdate)
 </insert>
 
+<select id="getPostNum" parameterType="int" resultType="PostVO">
+select * from posts where postNum=#{postNum}
+</select>
+
 </mapper>
 
 
