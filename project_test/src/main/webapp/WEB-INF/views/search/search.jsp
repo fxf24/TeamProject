@@ -32,8 +32,9 @@ $(document).ready(function(){
 		$('#hashtagSearch').css("display", "block");
 	})
 			
-	//main에서 넘어오는 search값 전달, id 검색
-	var searchMessage = $("#searchbar").val(); 
+	var searchMessage = $("#searchbar").val();
+	
+	//main에서 넘어오는 search값 전달, id 검색	
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
 		$("#idSearch").text("검색어를 입력하세요.");
 	} else {
@@ -102,14 +103,14 @@ $(document).ready(function(){
 			data : {"hashtag" : searchMessage},
 			dataType : "json",
 			success : function(response){
-				console.log(response)
+				//console.log(response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
 					$("#hashtagSearch").text("검색 결과가 없습니다.");
 				} else {
 					for(var i in list){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
-						//console.log("HASHTAG = "+hashtag)
+						console.log(response)
 						for(var tag in hashtag){
 							if(!hashtagArr.includes(hashtag[tag]) && //중복된 태그 검사 && 검색어와 태그 일치 여부 검사
 								searchMessage == hashtag[tag].substring(0, length)){
