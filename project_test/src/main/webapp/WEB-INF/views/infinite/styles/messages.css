@@ -10,8 +10,11 @@
 	box-sizing: border-box;
 	contain: layout;
 	will-change: transform;
+	background-color: rgba(244,238,238,1);
 }
-
+#beforeBubble{
+	margin-top: 500px;	
+}
 .chat-item {
 	display: flex;
 	padding: 57px 0;
@@ -82,10 +85,10 @@
 }
 
 .bubble .plusBox {
-    height: 319px;
+    height: 282px;
     background: white;
     box-shadow: 0 3px 2px rgba(0,0,0,0.1);
-    width: 445px;
+    width: 370px;
     position: absolute;
     top: 0px;
     margin:0px;
@@ -161,6 +164,7 @@
 	top: -100px;
     left: 96px;
     width:824px;
+    margin-top:60px;
     margin: auto;
     padding: 0px;
     text-overflow:ellipsis;
@@ -206,7 +210,7 @@
     line-height:72px;
     white-space: nowrap;
     padding-left: 107px;
-    margin-top:-11px;
+    margin-top:21px;
     padding-bottom: 18px;
 	}
 #invisibleIcon {
@@ -225,8 +229,8 @@
 		position: absolute;
 		width: 40px;
 		height: 22px;
-		left: 63px;
-		top: 244px;
+		left: 64px;
+		top: 218px;
 		overflow: visible;
 }
 #shareIcon {
@@ -238,8 +242,8 @@
 		width: 27px;
 		height: 30px;
 		left: 69px;
-		top: 142px;
-		transform: matrix(1,0,0,1,0,0);
+		top: 126px;
+		transform: matrix(1.2,0,0,1.2,0,0);
 }
 #reportIcon1{
 		fill: rgba(255,0,0,1);
@@ -285,7 +289,7 @@
 		stroke-miterlimit: 4;
 		shape-rendering: auto;
 }
-	.reportIcon3{
+.reportIcon3{
 		position: absolute;
 		overflow: visible;
 		width: 6px;
@@ -342,12 +346,12 @@
 		font-family: Noto Sans CJK KR;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 36px;
+		font-size: 24px;
 		color: rgba(0,0,0,1);
 }
 #shareFont {
 		left: 141px;
-		top: 133px;
+		top: 125px;
 		position: absolute;
 		overflow: visible;
 		width: 114px;
@@ -362,8 +366,8 @@
 		color: rgba(0,0,0,1);
 }
 #reportFont {
-		left: 141px;
-		top: 232px;
+		left: 142px;
+		top: 210px;
 		position: absolute;
 		overflow: visible;
 		width: 133px;
@@ -628,21 +632,19 @@
 	}
 	.titleHH{
 		position: sticky;
-		width: 180px;
-		height: 140.5px;
+		width: 200%;
+		height: 50%;
 		top: 0px;
 	    right: 0px;
 	    left: 0px;
 	    z-index: 9999;
 	    display: flex;
 	    margin-left: 476px;
-	    -webkit-user-select: none;
-	    -moz-user-select: none;
-	    -ms-user-select: none;
 	    user-select: none;
 	    background-image:url("titleHH.jpg") ;
-	    background-size: 180px 140.5px;
+	    background-size: 180px 136px;
 		background-repeat:no-repeat ;
+		transform: translateX(-50%);
 	}
 	#iconPBox{
 		position: sticky;

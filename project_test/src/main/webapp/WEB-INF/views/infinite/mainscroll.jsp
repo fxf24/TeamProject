@@ -1,35 +1,44 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="author" content="Paul Lewis" />
-  <meta name="viewport" content="width=device-width">
-  <title>Infinite Scroll</title>
-  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ <meta name="author"/>
+ <meta name="viewport" content="width=device-width">
+ <title>Infinite Scroll</title>
+ <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="/jquery-3.2.1.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+});
+</script>
   <style>
-    html {
+html {
       background: #eeeeee;
-    }
+}
 
-    html, body {
+html, body {
       height: 100%;
       margin: 0;
       padding: 0;
       font-family: 'Roboto', sans-serif;
       overflow: hidden;
       -webkit-tap-highlight-color: rgba(0,0,0,0);
-    }
+}
     #templates {
-	position: relative;
+	position: inherit;
     width: 1920px;
+    height: 0px;
     background-color: rgba(244,238,238,1);
     overflow: hidden;
     --web-scale-on-resize: true;
     --web-enable-deep-linking: true;
-    }
+}
   </style>
-  <link href='styles/messages.css' rel='stylesheet' type='text/css'>
+<link href='styles/messages.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <div id="templates">
@@ -224,7 +233,7 @@
 	   </div>
 	    <li class="chat-item tombstone" data-id="{{id}}">
 	<!--       <img class="avatar" width="48" height="48" src="images/unknown.jpg"> -->
-	      <div class="bubble">
+	      <div class="bubble" id="beforeBubble">
 	      	<div class =plusBox></div>
 	        <p></p>
 	        <p></p>
@@ -278,8 +287,8 @@ function getItem(id) {
 
 function ContentSource() {
   // Collect template nodes to be cloned when needed.
-  this.tombstone_ = document.querySelector("#templates > .chat-item.tombstone");
-  this.messageTemplate_ = document.querySelector("#templates >#mainBarBox > .chat-item:not(.tombstone)");
+  this.tombstone_ = document.querySelector(".main > .chat-item.tombstone");
+  this.messageTemplate_ = document.querySelector(".main > .chat-item:not(.tombstone)");
   this.nextItem_ = 0;
 }
 
@@ -365,5 +374,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
   </script>
-</body>
-</html>
