@@ -117,7 +117,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		height: 60px;
 		left: 0px;
 		top: 0px;
-		z-index: 9999;
+		z-index: 9998;
 }
 	#idPBox{
 		position: absolute;
@@ -774,15 +774,4 @@ input[type="number"]::-webkit-inner-spin-button {
 		left: 296px;
 		top: -63px;
 		overflow: visible;
-}
-	#newSignupButton{
-		position: absolute;
-		overflow: visible;
-		width: 254px;
-		height: 60px;
-		left: 415px;
-		top: 648px;
-		border:none;
-		background:transparent;
-		z-index: 9999;
 }

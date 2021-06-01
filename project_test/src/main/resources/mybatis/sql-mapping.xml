@@ -14,7 +14,7 @@ select * from users where id LIKE #{id}||'%' order by id
 select * from users where name LIKE #{name}||'%' order by name
 </select>
 
-<select id="getHashtag" parameterType="String" resultType="PostVO">
+<select id="getHashtag" parameterType="String" resultType="postVO">
 select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
 </select>
 
@@ -26,10 +26,17 @@ insert into posts values(#{postNum}, #{id}, #{contents},
  #{imagepath}, #{hashtag}, 0, sysdate)
 </insert>
 
-<select id="getPostNum" parameterType="int" resultType="PostVO">
+<select id="getPostNum" parameterType="int" resultType="postVO">
 select * from posts where postNum=#{postNum}
 </select>
 
+<insert id="insertUserData" parameterType="userVO">
+<selectKey resultType="int" keyProperty="userNum" order="BEFORE">
+	select users_seq.nextval from dual
+</selectKey>
+insert into users values(#{userNum}, #{id}, #{password},
+ #{email}, #{name}, #{telephone})
+</insert>
 </mapper>
 
 

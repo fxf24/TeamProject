@@ -18,52 +18,52 @@
 var replaceChar = /[!@\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
 var replaceChar2 = /[!\$%\()\-=+_'\;<>\/.\`:\"\\,\[\]?|{}]/gi;
 $(document).ready(function(){
-$("#signupIdInput").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-            }
-            $(this).val(x);
-        }
-        }).on("keyup", function() {
-            $(this).val($(this).val().replace(replaceChar, ""));
-   });   
-$("#signupNameInput").on("focusout", function() {
-    var x = $(this).val();
-    if (x.length > 0) {
-        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-        }
-        $(this).val(x);
-    }
-    }).on("keyup", function() {
-        $(this).val($(this).val().replace(replaceChar, ""));
-}); 
-$("#signupEmailInput").on("focusout", function() {
+	$("#signupIdInput").on("focusout", function() {
 	        var x = $(this).val();
 	        if (x.length > 0) {
-	            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
-	                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
+	            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+	                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
 	            }
 	            $(this).val(x);
 	        }
 	        }).on("keyup", function() {
-	            $(this).val($(this).val().replace(replaceChar2, ""));
+	            $(this).val($(this).val().replace(replaceChar, ""));
+	   });   
+	$("#signupNameInput").on("focusout", function() {
+	    var x = $(this).val();
+	    if (x.length > 0) {
+	        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+	            x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+	        }
+	        $(this).val(x);
+	    }
+	    }).on("keyup", function() {
+	        $(this).val($(this).val().replace(replaceChar, ""));
+	}); 
+	$("#signupEmailInput").on("focusout", function() {
+		        var x = $(this).val();
+		        if (x.length > 0) {
+		            if (x.match(replaceChar2) || x.match(replaceNotFullKorean)) {
+		                x = x.replace(replaceChar2, "").replace(replaceNotFullKorean, "");
+		            }
+		            $(this).val(x);
+		        }
+		        }).on("keyup", function() {
+		            $(this).val($(this).val().replace(replaceChar2, ""));
+		   });
+	$("#signupPassInput").on("focusout", function() {
+	        var x = $(this).val();
+	        if (x.length > 0) {
+	            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+	                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+	            }
+	            $(this).val(x);
+	        }
+	        }).on("keyup", function() {
+	            $(this).val($(this).val().replace(replaceChar, ""));
 	   });
-$("#signupPassInput").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-            }
-            $(this).val(x);
-        }
-        }).on("keyup", function() {
-            $(this).val($(this).val().replace(replaceChar, ""));
-   });
-});       
-$("#signupPassConfirmInput").on("focusout", function() {
+	
+	$("#signupPassConfirmInput").on("focusout", function() {
 	    var x = $(this).val();
 	    if (x.length > 0) {
 	        if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
@@ -73,14 +73,22 @@ $("#signupPassConfirmInput").on("focusout", function() {
 	    }
     }).on("keyup", function() {
         $(this).val($(this).val().replace(replaceChar, ""));
-});
-});       
-function numberMaxLength(e){
-    if(e.value.length > e.maxLength){
-        e.value = e.value.slice(0, e.maxLength);
-    }
-}
-    });
+	});
+	   
+	function numberMaxLength(e){
+	    if(e.value.length > e.maxLength){
+	        e.value = e.value.slice(0, e.maxLength);
+	    }
+	}
+	    
+	$("#newSignupButton").on('click', function(e){
+		e.preventDefault();
+		location.href = "/login"
+	})
+		
+});//document ready end    
+	
+
 </script>
 </head>
 <body>
@@ -107,9 +115,9 @@ function numberMaxLength(e){
 					<div id="signupFont">
 						<span>가입하기</span>
 					</div>
-					<div class="signupButtonClick">
-						<button id="signupButtonClick" ></button>
-					</div>
+<!-- 					<div class="signupButtonClick"> -->
+<!-- 						<button id="signupButtonClick" ></button> -->
+<!-- 					</div> -->
 				</div>
 			</div>
 			<div id="idPBox">
@@ -213,15 +221,16 @@ function numberMaxLength(e){
 				<span>회원가입</span>
 			</div>
 		</div>
-			<form action="/signup/" method="post" class="signup">
+			<form action="" method="post" class="signup">
 				<input type="text" class="signupIdInput" id="signupIdInput"   maxlength='50'>
  				<input type="text" class="signupNameInput"  id="signupNameInput"  maxlength='16'>
 				<input type="text" class="signupEmailInput"  id="signupEmailInput"  maxlength='50'>
 				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'>
 				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'>
  				<input type="number" class="signupPhonenumInput"  id="signupPhonenumInput"  maxlength="11" oninput="numberMaxLength(this);"/>
-				<input type="submit" class="newSignupButton" id="newSignupButton" value="">
+				<button type="button" class="newSignupButton" id="newSignupButton" value="가입하기"></button>
 			</form>
+			
 	</div>
 </div>	
 </body>

@@ -41,4 +41,10 @@ public class HHserviceImpl implements HHservice{
 	public List<PostVO> getPostNum(int postNum) {
 		return hhdao.getPostNum(postNum);
 	}
+
+	@Override
+	public void insertUserData(UserVO uvo) {
+		// TODO Auto-generated method stub
+		hhdao.insertUserData(uvo);
+	}
 }

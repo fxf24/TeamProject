@@ -77,7 +77,26 @@ public class MainController {
 	public String login() {
 		return "login/main";
 	}
-
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@ResponseBody
+	public String loginService(String id, String password) {
+		String result = "";
+		UserVO user = hhService.getOneUser(id);
+		if(user != null) {
+			if(user.getPassword().equals(password)) {
+				result = "{\"data\":\"로그인 성공!\", \"user\":\""+user.getId()+"\"}";
+			}
+			else {
+				result = "{\"data\":\"잘못된 비밀번호 입니다!\"}";
+			}
+		}
+		else {
+			result = "{\"data\":\"없는 아이디 입니다!\"}";
+		}
+		
+		return result;
+	}
+	
 	@RequestMapping("/login/signup")
 	public String signup() {
 		return "login/signup";

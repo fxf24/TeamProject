@@ -14,29 +14,61 @@
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
-	$("#idInput").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-            }
-            $(this).val(x);
-        }
-        }).on("keyup", function() {
-            $(this).val($(this).val().replace(replaceChar, ""));
-   });   
-	$("#password").on("focusout", function() {
-        var x = $(this).val();
-        if (x.length > 0) {
-            if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
-                x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
-            }
-            $(this).val(x);
-        }
-        }).on("keyup", function() {
-            $(this).val($(this).val().replace(replaceChar, ""));
-   });   
-});
+// 	$("#idInput").on("focusout", function() {
+//         var x = $(this).val();
+//         if (x.length > 0) {
+//             if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+//                 x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+//             }
+//             $(this).val(x);
+//         }
+//         }).on("keyup", function() {
+//             $(this).val($(this).val().replace(replaceChar, ""));
+//    });   
+// 	$("#password").on("focusout", function() {
+//         var x = $(this).val();
+//         if (x.length > 0) {
+//             if (x.match(replaceChar) || x.match(replaceNotFullKorean)) {
+//                 x = x.replace(replaceChar, "").replace(replaceNotFullKorean, "");
+//             }
+//             $(this).val(x);
+//         }
+//         }).on("keyup", function() {
+//             $(this).val($(this).val().replace(replaceChar, ""));
+//    });   
+	
+
+});//document ready end
+
+function signup(){
+	location.href = "/login/signup"
+}
+
+function login(){
+	var id = $("#idInput").val()
+	var password = $("#passwordInput").val()
+	
+	$.ajax({
+		type: 'post',
+  		url: '/login',
+  		data: {'id': id, 'password': password},
+  		dataType: 'json',
+  		
+  		success: function(response){
+  			console.log(response.data)
+  			alert(response.data)
+  			sessionStorage.setItem("user", response.user)
+  			if(response.user != null){
+  				location.href = "/"
+  			}		
+  		},
+  			
+  		error:function(request,status,error){
+ 			alert("success에 실패 했습니다.");
+ 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		}
+	})
+}
 </script>
 </head>
 <body>
@@ -97,7 +129,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<div id="signup">
-					<span><a href="/login/signup">계정만들기</a></span>
+					<span><!-- <a href="/login/signup"> -->계정만들기<!-- </a> --></span>
 				</div>
 			<div id="findIdPass">
 				<span>아이디/비밀번호 찾기</span>
@@ -115,15 +147,15 @@ $(document).ready(function(){
 					<span>네이버로 로그인하기</span>
 				</div>
 			</div>
-			<form action="/login/" method="post" class="loginHome">
-			<input type="text"id="idInput" class="idInput">
-			<input type="password" id="passwordInput" class="passwordInput">
-			<input type="submit" id="loginButton" class="loginButton" value = "">
-			<button id="findIdPassButton"  class="findIdPassButton"  onclick="location.href = ""></button>
-			<button id="signupButton" class="signupButton"  onclick="location.href = "/login/signup"></button>
-			<button id="naverLoginButton" class="naverLoginButton"  onclick="location.href = ""></button>
-			</form>
 		</div>
+		<form action="" method="post" class="loginHome">
+		<input type="text"id="idInput" class="idInput">
+		<input type="password" id="passwordInput" class="passwordInput">
+		<input type="button" id="loginButton" class="loginButton" onclick="login()">
+		<button type=button id="findIdPassButton"  class="findIdPassButton"  onclick="location.href = "></button>
+		<button type=button id="signupButton" class="signupButton"  onclick='signup()'></button>
+		<button type=button id="naverLoginButton" class="naverLoginButton"  onclick="location.href = "></button>
+		</form>
 		</div>
 
 </div>
