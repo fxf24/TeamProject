@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.test.HHservice;
 import com.project.test.PostVO;
 import com.project.test.UserVO;
@@ -69,12 +71,11 @@ public class SearchController {
 		return "/search/hashtagresult";
 	}
 	
-	@RequestMapping(value="/hashtagresult", method=RequestMethod.POST)
-	public List<PostVO> oneHashtagResult(String hashtag){
-		List<PostVO> list = null;
-		if(hashtag!=null || hashtag!="") {
-			list = (List<PostVO>)service.getHashtag(hashtag);	
-		}
+	// postnum 검색시 반환 
+	@RequestMapping("/postnumsearch")
+	@ResponseBody
+	public List<PostVO> postnumsearch(int postNum) {
+		List<PostVO> list = (List<PostVO>)service.getPostNum(postNum);	
 		return list;
 	}
 }
