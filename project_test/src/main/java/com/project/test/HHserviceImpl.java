@@ -31,11 +31,14 @@ public class HHserviceImpl implements HHservice{
 		return hhdao.getHashtag(hashtag);
 	}
 	
-
 	@Override
 	public void insertPostData(PostVO pvo) {
 		// TODO Auto-generated method stub
 		hhdao.insertPostData(pvo);
 	}
 
+	@Override // postNum 검색 리스트 반환
+	public List<PostVO> getPostNum(int postNum) {
+		return hhdao.getPostNum(postNum);
+	}
 }
