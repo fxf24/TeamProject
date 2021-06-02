@@ -3,6 +3,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String hashtag = request.getParameter("hashtag");
+	String id = (String)session.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -48,12 +49,12 @@ $(document).ready(function(){
 	$("#favorite").on('click', function(){
 		$("#thumbsupView").css("display", "block");
 		$("#recentView").css("display", "none");
-	})
+	});
 	
 	$("#recentUpdate").on('click', function(){
 		$("#thumbsupView").css("display", "none");
 		$("#recentView").css("display", "block");
-	})
+	});
 	
 	var hashtagtest = "#"+$("#searchbar").val();
 	var hashtagArr = []; //검색어의 중복을 방지하기 위한 array
@@ -78,11 +79,11 @@ $(document).ready(function(){
 				for(var i=0; i<thumbsupList.length; i++){
 					var imageName = thumbsupList[i].imagepath.split("/");
 					var postNumber = thumbsupList[i].postNum
-					console.log(i)
+
 					if(i%3==0 || i%3==1){
 						$(".thumbsupList").append
 						//("<span class='thumbsupList'><img id='listimage' src='/upload/"+imageName[imageName.length-1]+"'></span>");
-						("<img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+");'>");
+						("<img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'>");
 					} else {
 						$(".thumbsupList").append
 						//("<span class='thumbsupList'><img id='listimage' src='/upload/"+imageName[imageName.length-1]+"'></span><br>");
@@ -103,25 +104,30 @@ $(document).ready(function(){
 					var postNumber = thumbsupList[i].postNum
 					if(i%3==2){
 						$(".recentList").append
-						("<img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'><br>");
-						
+						("<img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'><br>");					
 					} else {
 						$(".recentList").append
 						("<img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'>");
 					} // else end
 				} // for end
-				
 			}, // success end
 			error : function(e){
-						console.log(e)
-					} // error end
-			}) // ajax end
+					console.log(e);
+				} // error end
+		}); // ajax end
 }); //ready function end
+
+var CheckThumbsup = 0;
+var myid = "admin2"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var postNum = 0;
+var totalThumbs = 0;
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
 	$(".modalContent").text("")
-	var postNum = parseInt(postNumber);
+	postNum = parseInt(postNumber);
+//	myid = "admin"; 
+	
 	$.ajax({ //전달받은 postNum 조회
 		url :"/postnumsearch",
 		type : "get",
@@ -132,23 +138,56 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 			var imageName = contents.imagepath.split("/")
 			var hashtag = contents.hashtag.split("#")
 			hashtag.shift(0)
-			for(var i in hashtag){console.log(hashtag[i])}
-			$(".modalContent").append("등록일 : "+contents.postDate+"<br>");
-			$(".modalContent").append("아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a><br>");
-			$(".modalContent").append("<img class='contentsImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='thumbsup()'><br>");
-			$(".modalContent").append("내용 : "+contents.contents+"<br>");
-			$(".modalContent").append("해시태그 : ")
+			//for(var i in hashtag){console.log(hashtag[i])}
+			$(".modalContent").append("<div class='postDate'>게시일 : "+contents.postDate+"</div>");
+			$(".modalContent").append("<div class='postID'>아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>");
+			$(".modalContent").append("<div class='postImage'><img class='contentsImage' src='/upload/"+imageName[imageName.length-1]+"' ondblclick='thumbsup()'></div>"); // admin을 이후 세션 id값으로 변경
+			$(".modalContent").append("<div class='postContents'>내용 : "+contents.contents+"</div>");
+			$(".modalContent").append("<div class='postHashtag'></div>")
 			for(var i in hashtag){
-				$(".modalContent").append
-				("<a href='https://search.shopping.naver.com/search/all?query="+hashtag[i]+"&cat_id=&frm=NVSHATC'>#"+hashtag[i]+"</a>&nbsp");
+				$(".modalContent").append(
+						$(".postHashtag").append(
+								"<a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
+						+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"));
 			} // for end
-			$(".modalContent").append("<br>좋아요 : "+contents.thumbsup+"<br>");
+			
+			$.ajax({ // 좋아요 개수, 좋아요 누른 사람 반환
+				url : "/thumbsupsearch",
+				type : "get",
+				data : {"postNum" : postNum},
+				dataType : "json",
+				success : function(response){
+					var contents = []
+					CheckThumbsup = 0; //현재 게시물 좋아요를 눌렀는지 판단
+					for(var i in response){
+						contents.push(response[i]);
+						console.log(contents)
+						if(response[i].id == myid){ //현재는 admin 계정으로 간주, 이후 세션 id값으로 변경
+							CheckThumbsup = 1; 
+						} //if end
+					}//for end
+					console.log("CheckThumbsup : "+CheckThumbsup)
+					
+					totalThumbs = contents.length;
+					//console.log(totalThumbs)
+					//$(".modalContent").append("<div class='postThumbsup'>좋아요 : ");
+					$(".modalContent").append("<div>좋아요 : <span class='postThumbsup'>"+totalThumbs+"</span></div>");
+
+				},
+				error : function(e){
+					console.log(e)
+				} // error end 
+			}); // inner ajax end
+			
 		}, //success end
 		error : function(e){
 			console.log(e)
 		} // error end
-	}); //ajax end
-}
+	}); //outer ajax end
+}// function end
+
+
+
 
 var modalstatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
 function modalClick(e){
@@ -156,17 +195,57 @@ function modalClick(e){
 		$(".modal").fadeOut();
 	} else if(modalstatus==1) {
 		modalstatus = 0;
-	}
-}
-
-function thumbsup(e){
-	alert("Clickimage")
-	//e.stopPropagation();
-}
+	} // elseif end
+} // modalClick end
 
 function modalContentClick(){
 	modalstatus = 1;
-}
+} // modalContentClick end
+
+
+function thumbsup(){ //사진 더블클릭으로 좋아요 누르기 / 취소하기
+	var id = myid;
+	if(CheckThumbsup == 0){ //좋아요가 눌려있지 않은 경우
+		$.ajax({
+			url : "/thumbsplus",
+			type : "get",
+			data : {
+				"postNum" : postNum,
+				"id" : id
+			},
+			dataType : "text",
+			success : function(response){
+				totalThumbs = totalThumbs+1;
+				CheckThumbsup = parseInt(response);
+				$(".postThumbsup").text(totalThumbs)
+				console.log("토탈 : "+totalThumbs)
+			},
+			error : function(e){
+				console.log(e)
+			} // error end
+		}); // ajax end
+	} 
+	else { // 좋아요가 이미 눌려있는 경우
+		$.ajax({
+			url : "/thumbsminus",
+			type : "get",
+			data : {
+				"postNum" : postNum,
+				"id" : id
+			},
+			dataType : "text",
+			success : function(response){
+				totalThumbs = totalThumbs-1;
+				CheckThumbsup = parseInt(response);
+				$(".postThumbsup").text(totalThumbs)
+				console.log("토탈 : "+totalThumbs)
+			},
+			error : function(e){
+				console.log(e)
+			} // error end
+		}); // ajax end
+	}
+} // function thumbsup end
 
 </script>
 </head>
@@ -194,7 +273,8 @@ function modalContentClick(){
 </div>
 
 <div class="modal" onclick="modalClick()">
-	<div class="modalContent" onclick="modalContentClick()"></div>
+	<div class="modalContent" onclick="modalContentClick()">
+	</div>
 </div>
 </body>
 </html>
