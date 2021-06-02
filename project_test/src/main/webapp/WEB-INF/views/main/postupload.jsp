@@ -169,6 +169,11 @@
 					}
 				});
 			})
+			function resize(obj){
+				obj.style.height = "5px";
+				obj.style.height = obj.scrollHeight+"px";
+				console.log(obj.style.height)
+			}
 		</script>
 	</head>
 
@@ -184,10 +189,11 @@
 					</div>
 					<h5>해쉬태그 입력</h5>
 					<div id="hashtags"></div>
+					<input type="text">
 				</form>
 				<form class="col-8">
 					내용 입력<br>
-					<textarea maxlength="3000" id="contents" rows="3" cols="100"></textarea><br>
+					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 30px;" ></textarea><br>
 					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 				</form>
 			</div>
