@@ -193,7 +193,7 @@
 				</form>
 				<form class="col-8">
 					내용 입력<br>
-					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 30px;" ></textarea><br>
+					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
 					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 				</form>
 			</div>
