@@ -13,6 +13,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.test.HHservice;
 import com.project.test.PostVO;
+import com.project.test.ThumbsupVO;
 import com.project.test.UserVO;
 
 @Controller
@@ -78,4 +79,35 @@ public class SearchController {
 		List<PostVO> list = (List<PostVO>)service.getPostNum(postNum);	
 		return list;
 	}
+	
+	// 게시판 로드시 좋아요 개수, 좋아요 누른 사람 목록 반환
+	@RequestMapping("/thumbsupsearch")
+	@ResponseBody
+	public List<ThumbsupVO> thumbsupsearch(int postNum) {
+		List<ThumbsupVO> result = (List<ThumbsupVO>)service.getThumbsup(postNum);	
+		return result;
+	}
+	
+	// 게시물 좋아요 클릭시 좋아요 테이블에 쿼리 저장
+	@RequestMapping("/thumbsplus")
+	@ResponseBody
+	public String thumbsplus(int postNum, String id) {
+		ThumbsupVO tvo = new ThumbsupVO();
+		tvo.setId(id);
+		tvo.setPostNum(postNum);
+		service.thumbsPlus(postNum, id);
+		return "1";
+	}
+	
+	@RequestMapping("/thumbsminus")
+	@ResponseBody
+	public String thumbsminus(int postNum, String id) {
+		ThumbsupVO tvo = new ThumbsupVO();
+		tvo.setId(id);
+		tvo.setPostNum(postNum);
+		service.thumbsMinus(postNum, id);
+		return "0";
+	}
+	
+	
 }

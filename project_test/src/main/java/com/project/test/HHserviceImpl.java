@@ -43,8 +43,22 @@ public class HHserviceImpl implements HHservice{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void insertUserData(UserVO uvo) {
 		// TODO Auto-generated method stub
 		hhdao.insertUserData(uvo);
+=======
+	public List<ThumbsupVO> getThumbsup(int postNum) {
+		return hhdao.getThumbsup(postNum);
+	}
+
+	@Override
+	public void thumbsPlus(int postNum, String id) {
+		hhdao.thumbsPlus(postNum, id);
+	}
+	
+	public void thumbsMinus(int postNum, String id) {
+		hhdao.thumbsMinus(postNum, id);
+>>>>>>> 문병전
 	}
 }
