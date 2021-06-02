@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.test.HHDAO">
+<select id="getOneUser" parameterType="String" resultType="userVO">
+select * from users where id= #{id}
+</select>
+
+<select id="getUserID" parameterType="String" resultType="userVO">
+select * from users where id LIKE #{id}||'%' order by id 
+</select>
+
+<select id="getUserName" parameterType="String" resultType="userVO">
+select * from users where name LIKE #{name}||'%' order by name
+</select>
+
+<select id="getHashtag" parameterType="String" resultType="postVO">
+select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
+</select>
+
+<insert id="insertPostData" parameterType="postVO">
+<selectKey resultType="int" keyProperty="postNum" order="BEFORE">
+	select posts_seq.nextval from dual
+</selectKey>
+insert into posts values(#{postNum}, #{id}, #{contents},
+ #{imagepath}, #{hashtag}, 0, sysdate)
+</insert>
+
+<select id="getPostNum" parameterType="int" resultType="postVO">
+select * from posts where postNum=#{postNum}
+</select>
+
+<insert id="insertUserData" parameterType="userVO">
+<selectKey resultType="int" keyProperty="userNum" order="BEFORE">
+	select users_seq.nextval from dual
+</selectKey>
+insert into users values(#{userNum}, #{id}, #{password},
+ #{email}, #{name}, #{telephone})
+</insert>
+</mapper>
+
+
+
+

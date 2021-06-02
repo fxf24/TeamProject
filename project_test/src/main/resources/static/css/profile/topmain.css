@@ -1,0 +1,253 @@
+@charset "UTF-8";
+
+/* 1. 프로필 메인 상단 
+- 고정 정보 (프로필사진, 회원아이디, 프로필편집) */
+
+#info-container {
+	z-index: 1;
+	background: silver;
+	position: relative;
+	margin: auto;
+	width: 1110px;
+	height: 300px;
+}
+
+/* #profileiamge { 
+	z-index: 2;
+	background: blue;
+	position: absolute;
+	clear: both; 
+	width: 500px;
+	height: 200px;
+	margin: 20px;
+} */
+
+#img {
+	position: absolute;
+  	top: 30px;
+  	right: 1100px;
+    left: 300px;
+    bottom: 100px;
+    margin: 20px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 150px; 
+	height: 150px;
+	border-radius:300px; 
+	cursor:pointer;
+}
+
+#account_id {
+	position:absolute;
+	top:20%;
+    left:50%;
+	text-align: center;
+}
+
+#profile_edit {
+	position:absolute;
+	top:20%;
+    left:60%;
+	text-align: center;
+	cursor:pointer;
+}
+
+/* 게시물 | 팔로워 | 팔로우 
+게시물 업로드 (카메라, 앨범, (폰, pc))*/
+
+#secondline1 {
+	position:absolute;
+	top:32%;
+    left:50%;
+	text-align: center;
+}
+
+#secondline2 {
+	position:absolute;
+	top:32%;
+    left:60%;
+	text-align: center;
+}
+
+#secondline3 {
+	position:absolute;
+	top:32%;
+    left:70%;
+	text-align: center;
+}
+
+#postupload {
+	position:absolute;
+	top: 45%;
+    left: 50%;
+}
+
+#postfont {
+	z-index: 2;
+	position:absolute;
+	top: 55%;
+    left: 0;
+	cursor:pointer;
+	background: silver;
+	font-size: medium;
+	width: 180px;
+}
+
+#postuploadbtn {
+	position:absolute;
+	top: 30%;
+    left: 0;
+    display: none;
+}
+
+/* #upload_camera {
+	position:absolute;
+	top: 45%;
+    left: 200%;
+    text-align: center;
+	cursor:pointer;
+	display: none;
+	
+} */
+
+/* 소개 */
+#introduction {
+	position:absolute;
+	top: 55%;
+    left: 50%;
+	text-align: left;
+	z-index: 2;
+}
+
+
+
+/* 2. 프로필 메인 가운데 단 
+- 업로드 정보 (게시물 목록들) */
+
+#main-container {
+	z-index: 1;
+	background: pink;
+	border: 3px solid pink;
+	position: relative;
+	width: 1110px; 
+	height: 1150px;
+  	margin: auto; /* (위 오른쪽 아래 왼쪽 순) 50px 20px 0 30px*/
+} 
+
+/* 첫째 줄 */ 
+
+#card-body3-1 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 30px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body3-2{
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 30px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body3-3 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 30px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+/* 둘째 줄 */ 
+
+#second-contatiner {
+	z-index: 3;
+	position: relative;
+	clear: both; 
+}
+
+#card-body2-1 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 400px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body2-2{
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 400px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body2-3 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 400px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+/* 셋째 줄 */ 
+
+#card-body1-1 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 770px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body1-2{
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 770px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}
+
+#card-body1-3 {
+	z-index: 2;
+	background: gray;
+	position: absolute;
+	border: 3px solid gray;
+	margin: 770px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	padding: 10px;
+	text-align: center;
+}

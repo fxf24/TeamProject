@@ -12,17 +12,11 @@ $(document).ready(function(){
 
 });
 </script>
-<script type="text/javascript">
-const name = "Mike"; // let 은 변수 변경 가능 , const 상수 수정 불가능(대문자로 가급적) 문자,숫자 $ _ 만 사용가능
-const age = 30;
-
-const message = "I'm a boy";
-const message2 = `My name is ${name}, age is ${age}`;
-console.log(message2); //or alert()
-alert(message2);
-</script>
 </head>
 <body>
-
+<form action="/search" method="post" >
+	<input type="text" name="searchWord">
+	<input type="submit" value="search">
+</form>
 </body>
 </html>
