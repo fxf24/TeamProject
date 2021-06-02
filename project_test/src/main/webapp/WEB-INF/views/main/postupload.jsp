@@ -13,10 +13,10 @@
 		<title>Insert title here</title>
 		<script src="/jquery-3.2.1.min.js"></script>
 		<script>
-$(document).ready(function(){
-	var user = sessionStorage.getItem("user")
-	sessionStorage.setItem("user", "admin")
-	
+			$(document).ready(function () {
+				var user = sessionStorage.getItem("user")
+				sessionStorage.setItem("user", "admin")
+
 
 				/////////////////////////
 				var input = document.querySelector('input');
@@ -65,10 +65,10 @@ $(document).ready(function(){
 								var boxes = odjson.predictions[0].detection_boxes
 
 								//cfr json 
-					//cfr json 
+								//cfr json 
 								//cfr json 
 								var faces = cfrjson.faces
-					var faces = cfrjson.faces 
+								var faces = cfrjson.faces
 								var faces = cfrjson.faces
 
 								for (var i = 0; i < names.length; i++) {
@@ -105,11 +105,7 @@ $(document).ready(function(){
 						error: function (response) {
 							alert("사진을 올려주세요")
 						}
-
-
 					})
-
-
 				})//fileUpload onclick end
 			})//document ready end
 
@@ -164,6 +160,15 @@ $(document).ready(function(){
 					}
 				})
 			}
+			// 글자수 최대 3000자로 제한
+			$(function () {
+				$('textarea[maxlength]').keyup(function (event) {
+					var max = parseInt($(this).attr("maxlength"));
+					if ($(this).val().length >= max) {
+						alert("글자수를 초과하였습니다");
+					}
+				});
+			})
 		</script>
 	</head>
 
@@ -182,7 +187,7 @@ $(document).ready(function(){
 				</form>
 				<form class="col-8">
 					내용 입력<br>
-					<textarea id="contents" rows="3" cols="100"></textarea><br>
+					<textarea maxlength="3000" id="contents" rows="3" cols="100"></textarea><br>
 					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 				</form>
 			</div>
