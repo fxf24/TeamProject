@@ -14,7 +14,7 @@ select * from users where id LIKE #{id}||'%' order by id
 select * from users where name LIKE #{name}||'%' order by name
 </select>
 
-<select id="getHashtag" parameterType="String" resultType="PostVO">
+<select id="getHashtag" parameterType="String" resultType="postVO">
 select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
 </select>
 
@@ -26,9 +26,21 @@ insert into posts values(#{postNum}, #{id}, #{contents},
  #{imagepath}, #{hashtag}, 0, sysdate)
 </insert>
 
-<select id="getPostNum" parameterType="int" resultType="PostVO">
+<select id="getPostNum" parameterType="int" resultType="postVO">
 select * from posts where postNum=#{postNum}
 </select>
+
+<select id="getThumbsup" parameterType="int" resultType="thumbsupVO">
+select * from thumbsup where postNum=#{postNum}
+</select>
+
+<insert id="thumbsPlus" parameterType="thumbsupVO">
+insert into thumbsup values(thumbsup_SEQ.nextval, #{id}, #{postNum})
+</insert>
+
+<delete id="thumbsMinus" parameterType="thumbsupVO">
+delete from thumbsup where id=#{id} and postNum=#{postNum}
+</delete>
 
 </mapper>
 

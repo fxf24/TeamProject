@@ -9,4 +9,7 @@ public interface HHservice {
 	List<PostVO> getHashtag(String hashtag);
 	void insertPostData(PostVO pvo);
 	List<PostVO> getPostNum(int PostNum);
+	List<ThumbsupVO> getThumbsup(int postNum);
+	void thumbsPlus(int postNum, String id);
+	void thumbsMinus(int postNum, String id);
 }

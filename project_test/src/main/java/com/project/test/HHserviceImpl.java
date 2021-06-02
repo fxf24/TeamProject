@@ -41,4 +41,18 @@ public class HHserviceImpl implements HHservice{
 	public List<PostVO> getPostNum(int postNum) {
 		return hhdao.getPostNum(postNum);
 	}
+
+	@Override
+	public List<ThumbsupVO> getThumbsup(int postNum) {
+		return hhdao.getThumbsup(postNum);
+	}
+
+	@Override
+	public void thumbsPlus(int postNum, String id) {
+		hhdao.thumbsPlus(postNum, id);
+	}
+	
+	public void thumbsMinus(int postNum, String id) {
+		hhdao.thumbsMinus(postNum, id);
+	}
 }
