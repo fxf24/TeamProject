@@ -145,4 +145,10 @@ public class MainController {
 //		return "search/main";
 //	}
 
+	@RequestMapping("/mainscroll")
+	public String mainscroll() {
+		return "mainscroll";
+	}
+	
 }
+

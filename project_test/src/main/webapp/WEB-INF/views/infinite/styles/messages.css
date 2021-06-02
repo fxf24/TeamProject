@@ -128,7 +128,7 @@
     color: rgba(38,153,251,1);	
 }
 .meta .posted-date::before{
-	content: '● ';
+	content: '�뿈 ';
 	font-size:16px;
 	top:-8px;
 	margin-bottom: 1000px;
@@ -144,10 +144,10 @@
 }
 
 .from-me .bubble {
-  background: #F9D7FF; */
-}
-/
-.bubble p:.first-child{
+  background: #F9D7FF;
+}*/
+
+.bubble p:first-child{
     position: relative;
 	top: -100px;
     left: 96px;
@@ -156,7 +156,7 @@
     padding: 0px;
     text-overflow:ellipsis;
     word-break:break-word;
-/*     display: none; 버튼클릭 후 나옴 //////////////////////////////////////////////// */
+/*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
 }
 
 .contentsss{
@@ -169,7 +169,7 @@
     padding: 0px;
     text-overflow:ellipsis;
     word-break:break-word;
-/*     display: none; 버튼클릭 후 나옴 //////////////////////////////////////////////// */
+/*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
 }
  
 .contentsss p{
@@ -181,7 +181,7 @@
     padding: 0px;
     text-overflow:ellipsis;
 	word-break:break-word; 
-/*     display: none; 버튼클릭 후 나옴 //////////////////////////////////////////////// */
+/*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
 }
  
 .from-me .bubble::before {
@@ -394,7 +394,7 @@
 		transform: matrix(1,0,0,1,0,0);
 		z-index: 4444;
 }
-/* 플러스박스부르는버튼 ///////////////////////////////////////////////////////////////////////*/
+/* �뵆�윭�뒪諛뺤뒪遺�瑜대뒗踰꾪듉 ///////////////////////////////////////////////////////////////////////*/
 #favoriteIcon1 {
 		fill: rgba(0,0,0,1);
 }
@@ -436,7 +436,7 @@
 		transform: matrix(1,0,0,1,0,0);
 		z-index: 6666;
 }
-/*누르면 나타나고 전에 이미지는 display:none 검정 - 핑크 - 레드/////////////////////////////////////*/
+/*�늻瑜대㈃ �굹���굹怨� �쟾�뿉 �씠誘몄��뒗 display:none 寃��젙 - �븨�겕 - �젅�뱶/////////////////////////////////////*/
 
 
 
