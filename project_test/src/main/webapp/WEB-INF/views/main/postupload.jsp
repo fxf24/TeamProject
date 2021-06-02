@@ -176,6 +176,15 @@
 			}
 		</script>
 	</head>
+	<style>
+		*{
+			margin: 0%;
+			padding: 0;
+		}
+		body {
+			padding-top: 50px;
+		}
+	</style>
 
 	<body>
 		<div class="container">
@@ -191,7 +200,8 @@
 					<div id="hashtags"></div>
 					<input type="text">
 				</form>
-				<form class="col-8">
+				<div class="col-1"></div>
+				<form class="col-6">
 					내용 입력<br>
 					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
 					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
