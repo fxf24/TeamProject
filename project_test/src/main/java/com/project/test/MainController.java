@@ -114,6 +114,20 @@ public class MainController {
 		hhService.insertUserData(user);
 		return "{\"data\":\"유저 저장 완료\"}";
 	}
+	@RequestMapping(value="/getUserID", method=RequestMethod.POST)
+	@ResponseBody
+	public String getOneUser(String id) {
+		String result = "";
+		UserVO user = hhService.getOneUser(id);
+		if(user != null) {
+			result = "{\"data\":\"사용할 수 없는 아이디 입니다!\"}";
+		}
+		else {
+			result = "{\"data\":\"사용할 수 있는 아이디 입니다!\"}";
+		}
+		return result;
+	}
+	
 	
 	@RequestMapping("/profile")
 	public String profile() {
