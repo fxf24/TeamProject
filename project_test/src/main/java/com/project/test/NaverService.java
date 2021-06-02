@@ -83,7 +83,6 @@ public class NaverService {
 	
 	//Naver CFR service
 	public String getCFRService(String image) {
-		StringBuffer reqStr = new StringBuffer();
 		String clientId = "atk803phxv";
 		String clientSecret = "Ik5FNTdCVSbsB61Vsez1B4NZSfiLsGRDGZ2xOOh7";
 		
