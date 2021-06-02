@@ -4,6 +4,10 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String searchword = request.getParameter("searchWord");
+	if(searchword==null){
+		searchword = "";
+	}
+	String id = (String)session.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +37,6 @@ $(document).ready(function(){
 	})
 			
 	var searchMessage = $("#searchbar").val();
-	
 	//main에서 넘어오는 search값 전달, id 검색	
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
 		$("#idSearch").text("검색어를 입력하세요.");
