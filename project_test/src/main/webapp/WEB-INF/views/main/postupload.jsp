@@ -103,7 +103,7 @@
 							}//image onload end
 						},
 						error: function (response) {
-							alert("사진을 올려주세요")
+							alert("사진아이콘을 눌러 사진을 선택 후, 분석을 해주세요")
 						}
 					})
 				})//fileUpload onclick end
