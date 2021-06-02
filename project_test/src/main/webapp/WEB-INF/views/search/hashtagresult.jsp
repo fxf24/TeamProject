@@ -5,8 +5,10 @@
 	String hashtag = request.getParameter("hashtag");
 	String id = (String)session.getAttribute("id");
 %>
+
 <!DOCTYPE html>
 <html>
+<script src="https://kit.fontawesome.com/5e5186ce3e.js" crossorigin="anonymous"></script>
 <head>
 <meta charset="UTF-8">
 <title>HashHershe</title>
@@ -117,10 +119,10 @@ $(document).ready(function(){
 		}); // ajax end
 }); //ready function end
 
-var CheckThumbsup = 0;
+var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
 var myid = "admin2"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
-var postNum = 0;
-var totalThumbs = 0;
+var postNum = 0; // 클릭한 이미지의 포스트번호 저장
+var totalThumbs = 0; // 총 좋아요 개수 저장
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
@@ -163,16 +165,21 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 						contents.push(response[i]);
 						console.log(contents)
 						if(response[i].id == myid){ //현재는 admin 계정으로 간주, 이후 세션 id값으로 변경
-							CheckThumbsup = 1; 
+							CheckThumbsup = 1; 							
 						} //if end
 					}//for end
-					console.log("CheckThumbsup : "+CheckThumbsup)
-					
-					totalThumbs = contents.length;
+					totalThumbs = contents.length; // 좋아요 개수
 					//console.log(totalThumbs)
-					//$(".modalContent").append("<div class='postThumbsup'>좋아요 : ");
-					$(".modalContent").append("<div>좋아요 : <span class='postThumbsup'>"+totalThumbs+"</span></div>");
-
+					if(CheckThumbsup == 0){ //좋아요가 눌려져 있지 않음
+						$(".modalContent").append
+						("<div>좋아요 : <span class='postThumbsup'>"+totalThumbs+"</span>"+
+								"<span class='thumbsupButton' onclick='thumbsup()'><i class='far fa-heart'></i></span></div>");
+					} else { //좋아요가 눌려져 있음
+						$(".modalContent").append
+						("<div>좋아요 : <span class='postThumbsup'>"+totalThumbs+"</span>"+
+								"<span class='thumbsupButton' onclick='thumbsup()'><i class='fas fa-heart'></i></span></div>");						
+					}// if else end
+					
 				},
 				error : function(e){
 					console.log(e)
@@ -186,24 +193,7 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 	}); //outer ajax end
 }// function end
 
-
-
-
-var modalstatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
-function modalClick(e){
-	if(modalstatus==0){
-		$(".modal").fadeOut();
-	} else if(modalstatus==1) {
-		modalstatus = 0;
-	} // elseif end
-} // modalClick end
-
-function modalContentClick(){
-	modalstatus = 1;
-} // modalContentClick end
-
-
-function thumbsup(){ //사진 더블클릭으로 좋아요 누르기 / 취소하기
+function thumbsup(){ //좋아요 누르기 / 취소하기
 	var id = myid;
 	if(CheckThumbsup == 0){ //좋아요가 눌려있지 않은 경우
 		$.ajax({
@@ -218,7 +208,8 @@ function thumbsup(){ //사진 더블클릭으로 좋아요 누르기 / 취소하
 				totalThumbs = totalThumbs+1;
 				CheckThumbsup = parseInt(response);
 				$(".postThumbsup").text(totalThumbs)
-				console.log("토탈 : "+totalThumbs)
+				//console.log("토탈 : "+totalThumbs)
+				$(".thumbsupButton").html("<i class='fas fa-heart'></i>")
 			},
 			error : function(e){
 				console.log(e)
@@ -238,7 +229,8 @@ function thumbsup(){ //사진 더블클릭으로 좋아요 누르기 / 취소하
 				totalThumbs = totalThumbs-1;
 				CheckThumbsup = parseInt(response);
 				$(".postThumbsup").text(totalThumbs)
-				console.log("토탈 : "+totalThumbs)
+				//console.log("토탈 : "+totalThumbs)
+				$(".thumbsupButton").html("<i class='far fa-heart'></i>")
 			},
 			error : function(e){
 				console.log(e)
@@ -246,6 +238,26 @@ function thumbsup(){ //사진 더블클릭으로 좋아요 누르기 / 취소하
 		}); // ajax end
 	}
 } // function thumbsup end
+
+
+var modalstatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
+
+function modalClick(){
+	if(modalstatus==0){
+		$(".modal").fadeOut();
+	} else if(modalstatus==1) {
+		modalstatus = 0;
+	} // elseif end
+} // modalClick end
+
+function modalContentClick(){
+	modalstatus = 1;
+} // modalContentClick end
+
+
+function thumbsupModal(){
+	
+}
 
 </script>
 </head>
