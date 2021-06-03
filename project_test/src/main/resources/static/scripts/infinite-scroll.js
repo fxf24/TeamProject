@@ -16,22 +16,16 @@
  */
 
 (function(scope) {
-
 // Number of items to instantiate beyond current view in the scroll direction.
 var RUNWAY_ITEMS = 50;
-
 // Number of items to instantiate beyond current view in the opposite direction.
 var RUNWAY_ITEMS_OPPOSITE = 10;
-
 // The number of pixels of additional length to allow scrolling to.
 var SCROLL_RUNWAY = 2000;
-
 // The animation interval (in ms) for fading in content from tombstones.
 var ANIMATION_DURATION_MS = 200;
-
 scope.InfiniteScrollerSource = function() {
 }
-
 scope.InfiniteScrollerSource.prototype = {
   /**
    * Fetch more items from the data source. This should try to fetch at least
@@ -42,14 +36,12 @@ scope.InfiniteScrollerSource.prototype = {
    *     with an array of items.
    */
   fetch: function(count) {},
-
   /**
    * Create a tombstone element. All tombstone elements should be identical
    * @return {Element} A tombstone element to be displayed when item data is not
    *     yet available for the scrolled position.
    */
   createTombstone: function() {},
-
   /**
    * Render an item, re-using the provided item div if passed in.
    * @param {Object} item The item description from the array returned by fetch.
@@ -59,8 +51,6 @@ scope.InfiniteScrollerSource.prototype = {
    */
   render: function(item, div) {},
 };
-
-
 /**
  * Construct an infinite scroller.
  * @param {Element} scroller The scrollable element to use as the infinite
@@ -83,7 +73,6 @@ scope.InfiniteScroller = function(scroller, source) {
   this.requestInProgress_ = false;
   this.scroller_.addEventListener('scroll', this.onScroll_.bind(this));
   window.addEventListener('resize', this.onResize_.bind(this));
-
   // Create an element to force the scroller to allow scrolling to a certain
   // point.
   this.scrollRunway_ = document.createElement('div');
@@ -98,9 +87,7 @@ scope.InfiniteScroller = function(scroller, source) {
   this.scroller_.appendChild(this.scrollRunway_);
   this.onResize_();
 }
-
 scope.InfiniteScroller.prototype = {
-
   /**
    * Called when the browser window resizes to adapt to new scroller bounds and
    * layout sizes of items within the scroller.
@@ -116,7 +103,6 @@ scope.InfiniteScroller.prototype = {
     this.tombstoneSize_ = tombstone.offsetHeight;
     this.tombstoneWidth_ = tombstone.offsetWidth;
     this.scroller_.removeChild(tombstone);
-
     // Reset the cached size of items in the scroller as they may no longer be
     // correct after the item content undergoes layout.
     for (var i = 0; i < this.items_.length; i++) {
@@ -124,7 +110,6 @@ scope.InfiniteScroller.prototype = {
     }
     this.onScroll_();
   },
-
   /**
    * Called when the scroller scrolls. This determines the newly anchored item
    * and offset and then updates the visible elements, requesting more items
@@ -146,7 +131,6 @@ scope.InfiniteScroller.prototype = {
     else
       this.fill(this.anchorItem.index - RUNWAY_ITEMS_OPPOSITE, lastScreenItem.index + RUNWAY_ITEMS);
   },
-
   /**
    * Calculates the item that should be anchored after scrolling by delta from
    * the initial anchored item.
@@ -183,7 +167,6 @@ scope.InfiniteScroller.prototype = {
       offset: delta,
     };
   },
-
   /**
    * Sets the range of items which should be attached and attaches those items.
    * @param {number} start The first item which should be attached.
@@ -194,7 +177,6 @@ scope.InfiniteScroller.prototype = {
     this.lastAttachedItem_ = end;
     this.attachContent();
   },
-
   /**
    * Creates or returns an existing tombstone ready to be reused.
    * @return {Element} A tombstone element ready to be used.
@@ -210,7 +192,6 @@ scope.InfiniteScroller.prototype = {
     }
     return this.source_.createTombstone();
   },
-
   /**
    * Attaches content to the scroller and updates the scroll position if
    * necessary.
@@ -237,7 +218,6 @@ scope.InfiniteScroller.prototype = {
       }
       this.items_[i].node = null;
     }
-
     var tombstoneAnimations = {};
     // Create DOM nodes.
     for (i = this.firstAttachedItem_; i < this.lastAttachedItem_; i++) {
@@ -267,12 +247,10 @@ scope.InfiniteScroller.prototype = {
       this.scroller_.appendChild(node);
       this.items_[i].node = node;
     }
-
     // Remove all unused nodes
     while (unusedNodes.length) {
       this.scroller_.removeChild(unusedNodes.pop());
     }
-
     // Get the height of all nodes which haven't been measured yet.
     for (i = this.firstAttachedItem_; i < this.lastAttachedItem_; i++) {
       // Only cache the height if we have the real contents, not a placeholder.
@@ -281,7 +259,6 @@ scope.InfiniteScroller.prototype = {
         this.items_[i].width = this.items_[i].node.offsetWidth;
       }
     }
-
     // Fix scroll position in case we have realized the heights of elements
     // that we didn't used to know.
     // TODO: We should only need to do this when a height of an item becomes
@@ -291,7 +268,6 @@ scope.InfiniteScroller.prototype = {
       this.anchorScrollTop += this.items_[i].height || this.tombstoneSize_;
     }
     this.anchorScrollTop += this.anchorItem.offset;
-
     // Position all nodes.
     var curPos = this.anchorScrollTop - this.anchorItem.offset;
     i = this.anchorItem.index;
@@ -327,11 +303,9 @@ scope.InfiniteScroller.prototype = {
       this.items_[i].top = curPos;
       curPos += this.items_[i].height || this.tombstoneSize_;
     }
-
     this.scrollRunwayEnd_ = Math.max(this.scrollRunwayEnd_, curPos + SCROLL_RUNWAY)
     this.scrollRunway_.style.transform = 'translate(0, ' + this.scrollRunwayEnd_ + 'px)';
     this.scroller_.scrollTop = this.anchorScrollTop;
-
     if (ANIMATION_DURATION_MS) {
       // TODO: Should probably use transition end, but there are a lot of animations we could be listening to.
       setTimeout(function() {
@@ -343,11 +317,8 @@ scope.InfiniteScroller.prototype = {
         }
       }.bind(this), ANIMATION_DURATION_MS)
     }
-
     this.maybeRequestContent();
-
   },
-
   /**
    * Requests additional content if we don't have enough currently.
    */
@@ -375,13 +346,13 @@ scope.InfiniteScroller.prototype = {
       'top': 0,
     })
   },
-
   /**
    * Adds the given array of items to the items list and then calls
    * attachContent to update the displayed content.
    * @param {Array<Object>} items The array of items to be added to the infinite
    *     scroller list.
    */
+   
   addContent: function(items) {
     this.requestInProgress_ = false;
     for (var i = 0; i < items.length; i++) {

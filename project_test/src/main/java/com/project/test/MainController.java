@@ -149,6 +149,5 @@ public class MainController {
 	public String mainscroll() {
 		return "infinite/mainscroll";
 	}
-	
 }
 
