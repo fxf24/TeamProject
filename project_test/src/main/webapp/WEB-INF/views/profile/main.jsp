@@ -83,7 +83,7 @@ git push origin develop -->
 	<div id="info-container"> 
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 	      <div id="profileimage"> 
-	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
+	      	<img id="img" src="/images/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
 				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" >
     				<input type="file" id="file"  style="display:none;" onchange="changeValue(this)">
     				<input type="hidden" name = "target_url">

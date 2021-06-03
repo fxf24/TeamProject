@@ -147,7 +147,7 @@ public class MainController {
 
 	@RequestMapping("/mainscroll")
 	public String mainscroll() {
-		return "mainscroll";
+		return "infinite/mainscroll";
 	}
 	
 }

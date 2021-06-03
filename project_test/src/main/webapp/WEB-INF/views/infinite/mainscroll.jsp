@@ -13,8 +13,9 @@
 <script>
 $(document).ready(function(){
 	
-});//document ready end
-function signup mainscroll(){
+})//document ready end
+
+function signup_mainscroll(){
 	location.href = "/mainscroll"
 }//document ready end
 </script>

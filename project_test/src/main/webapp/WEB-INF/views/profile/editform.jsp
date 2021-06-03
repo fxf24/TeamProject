@@ -134,7 +134,7 @@ $.ajax ({
 			<form id="profileeditbox" name="editprofileinfo" action="editform.jsp" method="get"> 
 				<div id="formdesign"> 
 					<h1 id="profileedittitle"> &nbsp;&nbsp;프로필 편집 </h1>
-						<img id="img" src="/image/basicprofileimage.jpg" >
+						<img id="img" src="/images/basicprofileimage.jpg" >
 							<div id="formdesign2">
 							<h3 id="accountid"> 회원 아이디 </h3>
 							<label id="profileimgchange" for="input-profileimg"> 프로필 사진 바꾸기 </label><br>
