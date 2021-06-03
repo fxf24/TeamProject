@@ -45,20 +45,20 @@ html, body {
 <link href='styles/messages.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-  <div id="templates">
-  	<div id= mainBarBox>
+<div id="templates">
+<div id= mainBarBox>
 <div class= mainBarBox>
 	<svg class="topbar1">
 		<rect id="topbar1" rx="0" ry="0" x="0" y="0" width="100%" height="130px">
 		</rect>
 	</svg>
-	</div>
-	<div id= mainBarBox2>
-<div class= mainBarBox2>
+</div>
+<div id= mainBarBox2>
+	<div class= mainBarBox2>
 		<div class="titleHH" >
 		</div>
 	</div>
-	</div>
+</div>
 	<div id="iconPBox">
 	<div id="searchIconBox">
 	<svg class="searchIcon"  viewBox="160.5 482.975 50 50">
@@ -117,7 +117,7 @@ html, body {
 			</svg>
 		</div>
 	</div>
-</div>
+	</div>
 	    <li class="chat-item" data-id="{{id}}">
 	<!--     <img class="avatar" width="48" height="48"> -->
 	      <div class="bubble">
@@ -234,7 +234,7 @@ html, body {
 	        </div>
 	      </div>
 	    </li>
-	   </div>
+</div>
 	    <li class="chat-item tombstone" data-id="{{id}}">
 	<!--       <img class="avatar" width="48" height="48" src="images/unknown.jpg"> -->
 	      <div class="bubble" id="beforeBubble">
@@ -246,6 +246,7 @@ html, body {
 	    </li>
   </div>
   <ul id="chat-timeline">
+  
   </ul>
   <script src="es6-promise.js"></script>
   <script src="stats.min.js"></script>
