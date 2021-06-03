@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,11 +18,11 @@ $(document).ready(function(){
 
 function signup_mainscroll(){
 	location.href = "/mainscroll"
-}//document ready end
+};//document ready end
 </script>
   <style>
 html {
-      background: #eeeeee;
+  	  background-color: rgba(244,238,238,1);
 }
 
 html, body {
@@ -292,8 +293,8 @@ function getItem(id) {
 
 function ContentSource() {
   // Collect template nodes to be cloned when needed.
-  this.tombstone_ = document.querySelector(".main > .chat-item.tombstone");
-  this.messageTemplate_ = document.querySelector(".main > .chat-item:not(.tombstone)");
+  this.tombstone_ = document.querySelector("#templates > .chat-item.tombstone");
+  this.messageTemplate_ = document.querySelector("#templates >#mainBarBox > .chat-item:not(.tombstone)");
   this.nextItem_ = 0;
 }
 
@@ -378,4 +379,6 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 
 });
-  </script>
+</script>
+</body>
+</html>

@@ -161,8 +161,8 @@
 
 .contentsss{
     position: relative;
-	top: -100px;
-    left: 96px;
+	top: 0px;
+    left: -96px;
     width:824px;
     margin-top:60px;
     margin: auto;
@@ -446,9 +446,10 @@
 		width: 65px;
 		height: 65px;
 		left: 767px;
-		top: -9px;
+		top: auto;
 		overflow: visible;
 		margin:0px;
+		margin-top:-22px;
 		z-index: 9999;
 }
 #contentsDownButtonPBox{
