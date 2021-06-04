@@ -276,7 +276,7 @@ html, body {
   <script src="scripts/messages.js"></script>
 <script>
 var INIT_TIME = new Date().getTime();
-
+const random1 = Math.floor(Math.random()*19);// 총 데이터 갯수, 현재 image0 ~19가 있음
 /**
  * Constructs a random item with a given id.
  * @param {number} id An identifier for the item.
@@ -298,13 +298,13 @@ function getItem(id) {
     var item = {
       id: id,
       self: Math.random() < 0.1,
-      image: Math.random() < 1.0 / 20 ? Math.floor(Math.random()*20) : '',
+      image: Math.random() < 100.0 / 100 ? Math.floor(Math.random()*20) : '',
       time: new Date(Math.floor(INIT_TIME + id*20*1000 + Math.random()*20*1000)),
       message: pickRandom(MESSAGES)
     }
     if(item.image == '') {
       resolve(item);
-      item.image = 0
+      item.image = random1
     }
     var image = new Image();
     image.src = 'images/image' + item.image + '.jpg';
