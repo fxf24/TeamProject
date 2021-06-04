@@ -5,18 +5,19 @@ import org.springframework.stereotype.Component;
 @Component("userVO")
 public class UserVO {
 	int userNum;
-	String id, password, email, name, telephone;
+	String id, password, email, name, telephone, profileImage;
 	
 	
 	public UserVO() {
 	}
-	public UserVO(int userno, String id, String password, String email, String name, String telephone) {
+	public UserVO(int userno, String id, String password, String email, String name, String telephone, String profileImage) {
 		this.userNum = userno;
 		this.id = id;
 		this.password = password;
 		this.email = email;
 		this.name = name;
 		this.telephone = telephone;
+		this.profileImage = profileImage;
 	}
 	public int getUserno() {
 		return userNum;
@@ -53,6 +54,12 @@ public class UserVO {
 	}
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+	public String getProfileImage() {
+		return profileImage;
+	}
+	public void setProfileImage(String profileImage) {
+		this.profileImage = profileImage;
 	}
 	@Override
 	public String toString() {

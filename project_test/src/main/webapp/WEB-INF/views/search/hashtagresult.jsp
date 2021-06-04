@@ -123,6 +123,7 @@ var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌�
 var myid = "admin2"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
+var contents = []; // 좋아요 누른 사람을 저장하는 리스트
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
@@ -159,7 +160,7 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 				data : {"postNum" : postNum},
 				dataType : "json",
 				success : function(response){
-					var contents = []
+					contents = []
 					CheckThumbsup = 0; //현재 게시물 좋아요를 눌렀는지 판단
 					for(var i in response){
 						contents.push(response[i]);
@@ -172,14 +173,13 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 					//console.log(totalThumbs)
 					if(CheckThumbsup == 0){ //좋아요가 눌려져 있지 않음
 						$(".modalContent").append
-						("<div>좋아요 : <span class='postThumbsup'>"+totalThumbs+"</span>"+
-								"<span class='thumbsupButton' onclick='thumbsup()'><i class='far fa-heart'></i></span></div>");
+						("<div class='#'><span class='thumbsupButton' onclick='thumbsup()'><i class='far fa-heart'></i></span>"+
+						"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");
 					} else { //좋아요가 눌려져 있음
 						$(".modalContent").append
-						("<div>좋아요 : <span class='postThumbsup'>"+totalThumbs+"</span>"+
-								"<span class='thumbsupButton' onclick='thumbsup()'><i class='fas fa-heart'></i></span></div>");						
-					}// if else end
-					
+						("<div class='#'><span class='thumbsupButton' onclick='thumbsup()'><i class='fas fa-heart'></i></span>"+
+						"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");						
+					}// if else end	
 				},
 				error : function(e){
 					console.log(e)
@@ -207,7 +207,7 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 			success : function(response){
 				totalThumbs = totalThumbs+1;
 				CheckThumbsup = parseInt(response);
-				$(".postThumbsup").text(totalThumbs)
+				$(".postThumbsup").text(" 좋아요 : "+totalThumbs+"명이 좋아합니다.")
 				//console.log("토탈 : "+totalThumbs)
 				$(".thumbsupButton").html("<i class='fas fa-heart'></i>")
 			},
@@ -228,7 +228,7 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 			success : function(response){
 				totalThumbs = totalThumbs-1;
 				CheckThumbsup = parseInt(response);
-				$(".postThumbsup").text(totalThumbs)
+				$(".postThumbsup").text(" 좋아요 : "+totalThumbs+"명이 좋아합니다.")
 				//console.log("토탈 : "+totalThumbs)
 				$(".thumbsupButton").html("<i class='far fa-heart'></i>")
 			},
@@ -240,35 +240,32 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 } // function thumbsup end
 
 
-var modalstatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
+var modalStatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
 
 function modalClick(){
-	if(modalstatus==0){
+	if(modalStatus==0){
 		$(".modal").fadeOut();
-	} else if(modalstatus==1) {
-		modalstatus = 0;
+	} else if(modalStatus==1) {
+		modalStatus = 0;
 	} // elseif end
 } // modalClick end
 
 function modalContentClick(){
-	modalstatus = 1;
+	modalStatus = 1;
 } // modalContentClick end
 
-
-function thumbsupModal(){
-	
-}
 
 </script>
 </head>
 <body>
 <h1>해시태그 검색 리스트</h1>
-<form action="/search" method="post" >
+<form action="/search" method="post">
 	<input type="text" id=searchbar name="searchWord" value=<%=hashtag %>>
 	<input type="submit" value="search">
 </form>
-<span id=searchresult>#<%=hashtag %></span><span>검색결과</span><br>
+<span id=searchresult>#<%=hashtag %> </span><span>검색결과</span><br>
 <span id=totalhashtag></span>
+
 <div id="searchlist">
 	<button id="favorite">인기 게시물</button>&nbsp;&nbsp;
 	<button id="recentUpdate">최근 게시물</button>
@@ -276,17 +273,43 @@ function thumbsupModal(){
 
 <div id=thumbsupView style="background-color:#abcdef;
 		width:1000px; height:1000px; overflow:scroll;">
-	<div class="thumbsupList"></div>		
+	<div class="thumbsupBlock">
+		<div class="thumbsupList"></div>
+	</div>		
 </div>
 
 <div id=recentView style="display:none; background-color:yellow; 
 	width:1000px; height:1000px; overflow:scroll;">
-	<div class="recentList"></div>	
+	<div class="recentBlock">
+		<div class="recentList"></div>	
+	</div>
 </div>
 
 <div class="modal" onclick="modalClick()">
 	<div class="modalContent" onclick="modalContentClick()">
 	</div>
 </div>
+
+<!-- <div class="thumbsupModal" onclick="thumbsupModal()"> -->
+<!-- 	<div class="ifTotalZero"></div> -->
+<!-- 	<div class="thumbsupTitle"></div> -->
+<!-- 	<div class="thumbsupSearch"></div> -->
+<!-- 	<div class="clickThumbsupIdList"> -->
+<!-- 		<span class="profileImage"></span><span class="idList"></span> -->
+<!-- 	</div> -->
+<!-- </div> -->
+
 </body>
+<script type="text/javascript">
+var count = 0;
+window.onscroll = function(e){ //스크롤 바닥 감지
+	//window height + window scroll Y 값이 document height보다 클 경우
+	if((window.innerHeight + winddow.scrollY) >= document.body.offsetHeight){
+		// Add Contents 
+		count++;
+		var addContent = "<div class='thumbsupList'></div>";
+		$(".thumbsupList").append(addContent);
+	}
+}
+</script>
 </html>
