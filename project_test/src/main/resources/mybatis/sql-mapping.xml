@@ -23,7 +23,7 @@ select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
 	select posts_seq.nextval from dual
 </selectKey>
 insert into posts values(#{postNum}, #{id}, #{contents},
- #{imagepath}, #{hashtag}, 0, sysdate)
+ #{imagepath}, #{hashtag}, sysdate)
 </insert>
 
 <select id="getPostNum" parameterType="int" resultType="postVO">

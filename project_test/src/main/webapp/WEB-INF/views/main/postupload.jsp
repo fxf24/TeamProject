@@ -35,6 +35,7 @@
 					processData: false,
 					contentType: false,
 					success: function (response) {
+<<<<<<< HEAD
 						var responseSplit = response.split("|")
 						var filename = responseSplit[0]
 						var odjson = JSON.parse(responseSplit[1])
@@ -86,6 +87,23 @@
 								}//if end
 							}//for end
 						}//image onload end
+=======
+						console.log(response.data)
+					}
+
+				});
+
+				console.log($("#hashtags").html())
+
+				var user = sessionStorage.getItem("user")
+				
+				$.ajax({
+					type: 'post',
+					url: '/saveData',
+					data: {
+						'id': user, 'content': $("#contents").val(), 'image': fileName,
+						'hashtag': $("#hashtags").text() + $("#names").val()
+>>>>>>> a986f33b4881afa65429a493e3ac5c013d7a036e
 					},
 					error: function (response) {
 						alert("사진아이콘을 눌러 사진을 선택 후, 분석을 해주세요")
@@ -135,6 +153,20 @@
 					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 				}
 			})
+<<<<<<< HEAD
+=======
+			function resize(obj){
+				obj.style.height = "5px";
+				obj.style.height = obj.scrollHeight+"px";
+// 				console.log(obj.style.height)
+			}
+		</script>
+	</head>
+	<style>
+		*{
+			margin: 0%;
+			padding: 0;
+>>>>>>> a986f33b4881afa65429a493e3ac5c013d7a036e
 		}
 		// 글자수 최대 3000자로 제한
 		$(function () {
@@ -150,6 +182,7 @@
 			obj.style.height = obj.scrollHeight + "px";
 			console.log(obj.style.height)
 		}
+<<<<<<< HEAD
 	</script>
 </head>
 <style>
@@ -184,6 +217,31 @@
 					style="min-height: 150px;"></textarea><br>
 				<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 			</form>
+=======
+	</style>
+
+	<body>
+		<div class="container">
+			<div class="row">
+				<form id="fileForm" method=post enctype="multipart/form-data" class="col-4">
+					<canvas id="imagecanvas" width=400 height=400 style="border: 2px solid pink"></canvas>
+					<div>
+						<button id="fileUpload">이미지 분석</button>
+						<label for="selectedFile"><i class="far fa-images fa-2x"></i></label>
+						<input id="selectedFile" type="file" name="file"><br>
+					</div>
+					<h5>해쉬태그 입력</h5>
+					<div id="hashtags"></div>
+					<input id="names" type="text">
+				</form>
+				<div class="col-1"></div>
+				<form class="col-6">
+					내용 입력<br>
+					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
+					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
+				</form>
+			</div>
+>>>>>>> a986f33b4881afa65429a493e3ac5c013d7a036e
 		</div>
 	</div>
 </body>
