@@ -43,7 +43,11 @@ html, body {
     --web-enable-deep-linking: true;
 }
   </style>
-<link href='styles/messages.css' rel='stylesheet' type='text/css'>
+  
+<!--
+메세지 위치
+<link href='styles/messages.css' rel='stylesheet' type='text/css'> -->
+
 </head>
 <body>
   <div id="templates">
@@ -251,7 +255,9 @@ html, body {
   <script src="es6-promise.js"></script>
   <script src="stats.min.js"></script>
   <script src="scripts/infinite-scroll.js"></script>
-  <script src="scripts/messages.js"></script>
+<!--
+메시지 링크
+<script src="scripts/messages.js"></script> -->
   <script>
 var INIT_TIME = new Date().getTime();
 
@@ -264,11 +270,14 @@ function getItem(id) {
   function pickRandom(a) {
       return a[Math.floor(Math.random() * a.length)];
   }
+/* 
 
-  return new Promise(function(resolve) {
+
+데이터 랜덤전송 위치
+
+return new Promise(function(resolve) {
     var item = {
       id: id,
-/*       avatar: Math.floor(Math.random()*NUM_AVATARS), */
       self: Math.random() < 0.1,
       image: Math.random() < 1.0 / 20 ? Math.floor(Math.random()*NUM_IMAGES) : '',
       time: new Date(Math.floor(INIT_TIME + id*20*1000 + Math.random()*20*1000)),
@@ -282,14 +291,15 @@ function getItem(id) {
     image.addEventListener('load', function() {
       item.image = image;
       resolve(item);
-    });
+    }); 
     image.addEventListener('error', function() {
       item.image = '';
       resolve(item);
     });
   });
 }
-
+  */
+  
 function ContentSource() {
   // Collect template nodes to be cloned when needed.
   this.tombstone_ = document.querySelector("#templates > .chat-item.tombstone");
@@ -321,11 +331,12 @@ ContentSource.prototype = {
     // TODO: Different style?
     div = div || this.messageTemplate_.cloneNode(true);
     div.dataset.id = item.id;
-/*     div.querySelector('.avatar').src = 'images/avatar' + item.avatar + '.png'; */
-/* div.querySelector('.bubble p.hashtag').textContent = item.message; */
-	div.querySelector('.contentsss p').textContent = item.message;
+    div.querySelector('.contentsss p').textContent = item.message;
     div.querySelector('.bubble .posted-date').textContent = item.time.toString();
-
+/* 
+ * 
+ 이미지 위치
+ 
     var img = div.querySelector('.bubble img');
     if(item.image !== '') {
       img.classList.remove('invisible');
@@ -336,7 +347,7 @@ ContentSource.prototype = {
       img.src = '';
       img.classList.add('invisible');
     }
-
+ */
     if(item.self) {
       div.classList.add('from-me');
     } else {
