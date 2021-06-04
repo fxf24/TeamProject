@@ -7,19 +7,12 @@ public class UserVO {
 	int userNum;
 	String id, password, email, name, telephone, profileImage;
 	
-	
 	public UserVO() {
 	}
-<<<<<<< HEAD
-	
 	public UserVO(int userNum, String id, String password, String email, String name, String telephone,
 			String profileImage) {
 		super();
 		this.userNum = userNum;
-=======
-	public UserVO(int userno, String id, String password, String email, String name, String telephone, String profileImage) {
-		this.userNum = userno;
->>>>>>> 문병전
 		this.id = id;
 		this.password = password;
 		this.email = email;
@@ -67,17 +60,9 @@ public class UserVO {
 	public String getProfileImage() {
 		return profileImage;
 	}
-<<<<<<< HEAD
-
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
-
-=======
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
-	}
->>>>>>> 문병전
 	@Override
 	public String toString() {
 		return "UserVO [userNum=" + userNum + ", id=" + id + ", password=" + password + ", email=" + email + ", name="
