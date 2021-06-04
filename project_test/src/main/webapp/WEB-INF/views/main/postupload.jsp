@@ -15,8 +15,6 @@
 		<script>
 			$(document).ready(function () {
 				var user = sessionStorage.getItem("user")
-				sessionStorage.setItem("user", "admin")
-
 
 				/////////////////////////
 				var input = document.querySelector('input');
@@ -110,57 +108,64 @@
 			})//document ready end
 
 			function saveImage() {
-				var $canvas = document.getElementById('imagecanvas');
-				var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
-
-				var blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
-				var array = [];
-				for (var i = 0; i < blobBin.length; i++) {
-					array.push(blobBin.charCodeAt(i));
-				}
-				var file = new Blob([new Uint8Array(array)], { name: '$("#selectedFile")[0].files[0]', type: 'image/png' });	// Blob 생성
-				var formdata = new FormData();	// formData 생성
-				var fileValue = $("#selectedFile").val().split("\\");
-				var fileName = fileValue[fileValue.length - 1];
-
-				formdata.append("file", file, fileName);	// file data 추가
-
-				$.ajax({
-					type: 'post',
-					url: '/saveImage',
-					data: formdata,
-					processData: false,	// data 파라미터 강제 string 변환 방지!!
-					contentType: false,	// application/x-www-form-urlencoded; 방지!!
-					success: function (response) {
-						console.log(response.data)
-					}
-
-				});
-
-				console.log($("#hashtags").html())
-
 				var user = sessionStorage.getItem("user")
 				
-				$.ajax({
-					type: 'post',
-					url: '/saveData',
-					data: {
-						'id': user, 'content': $("#contents").val(), 'image': fileName,
-						'hashtag': $("#hashtags").text() + $("#names").val()
-					},
-					dataType: 'json',
-
-					success: function (response) {
-						console.log(response.data)
-						location.href = "/"
-					},
-
-					error: function (request, status, error) {
-						alert("success에 실패 했습니다.");
-						console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				if(user == null){
+					if(confirm("로그인해주세요!")){
+						location.href = "/login"
 					}
-				})
-			}
+				}
+				else{
+					var $canvas = document.getElementById('imagecanvas');
+					var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
+
+					var blobBin = atob(imgDataUrl.split(',')[1]);	// base64 데이터 디코딩
+					var array = [];
+					for (var i = 0; i < blobBin.length; i++) {
+						array.push(blobBin.charCodeAt(i));
+					}
+					var file = new Blob([new Uint8Array(array)], { name: '$("#selectedFile")[0].files[0]', type: 'image/png' });	// Blob 생성
+					var formdata = new FormData();	// formData 생성
+					var fileValue = $("#selectedFile").val().split("\\");
+					var fileName = fileValue[fileValue.length - 1];
+
+					formdata.append("file", file, fileName);	// file data 추가
+
+					$.ajax({
+						type: 'post',
+						url: '/saveImage',
+						data: formdata,
+						processData: false,	// data 파라미터 강제 string 변환 방지!!
+						contentType: false,	// application/x-www-form-urlencoded; 방지!!
+						success: function (response) {
+							console.log(response.data)
+						}
+
+					});
+
+					console.log($("#hashtags").html())
+					$.ajax({
+						type: 'post',
+						url: '/saveData',
+						data: {
+							'id': user, 'content': $("#contents").val(), 'image': fileName,
+							'hashtag': $("#hashtags").text() + $("#names").val()
+						},
+						dataType: 'json',
+
+						success: function (response) {
+							console.log(response.data)
+							location.href = "/"
+						},
+
+						error: function (request, status, error) {
+							alert("success에 실패 했습니다.");
+							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+						}
+					})
+				}//else end
+				
+			}//saveImage() end
 			// 글자수 최대 3000자로 제한
 			$(function () {
 				$('textarea[maxlength]').keyup(function (event) {
