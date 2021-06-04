@@ -304,7 +304,7 @@ function modalContentClick(){
 var count = 0;
 window.onscroll = function(e){ //스크롤 바닥 감지
 	//window height + window scroll Y 값이 document height보다 클 경우
-	if((window.innerHeight + winddow.scrollY) >= document.body.offsetHeight){
+	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
 		// Add Contents 
 		count++;
 		var addContent = "<div class='thumbsupList'></div>";
