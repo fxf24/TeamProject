@@ -7,10 +7,8 @@ public class UserVO {
 	int userNum;
 	String id, password, email, name, telephone, profileImage;
 	
-	
 	public UserVO() {
 	}
-	
 	public UserVO(int userNum, String id, String password, String email, String name, String telephone,
 			String profileImage) {
 		super();
@@ -62,11 +60,9 @@ public class UserVO {
 	public String getProfileImage() {
 		return profileImage;
 	}
-
 	public void setProfileImage(String profileImage) {
 		this.profileImage = profileImage;
 	}
-
 	@Override
 	public String toString() {
 		return "UserVO [userNum=" + userNum + ", id=" + id + ", password=" + password + ", email=" + email + ", name="
