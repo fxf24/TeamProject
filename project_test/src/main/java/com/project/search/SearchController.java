@@ -50,7 +50,7 @@ public class SearchController {
 	public List<UserVO> namesearch(String name) {
 		List<UserVO> list = null;
 		if(name!=null || name!="") {
-			list = (List<UserVO>)service.getUserID(name);	
+			list = (List<UserVO>)service.getUserName(name);	
 		}
 		return list;
 	}
