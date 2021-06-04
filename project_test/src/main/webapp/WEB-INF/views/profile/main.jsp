@@ -17,12 +17,15 @@
 <script>
 window.onload = function() {
 	$(document).ready(function(){
+		var user = sessionStorage.getItem("user")
 		/* 프로필 사진 업로드  */
 		$('#img').click(function(i){
 			document.imageform.target_url.value = document.getElementById('img').src;
 			i.preventDefault();
 		    $('#file').click();
 		});
+		
+		
 	});
 
 });

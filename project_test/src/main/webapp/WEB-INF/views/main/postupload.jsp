@@ -154,7 +154,7 @@
 						dataType: 'json',
 
 						success: function (response) {
-							console.log(response.data)
+							alert(response.data)
 							location.href = "/"
 						},
 
