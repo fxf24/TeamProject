@@ -113,6 +113,32 @@ function signup(){
  		}
   	})
 }
+
+function uniqueID(){
+	$.ajax({
+  		type: 'post',
+  		url: '/getUserID',
+  		data: {'id': $("#signupIdInput").val()},
+  		dataType: 'json',
+  		
+  		success: function(response){
+  			console.log(response.data)
+  			alert(response.data)
+  			if(response.data == "사용할 수 없는 아이디 입니다!"){
+  				$("#idTerm").show()
+  			}
+  			else{
+  				$("#idTerm").hide()
+  			}
+  		},
+  			
+  		error:function(request,status,error){
+ 			alert("success에 실패 했습니다.");
+ 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		}
+  	})
+}
+
 </script>
 </head>
 <body>
@@ -267,7 +293,7 @@ function signup(){
 				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'/>
 				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'/>
  				<input type="text" class="signupPhonenumInput"  id="signupPhonenumInput"  oninput=""/>
-				<button type="button" class="ConfirmIdButton" id="ConfirmIdButton" value="아이디중복확인" onclick="">
+				<button type="button" class="ConfirmIdButton" id="ConfirmIdButton" value="아이디중복확인" onclick="uniqueID()">
 				<button type="button" class="newSignupButton" id="newSignupButton" value="가입하기" onclick="signup()"></button>
 			</form>
 			
