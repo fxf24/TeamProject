@@ -205,6 +205,31 @@ function signup_mainscroll(){
 </body>
 </html>
 <script>
+
+
+return new Promise(function(resolve) {
+    var item = {
+      id: id,
+      avarta: ''
+    }
+    if(item.image === '') {
+      resolve(item);
+    }
+    var image = new Image();
+    avarta.src = 'BUTTONIMG/zzzzzzz (' + item.image + ').jpg';
+    avarta.addEventListener('load', function() {
+      item.image = image;
+      resolve(item);
+    }); 
+    image.addEventListener('error', function() {
+      item.image = '';
+      resolve(item);
+    });
+  });
+}
+
+
+
 function YesScroll () {
 const pagination = document.querySelector('.paginaiton'); // 페이지네이션 정보획득
 const fullContent = document.querySelector('.container'); // 전체를 둘러싼 컨텐츠 정보획득
@@ -220,6 +245,8 @@ if (fullHeight-screenHeight/2 <= scrollPosition && !oneTime) { // 만약 전체�
 }
 }
 }
+
+
 YesScroll()
 
 const nextLink = pagination.querySelector('.next');
@@ -232,7 +259,7 @@ xhr.onreadystatechange = function() {
   if (xhr.readyState === xhr.DONE) { 
     if (xhr.status === 200 || xhr.status === 201) {
       const data = xhr.response; // 다음페이지의 정보
-      const addList = data.querySelector('.item'); // 다음페이지에서 list아이템을 획득
+      const addList = data.querySelector('.item'); // 다음페이지에서 item아이템을 획득
       fullContent.appendChild(addList); // infinite에 list를 더해주기
       oneTime = false; // oneTime을 다시 false로 돌려서 madeBox를 불러올 수 있게 해주기
     } else {
