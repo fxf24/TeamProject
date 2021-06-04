@@ -149,5 +149,9 @@ public class MainController {
 	public String mainscroll() {
 		return "infinite/mainscroll";
 	}
+	@RequestMapping("/button")
+	public String button() {
+		return "button/button";
+	}
 }
 
