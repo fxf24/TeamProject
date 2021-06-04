@@ -110,7 +110,7 @@ public class MainController {
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setTelephone(telephone);
-
+		
 		hhService.insertUserData(user);
 		return "{\"data\":\"유저 저장 완료\"}";
 	}

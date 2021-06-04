@@ -35,7 +35,7 @@ select * from posts where postNum=#{postNum}
 	select users_seq.nextval from dual
 </selectKey>
 insert into users values(#{userNum}, #{id}, #{password},
- #{email}, #{name}, #{telephone}, #{profileImage})
+ #{email}, #{name}, #{telephone}, null)
 </insert>
 <select id="getThumbsup" parameterType="int" resultType="thumbsupVO">
 select * from thumbsup where postNum=#{postNum}
