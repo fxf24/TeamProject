@@ -140,6 +140,7 @@
 				console.log($("#hashtags").html())
 
 				var user = sessionStorage.getItem("user")
+				
 				$.ajax({
 					type: 'post',
 					url: '/saveData',
@@ -172,7 +173,7 @@
 			function resize(obj){
 				obj.style.height = "5px";
 				obj.style.height = obj.scrollHeight+"px";
-				console.log(obj.style.height)
+// 				console.log(obj.style.height)
 			}
 		</script>
 	</head>
@@ -198,7 +199,7 @@
 					</div>
 					<h5>해쉬태그 입력</h5>
 					<div id="hashtags"></div>
-					<input type="text">
+					<input id="names" type="text">
 				</form>
 				<div class="col-1"></div>
 				<form class="col-6">
