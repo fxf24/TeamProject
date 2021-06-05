@@ -24,7 +24,6 @@
 				// button.style.opacity = 0;
 
 				$("#fileUpload").on('click', function (event) {
-					console.log(event);
 					event.preventDefault()
 
 					var form = $("#fileForm")[0]
@@ -45,7 +44,6 @@
 							//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
 							var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 							var context = imagecanvas.getContext("2d")
-							console.log(imagecanvas.style);
 							context.fillStyle = "red"
 							context.font = '15px batang'
 							context.strokeStyle = 'green'
@@ -63,10 +61,6 @@
 								var boxes = odjson.predictions[0].detection_boxes
 
 								//cfr json 
-								//cfr json 
-								//cfr json 
-								var faces = cfrjson.faces
-								var faces = cfrjson.faces
 								var faces = cfrjson.faces
 
 								for (var i = 0; i < names.length; i++) {
@@ -83,9 +77,7 @@
 										//사각형 그려서 출력
 										context.strokeRect(x1 + 10, y1 + 10, x2 - x1, y2 - y1)
 										$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query=" + names[i] + "&cat_id=&frm=NVSHATC'>#" + names[i] + " </a>")
-									}
-
-									//}//if end
+									}//if end
 								}//for end
 
 								//cfr데이터를 해쉬태그로 추가해주기
@@ -143,7 +135,7 @@
 
 					});
 
-					console.log($("#hashtags").html())
+					console.log($("#hashtags").text())
 					$.ajax({
 						type: 'post',
 						url: '/saveData',

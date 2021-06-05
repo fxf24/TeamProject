@@ -99,6 +99,7 @@ $(document).ready(function(){
 
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
 var myid = "dlwlrma"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+//var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
