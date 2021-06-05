@@ -102,6 +102,7 @@ var myid = "dlwlrma"; // 현재 로그인한 아이디를 세션에서 받아옴
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
+var emptyComment = 0; //댓글이 없는 게시글일 때 1 저장
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
@@ -128,19 +129,25 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 				dataType : "json",
 				success: function(response){
 					for(var i=0; i<response.length; i++){
-				//		console.log(response[i])
+						//console.log(response[i])
 						commentList.push(response[i])
 					}
-					console.log(commentList)
-					for(var i=0; i<commentList.length; i++){
-						var listval = commentList[i]
-						$(".commentsList").append("<p class=oneComment>"+listval.id+" : "+listval.comments+"<br>작성일 : "+listval.commentsDate+"</p>")
-					}
-				},//success end
-				error : function(e){
-					console.log(e)
-				}//error end
-			})//ajax end
+					//console.log(commentList)
+					if(commentList.length==0){
+						$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
+						emptyComment = 1;
+					} 
+					else {
+						for(var i=0; i<commentList.length; i++){
+							var listval = commentList[i]	
+							$(".commentsList").append("<p class=oneComment>"+listval.id+" : "+listval.comments+"<br>작성일 : "+listval.commentsDate+"</p>")
+							}
+						} // else end 
+					},//success end
+					error : function(e){
+						console.log(e)
+						}//error end
+					})//ajax end
 			
 			console.log(commentList)
 			
@@ -271,9 +278,15 @@ function addComment(postNum){
 			success : function(response){
 				console.log(response)
 				let now = new Date();
+				if(emptyComment==1){
+					$(".commentsList").html("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
+					emptyComment=0;
+				}
+				else{
 				$(".commentsList").prepend("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
 				$("#myComment").val("");
 				alert("댓글 작성이 완료되었습니다.");
+				}
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
