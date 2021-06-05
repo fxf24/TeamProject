@@ -98,11 +98,11 @@ $(document).ready(function(){
 }); //ready function end
 
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
-var myid = "dlwlrma"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var myid = "admin2"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+//var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
-var emptyComment = 0; //댓글이 없는 게시글일 때 1 저장
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
@@ -128,39 +128,26 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 				data : {"postNum" : postNum},
 				dataType : "json",
 				success: function(response){
-					for(var i=0; i<response.length; i++){
-						//console.log(response[i])
-						commentList.push(response[i])
-					}
-					//console.log(commentList)
-					if(commentList.length==0){
-						$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
-						emptyComment = 1;
-					} 
-					else {
-						for(var i=0; i<commentList.length; i++){
-							var listval = commentList[i]	
-							$(".commentsList").append("<p class=oneComment>"+listval.id+" : "+listval.comments+"<br>작성일 : "+listval.commentsDate+"</p>")
-							}
-						} // else end 
-					},//success end
-					error : function(e){
-						console.log(e)
-						}//error end
-					})//ajax end
+					commentList.push(response)
+					//console.log(commentList[0])
+					//0: {commentNum: 36, postNum: 25, id: "admin2", comments: "제니", commentsDate: "2021-06-05 01:57:41"}
+				},//success end
+				error : function(e){
+					console.log(e)
+				}//error end
+			})//ajax end
 			
-			console.log(commentList)
 			
 			$(".modalContent").append("<div class='postDate'>게시일 : "+contents.postDate+"</div>");
 			$(".modalContent").append("<div class='postID'>아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>");
 			$(".modalContent").append
 				("<div class='postImage'>"+
 				"<img class='contentsImage' src='/upload/"+imageName[imageName.length-1]+"' ondblclick='thumbsup()'></div>"+ // admin을 이후 세션 id값으로 변경
-				"<div class=comments><div class=commentsTitle>댓글"+
-				"<div class='commentsList'></div>"+
+				"<span class=comments><div class=commentsTitle>댓글"+
+				"<div class='commentsList'>댓글 내용 나중에 이 내용은 수정</div>"+
 				"<div class='postComment'><input id='myComment' type='text' onkeyup='enterkey(\""+contents.postNum+"\")' placeholder='댓글을 입력하세요'>"+
 	 			"<input id='commentBtn' type='button' value='작성' onclick='addComment(\""+contents.postNum+"\")'></div>"+
-				"</div></div>")
+				"</span></div>")
 			$(".modalContent").append("<p class='postContents'>내용 : "+contents.contents+"</p>");
 			$(".modalContent").append("<div class='postHashtag'></div>")
 			for(var i in hashtag){
@@ -266,6 +253,8 @@ function addComment(postNum){
 		var id = myid
 		var postNum = postNum
 		var myComment = $("#myComment").val()
+		console.log("post번호 : "+postNum)
+		console.log("댓글 내용 = "+myComment)
 		$.ajax({
 			url: "/addcomment",
 			type: "post",
@@ -274,19 +263,9 @@ function addComment(postNum){
 				"comments": myComment,
 				"id" : myid
 			},
-			dataType : "text",
+			dataType : "json",
 			success : function(response){
 				console.log(response)
-				let now = new Date();
-				if(emptyComment==1){
-					$(".commentsList").html("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
-					emptyComment=0;
-				}
-				else{
-				$(".commentsList").prepend("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
-				$("#myComment").val("");
-				alert("댓글 작성이 완료되었습니다.");
-				}
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -316,25 +295,6 @@ function modalClick(){
 function modalContentClick(){
 	modalStatus = 1;
 } // modalContentClick end
-
-
-function getTime(){
-	var today = new Date();
-
-	var year = today.getFullYear();
-	var month = ('0' + (today.getMonth() + 1)).slice(-2);
-	var day = ('0' + today.getDate()).slice(-2);
-
-	var dateString = year + '-' + month  + '-' + day;
-	
-	var hours = ('0' + today.getHours()).slice(-2); 
-	var minutes = ('0' + today.getMinutes()).slice(-2);
-	var seconds = ('0' + today.getSeconds()).slice(-2); 
-
-	var timeString = hours + ':' + minutes  + ':' + seconds;
-	
-	return dateString + " " + timeString;
-}
 
 </script>
 </head>
@@ -369,22 +329,8 @@ function getTime(){
 </div>
 
 <div class="modal" onclick="modalClick()">
-	<div class="modalContent" onclick="modalContentClick()">
-<!-- 		<div class="postDate"></div> -->
-<!-- 		<div class="postID"></div> -->
-<!-- 		<div class="postImage"></div> -->
-<!-- 		<div class="comments"> -->
-<!-- 			<div class="commentsTitle"> -->
-<!-- 				<div class="commentsList"></div> -->
-<!-- 				<div class="postComment"></div> -->
-<!-- 				<p class="postContents"></p> -->
-<!-- 				<div class="postHashtag"></div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-			
-	</div>
+	<div class="modalContent" onclick="modalContentClick()"></div>
 </div>
 
 </body>
-</script>
 </html>
