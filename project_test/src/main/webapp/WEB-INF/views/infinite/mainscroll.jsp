@@ -13,6 +13,8 @@
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
+	var user = sessionStorage.getItem("user")
+	
 })//document ready end
 
 function signup_mainscroll(){
@@ -123,8 +125,9 @@ html, body {
 	           	<div class=hashId>
 <!-- 
 아이디 표시 위치
+ -->
 <span>id</span>
- -->		</div>
+		</div>
 	        <div class =plusBox>
 	        		<svg class="plusBoxIcon" viewBox="10 4 8 32">
 						<path id="plusBoxIcon" d="M 13.99999904632568 12.00000095367432 C 16.19999885559082 12.00000095367432 17.99999809265137 10.20000171661377 17.99999809265137 8.000000953674316 C 17.99999809265137 5.799999713897705 16.19999885559082 4 13.99999904632568 4 C 11.79999923706055 4 9.999999046325684 5.799999713897705 9.999999046325684 8.000000953674316 C 9.999999046325684 10.20000171661377 11.79999923706055 12.00000095367432 13.99999904632568 12.00000095367432 Z M 13.99999904632568 16.00000190734863 C 11.79999923706055 16.00000190734863 9.999999046325684 17.80000114440918 9.999999046325684 20.00000381469727 C 9.999999046325684 22.20000267028809 11.79999923706055 24.00000381469727 13.99999904632568 24.00000381469727 C 16.19999885559082 24.00000381469727 17.99999809265137 22.20000267028809 17.99999809265137 20.00000381469727 C 17.99999809265137 17.80000114440918 16.19999885559082 16.00000190734863 13.99999904632568 16.00000190734863 Z M 13.99999904632568 28.00000381469727 C 11.79999923706055 28.00000381469727 9.999999046325684 29.80000495910645 9.999999046325684 32.00000381469727 C 9.999999046325684 34.20000076293945 11.79999923706055 36 13.99999904632568 36 C 16.19999885559082 36 17.99999809265137 34.20000076293945 17.99999809265137 32.00000381469727 C 17.99999809265137 29.80000495910645 16.19999885559082 28.00000381469727 13.99999904632568 28.00000381469727 Z">
@@ -185,14 +188,16 @@ html, body {
 		   <div class="timePost">
 <!--           
 시간 표시 위치
+-->	
 <time class="posted-date"></time>
--->		  
+	  
 		   </div>
 	        </div>
 <!--
 이미지 위치
-<img>
 -->
+<img>
+
 	 	       <div id="contentsssssss">
 			     <div id="contentsButtonPBox">
 					<div id="contentsUpButtonPBox">
@@ -235,14 +240,16 @@ html, body {
 	     		   <p class="hashtag">
 <!-- 
 해시태그 위치 
-#HASHTAG/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
 -->
+#HASHTAG/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
+
 				        <div class="contentsss">
 <!--
 게시물 내용 위치
+-->
 <p>
 </p>
--->
+
 				        </div>
 				     </div>
 	        <div class="meta">
@@ -267,9 +274,9 @@ html, body {
   <script src="stats.min.js"></script>
   <script src="scripts/infinite-scroll.js"></script>
   <script src="scripts/messages.js"></script>
-  <script>
+<script>
 var INIT_TIME = new Date().getTime();
-
+const random1 = Math.floor(Math.random()*19);// 총 데이터 갯수, 현재 image0 ~19가 있음
 /**
  * Constructs a random item with a given id.
  * @param {number} id An identifier for the item.
@@ -279,24 +286,25 @@ function getItem(id) {
   function pickRandom(a) {
       return a[Math.floor(Math.random() * a.length)];
   }
-/* 
- * 데이터 랜덤 전송위치 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+/* 데이터 랜덤 전송위치 ///////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
  
   return new Promise(function(resolve) {
     var item = {
       id: id,
       self: Math.random() < 0.1,
-      image: Math.random() < 1.0 / 20 ? Math.floor(Math.random()*NUM_IMAGES) : '',
+      image: Math.random() < 100.0 / 100 ? Math.floor(Math.random()*20) : '',
       time: new Date(Math.floor(INIT_TIME + id*20*1000 + Math.random()*20*1000)),
       message: pickRandom(MESSAGES)
     }
-    if(item.image === '') {
+    if(item.image == '') {
       resolve(item);
+      item.image = random1
     }
     var image = new Image();
     image.src = 'images/image' + item.image + '.jpg';
@@ -309,8 +317,10 @@ function getItem(id) {
       resolve(item);
     });
   });
+
 }
- */
+ 
+ 
 function ContentSource() {
   // Collect template nodes to be cloned when needed.
   this.tombstone_ = document.querySelector("#templates > .chat-item.tombstone");
@@ -350,7 +360,7 @@ ContentSource.prototype = {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
     var img = div.querySelector('.bubble img');
     if(item.image !== '') {
       img.classList.remove('invisible');
@@ -361,7 +371,7 @@ ContentSource.prototype = {
       img.src = '';
       img.classList.add('invisible');
     }
- */
+ 
     if(item.self) {
       div.classList.add('from-me');
     } else {
@@ -386,22 +396,20 @@ document.addEventListener('DOMContentLoaded', function() {
       new ContentSource()
     );
 
-/*   var stats = new Stats();
-  var domPanel = new Stats.Panel('DOM Nodes', '#0ff', '#002');
-  stats.addPanel(domPanel);
-  stats.showPanel(3);
-  document.body.appendChild(stats.dom);
-  var TIMEOUT = 100;
-  setTimeout(function timeoutFunc() {
-    // Only update DOM node graph when we have time to spare to call
-    // numDomNodes(), which is a fairly expensive function.
-    requestIdleCallback(function() {
-      domPanel.update(numDomNodes(document.body), 1500);
-      setTimeout(timeoutFunc, TIMEOUT);
-    });
-  }, TIMEOUT);
- */
-
+// var stats = new Stats();
+//   var domPanel = new Stats.Panel('DOM Nodes', '#0ff', '#002');
+//   stats.addPanel(domPanel);
+//   stats.showPanel(3);
+//   document.body.appendChild(stats.dom);
+//   var TIMEOUT = 100;
+//   setTimeout(function timeoutFunc() {
+//     // Only update DOM node graph when we have time to spare to call
+//     // numDomNodes(), which is a fairly expensive function.
+//     requestIdleCallback(function() {
+//       domPanel.update(numDomNodes(document.body), 1500);
+//       setTimeout(timeoutFunc, TIMEOUT);
+//     });
+//   }, TIMEOUT);
 });
 </script>
 </body>

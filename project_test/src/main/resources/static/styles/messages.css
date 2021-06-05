@@ -634,8 +634,8 @@
 	}
 	.titleHH{
 		position: sticky;
-		width: 200%;
-		height: 50%;
+		width: 190px;
+		height: 68px;
 		top: 0px;
 	    right: 0px;
 	    left: 0px;
@@ -644,7 +644,7 @@
 	    margin-left: 476px;
 	    user-select: none;
 	    background-image:url("titleHH.jpg") ;
-	    background-size: 180px 136px;
+	    background-size: 190px 68px;
 		background-repeat:no-repeat ;
 		transform: translateX(-50%);
 	}

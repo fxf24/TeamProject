@@ -49,6 +49,16 @@ insert into thumbsup values(thumbsup_SEQ.nextval, #{id}, #{postNum})
 delete from thumbsup where id=#{id} and postNum=#{postNum}
 </delete>
 
+<insert id="addComments" parameterType="commentsVO">
+<selectKey keyProperty="commentNum" resultType="integer" order="BEFORE">
+select comments_SEQ.NEXTVAL from dual
+</selectKey>
+insert into comments values(#{commentNum}, #{id}, #{postNum}, #{comments}, sysdate)
+</insert>
+
+<select id="getComments" parameterType="int" resultType="commentsVO">
+select * from comments where postNum=#{posttNum} order by commentsDate desc
+</select>
 </mapper>
 
 
