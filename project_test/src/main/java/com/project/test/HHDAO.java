@@ -17,6 +17,8 @@ public interface HHDAO {
 	List<PostVO> getPostNum(int postNum);  // 포스트번호 검색, 리스트 반환
 	void insertUserData(UserVO uvo);
 	List<ThumbsupVO> getThumbsup(int postNum); //좋아요 갯수, 누른 사람 목록 반환
-	void thumbsPlus(int postNum, String id);
-	void thumbsMinus(int postNum, String id);
+	void thumbsPlus(int postNum, String id); // 좋아요 누르기
+	void thumbsMinus(int postNum, String id); // 좋아요 취소
+	void addComments(int postNum, String comments, String id); //댓글 추가
+	List<CommentsVO> getComments(int postNum); // 작성한 댓글 불러오기
 }

@@ -33,7 +33,6 @@ public class HHserviceImpl implements HHservice{
 	
 	@Override
 	public void insertPostData(PostVO pvo) {
-		// TODO Auto-generated method stub
 		hhdao.insertPostData(pvo);
 	}
 
@@ -44,7 +43,6 @@ public class HHserviceImpl implements HHservice{
 
 	@Override
 	public void insertUserData(UserVO uvo) {
-		// TODO Auto-generated method stub
 		hhdao.insertUserData(uvo);
 	}
 	
@@ -60,4 +58,16 @@ public class HHserviceImpl implements HHservice{
 	public void thumbsMinus(int postNum, String id) {
 		hhdao.thumbsMinus(postNum, id);
 	}
+
+	@Override
+	public void addComments(int postNum, String comments, String id) {
+		hhdao.addComments(postNum, comments, id);
+	}
+
+	@Override
+	public List<CommentsVO> getComments(int postNum) {
+		return hhdao.getComments(postNum);
+	}
+	
+	
 }

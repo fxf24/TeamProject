@@ -13,4 +13,6 @@ public interface HHservice {
 	List<ThumbsupVO> getThumbsup(int postNum);
 	void thumbsPlus(int postNum, String id);
 	void thumbsMinus(int postNum, String id);
+	void addComments(int postNum, String comments, String id);
+	List<CommentsVO> getComments(int postNum); 
 }
