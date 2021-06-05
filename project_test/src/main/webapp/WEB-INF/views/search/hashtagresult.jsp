@@ -24,12 +24,12 @@
 <script>
 $(document).ready(function(){
 	//좋아요순, 최신순 화면 출력
-	$("#favorite").on('click', function(){
+	$("#favoriteBtn").on('click', function(){
 		$("#thumbsupView").css("display", "block");
 		$("#recentView").css("display", "none");
 	});
 	
-	$("#recentUpdate").on('click', function(){
+	$("#recentUpdateBtn").on('click', function(){
 		$("#thumbsupView").css("display", "none");
 		$("#recentView").css("display", "block");
 	});
@@ -81,7 +81,7 @@ $(document).ready(function(){
 //				}	
 				for(var i=0; i<recentList.length; i++){
 					var imageName = recentList[i].imagepath.split("/");
-					var postNumber = thumbsupList[i].postNum
+					var postNumber = recentList[i].postNum
 					if(i%3==2){
 						$(".recentList").append
 						("<div class=imageFrame><img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'><br></div>");					
@@ -263,10 +263,14 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 
 // 댓글 작성 기능
 function addComment(postNum){
-	if(confirm("댓글을 작성하시겠습니까?")){
+	var myComment = $("#myComment").val()
+	if(myComment == null || myComment.trim() == ""){
+		alert("내용을 입력해주세요!")
+	}
+	else if(confirm("댓글을 작성하시겠습니까?")){
 		var id = myid
 		var postNum = postNum
-		var myComment = $("#myComment").val()
+		
 		$.ajax({
 			url: "/addcomment",
 			type: "post",
