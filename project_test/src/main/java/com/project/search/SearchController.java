@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.test.CommentsVO;
 import com.project.test.HHservice;
 import com.project.test.PostVO;
 import com.project.test.ThumbsupVO;
@@ -23,7 +24,7 @@ public class SearchController {
 	HHservice service;
 	
 	// 테스트용, 추후 main페이지로 기능 이동 필요
-	@RequestMapping(value="/searchtest", method=RequestMethod.GET)
+	@RequestMapping("/searchtest")
 	public String test() {
 		return "/search/mainsearchtest";
 	}
@@ -109,5 +110,22 @@ public class SearchController {
 		return "0";
 	}
 	
-	
+	@RequestMapping(value="/addcomment", method=RequestMethod.POST)
+	@ResponseBody
+	public String addComments(int postNum, String comments, String id) {
+		CommentsVO cvo = new CommentsVO();
+		cvo.setPostNum(postNum);
+		cvo.setComments(comments);
+		cvo.setId(id);
+		service.addComments(postNum, comments, id);
+		//List<CommentsVO> list = service.getComments(postNum);
+		return "1";
+	}
+		
+	@RequestMapping(value="/getcomment", method=RequestMethod.POST)
+	@ResponseBody
+	public List<CommentsVO> getComments(int postNum){
+		List<CommentsVO> result = (List<CommentsVO>)service.getComments(postNum);	
+		return result;
+	}
 }
