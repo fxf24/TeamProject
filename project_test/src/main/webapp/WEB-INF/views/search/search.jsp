@@ -281,19 +281,21 @@ function search(){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
 						//console.log("HASHTAG = "+hashtag)
 						for(var tag in hashtag){
-							if(!hashtagArr.includes(hashtag[tag]) &&
-								searchMessage == hashtag[tag].substring(0, length)){ //중복된 태그 검사 && 검색어와 태그 일치 여부 검사
-									hashtagArr.push(hashtag[tag]);
-									hashtagArr.sort();																	
-							} // if end								
+							if(searchMessage == hashtag[tag].substring(0, length)){
+								hashtagArr.push(hashtag[tag]);
+								hashtagArr.sort();
+							} // for end							
 						}// for tag end
 					} // for i end
 					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
 						$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 					} else {
-						for(var i in hashtagArr){ //결과 반환
+						var hashtagSet = new Set(hashtagArr)
+						console.log(hashtagSet)
+						for(let i of hashtagSet){ //결과 반환
 							$(".hashtagSearchList").append
-							("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a></p>");
+							("<p><a class=hashtagList href='hashtagresult?hashtag="+i+"'>"+"#"+i+"</a></p>");
+							//("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArrtest[i]+"'>"+"#"+hashtagArrtest[i]+"</a></p>");
 						}// for end
 					}// else end
 				}// else
