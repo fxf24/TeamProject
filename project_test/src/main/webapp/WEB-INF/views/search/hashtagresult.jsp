@@ -98,7 +98,7 @@ $(document).ready(function(){
 }); //ready function end
 
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
-var myid = "dlwlrma"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var myid = "admin2"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
 //var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
@@ -278,16 +278,44 @@ function addComment(postNum){
 			dataType : "text",
 			success : function(response){
 				console.log(response)
-				let now = new Date();
-				if(emptyComment==1){
-					$(".commentsList").html("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
-					emptyComment=0;
-				}
-				else{
-				$(".commentsList").prepend("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
-				$("#myComment").val("");
-				alert("댓글 작성이 완료되었습니다.");
-				}
+// 				let now = new Date();
+// 				if(emptyComment==1){
+// 					$(".commentsList").html("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
+// 					emptyComment=0;
+// 				}
+// 				else{
+// 				$(".commentsList").prepend("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
+// 				$("#myComment").val("");
+// 				alert("댓글 작성이 완료되었습니다.");
+// 				}
+				var commentList = []
+				$.ajax({ //댓글 불러옴
+					url: "/getcomment",
+					type: "post",
+					data : {"postNum" : postNum},
+					dataType : "json",
+					success: function(response){
+						$(".commentsList").text("")
+						for(var i=0; i<response.length; i++){
+							//console.log(response[i])
+							commentList.push(response[i])
+						}
+						//console.log(commentList)
+						if(commentList.length==0){
+							$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
+							emptyComment = 1;
+						} 
+						else {
+							for(var i=0; i<commentList.length; i++){
+								var listval = commentList[i]	
+								$(".commentsList").append("<p class=oneComment>"+listval.id+" : "+listval.comments+"<br>작성일 : "+listval.commentsDate+"</p>")
+								}
+							} // else end 
+						},//success end
+						error : function(e){
+							console.log(e)
+							}//error end
+				})//ajax end
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
