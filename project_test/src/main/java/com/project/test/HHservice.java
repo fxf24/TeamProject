@@ -15,4 +15,5 @@ public interface HHservice {
 	void thumbsMinus(int postNum, String id);
 	void addComments(int postNum, String comments, String id);
 	List<CommentsVO> getComments(int postNum); 
+	String getProfileImage(String id); 
 }

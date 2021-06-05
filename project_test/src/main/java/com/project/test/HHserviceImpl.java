@@ -68,6 +68,11 @@ public class HHserviceImpl implements HHservice{
 	public List<CommentsVO> getComments(int postNum) {
 		return hhdao.getComments(postNum);
 	}
+
+	@Override
+	public String getProfileImage(String id) {
+		return hhdao.getProfileImage(id);
+	}
 	
 	
 }

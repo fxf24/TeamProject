@@ -58,17 +58,9 @@ $(document).ready(function(){
 					var imageName = thumbsupList[i].imagepath.split("/");
 					var postNumber = thumbsupList[i].postNum
 
-					if(i%3==0 || i%3==1){
-						$(".thumbsupList").append
-						//("<span class='thumbsupList'><img id='listimage' src='/upload/"+imageName[imageName.length-1]+"'></span>");
+					$(".thumbsupList").append
 						("<div class=imageFrame><img class='listImage' src='/upload/"+imageName[imageName.length-1]+
 								"' onclick='clickimage("+postNumber+")'></div>");
-					} else {
-						$(".thumbsupList").append
-						//("<span class='thumbsupList'><img id='listimage' src='/upload/"+imageName[imageName.length-1]+"'></span><br>");
-						("<div class=imageFrame><img class='listImage' src='/upload/"+imageName[imageName.length-1]+
-								"' onclick='clickimage("+postNumber+")'><br></div>");
-					} // else end
 				} //for end
 				
 				
@@ -76,19 +68,13 @@ $(document).ready(function(){
 				var recentList = list.sort(function(a, b){
 					return new Date(b.postDate) - new Date(a.postDate);
 				});
-// 				for(var i=0; i<recentList.length; i++){
-//					console.log(recentList[i].postDate);					
-//				}	
+				
 				for(var i=0; i<recentList.length; i++){
 					var imageName = recentList[i].imagepath.split("/");
 					var postNumber = recentList[i].postNum
-					if(i%3==2){
-						$(".recentList").append
-						("<div class=imageFrame><img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'><br></div>");					
-					} else {
-						$(".recentList").append
-						("<div class=imageFrame><img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'></div>");
-					} // else end
+					
+					$(".recentList").append
+						("<div class=imageFrame><img class='listImage' src='/upload/"+imageName[imageName.length-1]+"' onclick='clickimage("+postNumber+")'></div>");					
 				} // for end
 			}, // success end
 			error : function(e){
@@ -98,18 +84,16 @@ $(document).ready(function(){
 }); //ready function end
 
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
-var myid = "admin2"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var myid = "ajenn"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
 //var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
-var emptyComment = 0; //댓글이 없는 게시글일 때 1 저장
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
 	$(".modalContent").text("")
 	postNum = parseInt(postNumber);
-//	myid = "admin"; 
 	
 	$.ajax({ //전달받은 postNum 조회
 		url :"/postnumsearch",
@@ -123,34 +107,7 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 			var commentList = []
 			hashtag.shift(0)
 			
-			$.ajax({ //댓글 불러옴
-				url: "/getcomment",
-				type: "post",
-				data : {"postNum" : postNum},
-				dataType : "json",
-				success: function(response){
-					for(var i=0; i<response.length; i++){
-						//console.log(response[i])
-						commentList.push(response[i])
-					}
-					//console.log(commentList)
-					if(commentList.length==0){
-						$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
-						emptyComment = 1;
-					} 
-					else {
-						for(var i=0; i<commentList.length; i++){
-							var listval = commentList[i]	
-							$(".commentsList").append("<p class=oneComment>"+listval.id+" : "+listval.comments+"<br>작성일 : "+listval.commentsDate+"</p>")
-							}
-						} // else end 
-					},//success end
-					error : function(e){
-						console.log(e)
-						}//error end
-					})//ajax end
-			
-			console.log(commentList)
+			FunctionGetComment(postNum, commentList) // 댓글 가져오기
 			
 			$(".modalContent").append("<div class='postDate'>게시일 : "+contents.postDate+"</div>");
 			$(".modalContent").append("<div class='postID'>아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>");
@@ -169,44 +126,8 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 						$(".postHashtag").append(
 								"<a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
 						+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"));
-			} // for end
-// 			$(".modalContent").append
-// 			("<div class='postComment'><input id='myComment' type='text' placeholder='댓글을 입력하세요'>"+
-// 			"<input id='commentBtn' type='submit' value='댓글 달기' onclick='addComment()'></div>")
-			
-			$.ajax({ // 좋아요 개수, 좋아요 누른 사람 반환
-				url : "/thumbsupsearch",
-				type : "get",
-				data : {"postNum" : postNum},
-				dataType : "json",
-				success : function(response){
-					contents = []
-					CheckThumbsup = 0; //현재 게시물 좋아요를 눌렀는지 판단
-					for(var i in response){
-						contents.push(response[i]);
-						//console.log(contents)
-						if(response[i].id == myid){ //현재는 admin 계정으로 간주, 이후 세션 id값으로 변경
-							CheckThumbsup = 1; 							
-						} //if end
-					}//for end
-					totalThumbs = contents.length; // 좋아요 개수
-					//console.log(totalThumbs)
-					if(CheckThumbsup == 0){ //좋아요가 눌려져 있지 않음
-						$(".modalContent").append
-						("<div class='thumbsupBox'><span class='thumbsupButton' onclick='thumbsup()'>"+
-						"<i class='far fa-heart fa-2x'></i></span>"+
-						"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");
-					} else { //좋아요가 눌려져 있음
-						$(".modalContent").append
-						("<div class='thumbsupBox'><span class='thumbsupButton' onclick='thumbsup()'>"+
-						"<i class='fas fa-heart fa-2x'></i></span>"+
-						"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");						
-					}// if else end	
-				},
-				error : function(e){
-					console.log(e)
-				} // error end 
-			}); // inner ajax end
+			} // for end			
+			FunctionThumbsupSearch(postNum) // 좋아요 불러오기
 		}, //success end
 		error : function(e){
 			console.log(e)
@@ -263,8 +184,8 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 
 // 댓글 작성 기능
 function addComment(postNum){
-	var myComment = $("#myComment").val()
-	if(myComment == null || myComment.trim() == ""){
+	var myComment = $("#myComment").val() //댓글입력창의 값을 추출
+	if(myComment == null || myComment.trim() == ""){ //댓글입력창에 값이 없을 경우
 		alert("내용을 입력해주세요!")
 	}
 	else if(confirm("댓글을 작성하시겠습니까?")){
@@ -281,45 +202,10 @@ function addComment(postNum){
 			},
 			dataType : "text",
 			success : function(response){
-				console.log(response)
-// 				let now = new Date();
-// 				if(emptyComment==1){
-// 					$(".commentsList").html("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
-// 					emptyComment=0;
-// 				}
-// 				else{
-// 				$(".commentsList").prepend("<p class=oneComment>"+myid+" : "+myComment+"<br>작성일 : "+getTime()+"</p>")
-// 				$("#myComment").val("");
-// 				alert("댓글 작성이 완료되었습니다.");
-// 				}
+				//console.log(response)
 				var commentList = []
-				$.ajax({ //댓글 불러옴
-					url: "/getcomment",
-					type: "post",
-					data : {"postNum" : postNum},
-					dataType : "json",
-					success: function(response){
-						$(".commentsList").text("")
-						for(var i=0; i<response.length; i++){
-							//console.log(response[i])
-							commentList.push(response[i])
-						}
-						//console.log(commentList)
-						if(commentList.length==0){
-							$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
-							emptyComment = 1;
-						} 
-						else {
-							for(var i=0; i<commentList.length; i++){
-								var listval = commentList[i]	
-								$(".commentsList").append("<p class=oneComment>"+listval.id+" : "+listval.comments+"<br>작성일 : "+listval.commentsDate+"</p>")
-								}
-							} // else end 
-						},//success end
-						error : function(e){
-							console.log(e)
-							}//error end
-				})//ajax end
+				$(".commentsList").text("")
+				FunctionGetComment(postNum, commentList)
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -328,16 +214,15 @@ function addComment(postNum){
 	}//if end
 }//addComment end
 
+//엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
 function enterkey(postNum){
-	//  엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
 	if(window.event.keyCode == 13){
 		addComment(postNum);
 	}
-}
+}//function end
 
 
 var modalStatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
-
 function modalClick(){
 	if(modalStatus==0){
 		$(".modal").fadeOut();
@@ -351,23 +236,103 @@ function modalContentClick(){
 } // modalContentClick end
 
 
-function getTime(){
-	var today = new Date();
-
-	var year = today.getFullYear();
-	var month = ('0' + (today.getMonth() + 1)).slice(-2);
-	var day = ('0' + today.getDate()).slice(-2);
-
-	var dateString = year + '-' + month  + '-' + day;
-	
-	var hours = ('0' + today.getHours()).slice(-2); 
-	var minutes = ('0' + today.getMinutes()).slice(-2);
-	var seconds = ('0' + today.getSeconds()).slice(-2); 
-
-	var timeString = hours + ':' + minutes  + ':' + seconds;
-	
-	return dateString + " " + timeString;
+//좋아요 개수, 좋아요 누른 사람 반환
+function FunctionThumbsupSearch(postNum){
+	$.ajax({ 
+		url : "/thumbsupsearch",
+		type : "get",
+		data : {"postNum" : postNum},
+		dataType : "json",
+		success : function(response){
+			contents = []
+			CheckThumbsup = 0; //현재 게시물 좋아요를 눌렀는지 판단
+			for(var i in response){
+				contents.push(response[i]);
+				//console.log(contents)
+				if(response[i].id == myid){ //현재는 admin 계정으로 간주, 이후 세션 id값으로 변경
+					CheckThumbsup = 1; 							
+				} //if end
+			}//for end
+			totalThumbs = contents.length; // 좋아요 개수
+			//console.log(totalThumbs)
+			if(CheckThumbsup == 0){ //좋아요가 눌려져 있지 않음
+				$(".modalContent").append
+				("<div class='thumbsupBox'><span class='thumbsupButton' onclick='thumbsup()'>"+
+				"<i class='far fa-heart fa-2x'></i></span>"+
+				"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");
+			} else { //좋아요가 눌려져 있음
+				$(".modalContent").append
+				("<div class='thumbsupBox'><span class='thumbsupButton' onclick='thumbsup()'>"+
+				"<i class='fas fa-heart fa-2x'></i></span>"+
+				"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");						
+			}// if else end	
+		},
+		error : function(e){
+			console.log(e)
+		} // error end 
+	}); // inner ajax end
 }
+
+// 댓글 내용 반환 
+function FunctionGetComment(postNum, commentList){
+	$.ajax({ //댓글 불러옴
+		url: "/getcomment",
+		type: "post",
+		data : {"postNum" : postNum},
+		dataType : "json",
+		success: function(response){
+			for(var i=0; i<response.length; i++){
+				//console.log(response[i])
+				commentList.push(response[i])
+			}
+			//console.log(commentList)
+			if(commentList.length==0){
+				$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
+			} // if end
+			else { // 댓글 불러오기
+				// 프로필 사진 불러오기
+				for(var i=0; i<commentList.length; i++){
+					FunctionGetProfileImage(commentList[i])
+				}// for end
+			}
+		},//success end
+		error : function(e){
+			console.log(e)
+		}//error end
+	})//ajax end
+} //function end
+
+
+// 댓글 프로필 이미지 반환, 내용 작성
+function FunctionGetProfileImage(commentList){
+	$.ajax({ 
+		url: "/getprofileimage",
+		type: "post",
+		data: {"id" : commentList.id},
+		dataType: "text",
+		success: function(response){					
+			if(response=="0"){ //프로필 사진이 없을 때
+				profileImage = '/images/basicprofileimage.jpg';
+			}
+			else {
+				var imagePath = response.split("/")
+				//console.log("경로 : "+ imagePath)
+				var imageName = imagePath[imagePath.length-1]
+				//console.log("이미지이름 : "+ imageName)
+				profileImage = '/upload/'
+				profileImage += imageName
+			}//else end
+
+			$(".commentsList").append
+			("<div><image class='commentImage' src='"+profileImage+"'>"+
+			"<p class=oneComment>"+commentList.id+" : "+commentList.comments+"<br>작성일 : "+commentList.commentsDate+"</p></div>")
+			console.log($('.commentsList').val())
+		},
+		error: function(e){
+			console.log(e)
+		}//error end
+	})//ajax end	
+}// function end
 
 </script>
 </head>
@@ -402,19 +367,7 @@ function getTime(){
 </div>
 
 <div class="modal" onclick="modalClick()">
-	<div class="modalContent" onclick="modalContentClick()">
-<!-- 		<div class="postDate"></div> -->
-<!-- 		<div class="postID"></div> -->
-<!-- 		<div class="postImage"></div> -->
-<!-- 		<div class="comments"> -->
-<!-- 			<div class="commentsTitle"> -->
-<!-- 				<div class="commentsList"></div> -->
-<!-- 				<div class="postComment"></div> -->
-<!-- 				<p class="postContents"></p> -->
-<!-- 				<div class="postHashtag"></div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-			
+	<div class="modalContent" onclick="modalContentClick()">	
 	</div>
 </div>
 

@@ -97,6 +97,7 @@ public class SearchController {
 		return "1";
 	}
 	
+	// 좋아요 취소 기능
 	@RequestMapping("/thumbsminus")
 	@ResponseBody
 	public String thumbsminus(int postNum, String id) {
@@ -107,6 +108,7 @@ public class SearchController {
 		return "0";
 	}
 	
+	// 댓글 작성 기능
 	@RequestMapping(value="/addcomment", method=RequestMethod.POST)
 	@ResponseBody
 	public String addComments(int postNum, String comments, String id) {
@@ -118,11 +120,25 @@ public class SearchController {
 		//List<CommentsVO> list = service.getComments(postNum);
 		return "1";
 	}
-		
+	
+	// 댓글 불러오기 기능
 	@RequestMapping(value="/getcomment", method=RequestMethod.POST)
 	@ResponseBody
 	public List<CommentsVO> getComments(int postNum){
 		List<CommentsVO> result = (List<CommentsVO>)service.getComments(postNum);	
 		return result;
+	}
+	
+	//프로필 이미지 불러오기 기능
+	@RequestMapping(value="/getprofileimage", method=RequestMethod.POST)
+	@ResponseBody
+	public String getprofileimage(String id){
+		UserVO uvo = new UserVO();
+		uvo.setId(id);
+		String profileImage = service.getProfileImage(id);
+		if(profileImage==null) {
+			profileImage = "0";
+		}
+		return profileImage;
 	}
 }

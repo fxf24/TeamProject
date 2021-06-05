@@ -112,6 +112,13 @@
 	margin-top: 10px;
 }
 
+.commentImage{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	float: left;
+}
+
 .commentsList{
 	padding: 5px, 5px, 5px, 5px;
 	background-color: white;
@@ -148,8 +155,6 @@
 }
 
 
-
-
 #thumbsupView{
 	margin: auto;
 	background-color:#abcdef;
@@ -160,7 +165,6 @@
 
 #recentView{
 	margin: auto;
-	text-align: center;
 	display:none;
 	background-color:yellow; 
 	width:1000px;
