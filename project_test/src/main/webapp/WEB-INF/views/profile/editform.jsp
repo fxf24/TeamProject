@@ -14,6 +14,7 @@
 	<link href="/css/profile/editprofile.css" rel="stylesheet" type="text/css">
 
 <script>
+var user = sessionStorage.getItem("user") //유저 아이디 가져오기
 $(document).ready(function(){
 	/* 프로필 편집 창 띄우기 */
 		$("#editenter").on('click', function(){

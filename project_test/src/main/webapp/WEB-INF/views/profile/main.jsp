@@ -15,9 +15,10 @@
 	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
 	
 <script>
+var user = sessionStorage.getItem("user") //유저 아이디 가져오기
 window.onload = function() {
 	$(document).ready(function(){
-		var user = sessionStorage.getItem("user")
+		
 		/* 프로필 사진 업로드  */
 		$('#img').click(function(i){
 			document.imageform.target_url.value = document.getElementById('img').src;
