@@ -64,13 +64,14 @@ $(document).ready(function(){
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img src='/images/basicprofileimage.jpg' class='profileimage' onclick=moveToID('"+userID+"')></div>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
 							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
-							"<div class=profileImage><img src='/upload/"+userImagepath[userImagepath.length-1]+"' class='profileimage'></div>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
 							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						}//else end
 					}// for end
@@ -105,13 +106,14 @@ $(document).ready(function(){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img src='/images/basicprofileimage.jpg' class='profileimage' onclick=moveToName('"+userName+"')></div>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
 							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
-							"<div class=profileImage><img src='/upload/"+userImagepath[userImagepath.length-1]+"' class='profileimage'></div>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
 							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
 						}//else end
 					}// for end
@@ -200,14 +202,15 @@ function search(){
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img src='/images/basicprofileimage.jpg' class='profileimage' onclick=moveToID('"+userID+"')></div>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
 							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} else {
 							var userImagepath = userImage.split("/")
 							//console.log(userImagepath)
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
-							"<div class=profileImage><img src='/upload/"+userImagepath[userImagepath.length-1]+"' class='profileimage'></div>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
 							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} // else end
 					}// for end
@@ -242,13 +245,14 @@ function search(){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img src='/images/basicprofileimage.jpg' class='profileimage' onclick=moveToName('"+userName+"')></div>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
 							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
-							"<div class=profileImage><img src='/upload/"+userImagepath[userImagepath.length-1]+"' class='profileimage'></div>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
 							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
 						}//else end					
 					}// for end
