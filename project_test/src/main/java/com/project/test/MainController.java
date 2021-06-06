@@ -153,5 +153,11 @@ public class MainController {
 	public String button() {
 		return "button/button";
 	}
+
+	@RequestMapping("/test")
+	public String forTest() {
+
+		return "/layout/classic";
+	}
 }
 
