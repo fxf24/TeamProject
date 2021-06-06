@@ -61,7 +61,14 @@
 	background: rgba(0,0,0,0.8); 
 	top:0; 
 	left:0; 
-	display:none; 
+	display:none;
+
+}
+
+#windowClose{
+	position: absolute;
+	top: 3%;
+	right: 3%;
 }
 
 .modalContent{
@@ -127,6 +134,7 @@
 	width:360px;
 	height:420px;
 	overflow: scroll;
+	
 }
 
 .postComment{
@@ -172,3 +180,6 @@
 	overflow:scroll;
 }
 
+html, body {
+    
+}
