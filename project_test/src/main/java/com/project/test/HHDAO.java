@@ -21,4 +21,5 @@ public interface HHDAO {
 	void thumbsMinus(int postNum, String id); // 좋아요 취소
 	void addComments(int postNum, String comments, String id); //댓글 추가
 	List<CommentsVO> getComments(int postNum); // 작성한 댓글 불러오기
+	String getProfileImage(String id); // 프로필 사진만 불러오기
 }
