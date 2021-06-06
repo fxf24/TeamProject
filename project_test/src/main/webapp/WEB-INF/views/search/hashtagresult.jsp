@@ -80,11 +80,11 @@ $(document).ready(function(){
 			error : function(e){
 					console.log(e);
 				} // error end
-		}); // ajax end
+		}); // ajax end	
 }); //ready function end
 
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
-var myid = "ajenn"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var myid = "aiu10"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
 //var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
@@ -92,6 +92,8 @@ var contents = []; // 좋아요 누른 사람을 저장하는 리스트
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
+ 	$("html").css("overflow", "hidden"); // 모달창 뜬 후 스크롤 불가능
+ //	$("body").css("overflow", "hidden"); // 모달창 뜬 후 스크롤 불가능
 	$(".modalContent").text("")
 	postNum = parseInt(postNumber);
 	
@@ -107,10 +109,11 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 			var commentList = []
 			hashtag.shift(0)
 			
-			FunctionGetComment(postNum, commentList) // 댓글 가져오기
+			FunctionGetComment(postNum, commentList) // 댓글 가져오기 함수
 			
-			$(".modalContent").append("<div class='postDate'>게시일 : "+contents.postDate+"</div>");
-			$(".modalContent").append("<div class='postID'>아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>");
+			$(".modalContent").append("<i class='far fa-window-close fa-3x' id='windowClose' onclick='modalClick()'></i>")
+			$(".modalContent").append("<div class='postDate'>게시일 : "+contents.postDate+"</div>")
+			$(".modalContent").append("<div class='postID'>아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>")
 			$(".modalContent").append
 				("<div class='postImage'>"+
 				"<img class='contentsImage' src='/upload/"+imageName[imageName.length-1]+"' ondblclick='thumbsup()'></div>"+ // admin을 이후 세션 id값으로 변경
@@ -119,14 +122,14 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 				"<div class='postComment'><input id='myComment' type='text' onkeyup='enterkey(\""+contents.postNum+"\")' placeholder='댓글을 입력하세요'>"+
 	 			"<input id='commentBtn' type='button' value='작성' onclick='addComment(\""+contents.postNum+"\")'></div>"+
 				"</div></div>")
-			$(".modalContent").append("<p class='postContents'>내용 : "+contents.contents+"</p>");
+			$(".modalContent").append("<p class='postContents'>내용 : "+contents.contents+"</p>")
 			$(".modalContent").append("<div class='postHashtag'></div>")
 			for(var i in hashtag){
 				$(".modalContent").append(
 						$(".postHashtag").append(
 								"<a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
-						+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"));
-			} // for end			
+						+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"))
+			} // for end
 			FunctionThumbsupSearch(postNum) // 좋아요 불러오기
 		}, //success end
 		error : function(e){
@@ -134,6 +137,38 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 		} // error end
 	}); //outer ajax end
 }// function end
+
+//엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
+function enterkey(postNum){
+	if(window.event.keyCode == 13){
+		addComment(postNum);
+	}
+}//function end
+
+// 모달 창 function
+var modalStatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
+function modalClick(){
+	if(modalStatus==0){
+		$(".modal").fadeOut();
+ 		$("html").css("overflow", "scroll");
+ 		//$("body").css("overflow", "scroll");
+	} else if(modalStatus==1) {
+		modalStatus = 0;
+	} // elseif end
+} // modalClick end
+
+function modalContentClick(){
+	modalStatus = 1;
+ 	$("html").css("overflow", "hidden");
+ 	//$("body").css("overflow", "hidden");
+} // modalContentClick end
+
+// //ESC키 입력
+// function esckey(){
+// 	if(window.event.keyCode == 27){
+// 		$(".modal").fadeOut();
+// 	}
+// }//function end
 
 function thumbsup(){ //좋아요 누르기 / 취소하기
 	var id = myid;
@@ -181,61 +216,6 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 	}// else end
 } // function thumbsup end
 
-
-// 댓글 작성 기능
-function addComment(postNum){
-	var myComment = $("#myComment").val() //댓글입력창의 값을 추출
-	if(myComment == null || myComment.trim() == ""){ //댓글입력창에 값이 없을 경우
-		alert("내용을 입력해주세요!")
-	}
-	else if(confirm("댓글을 작성하시겠습니까?")){
-		var id = myid
-		var postNum = postNum
-		
-		$.ajax({
-			url: "/addcomment",
-			type: "post",
-			data : {
-				"postNum": postNum,
-				"comments": myComment,
-				"id" : myid
-			},
-			dataType : "text",
-			success : function(response){
-				//console.log(response)
-				var commentList = []
-				$(".commentsList").text("")
-				FunctionGetComment(postNum, commentList)
-			},
-			error:function(request,status,error){
-			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			}//error
-		}) //ajax end
-	}//if end
-}//addComment end
-
-//엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
-function enterkey(postNum){
-	if(window.event.keyCode == 13){
-		addComment(postNum);
-	}
-}//function end
-
-
-var modalStatus = 0; // 모달창을 클릭한 것인지, 배경을 클릭한 것인지 구분
-function modalClick(){
-	if(modalStatus==0){
-		$(".modal").fadeOut();
-	} else if(modalStatus==1) {
-		modalStatus = 0;
-	} // elseif end
-} // modalClick end
-
-function modalContentClick(){
-	modalStatus = 1;
-} // modalContentClick end
-
-
 //좋아요 개수, 좋아요 누른 사람 반환
 function FunctionThumbsupSearch(postNum){
 	$.ajax({ 
@@ -273,6 +253,40 @@ function FunctionThumbsupSearch(postNum){
 	}); // inner ajax end
 }
 
+// 댓글 작성 기능
+function addComment(postNum){
+	var myComment = $("#myComment").val() //댓글입력창의 값을 추출
+	if(myComment == null || myComment.trim() == ""){ //댓글입력창에 값이 없을 경우
+		alert("내용을 입력해주세요!")
+	}
+	else if(confirm("댓글을 작성하시겠습니까?")){
+		var id = myid
+		var postNum = postNum		
+		$.ajax({
+			url: "/addcomment",
+			type: "post",
+			data : {
+				"postNum": postNum,
+				"comments": myComment,
+				"id" : myid
+			},
+			dataType : "text",
+			success : function(response){
+				//console.log(response)
+				var commentList = []
+				$(".commentsList").text("") // 댓글창 초기화				
+				FunctionGetComment(postNum, commentList)
+				$("#myComment").val("") //댓글 등록후 작성창에 내용 삭제
+				alert("댓글 작성이 완료되었습니다.")
+			},
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}//error
+		}) //ajax end
+	}//if end
+}//addComment end
+
+
 // 댓글 내용 반환 
 function FunctionGetComment(postNum, commentList){
 	$.ajax({ //댓글 불러옴
@@ -302,7 +316,6 @@ function FunctionGetComment(postNum, commentList){
 	})//ajax end
 } //function end
 
-
 // 댓글 프로필 이미지 반환, 내용 작성
 function FunctionGetProfileImage(commentList){
 	$.ajax({ 
@@ -323,11 +336,10 @@ function FunctionGetProfileImage(commentList){
 				profileImage = '/upload/'
 				profileImage += imageName
 			}//else end
-
 			$(".commentsList").append
 			("<div><image class='commentImage' src='"+profileImage+"'>"+
 			"<p class=oneComment>"+commentList.id+" : "+commentList.comments+"<br>작성일 : "+commentList.commentsDate+"</p></div>")
-			console.log($('.commentsList').val())
+			//console.log($('.commentsList').val())
 		},
 		error: function(e){
 			console.log(e)
@@ -335,21 +347,28 @@ function FunctionGetProfileImage(commentList){
 	})//ajax end	
 }// function end
 
+function search(){
+	var f = document.searchForm;
+	f.submit();
+}
+
 </script>
 </head>
 <body>
+<img src="/loginimage/logo.png" id='logo' onclick="location.href='/mainscroll'" width=10%; height=10%;>
+
 <h1>해시태그 검색 리스트</h1>
-<form action="/search" method="post">
+<form action="/search" method="post" name="searchForm">
 <div class="bar">
 	<input type="text" id=searchbar name="searchWord" value=<%=hashtag %>>
 <!-- 	<input type="submit" value="search"> -->
-	<i class="fas fa-search fa-3x" id=fa-search type="submit"></i>
+	<i class="fas fa-search fa-3x" id=fa-search type="submit" id="searchbutton" onclick="search()"></i>
 </div>
-	
 </form>
+
 <span id=searchresult>#<%=hashtag %> </span><span>검색결과</span><br>
 <span id=totalhashtag></span>
-
+	
 <div id="searchBtn">
 	<button id="favoriteBtn">인기 게시물</button>&nbsp;&nbsp;
 	<button id="recentUpdateBtn">최근 게시물</button>
@@ -368,7 +387,7 @@ function FunctionGetProfileImage(commentList){
 </div>
 
 <div class="modal" onclick="modalClick()">
-	<div class="modalContent" onclick="modalContentClick()">	
+	<div class="modalContent" onclick="modalContentClick()">
 	</div>
 </div>
 

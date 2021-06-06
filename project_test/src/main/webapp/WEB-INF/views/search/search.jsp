@@ -333,6 +333,8 @@ function moveToName(value){
 </script>
 </head>
 <body>
+	<img src="/loginimage/logo.png" id='logo' onclick="location.href='/mainscroll'" width=10%; height=10%;>
+
 	<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey()" placeholder="검색어를 입력하세요">
 	<i class="fas fa-search fa-3x" id=fa-search type="submit" id="searchbutton" onclick="search()"></i>
 	
