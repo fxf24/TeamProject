@@ -310,6 +310,7 @@ function FunctionGetProfileImage(commentList){
 		type: "post",
 		data: {"id" : commentList.id},
 		dataType: "text",
+		async: false,
 		success: function(response){					
 			if(response=="0"){ //프로필 사진이 없을 때
 				profileImage = '/images/basicprofileimage.jpg';
