@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
  
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
@@ -27,18 +26,4 @@
                 <put-attribute name="body" value="/WEB-INF/views/jsp/view/{1}/{2}/{3}.jsp" />
         </definition> -->
  
-=======
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE tiles-definitions PUBLIC
-       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
-       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
-<tiles-definitions>
-  <definition name="myapp.homepage" template="/layouts/classic.jsp">
-    <put-attribute name="title" value="Tiles tutorial homepage" />
-    <put-attribute name="header" value="/tiles/banner.jsp" />
-    <put-attribute name="menu" value="/tiles/common_menu.jsp" />
-    <put-attribute name="body" value="/tiles/home_body.jsp" />
-    <put-attribute name="footer" value="/tiles/credits.jsp" />
-  </definition>
->>>>>>> a073fa66cc40e1b2ff31ca54e787eeb93f351af4
 </tiles-definitions>
