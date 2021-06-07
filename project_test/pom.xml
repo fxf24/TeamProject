@@ -95,6 +95,13 @@
 		   <artifactId>json</artifactId>
 		   <version>20201115</version>
  		</dependency>
+
+		 <!-- tiles-jsp -->
+		 <dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>3.0.5</version>
+		</dependency>
  		
 	</dependencies>
 

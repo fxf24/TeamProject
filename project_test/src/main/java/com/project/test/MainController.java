@@ -153,5 +153,10 @@ public class MainController {
 	public String button() {
 		return "button/button";
 	}
+
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "base";
+	}
 }
 
