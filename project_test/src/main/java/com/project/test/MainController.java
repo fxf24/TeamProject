@@ -154,9 +154,16 @@ public class MainController {
 		return "button/button";
 	}
 
+<<<<<<< HEAD
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String index() {
 		return "base";
+=======
+	@RequestMapping("/test")
+	public String forTest() {
+
+		return "/layout/classic";
+>>>>>>> a073fa66cc40e1b2ff31ca54e787eeb93f351af4
 	}
 }
 
