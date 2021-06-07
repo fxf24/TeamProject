@@ -7,7 +7,6 @@ public class UserVO {
 	int userNum;
 	String id, password, email, name, telephone;
 	
-	
 	public UserVO() {
 	}
 	public UserVO(int userno, String id, String password, String email, String name, String telephone) {
@@ -18,6 +17,7 @@ public class UserVO {
 		this.name = name;
 		this.telephone = telephone;
 	}
+	
 	public int getUserno() {
 		return userNum;
 	}
@@ -54,6 +54,8 @@ public class UserVO {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "UserVO [userno=" + userNum + ", id=" + id + ", password=" + password + ", email=" + email + ", name="

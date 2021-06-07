@@ -16,7 +16,7 @@ $(document).ready(function(){
 		
 		var form = $("#fileForm")[0]
 		var formData = new FormData(form)
-		formData.append("file", $("#selectedFile")[0].files[0])
+		formData.append("file", $("#selectedFile")[0].files[0]) 
 		$.ajax({
 			url:'/getODjson',
 			type:'post',

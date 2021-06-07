@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,88 +8,102 @@
 <meta name="description" content="HTML, CSS">
 <meta name="author" content="Practice">
 <meta name="keywords" content="WebPortfolio">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
 <title>Insert title here</title>
-<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <!-- 상단 고정 스타일 css 연결  -->
-
 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
 	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
-	
+<script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <script>
-window.onload = function() {
-	$(document).ready(function(){
-		/* 프로필 사진 업로드  */
-		$('#img').click(function(i){
-			document.imageform.target_url.value = document.getElementById('img').src;
-			i.preventDefault();
-		    $('#file').click();
-		});
-	});
+$(document).ready(function(){
+	<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 
-});
-
-function changeValue(obj){
-	document.imageform.submit();
-};
-
-/* 게시물 업로드 - test1 */
-$('#post_upload_btn').click(function (e){
-	document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
-	e.preventDefault();
-    $('#postuploadfile').click();
-});
-
-/* 게시물 업로드 카메라와 연결 */ 
-$(function(){
-    $('#camera').change(function(e){
-        $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
-    });
-});
-
+/* 			$("#modal").fadeIn();
+			$("#modalContent").text("");
+ */
 	
-	function changeValue(obj){
-		document.post_upload_btn.submit();
-	};
 	
-	/* 게시물 업로드 - test1 */
-	$('#postupload').click(function(p){
-		document.postform.upload_url.value = document.getElementById('postupload').src;
-		p.preventDefault();
-	    $('#file').click();
-	});
+	/* 프로필 사진 업로드  */
+ 	$("#uploadprofile").click(function(event){
+		event.preventDefault() 
+
+		var form = $("#imageform")[0]
+		var formData = new FormData(form)
+		formData.append("file", $("#inputProfile")[0].files[0]) 
+		$.ajax({
+			url:'/saveProfileImage',
+			type:'post',
+			data: formData,
+			cache: false,
+			processData:false,
+			contentType:false,
+			success: function(response){
+				var json = JSON.parse(response)
+				var filename = json.filename
+				console.log(json.filename);
+
+ 				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
+				var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
+				var context = imagecanvas.getContext("2d")
+				
+				//<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
+				//이미지 로드
+				var profileimg = document.getElementById('img').src
+				var image = new Image()				
+				image.src = "/profile/" + filename
+				image.onload = function(){
+					var maxWidth = 250; 
+					var maxHeight = 250;
+					var width = image.width;
+					var height = image.height;
+					
+					if(width > maxWidth){
+						height = height/(width / maxWidth) ;
+						width = maxWidth;
+						
+					}else{
+						if(height > maxHeight){
+							width = width/(height/ maxHeight);
+							height = maxHeight;
+						}//중첩 if ends
+					}//if end 
+					context.drawImage(image, 0, 0, width, height)
+
+				}//image.onload function end  
 	
-	/* 게시물 업로드 카메라와 연결 */ 
-	$(function(){
-	    $('#camera').change(function(c){
-	        $('#pic').attr('src', URL.createObjectURL(c.target.files[0]));
-	    });
-	});//document ready 함수 end
+			}, //success end 
+			error: function(e){
+				console.log(e)
+				alert('error : ' + e.message)
+			} //error end 
+		});//ajax end 
 
-}; //window onload 함수 end 
+	}); //uploadprofile click function end 
 
-</script>
+
+});//document ready end
+</script>	
 </head>
-
-<!-- ㅋㅋㅋmerge할때 충돌 수정해주시는겁니다
-head가 원본파일에 어떻게 되어있는지 보여주는거고
-======표시 밑으로 merge한 파일이 어떻게 되어있는지 보여줘서
-git add .
-git commit -m '머지했다'
-git push origin develop -->
-
 <body>
-
 <main> 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
 	<div id="info-container"> 
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
-	      <div id="profileimage"> 
-	      	<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
-				<form name="imageform" ENCTYPE="multipart/form-data" action="imageform.jsp" >
-    				<input type="file" id="file"  style="display:none;" onchange="changeValue(this)">
-    				<input type="hidden" name = "target_url">
-				</form>
-			</div>
+		<div id="profileimage"> 
+			<canvas id="imagecanvas" width=250 height=250></canvas>
+			<img id="img" src=" " >
+		</div>
+			<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" action="/saveProfileImage" method="post">
+				<label id="fileimage" for="inputProfile"><img id="plus" src="/image/plus.png"></label>
+					<div id="profileimgbox"> 
+						<input name="file" type="file" id="inputProfile" accept="image/*" multiple   ><br>
+						<input type="hidden" name ="target_url">
+						<button id="uploadprofile" > 프로필 사진 업로드 </button>
+					</div>
+			</form>
+					<div id="modal" onclick="modalClick()"></div>
+					<div id="modalContent" onclick="modalContentClick()"></div>
+		</div> 
 
         	<table>
         		<tr>

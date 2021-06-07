@@ -1,5 +1,6 @@
 package com.project.test;
 
+
 import java.io.File;
 import java.io.IOException;
 
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class MainController {
@@ -115,16 +118,46 @@ public class MainController {
 		return "{\"data\":\"유저 저장 완료\"}";
 	}
 	
+	
+	/* 프로필 */ 
+	
 	@RequestMapping("/profile")
 	public String profile() {
 		return "profile/main";
 	}
+	
+	@RequestMapping(value="/saveProfileImage", method=RequestMethod.GET)
+	public String uploadprofileimageform() {
+		return "/profile/main";
+	}
 
+		@RequestMapping(value="/saveProfileImage", method=RequestMethod.POST)
+		@ResponseBody
+		public String saveProfileImage(MultipartFile file) throws IOException{
+			String filename = file.getOriginalFilename();
+			System.out.println(filename);
+			//서버 저장 경로 설정
+			String savePath="c:/profile/";
+			//저장할 경로와 파일 이름 완성
+			File savefile = new File(savePath + filename);
+			//서버 저장
+			file.transferTo(savefile);
+			System.out.println("파일을 저장했습니다.");
+			return "{\"filename\":\""+filename+"\"}";
+		}
+	
 	@RequestMapping("/profile/editform")
 	public String editform() {
 		return "profile/editform";
 	}
 
+	@RequestMapping("/profile/imageform")
+	public String imageform() {
+		return "profile/imageform";
+	}
+ 
+	
+	
 	// 중복 방지를 위해 블록처리
 //	@RequestMapping("/search")
 //	public String search() {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 
 <!-- 상단 고정 스타일 css 연결  -->
-	<link href="/css/profile/editprofile.css" rel="stylesheet" type="text/css">
+<!-- 	<link href="/css/profile/editprofile.css" rel="stylesheet" type="text/css"> -->
 
 <script>
 $(document).ready(function(){
@@ -60,11 +61,7 @@ $(document).ready(function(){
 		i.preventDefault();
 	    $('#input-profileimg').click(); //input file
 	});//function end
-	
-	
-	
-	
-	
+
 });//ready end 
 	
 	/* 푸시 알림 radio 버튼 선택 해제 (좋아요, 댓글) */
