@@ -73,6 +73,22 @@ public class HHserviceImpl implements HHservice{
 	public String getProfileImage(String id) {
 		return hhdao.getProfileImage(id);
 	}
+
+	@Override
+	public List<CommentThumbsupVO> getCommentThumbsup(int commentNum) {
+		return hhdao.getCommentThumbsup(commentNum);
+	}
+
+	@Override
+	public void commentThumbsPlus(int commentNum, String id) {
+		hhdao.commentThumbsPlus(commentNum, id);
+		
+	}
+
+	@Override
+	public void commentThumbsMinus(int commentNum, String id) {
+		hhdao.commentThumbsMinus(commentNum, id);
+	}
 	
 	
 }
