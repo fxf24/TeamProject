@@ -11,7 +11,6 @@
     <style scoped>
         * {
             box-sizing: border-box;
-            color: white;
         }
 
         body {
@@ -87,7 +86,7 @@
                 </a>
                 <div id="navbar-right">
                     <a class="active" href="/search">Search</a>
-                    <a href="/postupload">±Û¾²±â</a>
+                    <a href="/postupload">Â±Ã›Â¾Â²Â±Ã¢</a>
                     <a href="#about">Profile</a>
                 </div>
             </div>
