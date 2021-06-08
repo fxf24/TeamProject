@@ -16,59 +16,23 @@
 	
 <script>
 var user = sessionStorage.getItem("user") //유저 아이디 가져오기
-window.onload = function() {
-	$(document).ready(function(){
+
+$(document).ready(function(){
 		
-		/* 프로필 사진 업로드  */
-		$('#img').click(function(i){
-			document.imageform.target_url.value = document.getElementById('img').src;
-			i.preventDefault();
-		    $('#file').click();
-		});
-		
-		
-	});
-
-});
-
-function changeValue(obj){
-	document.imageform.submit();
-};
-
-/* 게시물 업로드 - test1 */
-$('#post_upload_btn').click(function (e){
-	document.post_upload_btn.upload_url.value = document.getElementById('post_upload_btn').src;
-	e.preventDefault();
-    $('#postuploadfile').click();
-});
-
-/* 게시물 업로드 카메라와 연결 */ 
-$(function(){
-    $('#camera').change(function(e){
-        $('#pic').attr('src', URL.createObjectURL(e.target.files[0]));
-    });
-});
-
+	/* 프로필 사진 업로드  */
+	$('#img').click(function(i){
+		document.imageform.target_url.value = document.getElementById('img').src;
+		i.preventDefault();
+	    $('#file').click();
+	});	
 	
-	function changeValue(obj){
-		document.post_upload_btn.submit();
-	};
 	
 	/* 게시물 업로드 - test1 */
-	$('#postupload').click(function(p){
-		document.postform.upload_url.value = document.getElementById('postupload').src;
-		p.preventDefault();
-	    $('#file').click();
+	$('#postupload').click(function(){
+		location.href = "/postupload"
 	});
 	
-	/* 게시물 업로드 카메라와 연결 */ 
-	$(function(){
-	    $('#camera').change(function(c){
-	        $('#pic').attr('src', URL.createObjectURL(c.target.files[0]));
-	    });
-	});//document ready 함수 end
-
-}; //window onload 함수 end 
+});
 
 </script>
 </head>
@@ -117,13 +81,7 @@ git push origin develop -->
 			<tr>
 				<td> 
 				<div id="postupload"> 
-					<form id="postform" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
-        					<label id="postfont" for="input-file"> 게시물 업로드 </label>
-        				<div id="postuploadbtn"> 
-        					<input type="file" id="input-file" onchange="changeValue(this)">
-    						<input type="hidden" name = "upload_url">
-    					</div>
-    				</form>
+        			<label id="postfont"> 게시물 업로드 </label>
     			</div>
 <!--         			게시물 업로드 카메라와 연결
         			<input type="file" id="file" name="camera" capture="camera" accept="image/*">
