@@ -15,11 +15,12 @@
 	
 	a{
 		text-decoration:none;
-		font-size: 20px;		
+		font-size: 20px;
+			
 	}
-	a:link{color:black;}
+	a:link{color:black; }
 	a:visited{color:black;}
-	a:hover{color:black; text-decoration:underline;}
+	a:hover{color:black; text-decoration:underline; 	}
 	
 	.oneProfile{
 		display: inline-block;
@@ -39,6 +40,7 @@
 		border-style: solid;
 		border-color: #f1a8bb;
 		transform:scale(1.2);
+		transition: transform 0.2s ease-in-out;
 	}
 	
 	.profileList{
@@ -78,6 +80,7 @@
 /* 		transition: color 1s; */
 /* 		color:#F6CEEC; */
 		transform:scale(1.2);
+		transition:0.2s;
 	}
 	
 	/*id, name, hashtag 검색*/
@@ -94,6 +97,7 @@
 	#idbutton:hover{
 		background-color:#f1a8bb;
 		transform:scale(1.1);
+		transition:0.2s;
 	}
 	
 	#namebutton{
@@ -109,6 +113,7 @@
 	#namebutton:hover{
 		background-color:#f1a8bb;
 		transform:scale(1.1);
+		transition:0.2s;
 	}
 	
 	#hashtagbutton{	
@@ -124,6 +129,7 @@
 	#hashtagbutton:hover{
 		background-color:#f1a8bb;
 		transform:scale(1.1);
+		transition:0.2s;
 	}
 	
 	/*검색결과*/
@@ -199,11 +205,13 @@
 		position:fixed;
 		top:90%;
 		right:5%;
+		color: #f1a8bb;
 		z-index:9999;
 	}
 	
 	#goToTopBtn:hover{
-		transform:scale(1.3);
+		transform:scale(1.5);
+		transition:0.2s;
 		
 	}
 	
