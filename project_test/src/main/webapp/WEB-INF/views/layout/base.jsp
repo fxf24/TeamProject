@@ -9,6 +9,9 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
+<script>
+  
+</script>
 <body>
 <table>
       <tr>
@@ -19,6 +22,7 @@
       <tr>
         <td>
           <tiles:insertAttribute name="body" />
+          <!-- <meta http-equiv="refresh" content="0; url=/" /> -->
         </td>
       </tr>
       <tr>

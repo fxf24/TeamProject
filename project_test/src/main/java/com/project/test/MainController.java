@@ -23,6 +23,12 @@ public class MainController {
 	public String index() {
 		return "index";
 	}
+
+	@RequestMapping(value = "/member/join")
+	public String join() {
+		return "/member/member_join";
+	}
+
 	
 	
 	@RequestMapping("/postupload")
