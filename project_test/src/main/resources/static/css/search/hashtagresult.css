@@ -4,13 +4,33 @@ html, body{
 	margin: 0;
 	padding: 0;
 	overflow-x:hidden;
+	font-family: 'Nanum Gothic', sans-serif;
+	
 }
+
 * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	border: none;
 	font-family: 'Nanum Gothic', sans-serif;
+}
+
+@keyframes blink-effect{
+	10%{opacity:0.1;}
+	20%{opacity:0.2;}
+	30%{opacity:0.3;}
+	40%{opacity:0.4;}
+	50%{opacity:0.5;}
+	60%{opacity:0.6;}
+	70%{opacity:0.7;}
+	80%{opacity:0.8;}
+	90%{opacity:0.9;}
+}
+.resultNone{		
+	text-align:center;
+	font-size:30px;
+	animation: blink-effect 1s;
 }
 	
 .bar{
@@ -22,7 +42,9 @@ html, body{
 	height:300px;
 }
 .listImage:hover{
-	transform:scale(1.05);
+	transform:scale(1.1);
+	transition:0.2s;
+	border: 5px solid #F6CEEC;
 }
 
 #searchbar{
@@ -52,6 +74,7 @@ html, body{
 /* 		transition: color 1s; */
 /* 		color: gray; */
 		transform:scale(1.2);
+		transition:0.2s;
 	}
 
 #searchBtn{
@@ -70,6 +93,7 @@ html, body{
 	#favoriteBtn:hover{
 		background-color:#f1a8bb;
 		transform:scale(1.1);
+		transition:0.2s;
 	}
 	
 #recentUpdateBtn{
@@ -85,6 +109,7 @@ html, body{
 	#recentUpdateBtn:hover{
 		background-color:#f1a8bb;
 		transform:scale(1.1);
+		transition:0.2s;
 	}
 
 .imageFrame{
@@ -120,15 +145,17 @@ html, body{
 	display:none;
 	width:1000px;
 	height:1000px;
-/* 	overflow:scroll; */
+/*  	overflow:scroll; */
 }
 	#goToTopBtn{
 		position:fixed;
 		top:90%;
 		right:5%;
 		z-index:9999;
+		color:#f1a8bb;
 	}
 	#goToTopBtn:hover{
-		transform:scale(1.3);
+		transform:scale(1.5);
+		transition:0.2s;
 		
 	}
