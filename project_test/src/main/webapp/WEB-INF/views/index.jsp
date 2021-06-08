@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>¿Ö¾ÈµÅ</h1>
+	<h1>index Page</h1>
 </body>
 </html>
