@@ -67,12 +67,7 @@
 										//사각형 그려서 출력
 										context.strokeRect(x1 + 10, y1 + 10, x2 - x1, y2 - y1)
 										$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query=" + names[i] + "&cat_id=&frm=NVSHATC'>#" + names[i] + " </a>")
-<<<<<<< HEAD
-									}
-									//}//if end
-=======
 									}//if end
->>>>>>> acd3806d91369d08411a57207ddcc90bf9548903
 								}//for end
 								//cfr데이터를 해쉬태그로 추가해주기
 								for (var i = 0; i < faces.length; i++) {
@@ -121,12 +116,7 @@
 							console.log(response.data)
 						}
 					});
-<<<<<<< HEAD
-					console.log($("#hashtags").html())
-=======
-
 					console.log($("#hashtags").text())
->>>>>>> acd3806d91369d08411a57207ddcc90bf9548903
 					$.ajax({
 						type: 'post',
 						url: '/saveData',
