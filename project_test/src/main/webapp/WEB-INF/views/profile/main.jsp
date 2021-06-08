@@ -20,8 +20,21 @@
 	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <script>
+var user = sessionStorage.getItem("user") //유저 아이디 가져오기
 $(document).ready(function(){
-	var user = sessionStorage.getItem("user")
+		/* 프로필 사진 업로드  */
+	$('#img').click(function(i){
+		document.imageform.target_url.value = document.getElementById('img').src;
+		i.preventDefault();
+	    $('#file').click();
+	});	
+	
+	
+	/* 게시물 업로드 - test1 */
+	$('#postupload').click(function(){
+		location.href = "/postupload"
+	});
+	
 	<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 /* 			$("#modal").fadeIn();
 			$("#modalContent").text("");
@@ -152,13 +165,7 @@ $(document).ready(function(){
 			<tr>
 				<td> 
 				<div id="postupload"> 
-					<form id="postform" ENCTYPE="multipart/form-data" method="post" action="postform.jsp"> 
-        					<label id="postfont" for="input-file"> 게시물 업로드 </label>
-        				<div id="postuploadbtn"> 
-        					<input type="file" id="input-file" onchange="changeValue(this)">
-    						<input type="hidden" name = "upload_url">
-    					</div>
-    				</form>
+        			<label id="postfont"> 게시물 업로드 </label>
     			</div>
 <!--         			게시물 업로드 카메라와 연결
         			<input type="file" id="file" name="camera" capture="camera" accept="image/*">

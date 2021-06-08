@@ -1,0 +1,134 @@
+@charset "EUC-KR";
+html, body{
+	background-color:rgba(244,238,238,1);
+	margin: 0;
+	padding: 0;
+	overflow-x:hidden;
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	border: none;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+	
+.bar{
+	text-align:center;
+}
+
+.listImage{
+	width:300px;
+	height:300px;
+}
+.listImage:hover{
+	transform:scale(1.05);
+}
+
+#searchbar{
+	position: absolute;
+	width:500px;
+	height:50px;
+	left:50%;
+	top: 90px;
+	margin-left:-270px;
+	border: 3px soild;
+	font-size:20px;
+	border-radius: 10px;
+	text-align:center;
+	box-shadow: 0px 1px 2px rgba(50, 50, 50, .1), 0px 2px 4px rgba(60, 60, 60, 0.1);
+}
+
+#fa-search{
+		display: block;
+		position: absolute;
+		left:50%;
+		top:90px;
+		margin-left: 250px;
+		overflow:hidden;
+		
+	}
+	#fa-search:hover{
+/* 		transition: color 1s; */
+/* 		color: gray; */
+		transform:scale(1.2);
+	}
+
+#searchBtn{
+	text-align: center;
+}
+#favoriteBtn{
+		position: absolute;
+		top:150px; left:50%;
+		margin-left:-270px;
+		background-color:#F6CEEC;
+		width:240px; height:40px;
+		font-size:20px;
+		font-weight: bold;
+		box-shadow: 0px 1px 2px rgba(50, 50, 50, .1), 0px 2px 4px rgba(60, 60, 60, 0.1);
+	}
+	#favoriteBtn:hover{
+		background-color:#f1a8bb;
+		transform:scale(1.1);
+	}
+	
+#recentUpdateBtn{
+		position: absolute;
+		top:150px; left:50%;
+		margin-left: -10px;
+		background-color:#F6CEEC;
+		width:240px; height:40px;
+		font-size:20px;
+		font-weight: bold;
+		box-shadow: 0px 1px 2px rgba(50, 50, 50, .1), 0px 2px 4px rgba(60, 60, 60, 0.1);
+	}
+	#recentUpdateBtn:hover{
+		background-color:#f1a8bb;
+		transform:scale(1.1);
+	}
+
+.imageFrame{
+	display: inline-block;
+	margin: 10px 10px 10px 10px;
+}
+
+#messageWindow {
+		position: absolute;
+		width: 100%;
+		left: 50%;
+		top: 200px;
+		margin-left: -500px;
+
+	}
+	
+#thumbsupView{
+/* 	position: absolute; */
+/* 	top:200px; */
+/* 	left:50%; */
+/* 	margin-left:-500px; */
+/* 	background-color:rgba(244,238,238,1); */
+	width:1000px;
+	height:1000px;
+/* 	overflow:scroll; */
+}
+
+#recentView{
+/* 	position: absolute; */
+/* 	top:200px; */
+/* 	margin-left:-500px; */
+/* 	background-color:rgba(244,238,238,1); */
+	display:none;
+	width:1000px;
+	height:1000px;
+/* 	overflow:scroll; */
+}
+	#goToTopBtn{
+		position:fixed;
+		top:90%;
+		right:5%;
+		z-index:9999;
+	}
+	#goToTopBtn:hover{
+		transform:scale(1.3);
+		
+	}
