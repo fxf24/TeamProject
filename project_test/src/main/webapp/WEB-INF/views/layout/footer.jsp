@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>footer</h1>
+<h1>나중에 옮길 예정</h1>
 </body>
 </html>

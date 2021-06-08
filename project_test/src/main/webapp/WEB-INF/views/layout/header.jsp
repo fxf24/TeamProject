@@ -86,7 +86,7 @@
                 </a>
                 <div id="navbar-right">
                     <a class="active" href="/search">Search</a>
-                    <a href="/postupload">±Û¾²±â</a>
+                    <a href="/postupload">글쓰기</a>
                     <a href="#about">Profile</a>
                 </div>
             </div>
