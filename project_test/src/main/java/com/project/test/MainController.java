@@ -17,6 +17,14 @@ public class MainController {
 	@Autowired
 	HHserviceImpl hhService;
 	
+	
+
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "index";
+	}
+	
+	
 	@RequestMapping("/postupload")
 	public String uploadform() {
 		return "/main/postupload";
@@ -154,9 +162,5 @@ public class MainController {
 		return "button/button";
 	}
 
-	@RequestMapping(value = "/index", method = RequestMethod.GET)
-	public String index() {
-		return "base";
-	}
 }
 

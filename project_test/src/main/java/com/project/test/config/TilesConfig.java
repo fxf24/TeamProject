@@ -1,4 +1,4 @@
-package com.project.config;
+package com.project.test.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ public class TilesConfig {
     public TilesConfigurer tilesConfigurer() {
  
         TilesConfigurer tiles = new TilesConfigurer();
-        tiles.setDefinitions(new String[] { "/WEB-INF/tiles.xml" });
+        tiles.setDefinitions(new String[] { "/WEB-INF/tiles/tiles.xml" });
         return tiles;
     }
 	
