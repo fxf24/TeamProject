@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% 
+	request.setCharacterEncoding("UTF-8");
+	String id = request.getParameter("id");
+	request.getParameter("postDate");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +21,12 @@
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
+	var user = sessionStorage.getItem("user")
 	<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
-
 /* 			$("#modal").fadeIn();
 			$("#modalContent").text("");
  */
-	
-	
+ 
 	/* 프로필 사진 업로드  */
  	$("#uploadprofile").click(function(event){
 		event.preventDefault() 
@@ -82,9 +86,31 @@ $(document).ready(function(){
 
 
 });//document ready end
+
+
+// /* 회원아이디 DB에서 받아오기 */ 
+// function accountid(id){
+// 	$.ajax({
+// 		url: '/profileaccount',
+// 		type: 'post',
+// 		data: {"id":id},
+// //		dataType: "text",
+// 		async: false,
+// 		success: function(response){	
+// 			console.log(response.data)
+// 			$("#accountId").text(response.data);
+// 			alert("회원 아이디 연결")
+// 		}//success end 
+// 	});//ajax end  
+//  } //accountId function end 
 </script>	
 </head>
 <body>
+		<div id="followermodal" onclick="modalClick()"></div>
+		<div id="modalContent" onclick="modalContentClick()"></div>
+		
+		<div id="followmodal" onclick="modalClick()"></div>
+		<div id="modalContent" onclick="modalContentClick()"></div>
 <main> 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
 	<div id="info-container"> 
@@ -93,22 +119,20 @@ $(document).ready(function(){
 			<canvas id="imagecanvas" width=250 height=250></canvas>
 			<img id="img" src=" " >
 		</div>
-			<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" action="/saveProfileImage" method="post">
-				<label id="fileimage" for="inputProfile"><img id="plus" src="/image/plus.png"></label>
-					<div id="profileimgbox"> 
-						<input name="file" type="file" id="inputProfile" accept="image/*" multiple   ><br>
-						<input type="hidden" name ="target_url">
-						<button id="uploadprofile" > 프로필 사진 업로드 </button>
-					</div>
-			</form>
-					<div id="modal" onclick="modalClick()"></div>
-					<div id="modalContent" onclick="modalContentClick()"></div>
-		</div> 
+		<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" action="/saveProfileImage" method="post">
+			<label id="fileimage" for="inputProfile"><img id="plus" src="/images/plus.png"></label>
+			<div id="profileimgbox"> 
+				<input name="file" type="file" id="inputProfile" accept="image/*" multiple   ><br>
+				<input type="hidden" name ="target_url">
+				<button id="uploadprofile" > 프로필 사진 업로드 </button>
+			</div>
+		</form>
+	</div> 
 
         	<table>
         		<tr>
-        			<td>
-						<span id="account_id"> 회원 아이디 &nbsp; </span>
+        			<td class="certaininfo">
+						<span id="accountId"> <%=id %>&nbsp; </span>
 							<!--         프로필 편집 클릭 시, 새로운 창으로 이동 - js 구현  -->
         					<button type="button" id=profileedit onclick="location.href='profile/editform'">프로필 편집</button>
         					<!-- <form id="profile_edit" name="editform" ENCTYPE="multipart/form-data" action="editform.jsp"> 
@@ -120,9 +144,9 @@ $(document).ready(function(){
         		<tr >
         			<!-- 게시물 | 팔로워 | 팔로우 수는 저장된 데이터의 수 그대로 불러오기 --> 
 					<td class="secondline">
-						<span id="secondline1">게시물 &nbsp; </span>
-        				<span id="secondline2">팔로워 &nbsp; </span>
-        				<span id="secondline3">팔로우 &nbsp; </span>
+						<span class="secondline" id="profileposts">게시물 &nbsp; <%=request.getParameter("postDate") %>&nbsp; </span>
+        				<span class="secondline" id="follower">팔로워 &nbsp; </span>
+        				<span class="secondline" id="follow">팔로우 &nbsp; </span>
 					</td>
 				</tr>
 			<tr>

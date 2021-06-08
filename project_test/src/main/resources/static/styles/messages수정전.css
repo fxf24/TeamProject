@@ -1,0 +1,876 @@
+@charset "UTF-8";
+#chat-timeline {
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	-webkit-overflow-scrolling: touch;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	box-sizing: border-box;
+	contain: layout;
+	will-change: transform;
+	background-color: rgba(244,238,238,1);
+}
+#beforeBubble{
+	margin-top: 500px;	
+}
+.chat-item {
+	display: flex;
+	padding: 57px 0;
+	width: 100%;
+	height:auto;
+	contain: layout;
+	will-change: transform;
+}
+
+.avatar {
+	border-radius: 500px;
+	margin-left: 20px;
+	margin-right: 6px;
+	min-width: 48px;
+}
+
+.chat-item .contents p {
+	margin: 0;
+	word-wrap: break-word;
+	font-size: 13px;
+	text-overflow: ellipsis;
+}
+#contentsssssss{
+	position:relative;
+	width:714px;
+    margin-left:93px;
+}
+.hashtag{
+	margin-top: -157px;
+    padding-bottom:68px;
+	text-align: left;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 40px;
+    font-size: 40px;
+    color: rgba(38,153,251,1);
+/*     word-break: break-word;
+   	text-overflow:ellipsis;
+ */   	
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.chat-item.tombstone p {
+	width: 100%;
+	height: 0.5em;
+	background-color: #ccc;
+	margin: 0.5em 0;
+}
+
+.chat-item .bubble img {
+	width: 824px;
+	height: auto;
+	padding-bottom:235px;
+	padding-inline:96px;
+	margin-top: -6px;
+}
+
+.bubble {
+	top:533px;
+	color: #333;
+	background: #fff;
+	box-shadow: 0 3px 2px rgba(0,0,0,0.1);
+	position: relative;
+	width: 1016px;
+	margin-left: 259px;
+}
+
+.bubble .plusBox {
+    height: 282px;
+    background: white;
+    box-shadow: 0 3px 2px rgba(0,0,0,0.1);
+    width: 370px;
+    position: absolute;
+    top: 0px;
+    margin:0px;
+    left: 1122px;
+    z-index: 8888;
+}
+
+/*.bubble img {
+  width: 80%;
+}*/
+
+.meta {
+	top:42px;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: rgba(38,153,251,1);
+    line-height:72px;
+    white-space: nowrap;
+    padding-left: 381px;
+    margin-top:-54px;
+    padding-bottom: 18px;
+}
+.timePost{
+	top:-100px;
+	margin-top:-54px;
+    padding-bottom:0px;
+	padding-top: 76px;
+}
+.meta p :last-child {
+	top:100px;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    color: rgba(38,153,251,1);	
+}
+.meta .posted-date::before{
+	content: '�뿈 ';
+	font-size:16px;
+	top:-8px;
+	margin-bottom: 1000px;
+}
+/* .from-me {
+  justify-content: flex-end;
+}
+
+.from-me .avatar {
+  order: 1;
+  margin-left: 6px;
+  margin-right: 20px;
+}
+
+.from-me .bubble {
+  background: #F9D7FF;
+}*/
+
+.bubble p:first-child{
+    position: relative;
+	top: -100px;
+    left: 96px;
+    width:824px;
+    margin: auto;
+    padding: 0px;
+    text-overflow:ellipsis;
+    word-break:break-word;
+/*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
+}
+
+.contentsss{
+    position: relative;
+	top: 12px;
+    left: -96px;
+    width:824px;
+    margin-top:60px;
+    margin: auto;
+    padding: 0px;
+    text-overflow:ellipsis;
+    word-break:break-word;
+/*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
+}
+ 
+.contentsss p{
+    position: relative;
+	top: 0px;
+    left: -97px;
+    width:824px;
+    margin: auto;
+    padding: 0px;
+    text-overflow:ellipsis;
+	word-break:break-word; 
+/*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
+}
+ 
+.from-me .bubble::before {
+	left: 100%;
+	border-width: 10px 10px 0 0;
+	border-color: #F9D7FF transparent transparent transparent;
+}
+.state {
+	display: none;
+}
+.invisible {
+	display: none;
+}
+
+.hashId span::before{
+	content: '@';
+	font-size:32px;
+}
+.hashId{
+	position:absolute;
+    text-align: left;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    color: rgba(0,0,0,1);
+    line-height:72px;
+    white-space: nowrap;
+    padding-left: 107px;
+    margin-top:21px;
+    padding-bottom: 18px;
+	}
+#invisibleIcon {
+		fill: rgba(0,0,0,1);
+}
+.invisibleIcon {
+		overflow: visible;
+		position: absolute;
+		width: 40px;
+		height: 30px;
+		left: 63px;
+		top: 39px;
+		transform: matrix(1,0,0,1,0,0);
+}
+#reportPBoxIcon{
+		position: absolute;
+		width: 40px;
+		height: 22px;
+		left: 64px;
+		top: 218px;
+		overflow: visible;
+}
+#shareIcon {
+		fill: rgba(20,146,230,1);
+}
+.shareIcon {
+		overflow: visible;
+		position: absolute;
+		width: 27px;
+		height: 30px;
+		left: 69px;
+		top: 126px;
+		transform: matrix(1.2,0,0,1.2,0,0);
+}
+#reportIcon1{
+		fill: rgba(255,0,0,1);
+		stroke: rgba(255,87,0,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+.reportIcon1{
+		overflow: visible;
+		position: absolute;
+		width: 28px;
+		height: 18px;
+		left: 6px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+}
+#reportIcon2{
+		fill: rgba(0,0,0,1);
+		stroke: rgba(38,38,38,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+.reportIcon2{
+		position: absolute;
+		overflow: visible;
+		width: 40px;
+		height: 6px;
+		left: 0px;
+		top: 16px;
+}
+#reportIcon3{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(255,255,255,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+.reportIcon3{
+		position: absolute;
+		overflow: visible;
+		width: 6px;
+		height: 6px;
+		left: 22px;
+		top: 4px;
+}
+#reportIcon4{
+		fill: transparent;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+.reportIcon4{
+		overflow: visible;
+		position: absolute;
+		width: 12px;
+		height: 1px;
+		left: 25px;
+		top: 18px;
+		transform: matrix(1,0,0,1,0,0);
+}
+
+#invisibleFont{
+		left: 141px;
+		top: 32px;
+		position: absolute;
+		overflow: visible;
+		width: 163px;
+		white-space: nowrap;
+		line-height: 120px;
+		margin-top: -42px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 36px;
+		color: rgba(0,0,0,1);
+}
+#notinterestedFont {
+		opacity: 0.3;
+		left: 141px;
+		top: 78px;
+		position: absolute;
+		overflow: visible;
+		width: 242px;
+		white-space: nowrap;
+		line-height: 120px;
+		margin-top: -42px;
+		text-align: left;
+		font-family: Noto Sans CJK KR;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 24px;
+		color: rgba(0,0,0,1);
+}
+#shareFont {
+		left: 141px;
+		top: 125px;
+		position: absolute;
+		overflow: visible;
+		width: 114px;
+		white-space: nowrap;
+		line-height: 72px;
+		margin-top: -18px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 36px;
+		color: rgba(0,0,0,1);
+}
+#reportFont {
+		left: 142px;
+		top: 210px;
+		position: absolute;
+		overflow: visible;
+		width: 133px;
+		white-space: nowrap;
+		line-height: 120px;
+		margin-top: -42px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 36px;
+		color: rgba(0,0,0,1);
+}
+#plusBoxIcon {
+		fill: rgba(0,0,0,1);
+}
+.plusBoxIcon {
+		overflow: visible;
+		position: absolute;
+		width: 8px;
+		height: 32px;
+		left: -232px;
+		top: 42px;
+		transform: matrix(1,0,0,1,0,0);
+		z-index: 4444;
+}
+/* �뵆�윭�뒪諛뺤뒪遺�瑜대뒗踰꾪듉 ///////////////////////////////////////////////////////////////////////*/
+#favoriteIcon1 {
+		fill: rgba(0,0,0,1);
+}
+.favoriteIcon1 {
+		overflow: visible;
+		position: absolute;
+		width: 30px;
+		height: 27px;
+		left: -340px;
+		top: 43px;
+		transform: matrix(1,0,0,1,0,0);
+		z-index: 4444;
+}
+#favoriteIcon2 {
+		fill: rgba(241,168,187,1);
+		display: none;
+}
+.favoriteIcon2 {
+		overflow: visible;
+		position: absolute;
+		width: 30px;
+		height: 27px;
+		left: -340px;
+		top: 43px;
+		transform: matrix(1,0,0,1,0,0);
+		z-index: 5555;
+}
+#favoriteIcon3 {
+		fill: rgba(255,0,66,1);
+		display: none;
+}
+.favoriteIcon3 {
+		overflow: visible;
+		position: absolute;
+		width: 30px;
+		height: 27px;
+		left: -340px;
+		top: 43px;
+		transform: matrix(1,0,0,1,0,0);
+		z-index: 6666;
+}
+/*�늻瑜대㈃ �굹���굹怨� �쟾�뿉 �씠誘몄��뒗 display:none 寃��젙 - �븨�겕 - �젅�뱶/////////////////////////////////////*/
+
+
+
+
+#contentsButtonPBox{
+		position: absolute;
+		width: 65px;
+		height: 65px;
+		left: 767px;
+		top: auto;
+		overflow: visible;
+		margin:0px;
+		margin-top:-22px;
+		z-index: 9999;
+}
+#contentsDownButtonPBox{
+		position: absolute;
+/* 		position: inherit;
+		width: 65px;
+		height: 65px;
+		left: 861px;
+		top: -201px;
+		overflow: visible;
+		margin:0px;
+		z-index: 9999;
+ */}
+
+.contentsDownButtonBright{
+		opacity: 1;
+		filter: blur(10px);
+		fill: rgba(1,193,198,0.02);
+}
+#contentsDownButtonBright{
+		overflow: visible;
+		position: absolute;
+		width: 114px;
+		height: 114px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+}
+#contentsDownButtonShadow{
+		opacity: 0.8;
+		filter: blur(5px);
+		fill: rgba(58,0,0,0.149);
+}
+.contentsDownButtonShadow{
+		position: absolute;
+		overflow: visible;
+		width: 84px;
+		height: 84px;
+		left: 11px;
+		top: 11px;
+}
+.contentsDownButtonBox{
+		position: absolute;
+		overflow: visible;
+		width: 54px;
+		height: 54px;
+		left: 5px;
+		top: 5px;
+}
+#contentsDownButtonBox{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+#contentsUpButtonPBox{
+		position: absolute;
+/* 		position: inherit;
+		width: 65px;
+		height: 65px;
+		left: 861px;
+		top: -201px;
+		overflow: visible;
+		margin:0px;
+		z-index: 9998;
+ */}
+.contentsUpButtonBright{
+		opacity: 1;
+		filter: blur(10px);
+		fill: rgba(1,193,198,0.02);
+}
+#contentsUpButtonBright{
+		overflow: visible;
+		position: absolute;
+		width: 114px;
+		height: 114px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+}
+#contentsUpButtonShadow{
+		opacity: 0.8;
+		filter: blur(5px);
+		fill: rgba(58,0,0,0.149);
+}
+.contentsUpButtonShadow{
+		position: absolute;
+		overflow: visible;
+		width: 84px;
+		height: 84px;
+		left: 11px;
+		top: 11px;
+}
+.contentsUpButtonBox{
+		position: absolute;
+		overflow: visible;
+		width: 54px;
+		height: 54px;
+		left: 5px;
+		top: 5px;
+}
+#contentsUpButtonBox{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(255,255,255,1);
+		stroke-width: 2px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+#contentsUpButton{
+		fill: rgba(0,0,0,1);
+}
+.contentsUpButton{
+		overflow: visible;
+		position: absolute;
+		width: 28px;
+		height: 14px;
+		left: 19px;
+		top: 28px;
+		transform: matrix(1,0,0,1,0,0);
+}
+#contentsDownButton{
+		fill: rgba(0,0,0,1);
+}
+.contentsDownButton{
+		overflow: visible;
+		position: absolute;
+		width: 28px;
+		height: 14px;
+		left: 19px;
+		top: 26px;
+		transform: matrix(1,0,0,1,0,0);
+}
+
+
+
+
+
+
+
+
+	#mainBarBox{
+	position: absolute;
+	}
+	.mainBarBox{
+	height: 100000vh;
+	position: absolute;
+	}
+	#topbar1{
+		fill:rgba(0,0,0,1);
+			}
+	.topbar1{
+		position: sticky;
+		overflow: scroll;
+		width: 1920px;
+		height: 68px;
+		top: 0px;
+	    right: 0px;
+	    left: 0px;
+	    z-index: 9998;
+	    display: flex;
+	    margin: 0;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	}
+	
+	#mainBarBox2{
+	position: absolute;
+
+	}
+	.mainBarBox2{
+	top: 0vh;
+	height: 10000vh;
+	position: absolute;
+	}
+	.titleHH{
+		position: sticky;
+		width: 190px;
+		height: 68px;
+		top: 0px;
+	    right: 0px;
+	    left: 0px;
+	    z-index: 9999;
+	    display: flex;
+	    margin-left: 476px;
+	    user-select: none;
+	    background-image:url("titleHH.jpg") ;
+	    background-size: 190px 68px;
+		background-repeat:no-repeat ;
+		transform: translateX(-50%);
+	}
+	#iconPBox{
+		position: sticky;
+		display:flex;
+		width: 50px;
+		height: 50px;
+		left: 0px;
+		top: 0px;
+		padding-left:87.98vw;
+		padding-top:10px;
+	    z-index: 9998;
+	    transform: translateX(-5%);
+	}
+	#searchIconBox{
+		position: sticky;
+		display:flex;
+		width: 50px;
+		height: 50px;
+		left: 89.5%;
+		top: 39px;
+	    z-index: 9998;
+	}
+	#loginIconBox{
+		left: 85.52083%;
+		top: 39px;
+	    z-index: 9998;
+		width: 50px;
+		height: 50px;
+
+	}
+		#searchIconBox{
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 50px;
+		height: 50px;
+		transform: matrix(1,0,0,1,0,0);
+		padding-right: 15px;
+	}
+		#searchIcon{
+		fill: rgba(255,255,255,1);
+	}
+	.searchIcon{
+
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 40px;
+		height: 55px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,-20,0);
+		margin-left: 5px;
+		}
+	#loginIcon{
+		fill: rgba(255,255,255,1);
+	}
+	.loginIcon{
+		justify-content:flex-end;
+		display:inline;
+	    z-index: 9998;
+		position: sticky;
+		width: 58px;
+		height: 52px;
+		left: 85.52083%;
+		top: 39px;
+		transform: matrix(1,0,0,1,0,0);
+		padding-right: 15px;
+	}
+	#langueIconBox {
+
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 50px;
+		height: 50px;
+		left: 90.10416%;
+		top: 38px;
+	}
+	#langueIcon{
+		fill: rgba(255,255,255,1);
+	}
+	.langueIcon{
+
+	    z-index: 9998;
+			display:inline;
+		position: sticky;
+		width: 50px;
+		height: 50px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,40,5);
+		padding-right: 10px;
+		margin-top: -5px;
+	}
+		#subIconPBox{
+		position: absolute;
+		width: 342px;
+		height: 91px;
+		left: -192px;
+		top: 60px;
+		overflow: visible;
+	}
+	#subIconPBox1{
+		position: absolute;
+		width: 342px;
+		height: 79px;
+		left: 0px;
+		top: 12px;
+		overflow: visible;
+	}
+	#subIconBox{
+		fill: rgba(0,0,0,1);
+	}
+	.subIconBox{
+		overflow: visible;
+		position: absolute;
+		width: 342px;
+		height: 79px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#writeIcon{
+		fill: rgba(241,168,187,1);
+		z-index: 9995;
+	}
+	.writeIcon{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 34px;
+		left: 26px;
+		top: 23px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#sendMessageIcon{
+		fill: rgba(241,168,187,1);
+		z-index: 9995;
+	}
+	.sendMessageIcon{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 28px;
+		left: 90px;
+		top: 27px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#messageBoxIcon{
+		fill: rgba(241,168,187,1);
+		z-index: 9999;
+	}
+	.messageBoxIcon{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 32px;
+		left: 154px;
+		top: 25px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+
+	#bookmark{
+		fill: rgba(241,168,187,1);
+		z-index: 9995;
+	}
+	.bookmark{
+		overflow: visible;
+		position: absolute;
+		width: 20px;
+		height: 32px;
+		left: 218px;
+		top: 25px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#optionIconPBox{
+		position: absolute;
+		width: 34px;
+		height: 34.001px;
+		left: 268px;
+		top: 23px;
+		overflow: visible;
+		z-index: 9995;
+	}
+	#optionIconBox1{
+		fill: rgba(241,168,187,1);
+	}
+	.optionIconBox1{
+		overflow: visible;
+		position: absolute;
+		width: 34px;
+		height: 34.001px;
+		left: 0px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#optionIconBox2{
+		fill: transparent;
+		stroke: rgba(241,168,187,1);
+		stroke-width: 3px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.optionIconBox2{
+		overflow: visible;
+		position: absolute;
+		width: 16px;
+		height: 16px;
+		left: 9px;
+		top: 9px;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#boxVertex{
+		fill: rgba(0,0,0,1);
+	}
+	.boxVertex{
+		overflow: visible;
+		position: absolute;
+		width: 16px;
+		height: 16.81px;
+		left: 163px;
+		top: 0px;
+		transform: matrix(1,0,0,1,0,0);
+	}

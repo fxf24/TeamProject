@@ -92,7 +92,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 	#signupFont {
 		left: 93px;
-		top: 18px;
+		top: 20px;
 		position: absolute;
 		overflow: visible;
 		width: 71px;
@@ -102,7 +102,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		text-align: left;
 		font-family: Noto Sans CJK KR;
 		font-style: normal;
-		font-weight: normal;
+		font-weight: bold;
 		font-size: 19px;
 		color: rgba(241,168,187,1);
 }
@@ -211,17 +211,77 @@ input[type="number"]::-webkit-inner-spin-button {
 		font-size: 34px;
 		color: rgba(129,129,129,1);
 }
-	#namePBox{
+	#ConfirmIdPBox{
 		position: absolute;
 		width: 372px;
 		height: 52px;
 		left: 412px;
-		top: 84px;
+		top: 64px;
+		overflow: visible;
+}
+	#ConfirmIdBoxFont{
+		left: 10px;
+		top: 67px;
+		position: absolute;
+		overflow: visible;
+		width: 67px;
+		white-space: nowrap;
+		line-height: 73px;
+		margin-top: -25.5px;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 18px;
+		color: rgba(128,128,128,1);
+}
+	#ConfirmIdBox1 {
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 58px;
+		overflow: visible;
+}
+	#ConfirmIdBox2 {
+		fill: transparent;
+}
+	.ConfirmIdBox2 {
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+}
+	#ConfirmIdBox3{
+		fill: rgba(255,255,255,1);
+		stroke: rgba(188,188,188,1);
+		stroke-width: 1px;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+}
+	.ConfirmIdBox3{
+		position: absolute;
+		overflow: visible;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 0px;
+}
+	#namePBox{
+		position: absolute;
+		width: 372px;
+		height: 52px;
+		left: 0px;
+		top: 315px;
 		overflow: visible;
 }
 	#nameBoxFont{
 		left: 0px;
-		top: 0px;
+		top: -39px;
 		position: absolute;
 		overflow: visible;
 		width: 67px;
@@ -449,7 +509,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		position: absolute;
 		width: 372px;
 		height: 52px;
-		left: 0px;
+		left: 412px;
 		top: 373px;
 		overflow: visible;
 }
@@ -646,6 +706,26 @@ input[type="number"]::-webkit-inner-spin-button {
 		background:transparent;
 		z-index: 9999;
 }
+	.ConfirmIdButton{
+		white-space: nowrap;
+		text-align: left;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 21px;
+		color: rgba(0,0,0,1);
+}
+	#ConfirmIdButton{
+		position: absolute;
+		overflow: visible;
+		width: 92px;
+		height: 44px;
+		left: 565px;
+		top: 181px;
+		border:none;
+		background:transparent;
+		z-index: 9999;
+}
 	.signupNameInput{
 		white-space: nowrap;
 		text-align: left;
@@ -660,8 +740,8 @@ input[type="number"]::-webkit-inner-spin-button {
 		overflow: visible;
 		width: 368px;
 		height: 51px;
-		left: 565px;
-		top: 177px;
+		left: 153px;
+		top: 433px;
 		border:none;
 		background:transparent;
 		z-index: 9999;
@@ -708,7 +788,7 @@ input[type="number"]::-webkit-inner-spin-button {
 		overflow: visible;
 		width: 368px;
 		height: 51px;
-		left: 153px;
+		left: 565px;
 		top: 433px;
 		border:none;
 		background : transparent;

@@ -11,6 +11,8 @@
 	<typeAliases>
 		<typeAlias type="com.project.test.PostVO" alias="postVO"/>
 		<typeAlias type="com.project.test.UserVO" alias="userVO"/>
+		<typeAlias type="com.project.test.ThumbsupVO" alias="thumbsupVO"/>
+		<typeAlias type="com.project.test.CommentsVO" alias="commentsVO"/>
 	</typeAliases> 
 	
 	<!--3. sql mapping 파일 설정-->

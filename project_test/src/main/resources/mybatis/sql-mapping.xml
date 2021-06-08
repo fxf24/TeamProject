@@ -23,7 +23,7 @@ select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
 	select posts_seq.nextval from dual
 </selectKey>
 insert into posts values(#{postNum}, #{id}, #{contents},
- #{imagepath}, #{hashtag}, 0, sysdate)
+ #{imagepath}, #{hashtag}, sysdate)
 </insert>
 
 <select id="getPostNum" parameterType="int" resultType="postVO">
@@ -35,8 +35,39 @@ select * from posts where postNum=#{postNum}
 	select users_seq.nextval from dual
 </selectKey>
 insert into users values(#{userNum}, #{id}, #{password},
- #{email}, #{name}, #{telephone})
+ #{email}, #{name}, #{telephone}, null)
 </insert>
+<select id="getThumbsup" parameterType="int" resultType="thumbsupVO">
+select * from thumbsup where postNum=#{postNum}
+</select>
+
+<insert id="thumbsPlus" parameterType="thumbsupVO">
+insert into thumbsup values(thumbsup_SEQ.nextval, #{id}, #{postNum})
+</insert>
+
+<delete id="thumbsMinus" parameterType="thumbsupVO">
+delete from thumbsup where id=#{id} and postNum=#{postNum}
+</delete>
+
+<insert id="addComments" parameterType="commentsVO">
+<selectKey keyProperty="commentNum" resultType="integer" order="BEFORE">
+select comments_SEQ.NEXTVAL from dual
+</selectKey>
+insert into comments values(#{commentNum}, #{id}, #{postNum}, #{comments}, sysdate)
+</insert>
+
+<select id="getComments" parameterType="int" resultType="commentsVO">
+select * from comments where postNum=#{posttNum} order by commentsDate DESC
+</select>
+
+<select id="getProfileImage" parameterType="UserVO" resultType="String">
+select profileImage from users where id=#{id}
+</select>
+
+<select id="getProfilePosts" parameterType="int" resultType="integer">
+select postDate from posts where id=#{id} order by postDate DESC
+</select>
+
 </mapper>
 
 

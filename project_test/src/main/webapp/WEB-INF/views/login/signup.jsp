@@ -113,6 +113,32 @@ function signup(){
  		}
   	})
 }
+
+function uniqueID(){
+	$.ajax({
+  		type: 'post',
+  		url: '/getUserID',
+  		data: {'id': $("#signupIdInput").val()},
+  		dataType: 'json',
+  		
+  		success: function(response){
+  			console.log(response.data)
+  			alert(response.data)
+  			if(response.data == "사용할 수 없는 아이디 입니다!"){
+  				$("#idTerm").show()
+  			}
+  			else{
+  				$("#idTerm").hide()
+  			}
+  		},
+  			
+  		error:function(request,status,error){
+ 			alert("success에 실패 했습니다.");
+ 			console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		}
+  	})
+}
+
 </script>
 </head>
 <body>
@@ -165,9 +191,22 @@ function signup(){
 					</div>
 				</div>
 			 </div>
+			 	<div id="ConfirmIdPBox">
+						<div id="ConfirmIdBox1">
+							<svg class="ConfirmIdBox2">
+								<rect id="ConfirmIdBox2" rx="0" ry="0" x="0" y="0" width="92" height="42">
+								</rect>
+							</svg>
+							<svg class="ConfirmIdBox3">
+								<rect id="ConfirmIdBox3" rx="10" ry="10" x="0" y="0" width="92" height="42">
+								</rect>
+							</svg>
+						</div>
+					<div id="ConfirmIdBoxFont">
+						<span>중복확인</span>
+					</div>
+				</div>
 			 <div id="namePBox">
-				<div id="nameBoxFont">
-					<span>이름</span>
 				<div id="nameBox1">
 					<svg class="nameBox2">
 						<rect id="nameBox2" rx="0" ry="0" x="0" y="0" width="372" height="52">
@@ -177,7 +216,9 @@ function signup(){
 						<rect id="nameBox3" rx="10" ry="10" x="0" y="0" width="372" height="52">
 						</rect>
 					</svg>
-				</div>
+					<div id="nameBoxFont">
+							<span>이름</span>
+					</div>
 				</div>
 			 </div>
 			 	<div id="passwordPBox">
@@ -252,6 +293,7 @@ function signup(){
 				<input type="password" class="signupPassInput" id="signupPassInput"   maxlength='16'/>
 				<input type="password" class="signupPassConfirmInput"  id="signupPassConfirmInput"  maxlength='16'/>
  				<input type="text" class="signupPhonenumInput"  id="signupPhonenumInput"  oninput=""/>
+				<button type="button" class="ConfirmIdButton" id="ConfirmIdButton" value="아이디중복확인" onclick="uniqueID()">
 				<button type="button" class="newSignupButton" id="newSignupButton" value="가입하기" onclick="signup()"></button>
 			</form>
 			

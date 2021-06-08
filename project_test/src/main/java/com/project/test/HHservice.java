@@ -10,4 +10,11 @@ public interface HHservice {
 	void insertPostData(PostVO pvo);
 	List<PostVO> getPostNum(int PostNum);
 	void insertUserData(UserVO uvo);
+	List<ThumbsupVO> getThumbsup(int postNum);
+	void thumbsPlus(int postNum, String id);
+	void thumbsMinus(int postNum, String id);
+	void addComments(int postNum, String comments, String id);
+	List<CommentsVO> getComments(int postNum); 
+	String getProfileImage(String id); 
+	int getProfilePosts(int postDate);
 }

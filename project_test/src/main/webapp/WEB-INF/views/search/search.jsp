@@ -4,9 +4,18 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String searchword = request.getParameter("searchWord");
+	if(searchword==null){
+		searchword = "";
+	}
+	String id = (String)session.getAttribute("id");
 %>
 <!DOCTYPE html>
 <html>
+<link href="/css/search/search.css" rel="stylesheet" type="text/css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<script src="https://kit.fontawesome.com/5e5186ce3e.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
 <head>
 <meta charset="UTF-8">
 <title>HashHershe</title>
@@ -33,10 +42,9 @@ $(document).ready(function(){
 	})
 			
 	var searchMessage = $("#searchbar").val();
-	
 	//main에서 넘어오는 search값 전달, id 검색	
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
-		$("#idSearch").text("검색어를 입력하세요.");
+		$(".idSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 	} else {
 		$.ajax({
 			url :"/idsearch",
@@ -47,12 +55,25 @@ $(document).ready(function(){
 				//console.log(response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
-					$("#idSearch").text("검색 결과가 없습니다.");
+					$(".idSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
 					for(var i in list){ //결과 반환
-						$("#idSearch").append
-						("<img src='#' class='profileimage'><a href='profile?id="+list[i].id+"'>"+list[i].id+"</a><br>");		
-						// 이미지 경로 및 css 수정 필요
+						var userImage = list[i].profileImage
+						var userID = list[i].id
+						if(userImage==null){
+							$(".idSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");	
+						} else {
+							var userImagepath = userImage.split("/")
+							$(".idSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
+						}//else end
 					}// for end
 				} 
 			}, // success end
@@ -65,7 +86,7 @@ $(document).ready(function(){
 	
 	//main에서 넘어오는 search값 전달, name 검색
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을때
-		$("#nameSearch").text("검색어를 입력하세요.");
+		$(".nameSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 	} else {
 		$.ajax({
 			url :"/namesearch",
@@ -76,11 +97,25 @@ $(document).ready(function(){
 				//console.log(response)
 				var list = response;
 				if(list.length==0){ // 검색결과가 없을때
-					$("#nameSearch").text("검색 결과가 없습니다.");
+					$(".nameSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
 					for(var i in list){ //결과 반환
-						$("#nameSearch").append
-						("<img src='#' class='profileimage'><a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
+						var userImage = list[i].profileImage
+						var userName = list[i].name
+						if(userImage==null){
+							$(".nameSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
+						} else {
+							var userImagepath = userImage.split("/")
+							$(".idSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
+						}//else end
 					}// for end
 				}  //else end
 			}, // success end
@@ -95,7 +130,7 @@ $(document).ready(function(){
 	var length = searchMessage.length; //검색어의 길이
 	var hashtagArr = []; //검색어의 중복을 방지하기 위한 array
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을때
-		$("#hashtagSearch").text("검색어를 입력하세요.");
+		$(".hashtagSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 	} else {
 		$.ajax({
 			url :"/hashtagsearch",
@@ -106,7 +141,7 @@ $(document).ready(function(){
 				//console.log(response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
-					$("#hashtagSearch").text("검색 결과가 없습니다.");
+					$(".hashtagSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 				} else {
 					for(var i in list){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
@@ -120,11 +155,11 @@ $(document).ready(function(){
 						}// for tag end
 					} // for i end
 					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
-						$("#hashtagSearch").append("검색 결과가 없습니다.");
+						$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 					} else {
 						for(var i in hashtagArr){ //결과 반환
-							$("#hashtagSearch").append
-							("<a href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a><br>");
+							$(".hashtagSearchList").append
+							("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a></p>");		
 						}// for end
 					}// else end
 				}// else
@@ -141,13 +176,13 @@ $(document).ready(function(){
 function search(){ 
 	var searchMessage = $("#searchbar").val(); // 검색어 입력
 	// 검색결과 초기화
-	$("#idSearch").text(""); 
-	$("#nameSearch").text("");
-	$("#hashtagSearch").text(""); 
+	$(".idSearchList").text("");
+	$(".nameSearchList").text("");
+	$(".hashtagSearchList").text(""); 
 	
 	// id 검색결과
 	if(searchMessage==null || searchMessage==""){ //검색어가 없을 때
-		$("#idSearch").text("검색어를 입력하세요.");
+		$(".idSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 	} else {
 		$.ajax({
 			url :"/idsearch",
@@ -155,16 +190,31 @@ function search(){
 			data : {"id" : searchMessage},
 			dataType : "json",
 			success : function(response){
-				console.log(response)
+				//console.log("idsearch = "+response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
-					$("#idSearch").text("검색 결과가 없습니다.");
+					$(".idSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
 					for(var i in list){ //결과 반환
-						$("#idSearch").append
-						("<img src='#' class='profileimage'><a href='profile?id="+list[i].id+"'>"+list[i].id+"</a><br>");				
+						var userImage = list[i].profileImage
+						var userID = list[i].id
+						if(userImage == null){
+							$(".idSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
+						} else {
+							var userImagepath = userImage.split("/")
+							//console.log(userImagepath)
+							$(".idSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
+						} // else end
 					}// for end
-				} 
+				}// else end 
 			}, // success end
 			error : function(e){
 				console.log(e)
@@ -174,7 +224,7 @@ function search(){
 	
 	// name 검색 결과
 	if(searchMessage==null || searchMessage==""){ //검색어가 없을 때
-		$("#nameSearch").text("검색어를 입력하세요.");
+		$(".nameSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 	} else {
 		$.ajax({
 			url :"/namesearch",
@@ -182,14 +232,29 @@ function search(){
 			data : {"name" : searchMessage},
 			dataType : "json",
 			success : function(response){
-				console.log(response)
+				//console.log("namesearch = "+response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
-					$("#nameSearch").text("검색 결과가 없습니다.");
+					$(".nameSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
 					for(var i in list){ //결과 반환
-						$("#nameSearch").append
-						("<img src='#' class='profileimage'><a href='profile?name="+list[i].name+"'>"+list[i].name+"</a><br>");				
+						$(".nameSearchList").append
+						var userImage = list[i].profileImage
+						var userName = list[i].name
+						if(userImage==null){
+							$(".nameSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
+						} else {
+							var userImagepath = userImage.split("/")
+							$(".nameSearchList").append
+							("<div class=oneProfile>"+
+							"<div class=profileImage>"+
+							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
+						}//else end					
 					}// for end
 				} // else end
 			}, // success end
@@ -203,7 +268,7 @@ function search(){
 	var length = searchMessage.length; //검색어의 길이
 	var hashtagArr = []; //검색어의 중복을 방지하기 위한 array
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
-		$("#hashtagSearch").text("검색어를 입력하세요.");
+		$(".hashtagSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 	} else {
 		$.ajax({
 			url :"/hashtagsearch",
@@ -211,28 +276,30 @@ function search(){
 			data : {"hashtag" : searchMessage},
 			dataType : "json",
 			success : function(response){
-				console.log(response)
+				//console.log("hashtag result = "+response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
-					$("#hashtagSearch").text("검색 결과가 없습니다.");
+					$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
 					for(var i in list){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
 						//console.log("HASHTAG = "+hashtag)
 						for(var tag in hashtag){
-							if(!hashtagArr.includes(hashtag[tag]) &&
-								searchMessage == hashtag[tag].substring(0, length)){ //중복된 태그 검사 && 검색어와 태그 일치 여부 검사
-									hashtagArr.push(hashtag[tag]);
-									hashtagArr.sort();																	
-							} // if end								
+							if(searchMessage == hashtag[tag].substring(0, length)){
+								hashtagArr.push(hashtag[tag]);
+								hashtagArr.sort();
+							} // for end							
 						}// for tag end
 					} // for i end
 					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
-						$("#hashtagSearch").append("검색 결과가 없습니다.");
+						$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 					} else {
-						for(var i in hashtagArr){ //결과 반환
-							$("#hashtagSearch").append
-							("<a href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a><br>");
+						var hashtagSet = new Set(hashtagArr)
+						console.log(hashtagSet)
+						for(let i of hashtagSet){ //결과 반환
+							$(".hashtagSearchList").append
+							("<p><a class=hashtagList href='hashtagresult?hashtag="+i+"'>"+"#"+i+"</a></p>");
+							//("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArrtest[i]+"'>"+"#"+hashtagArrtest[i]+"</a></p>");
 						}// for end
 					}// else end
 				}// else
@@ -250,29 +317,38 @@ function enterkey(){
 		search();
 	}
 }	
+	
+function moveToID(value){
+	console.log(value)
+	var url = "/profile?id="+value;
+	location.href = url;
+}
+
+function moveToName(value){
+	console.log(value)
+	var url = "/profile?name="+value;
+	location.href = url;
+}
 
 </script>
 </head>
 <body>
-<h1>검색페이지</h1>
-<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey()">
-<input type="submit" id="searchbutton" value="검색" onclick="search()"><br>
-<div id="searchlist">
-	<button id="idbutton">아이디</button>&nbsp;&nbsp;
-	<button id="namebutton">이름</button>&nbsp;&nbsp;
+	<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey()" placeholder="검색어를 입력하세요">
+	<i class="fas fa-search fa-3x" id=fa-search type="submit" id="searchbutton" onclick="search()"></i>
+	
+	<button id="idbutton">아이디</button>
+	<button id="namebutton">이름</button>
 	<button id="hashtagbutton">해시태그</button><br>
-</div>
-
 <!-- 색상은 구분을 위해 임시 지정 , css 스타일 적용 필요 -->
 <div id="messageWindow">
-	<div id="idSearch" style="background-color:#abcdef;
-		width:500px; height:600px; overflow:scroll;"> <!-- default view -->
+	<div id="idSearch"> <!-- default view -->
+		<div class=idSearchList id=idSearchList></div>
 	</div>
-	<div id="nameSearch" style="display:none; background-color:yellow; 
-	width:500px; height:600px; overflow:scroll;"> 
+	<div id="nameSearch">
+		<div class=nameSearchList></div>
 	</div>
-	<div id="hashtagSearch" style="display:none; background-color:orange;
-	width:500px; height:600px; overflow:scroll;">
+	<div id="hashtagSearch">
+		<div class=hashtagSearchList></div>
 	</div>
 </div>
 

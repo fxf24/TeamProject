@@ -131,12 +131,15 @@
 }
 
 /* 회원 아이디(계정) */
-#account_id {
+#accountId {
 	position:absolute;
 	z-index: 2;
-	top: 5%;
+	top: 3%;
     left: 50%;
 	text-align: center;
+	font-family: inherit;
+	font-size: xx-large;
+	font-weight: bold;
 }
 
 /* 프로필 편집 버튼 */
@@ -152,28 +155,38 @@
 /* 게시물 | 팔로워 | 팔로우 
 게시물 업로드 (카메라, 앨범, (폰, pc))*/
 
-#secondline1 {
+#profileposts {
 	position:absolute;
 	z-index: 2;
 	top:10%;
     left:50%;
 	text-align: center;
+	font-family: inherit;
+	font-size: large;
+	font-weight: bold;
+	
 }
 
-#secondline2 {
+#follower {
 	position:absolute;
 	z-index: 2;
 	top:10%;
     left:60%;
 	text-align: center;
+	font-family: inherit;
+	font-size: large;
+	font-weight: bold;
 }
 
-#secondline3 {
+#follow {
 	position:absolute;
 	z-index: 2;
 	top:10%;
     left:70%;
 	text-align: center;
+	font-family: inherit;
+	font-size: large;
+	font-weight: bold;	
 }
 
 #postupload {

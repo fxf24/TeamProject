@@ -3,6 +3,7 @@ package com.project.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -112,10 +113,24 @@ public class MainController {
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setTelephone(telephone);
-
+		
 		hhService.insertUserData(user);
 		return "{\"data\":\"유저 저장 완료\"}";
 	}
+	@RequestMapping(value="/getUserID", method=RequestMethod.POST)
+	@ResponseBody
+	public String getOneUser(String id) {
+		String result = "";
+		UserVO user = hhService.getOneUser(id);
+		if(user != null) {
+			result = "{\"data\":\"사용할 수 없는 아이디 입니다!\"}";
+		}
+		else {
+			result = "{\"data\":\"사용할 수 있는 아이디 입니다!\"}";
+		}
+		return result;
+	}
+	
 	
 	
 	/* 프로필 */ 
@@ -125,6 +140,18 @@ public class MainController {
 		return "profile/main";
 	}
 	
+	@RequestMapping(value="/profileaccount", method=RequestMethod.POST)
+	@ResponseBody
+	public UserVO profileaccount(String id) {
+		UserVO user= null;
+		UserVO uvo = new UserVO();
+		uvo.setId(id);
+		user = (UserVO) hhService.getOneUser(id);
+		System.out.println("유저 저장 완료");
+		return user;
+		//return "{\"data\":\"유저 저장 완료\"}";
+	}	
+	
 	@RequestMapping(value="/saveProfileImage", method=RequestMethod.GET)
 	public String uploadprofileimageform() {
 		return "/profile/main";
@@ -132,7 +159,7 @@ public class MainController {
 
 		@RequestMapping(value="/saveProfileImage", method=RequestMethod.POST)
 		@ResponseBody
-		public String saveProfileImage(MultipartFile file) throws IOException{
+		public String saveprofileimage(MultipartFile file) throws IOException{
 			String filename = file.getOriginalFilename();
 			System.out.println(filename);
 			//서버 저장 경로 설정
@@ -145,6 +172,13 @@ public class MainController {
 			return "{\"filename\":\""+filename+"\"}";
 		}
 	
+		@RequestMapping(value="/profilePosts", method=RequestMethod.POST)
+		@ResponseBody
+		public int getProfilePosts(int postDate) {
+			int profileposts = (int) hhService.getProfilePosts(postDate);
+			return profileposts;
+		}		
+		
 	@RequestMapping("/profile/editform")
 	public String editform() {
 		return "profile/editform";
@@ -163,4 +197,13 @@ public class MainController {
 //		return "search/main";
 //	}
 
+	@RequestMapping("/mainscroll")
+	public String mainscroll() {
+		return "infinite/mainscroll";
+	}
+	@RequestMapping("/button")
+	public String button() {
+		return "button/button";
+	}
 }
+
