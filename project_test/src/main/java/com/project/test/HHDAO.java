@@ -22,4 +22,7 @@ public interface HHDAO {
 	void addComments(int postNum, String comments, String id); //댓글 추가
 	List<CommentsVO> getComments(int postNum); // 작성한 댓글 불러오기
 	String getProfileImage(String id); // 프로필 사진만 불러오기
+	List<CommentThumbsupVO> getCommentThumbsup(int commentNum);//댓글 로드시 각 댓글의 좋아요 갯수 반환
+	void commentThumbsPlus(int commentNum, String id); // 댓글 좋아요 누르기
+	void commentThumbsMinus(int commentNum, String id); // 댓글 좋아요 취소
 }

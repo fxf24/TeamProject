@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.project.test.CommentThumbsupVO;
 import com.project.test.CommentsVO;
 import com.project.test.HHservice;
 import com.project.test.PostVO;
@@ -58,8 +59,10 @@ public class SearchController {
 	@ResponseBody
 	public List<PostVO> hashtagsearch(String hashtag) {
 		List<PostVO> list = null;
-		if(hashtag!=null || hashtag!="") {
-			list = (List<PostVO>)service.getHashtag(hashtag);	
+		if(hashtag==null || hashtag=="") {
+			list = null;	
+		} else {
+			list = (List<PostVO>)service.getHashtag(hashtag);
 		}
 		return list;
 	}
@@ -140,5 +143,36 @@ public class SearchController {
 			profileImage = "0";
 		}
 		return profileImage;
+	}
+	
+	// 댓글 로드시 각 댓글의 좋아요 갯수 반환
+	@RequestMapping(value="/getcommentthumbsup", method=RequestMethod.POST)
+	@ResponseBody
+	public List<CommentThumbsupVO> getCommentThumbsup(int commentNum) {
+		List<CommentThumbsupVO> result = 
+				(List<CommentThumbsupVO>)service.getCommentThumbsup(commentNum);
+		return result;
+	}
+	
+	// 댓글에 좋아요 기능 클릭시 좋아요 눌리고 테이블에 저장
+	@RequestMapping("/commentthumbsplus")
+	@ResponseBody
+	public String commentThumbsPlus(int commentNum, String id) {
+		CommentThumbsupVO vo = new CommentThumbsupVO();
+		vo.setId(id);
+		vo.setCommentNum(commentNum);
+		service.commentThumbsPlus(commentNum, id);
+		return "1";
+	}
+	
+	// 댓글 좋아요 취소 기능
+	@RequestMapping("/commentthumbsminus")
+	@ResponseBody
+	public String commentThumbsMinus(int commentNum, String id) {
+		CommentThumbsupVO vo = new CommentThumbsupVO();
+		vo.setId(id);
+		vo.setCommentNum(commentNum);
+		service.commentThumbsMinus(commentNum, id);
+		return "0";
 	}
 }
