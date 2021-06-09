@@ -6,7 +6,6 @@
         <meta charset="EUC-KR">
         <title>Insert title here</title>
         <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     </head>
     <style scoped>
         * {
@@ -17,41 +16,42 @@
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
         }
-
+        
+        /* √ ±‚ navbar*/
         #navbar {
             overflow: hidden;
             background-color: #f1f1f1;
             padding: 20px 10px;
-            transition: 0.4s;
+            transition: 0.5s;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 99;
         }
-
+        
+        /* æ∆¿Ãƒ‹ Ω∫≈∏¿œ */
         #navbar a {
             float: left;
             color: ivory;
             text-align: center;
-            padding: 1px 5px;
+            padding: 1em 2em;
             text-decoration: none;
             font-size: 12px;
             line-height: 25px;
             border-radius: 4px;
         }
-
+        
+        /* æ∆¿Ãƒ‹ ∏∂øÏΩ∫ ø√∏± Ω√ */
         #navbar a:hover {
             background-color: #ddd;
             color: black;
         }
 
-        #navbar a.active {
-            background-color: dodgerblue;
-            color: white;
-        }
-
         #navbar-right {
             float: right;
+            margin-top: 0.4em;
+            /* align-content: center ≥÷∞ÌΩÕ¿∫µ• æ»µ≈º≠ ¥Î√º«‘ */
+            margin-right: 5em;
         }
 
         @media screen and (max-width: 580px) {
@@ -71,23 +71,25 @@
         }
 
         .logo-image {
-            width: 10em;
+            width: 13em;
+            margin-left: 10em;
         }
+
         .header_navbar {
             background-color: black !important;
         }
     </style>
 
     <body>
-        <div id="navbar" class = "header_navbar">
-            <div class="d-flex bd-highlight mb-3">
+        <div id="navbar" class="header_navbar align-self-center">
+            <div class="d-flex bd-highlight">
                 <a href="" class="me-auto">
                     <img class="logo-image" src="/loginimage/logo.png" alt="">
                 </a>
                 <div id="navbar-right">
-                    <a class="active" href="/search">Search</a>
-                    <a href="/postupload">Í∏ÄÏì∞Í∏∞</a>
-                    <a href="#about">Profile</a>
+                    <a href="/search"><i class="fas fa-search fa-3x"></i></a>
+                    <a href="/postupload"><i class="fas fa-pen fa-3x"></i></a>
+                    <a href="/profile"><i class="fas fa-user-circle fa-3x"></i></a>
                 </div>
             </div>
         </div>

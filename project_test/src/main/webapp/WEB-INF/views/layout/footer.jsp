@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>ë‚˜ì¤‘ì— ì•„ë˜ê°€ ì•„ë‹Œ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì˜®ê¸¸ ì˜ˆì •</h1>
-</body>
-</html>
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="EUC-KR">
+        <title>Insert title here</title>
+    </head>
+
+    <body>
+        <h6 class="border border-primary">ÀÌ ºÎºĞÀº ³ªÁß¿¡ ¾Æ·¡°¡ ¾Æ´Ñ ¿À¸¥ÂÊÀ¸·Î ¿Å°Ü¼­ ÆÈ·Î¿ì ¸ñ·Ï, ÃßÃµ ¸ñ·Ï µîÀ» Ç¥½ÃÇÒ ¿¹Á¤ </h6>
+    </body>
+
+    </html>
