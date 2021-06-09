@@ -204,7 +204,7 @@ html, body {
 <!--
 이미지 위치
 -->
-<img>
+<img id="postImage">
 
 	 	       <div id="contentsssssss">
 			     <div id="contentsButtonPBox">

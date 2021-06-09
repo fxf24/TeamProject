@@ -84,7 +84,7 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main() {
-		return "main/main";
+		return "infinite/mainscroll";
 	}
 
 	@RequestMapping("/login")
