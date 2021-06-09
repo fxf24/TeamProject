@@ -175,4 +175,29 @@ public class SearchController {
 		service.commentThumbsMinus(commentNum, id);
 		return "0";
 	}
+	
+	// 댓글 지우기 기능
+	@RequestMapping(value="/deletecomment", method=RequestMethod.POST)
+	@ResponseBody
+	public void DeleteComment(String id, int commentNum) {
+		CommentThumbsupVO tvo = new CommentThumbsupVO();
+		tvo.setCommentNum(commentNum);
+		service.DeleteCommentThumbs(commentNum);
+		CommentsVO vo = new CommentsVO();
+		vo.setId(id);
+		vo.setCommentNum(commentNum);
+		service.DeleteComment(id, commentNum);
+	}
+	
+	// 댓글 수정하기 기능
+	@RequestMapping(value="/updatecomment", method=RequestMethod.POST)
+	@ResponseBody
+	public void UpdateComment(int postNum, String comments, String id, int commentNum) {
+		CommentsVO vo = new CommentsVO();
+		vo.setPostNum(postNum);
+		vo.setComments(comments);
+		vo.setId(id);
+		vo.setCommentNum(commentNum);
+		service.UpdateComments(postNum, comments, id, commentNum);
+	}
 }
