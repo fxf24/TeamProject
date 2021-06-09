@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>
 
 
@@ -23,7 +23,7 @@
 
             <tiles:insertAttribute name="header" />
             <div class="header_indent"></div>
-            <div class="border border-primary m-5">위에 위치한 빈공간은 다른 작업에 방해되지 않도록 띄운 공간입니다.</div>
+            <div class="border border-primary m-5">위에 위치한 빈공간은 다른 작업에 방해되지 않도록 띄운 공간입니다. 나중에 삭제할 예정</div>
             <tiles:insertAttribute name="body" />
             <!-- <meta http-equiv="refresh" content="0; url=/" /> -->
             <tiles:insertAttribute name="footer" />

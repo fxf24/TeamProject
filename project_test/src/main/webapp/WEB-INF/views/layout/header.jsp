@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
     <!DOCTYPE html>
     <html>
 
@@ -17,7 +17,7 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         
-        /* ÃÊ±â navbar*/
+        /* ì´ˆê¸° navbar*/
         #navbar {
             overflow: hidden;
             background-color: #f1f1f1;
@@ -29,7 +29,7 @@
             z-index: 99;
         }
         
-        /* ¾ÆÀÌÄÜ ½ºÅ¸ÀÏ */
+        /* ì•„ì´ì½˜ ìŠ¤íƒ€ì¼ */
         #navbar a {
             float: left;
             color: ivory;
@@ -41,7 +41,7 @@
             border-radius: 4px;
         }
         
-        /* ¾ÆÀÌÄÜ ¸¶¿ì½º ¿Ã¸± ½Ã */
+        /* ì•„ì´ì½˜ ë§ˆìš°ìŠ¤ ì˜¬ë¦´ ì‹œ */
         #navbar a:hover {
             background-color: #ddd;
             color: black;
@@ -50,7 +50,7 @@
         #navbar-right {
             float: right;
             margin-top: 0.4em;
-            /* align-content: center ³Ö°í½ÍÀºµ¥ ¾ÈµÅ¼­ ´ëÃ¼ÇÔ */
+            /* align-content: center ë„£ê³ ì‹¶ì€ë° ì•ˆë¼ì„œ ëŒ€ì²´í•¨ */
             margin-right: 5em;
         }
 
