@@ -15,7 +15,7 @@
         </head>
         <style>
             .header_indent {
-                margin: 20em;
+                margin: 5em;
             }
         </style>
 
@@ -23,12 +23,12 @@
 
             <tiles:insertAttribute name="header" />
             <div class="header_indent"></div>
-            <div class="border border-primary m-5">À§¿¡ À§Ä¡ÇÑ ºó°ø°£Àº ´Ù¸¥ ÀÛ¾÷¿¡ ¹æÇØµÇÁö ¾Êµµ·Ï ¶ç¿î °ø°£ÀÔ´Ï´Ù.</div>
+            <div class="border border-primary m-5">ìœ„ì— ìœ„ì¹˜í•œ ë¹ˆê³µê°„ì€ ë‹¤ë¥¸ ìž‘ì—…ì— ë°©í•´ë˜ì§€ ì•Šë„ë¡ ë„ìš´ ê³µê°„ìž…ë‹ˆë‹¤.</div>
             <tiles:insertAttribute name="body" />
             <!-- <meta http-equiv="refresh" content="0; url=/" /> -->
             <tiles:insertAttribute name="footer" />
             <div class="border border-primary m-5">
-                ÀÌ ºÎºÐÀº ³ªÁß¿¡ ¾Æ·¡°¡ ¾Æ´Ñ ¿À¸¥ÂÊÀ¸·Î ¿Å°Ü¼­ ÆÈ·Î¿ì ¸ñ·Ï, ÃßÃµ ¸ñ·Ï µîÀ» Ç¥½ÃÇÒ ¿¹Á¤
+                ì´ ë¶€ë¶„ì€ ë‚˜ì¤‘ì— ì•„ëž˜ê°€ ì•„ë‹Œ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ì˜®ê²¨ì„œ íŒ”ë¡œìš° ëª©ë¡, ì¶”ì²œ ëª©ë¡ ë“±ì„ í‘œì‹œí•  ì˜ˆì •
             </div>
         </body>
 
