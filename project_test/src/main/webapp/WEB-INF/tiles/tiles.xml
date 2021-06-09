@@ -8,33 +8,13 @@
  
         <definition name="base" template="/WEB-INF/views/layout/base.jsp">
             <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
-<!--             <put-attribute name="body" value="/views/jsp/layout/base.jsp" />  -->
-            <put-attribute name="footer" value="/WEB-INF/views/layout/footer.jsp" />
+            <!-- <put-attribute name="body" value="/views/jsp/layout/base.jsp" />  -->
+            <put-attribute name="right" value="/WEB-INF/views/layout/footer.jsp" />
         </definition>
- 
-        <definition name="*" extends="base">
-                <put-attribute name="body" value="/WEB-INF/views/{1}.jsp" />
-        </definition>
-        
-        <definition name="*/*" extends="base">
-                <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
-        </definition>
- 
-        <definition name="*/*/*" extends="base">
-                <put-attribute name="body" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+       
+        <definition name="main/*/*" extends="base">
+            <put-attribute name="body" value="/WEB-INF/views/main/{1}/{2}.jsp" />
         </definition>
 
-        <!-- 로그인 화면 -->
-
-        <!-- <definition name="login" template="/WEB-INF/views/layout/empty.jsp">
-        </definition>
-
-        <definition name="*" extends="login">
-                <put-attribute name="body" value="/WEB-INF/views/login/{1}.jsp" />
-        </definition>
-        
-        <definition name="*/*" extends="login">
-                <put-attribute name="body" value="/WEB-INF/views/login/{1}/{2}.jsp" />
-        </definition> -->
  
 </tiles-definitions>

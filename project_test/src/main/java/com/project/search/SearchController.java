@@ -24,12 +24,12 @@ public class SearchController {
 	// 테스트용, 추후 main페이지로 기능 이동 필요
 	@RequestMapping("/searchtest")
 	public String test() {
-		return "/search/mainsearchtest";
+		return "main/search/mainsearchtest";
 	}
 		
 	@RequestMapping("/search")
 	public String hastagsearch() {
-		return "/search/search"; 
+		return "main/search/search"; 
 	}
 
 	// id 검색시 userVO 리스트 반환
@@ -70,7 +70,7 @@ public class SearchController {
 	// hashtagresult.jsp
 	@RequestMapping("/hashtagresult")
 	public String oneHashtag() {
-		return "/search/hashtagresult";
+		return "main/search/hashtagresult";
 	}
 	
 	// postnum 검색시 반환 

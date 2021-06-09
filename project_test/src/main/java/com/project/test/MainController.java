@@ -25,7 +25,7 @@ public class MainController {
 
 	@RequestMapping("/postupload")
 	public String uploadform() {
-		return "/main/postupload";
+		return "main/posts/postupload";
 	}
 
 	@RequestMapping(value = "/saveImage", method = RequestMethod.POST)
@@ -76,7 +76,7 @@ public class MainController {
 
 	@RequestMapping("/")
 	public String main() {
-		return "infinite/mainscroll";
+		return "main/infinite/mainscroll";
 	}
 
 	@RequestMapping("/login")
@@ -136,12 +136,12 @@ public class MainController {
 
 	@RequestMapping("/profile")
 	public String profile() {
-		return "profile/main";
+		return "main/profile/main";
 	}
 
 	@RequestMapping("/profile/editform")
 	public String editform() {
-		return "profile/editform";
+		return "main/profile/editform";
 	}
 
 	// 중복 방지를 위해 블록처리
@@ -152,12 +152,12 @@ public class MainController {
 
 	@RequestMapping("/mainscroll")
 	public String mainscroll() {
-		return "infinite/mainscroll";
+		return "main/infinite/mainscroll";
 	}
 
 	@RequestMapping("/button")
 	public String button() {
-		return "button/button";
+		return "main/button/button";
 	}
 
 	@RequestMapping(value = "/showposts", method = RequestMethod.POST)
