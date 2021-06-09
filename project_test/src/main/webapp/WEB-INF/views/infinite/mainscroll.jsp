@@ -293,8 +293,7 @@ $.ajax({
 				console.log(e);
 		} // error end
 }); // ajax end		
-var INIT_TIME = new Date().getTime();
-const random1 = Math.floor(Math.random()*18);// 총 데이터 갯수, 현재 image0 ~19가 있음
+
 /**
  * Constructs a random item with a given id.
  * @param {number} id An identifier for the item.
