@@ -92,8 +92,23 @@ public class HHserviceImpl implements HHservice{
 
 	@Override
 	public List<PostVO> getUserPosts(String id) {
-		// TODO Auto-generated method stub
 		return hhdao.getUserPosts(id);
+	}
+
+	@Override
+	public void DeleteComment(String id, int commentNum) {
+		hhdao.DeleteComment(id, commentNum);		
+	}
+
+	@Override
+	public void DeleteCommentThumbs(int commentNum) {
+		hhdao.DeleteCommentThumbs(commentNum);
+	}
+
+	@Override
+	public void UpdateComments(int postNum, String comments, String id, int commentNum) {
+		hhdao.UpdateComments(postNum, comments, id, commentNum);
+		
 	}
 	
 	

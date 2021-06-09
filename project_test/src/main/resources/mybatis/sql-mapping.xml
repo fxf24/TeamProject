@@ -64,21 +64,33 @@ select * from comments where postNum=#{postNum} order by commentsDate DESC
 select profileImage from users where id=#{id}
 </select>
 
-<select id="getCommentThumbsup" parameterType="CommentThumbsupVO" resultType="CommentThumbsupVO">
+<select id="getCommentThumbsup" parameterType="CommentThumbsupVO" resultType="commentthumbsupVO">
 select * from commentThumbsup where commentNum=#{commentNum}
 </select>
 
-<insert id="commentThumbsPlus" parameterType="CommentThumbsupVO">
+<insert id="commentThumbsPlus" parameterType="commentthumbsupVO">
 insert into commentThumbsup values(commentThumbsup_SEQ.nextval, #{id}, #{commentNum})
 </insert>
 
-<delete id="commentThumbsMinus" parameterType="CommentThumbsupVO">
+<delete id="commentThumbsMinus" parameterType="commentthumbsupVO">
 delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
 </delete>
 
 <select id="getUserPosts" parameterType="String" resultType="postVO">
 select * from posts where id=#{user} order by postdate desc
 </select>
+
+<delete id="DeleteCommentThumbs" parameterType="int">
+delete from commentThumbsup where commentNum=#{commentNum}
+</delete>
+
+<delete id="DeleteComment" parameterType="commentsVO">
+delete from comments where id=#{id} and commentNum=#{commentNum}
+</delete>
+
+<update id="UpdateComments" parameterType="commentsVO">
+update comments set comments=#{comments} where postNum=#{postNum} and id=#{id} and commentNum=#{commentNum}
+</update>
 </mapper>
 
 
