@@ -83,7 +83,7 @@
     <body>
         <div id="navbar" class="header_navbar align-self-center">
             <div class="d-flex bd-highlight">
-                <a href="" class="me-auto">
+                <a href="/" class="me-auto">
                     <img class="logo-image" src="/loginimage/logo.png" alt="">
                 </a>
                 <div id="navbar-right">

@@ -89,6 +89,12 @@ public class HHserviceImpl implements HHservice{
 	public void commentThumbsMinus(int commentNum, String id) {
 		hhdao.commentThumbsMinus(commentNum, id);
 	}
+
+	@Override
+	public List<PostVO> getUserPosts(String id) {
+		// TODO Auto-generated method stub
+		return hhdao.getUserPosts(id);
+	}
 	
 	
 }

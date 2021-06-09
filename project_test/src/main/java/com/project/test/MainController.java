@@ -2,6 +2,7 @@ package com.project.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -159,4 +160,13 @@ public class MainController {
 		return "button/button";
 	}
 
+	@RequestMapping(value = "/showposts", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PostVO> showPosts(String user){
+		List<PostVO> list = null;
+		if(user != null) {
+			list = hhService.getUserPosts(user);
+		}
+		return list;
+	}
 }

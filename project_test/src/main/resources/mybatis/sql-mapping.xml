@@ -75,6 +75,10 @@ insert into commentThumbsup values(commentThumbsup_SEQ.nextval, #{id}, #{comment
 <delete id="commentThumbsMinus" parameterType="CommentThumbsupVO">
 delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
 </delete>
+
+<select id="getUserPosts" parameterType="String" resultType="postVO">
+select * from posts where id=#{user} order by postdate desc
+</select>
 </mapper>
 
 

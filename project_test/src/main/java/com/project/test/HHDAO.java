@@ -25,4 +25,5 @@ public interface HHDAO {
 	List<CommentThumbsupVO> getCommentThumbsup(int commentNum);//댓글 로드시 각 댓글의 좋아요 갯수 반환
 	void commentThumbsPlus(int commentNum, String id); // 댓글 좋아요 누르기
 	void commentThumbsMinus(int commentNum, String id); // 댓글 좋아요 취소
+	List<PostVO> getUserPosts(String user);//유저의 모든 포스트 데이터 반환
 }

@@ -19,4 +19,5 @@ public interface HHservice {
 	List<CommentThumbsupVO> getCommentThumbsup(int commentNum);
 	void commentThumbsPlus(int commentNum, String id); // 댓글 좋아요 누르기
 	void commentThumbsMinus(int commentNum, String id); // 댓글 좋아요 취소
+	List<PostVO> getUserPosts(String id);//유저의 모든 포스트 데이터 반환
 }
