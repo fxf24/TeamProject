@@ -38,15 +38,18 @@ public class MainController {
 		file.transferTo(savefile);
 		return "{\"data\":\"저장했습니다!\"}";
 	}
+	
+	//사용자 입력한 포스트 저장하기
 	@RequestMapping(value="/saveData", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveData(String id, String content, String image, String hashtag) {
-		System.out.println(id + "|"+ content + "|"+ image + "|"+ hashtag);
+	public String saveData(String id, String content, String image, String hashtag, String postDate) {
+		System.out.println(id + "|"+ content + "|"+ image + "|"+ hashtag + "|" + postDate);
 		PostVO pvo = new PostVO();
 		pvo.setId(id);
 		pvo.setContents(content);
 		pvo.setImagepath(image);
 		pvo.setHashtag(hashtag);
+		pvo.setPostDate(postDate);
 		hhService.insertPostData(pvo);
 		return "{\"data\":\"포스트 저장 완료\"}";
 	}
@@ -80,6 +83,8 @@ public class MainController {
 	public String login() {
 		return "login/main";
 	}
+	
+	//사용자 입력 데이터 저장하기
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	@ResponseBody
 	public String loginService(String id, String password) {
@@ -88,15 +93,12 @@ public class MainController {
 		if(user != null) {
 			if(user.getPassword().equals(password)) {
 				result = "{\"data\":\"로그인 성공!\", \"user\":\""+user.getId()+"\"}";
-			}
-			else {
+			}else {
 				result = "{\"data\":\"잘못된 비밀번호 입니다!\"}";
 			}
-		}
-		else {
+		}else {
 			result = "{\"data\":\"없는 아이디 입니다!\"}";
 		}
-		
 		return result;
 	}
 	
@@ -112,8 +114,7 @@ public class MainController {
 		user.setName(name);
 		user.setEmail(email);
 		user.setPassword(password);
-		user.setTelephone(telephone);
-		
+		user.setTelephone(telephone);	
 		hhService.insertUserData(user);
 		return "{\"data\":\"유저 저장 완료\"}";
 	}
@@ -130,16 +131,14 @@ public class MainController {
 		}
 		return result;
 	}
-	
-	
-	
+
 	/* 프로필 */ 
-	
 	@RequestMapping("/profile")
 	public String profile() {
 		return "profile/main";
 	}
 	
+	//회원아이디 불러오기
 	@RequestMapping(value="/profileaccount", method=RequestMethod.POST)
 	@ResponseBody
 	public UserVO profileaccount(String id) {
@@ -157,28 +156,52 @@ public class MainController {
 		return "/profile/main";
 	}
 
-		@RequestMapping(value="/saveProfileImage", method=RequestMethod.POST)
-		@ResponseBody
-		public String saveprofileimage(MultipartFile file) throws IOException{
-			String filename = file.getOriginalFilename();
-			System.out.println(filename);
-			//서버 저장 경로 설정
-			String savePath="c:/profile/";
-			//저장할 경로와 파일 이름 완성
-			File savefile = new File(savePath + filename);
-			//서버 저장
-			file.transferTo(savefile);
-			System.out.println("파일을 저장했습니다.");
-			return "{\"filename\":\""+filename+"\"}";
-		}
-	
-		@RequestMapping(value="/profilePosts", method=RequestMethod.POST)
-		@ResponseBody
-		public int getProfilePosts(int postDate) {
-			int profileposts = (int) hhService.getProfilePosts(postDate);
-			return profileposts;
-		}		
+	//프로필 이미지 업로드 받아오기
+	@RequestMapping(value="/saveProfileImage", method=RequestMethod.POST)
+	@ResponseBody
+	public String saveprofileimage(MultipartFile file) throws IOException{
+		String filename = file.getOriginalFilename();
+		System.out.println(filename);
+		//서버 저장 경로 설정
+		String savePath="c:/profile/";
+		//저장할 경로와 파일 이름 완성
+		File savefile = new File(savePath + filename);
+		//서버 저장
+		file.transferTo(savefile);
+		System.out.println("파일을 저장했습니다.");
+		return "{\"filename\":\""+filename+"\"}";
+	}
 		
+	//게시물 수 불러오기 1 
+	@RequestMapping(value="/postsCount", method=RequestMethod.POST)
+	@ResponseBody
+	public List<PostVO> getPostsCount(String postDate, String id) throws IOException {
+		List<PostVO> countList = hhService.getPostsCount(postDate, id);
+		System.out.println("게시물 수 불러오기 완료");
+		return countList;
+	}		
+	
+	//포스트 전체 불러오기 3 작동오류
+	@RequestMapping(value="/posts", method=RequestMethod.POST)
+    @ResponseBody
+    public List<PostVO> getPosts(String id, String contents, String imagepath, String hashtag, String postDate) throws IOException {
+        List<PostVO> post = hhService.getPosts(id, contents, imagepath, hashtag, postDate);
+        System.out.println("포스트 불러오기 완료");
+        return post;
+    }
+	
+	//포스트 이미지 불러오기 2 
+	@RequestMapping(value="/postsImage", method=RequestMethod.POST)
+    @ResponseBody
+    public String getPostsImage(String id) throws IOException {
+        String postsImage = hhService.getPostsImage(id);
+		if(postsImage == null) {
+			postsImage = "0";
+		}
+		System.out.println("포스트 이미지 불러오기 완료");
+		return postsImage;
+    }
+	
 	@RequestMapping("/profile/editform")
 	public String editform() {
 		return "profile/editform";

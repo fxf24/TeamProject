@@ -4,7 +4,8 @@
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
-	request.getParameter("postDate");
+	//String postDate = request.getParameter("postDate");
+	//out.print("게시물 등록 날짜는" + postDate);
 %>
 <!DOCTYPE html>
 <html>
@@ -15,31 +16,29 @@
 <meta name="keywords" content="WebPortfolio">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <title>Insert title here</title>
+
 <!-- 상단 고정 스타일 css 연결  -->
 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
 	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <script>
-var user = sessionStorage.getItem("user") //유저 아이디 가져오기
+var user = sessionStorage.getItem("user") //유저 아이디 가져오기 (String id, String name, String email, String password, String telephone)
+var post = sessionStorage.getItem("post") 
+
 $(document).ready(function(){
-		/* 프로필 사진 업로드  */
-	$('#img').click(function(i){
-		document.imageform.target_url.value = document.getElementById('img').src;
-		i.preventDefault();
-	    $('#file').click();
-	});	
-	
-	
-	/* 게시물 업로드 - test1 */
+	/* 게시물 업로드 - 포스트 작성으로 이동 */
 	$('#postupload').click(function(){
 		location.href = "/postupload"
 	});
 	
-	<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
-/* 			$("#modal").fadeIn();
-			$("#modalContent").text("");
- */
- 
+	$("#fileimage").click(function(e){
+		document.imageform.target_url.value = document.getElementById('img').src;
+		e.preventDefault()
+		 $('#file').click();
+		
+	});
+	
+<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 	/* 프로필 사진 업로드  */
  	$("#uploadprofile").click(function(event){
 		event.preventDefault() 
@@ -96,26 +95,123 @@ $(document).ready(function(){
 		});//ajax end 
 
 	}); //uploadprofile click function end 
+	
+/* 게시물 수 불러오기 1*/ 
+var id = "";
+var postDate = "";
+
+		$.ajax({ 
+		url: '/postsCount',
+		type: 'post',
+		data: {
+			"postDate":postDate,
+			"id":user
+			},
+		dataType: "json",
+		processData: false,	
+		async: false,
+		success: function(response){
+			//alert(response.length)
+			console.log(response)
+			var postscount = response.length
+			var postsword = $('#profileposts').text(); 
+			$('#profileposts').text(postsword + postscount); //게시물 + 갯수
+		}, //success end 
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}//error end
+	});//ajax end  
+
+	
+/* 포스트 전체 불러오기 3 */
+var contents = "";
+$.ajax({
+	url: '/posts',
+	type: 'post',
+	data: {"postDate": postDate},
+	dataType: "json",
+	success: function(response){
+		alert(response)
+	}, //success end 
+	error: function(request, status, error){
+		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+	} //error end 
+});//ajax end
 
 
+/* 포스트 이미지 불러오기 2 */
+var postsImage = "";
+
+//function getPostsImage(id, postDate, postsList){
+	$.ajax({ //postupload 이미지 불러오기
+		url:'/postsImage',
+		type:'post',
+		data: {"id": user},
+		dataType: "json",
+		success: function(response){
+			alert(response)
+			for(var i=0; i< response.length; i++){
+				console.log(response[i]);
+			}
+			if(response == "0"){ //포스트 사진이 없을 때
+				$(".card-body").append
+				("<div class='card-body' ></div>" + "<p class='card-text'>게시물 내용</p>"
+   				+ "<div class='d-flex justify-content-between align-items-center'>"
+					+ '<div class="btn-group">'
+					+ '<button type="button" class="btn btn-sm btn-outline-secondary">View</button>'
+					+ '<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>'
+					+ '</div>'
+					+ '<small class="text-muted">9 mins</small>'
+				+ '</div>')
+			}
+			else {
+				var postimagePath = response.split('/')
+				console.log("경로 : "+ postimagePath)
+				var postimageName = postimagePath[postimagePath.length-1]
+				console.log("이미지이름 : "+ postimageName)
+				postsImage = '/upload/'
+				postsImage += postimageName
+			}//else end
+			$(".card-body").append
+			("<img id='postsimg' src='"+ postsImage +"'>")
+			console.log($('.card-body').val())
+		}, //success end 
+		error: function(request, status, error){
+			alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+		} //error end 
+	});//ajax end 
+//}//function getPostsImage end 
+
+		
+		
+ /* 회원 아이디에서만 올린 포스트로 분류하기 위해 DB (문자열) 불러오기 */
+// console.log($("#card-body3-1").append())
+// $.ajax({
+// 	type: 'post',
+// 	url: '/saveData',
+// 	data: {
+// 		'id': user, 'content': $("#contents").val(), 'image': fileName,
+// 		'hashtag': $("#hashtags").text() + $("#names").val()
+// 	},
+// 	dataType: 'json',
+
+// 	success: function (response) {
+// 		alert(response.data)
+// 		location.href = "/"
+		
+// 	},
+
+// 	error: function (request, status, error) {
+// 		alert("success에 실패 했습니다.");
+// 		console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+// 	}
+// }); //ajax end
+
+ 	 
 });//document ready end
 
 
-// /* 회원아이디 DB에서 받아오기 */ 
-// function accountid(id){
-// 	$.ajax({
-// 		url: '/profileaccount',
-// 		type: 'post',
-// 		data: {"id":id},
-// //		dataType: "text",
-// 		async: false,
-// 		success: function(response){	
-// 			console.log(response.data)
-// 			$("#accountId").text(response.data);
-// 			alert("회원 아이디 연결")
-// 		}//success end 
-// 	});//ajax end  
-//  } //accountId function end 
+
 </script>	
 </head>
 <body>
@@ -124,6 +220,7 @@ $(document).ready(function(){
 		
 		<div id="followmodal" onclick="modalClick()"></div>
 		<div id="modalContent" onclick="modalContentClick()"></div>
+
 <main> 
 <!-- <1> 회원 간단 정보(DB) - 고정 : 프로필 사진 | 회원 아이디 | 프로필 편집  -->
 	<div id="info-container"> 
@@ -157,7 +254,7 @@ $(document).ready(function(){
         		<tr >
         			<!-- 게시물 | 팔로워 | 팔로우 수는 저장된 데이터의 수 그대로 불러오기 --> 
 					<td class="secondline">
-						<span class="secondline" id="profileposts">게시물 &nbsp; <%=request.getParameter("postDate") %>&nbsp; </span>
+						<span class="secondline" id="profileposts">게시물 &nbsp; </span>
         				<span class="secondline" id="follower">팔로워 &nbsp; </span>
         				<span class="secondline" id="follow">팔로우 &nbsp; </span>
 					</td>
@@ -188,9 +285,11 @@ $(document).ready(function(){
 <!-- 목록은 최근에 업로드한 것이 위에 위치하도록 (순서는 거꾸로 - 3(첫째 줄), 2(둘째 줄), 1(셋째 줄))
 '-1, 2, 3' 은 왼쪽에서 오른쪽으로의 순서  -->
 
-		<div id="main-container">
+	<div id="main-container">
 		 <!-- 게시물 첫째 줄 -->
-            <div id="card-body3-1">
+		 <div id="first-container">
+            <div class="card-body" id="card-body3-1">
+            <canvas class="posts" id="postscanvas" ></canvas>
             	<p class="card-text">게시물 내용</p>
               		<div class="d-flex justify-content-between align-items-center">
                 		<div class="btn-group">
@@ -203,7 +302,7 @@ $(document).ready(function(){
 
 
 
-            <span id="card-body3-2" >
+            <div class="card-body" id="card-body3-2" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -212,11 +311,11 @@ $(document).ready(function(){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </span>
+            </div>
 
         
 
-            <span id="card-body3-3" >
+            <div class="card-body" id="card-body3-3" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -225,13 +324,14 @@ $(document).ready(function(){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </span>
-		       
+            </div>
+		    
+		 </div>   
 		
 
 		<!-- 게시물 둘째 줄 -->
 		<div id="second-contatiner">
-            <div id="card-body2-1">
+            <div class="card-body"  id="card-body2-1">
             	<p class="card-text">게시물 내용</p>
               		<div class="d-flex justify-content-between align-items-center">
                 		<div class="btn-group">
@@ -240,11 +340,11 @@ $(document).ready(function(){
                 		</div>
                 		<small class="text-muted">9 mins</small>
               		</div>
-            	</div>
+            </div>
 
 
 
-            <span id="card-body2-2" >
+            <div class="card-body"  id="card-body2-2" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -253,11 +353,11 @@ $(document).ready(function(){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </span>
+            </div>
 
         
 
-            <span id="card-body2-3" >
+            <div class="card-body"  id="card-body2-3" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -266,12 +366,14 @@ $(document).ready(function(){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </span>
+            </div>
+            
 		</div>       
 
 		
 		<!-- 게시물 셋째 줄 -->
-            <div id="card-body1-1">
+		<div id="third-contatiner">
+            <div class="card-body"  id="card-body1-1">
             	<p class="card-text">게시물 내용</p>
               		<div class="d-flex justify-content-between align-items-center">
                 		<div class="btn-group">
@@ -281,10 +383,10 @@ $(document).ready(function(){
                 		<small class="text-muted">9 mins</small>
               		</div>
             	</div>
+		
 
 
-
-            <span id="card-body1-2" >
+            <div class="card-body"  id="card-body1-2" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -293,11 +395,11 @@ $(document).ready(function(){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </span>
+            </div>
 
         
 
-            <span id="card-body1-3" >
+            <div class="card-body"  id="card-body1-3" >
               <p class="card-text">게시물 내용</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
@@ -306,8 +408,13 @@ $(document).ready(function(){
                 </div>
                 <small class="text-muted">9 mins</small>
               </div>
-            </span>
-		</div>       
+            </div>
+            
+        </div> 
+          
+          
+          
+	</div>       
 </div>
 		
 

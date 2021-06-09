@@ -22,5 +22,7 @@ public interface HHDAO {
 	void addComments(int postNum, String comments, String id); //댓글 추가
 	List<CommentsVO> getComments(int postNum); // 작성한 댓글 불러오기
 	String getProfileImage(String id); // 프로필 사진만 불러오기
-	int getProfilePosts(int postDate); //프로필 게시물 수 불러오기
+	List<PostVO> getPostsCount(String postDate, String id); //프로필 게시물 수 불러오기
+	List<PostVO> getPosts(String id, String contents, String imagepath, String hashtag, String postDate); //프로필 목록에 포스트 전체 불러오기
+	String getPostsImage(String id); //프로필에 포스트 이미지 불러오기
 }

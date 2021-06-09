@@ -16,5 +16,7 @@ public interface HHservice {
 	void addComments(int postNum, String comments, String id);
 	List<CommentsVO> getComments(int postNum); 
 	String getProfileImage(String id); 
-	int getProfilePosts(int postDate);
+	List<PostVO> getPostsCount(String postDate, String id);
+	List<PostVO> getPosts(String id, String contents, String imagepath, String hashtag, String postDate);
+	String getPostsImage(String id);
 }

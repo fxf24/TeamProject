@@ -5,8 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("postVO")
 public class PostVO {
 	int postNum;
-	String id, contents, imagepath, hashtag;
-	String postDate;
+	String id, contents, imagepath, hashtag, postDate;
 	
 	public PostVO() {}
 	

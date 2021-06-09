@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+%>
 	<!DOCTYPE html>
 	<html>
 
@@ -15,7 +21,7 @@
 		<script>
 			$(document).ready(function () {
 				var user = sessionStorage.getItem("user")
-
+				
 				/////////////////////////
 				var input = document.querySelector('input');
 				input.style.opacity = 0;
@@ -141,13 +147,14 @@
 						url: '/saveData',
 						data: {
 							'id': user, 'content': $("#contents").val(), 'image': fileName,
-							'hashtag': $("#hashtags").text() + $("#names").val()
+							'hashtag': $("#hashtags").text() + $("#names").val(), 'postDate': $("#sysdate").text()
 						},
 						dataType: 'json',
 
 						success: function (response) {
 							alert(response.data)
 							location.href = "/"
+							sessionStorage.setItem("post", response.post)
 						},
 
 						error: function (request, status, error) {
@@ -202,6 +209,7 @@
 				<form class="col-6">
 					내용 입력<br>
 					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
+					<div id="sysdate"><%=sf.format(nowTime)%></div>
 					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 				</form>
 			</div>

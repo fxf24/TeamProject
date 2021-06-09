@@ -64,8 +64,23 @@ select * from comments where postNum=#{posttNum} order by commentsDate DESC
 select profileImage from users where id=#{id}
 </select>
 
-<select id="getProfilePosts" parameterType="int" resultType="integer">
-select postDate from posts where id=#{id} order by postDate DESC
+<!-- 메인 프로필 DB 작업 -->
+<select id="getPostsCount" parameterType="postVO" resultType="postVO">
+select id, count(postDate) as totalpostDate from posts group by id, postDate order by postDate DESC
+<!-- 	<if test="countList != null and countList.size != 0">
+		and count(postDate) in
+		<foreach item="countList" collection="countList" index="index" open="(" separator="," close=")">
+		#{countList}
+		</foreach>
+	</if> -->
+</select>
+
+<select id="getPosts" parameterType="postVO" resultType="postVO">
+select * from posts where id=#{id} order by postDate DESC
+</select>
+
+<select id="getPostsImage" parameterType="postVO" resultType="String">
+select imagepath from posts where id=#{id} order by postDate DESC
 </select>
 
 </mapper>

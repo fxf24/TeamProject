@@ -250,13 +250,33 @@
   	margin: auto; /* (위 오른쪽 아래 왼쪽 순) 50px 20px 0 30px*/
 } 
 
-/* 첫째 줄 */ 
 
+/* 첫째 줄 동적 구현 캔버스, 불러올 이미지  */
+.card-body{
+	display: flex; 
+	justify-content: space-between;
+}
+
+#postscanvas {
+	z-index: 3;
+	position: absolute;
+	border: 3px solid blue;
+	margin: 0; /* (위 오른쪽 아래 왼쪽 순) */
+	width: 300px;
+	height: 300px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0; 
+	padding: 0;
+}
+
+
+/* 첫째 줄 정적 모양 형성 */ 
 #card-body3-1 {
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 30px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -268,7 +288,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 30px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -280,7 +299,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 30px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -300,7 +318,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 400px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -312,7 +329,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 400px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -324,7 +340,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 400px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -338,7 +353,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 770px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -350,7 +364,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 770px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -362,7 +375,6 @@
 	z-index: 2;
 	background: gray;
 	position: absolute;
-	border: 3px solid gray;
 	margin: 770px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
