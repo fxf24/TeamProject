@@ -23,7 +23,7 @@
 
             <tiles:insertAttribute name="header" />
             <div class="indent"></div>
-            <div>위에 위치한 빈공간은 다른 작업에 방해되지 않도록 띄운 공간입니다.</div>
+            <div class="border border-primary">위에 위치한 빈공간은 다른 작업에 방해되지 않도록 띄운 공간입니다.</div>
             <tiles:insertAttribute name="body" />
             <!-- <meta http-equiv="refresh" content="0; url=/" /> -->
             <tiles:insertAttribute name="footer" />
