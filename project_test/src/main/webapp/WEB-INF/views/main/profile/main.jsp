@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <% 
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
-	//String postDate = request.getParameter("postDate");
-	//out.print("게시물 등록 날짜는" + postDate);
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 %>
 <!DOCTYPE html>
 <html>
@@ -23,8 +25,6 @@
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <script>
 var user = sessionStorage.getItem("user") //유저 아이디 가져오기 (String id, String name, String email, String password, String telephone)
-var post = sessionStorage.getItem("post") 
-
 $(document).ready(function(){
 	/* 게시물 업로드 - 포스트 작성으로 이동 */
 	$('#postupload').click(function(){
@@ -97,51 +97,25 @@ $(document).ready(function(){
 	}); //uploadprofile click function end 
 	
 /* 게시물 수 불러오기 1*/ 
-var id = "";
-var postDate = "";
-
 		$.ajax({ 
 		url: '/postsCount',
 		type: 'post',
-		data: {
-			"postDate":postDate,
-			"id":user
-			},
+		data: {"id": user},
 		dataType: "json",
-		processData: false,	
-		async: false,
 		success: function(response){
-			//alert(response.length)
-			console.log(response)
-			var postscount = response.length
+ 			//console.log(response) // Array(response.length) 
+ 			//console.log(response.length)
+			var postscount = response.length //게시물 개수
 			var postsword = $('#profileposts').text(); 
-			$('#profileposts').text(postsword + postscount); //게시물 + 갯수
+			$('#profileposts').text(postsword + "\n" + "\n" + postscount); //게시물 + 갯수
 		}, //success end 
 		error:function(request,status,error){
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
 		}//error end
 	});//ajax end  
 
-	
-/* 포스트 전체 불러오기 3 */
-var contents = "";
-$.ajax({
-	url: '/posts',
-	type: 'post',
-	data: {"postDate": postDate},
-	dataType: "json",
-	success: function(response){
-		alert(response)
-	}, //success end 
-	error: function(request, status, error){
-		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
-	} //error end 
-});//ajax end
-
 
 /* 포스트 이미지 불러오기 2 */
-var postsImage = "";
-
 //function getPostsImage(id, postDate, postsList){
 	$.ajax({ //postupload 이미지 불러오기
 		url:'/postsImage',
@@ -149,39 +123,113 @@ var postsImage = "";
 		data: {"id": user},
 		dataType: "json",
 		success: function(response){
-			alert(response)
+			console.log(response) //array(접속 회원 아이디의 포스트 개수)
+			
 			for(var i=0; i< response.length; i++){
-				console.log(response[i]);
-			}
-			if(response == "0"){ //포스트 사진이 없을 때
-				$(".card-body").append
-				("<div class='card-body' ></div>" + "<p class='card-text'>게시물 내용</p>"
-   				+ "<div class='d-flex justify-content-between align-items-center'>"
-					+ '<div class="btn-group">'
-					+ '<button type="button" class="btn btn-sm btn-outline-secondary">View</button>'
-					+ '<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>'
-					+ '</div>'
-					+ '<small class="text-muted">9 mins</small>'
-				+ '</div>')
-			}
-			else {
-				var postimagePath = response.split('/')
-				console.log("경로 : "+ postimagePath)
-				var postimageName = postimagePath[postimagePath.length-1]
-				console.log("이미지이름 : "+ postimageName)
-				postsImage = '/upload/'
-				postsImage += postimageName
-			}//else end
-			$(".card-body").append
-			("<img id='postsimg' src='"+ postsImage +"'>")
-			console.log($('.card-body').val())
+				//console.log(response[i]); //최상단의 하나의 포스트 {}
+						
+				var onePost = response[i];
+				//console.log(onePost.imagepath.split("/")) //["iu.png"]
+				var imageName = onePost.imagepath.split("/"); 
+				var onePostDate = onePost.postDate.split("|"); 
+				//console.log(onePost.postDate.split("/")) //["2021-06-10 22:40:46"]
+				
+				//이미지 출력이 날짜 내림차순으로 - sql ASC
+				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
+				var postcanvas = document.getElementById("postcanvas")//htmlobject타입
+				var context = postcanvas.getContext("2d")
+				
+				//이미지 로드
+				var image = new Image()
+				image.src = "/upload/" + imageName //반복문으로 인해 가장 최근 포스트 = 최상단
+				image.onload = function() {
+					var maxWidth = 300; 
+					var maxHeight = 300;
+					var width = image.width;
+					var height = image.height;
+					
+					if(width > maxWidth){
+						height = height/(width / maxWidth) ;
+						width = maxWidth;
+						
+					}else{
+						if(height > maxHeight){
+							width = width/(height/ maxHeight);
+							height = maxHeight;
+						}//중첩 if ends
+					}//if end 
+					context.drawImage(image, 0, 0, width, height)
+				} //image onload function end
+			}//for end	
+// 			if(response == "0"){ //포스트 사진이 없을 때
+// 				$(".card-body").append
+// 				("<div class='card-body' ></div>" + "<p class='card-text'>게시물 내용</p>"
+//    				+ "<div class='d-flex justify-content-between align-items-center'>"
+// 					+ '<div class="btn-group">'
+// 					+ '<button type="button" class="btn btn-sm btn-outline-secondary">View</button>'
+// 					+ '<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>'
+// 					+ '</div>'
+// 					+ '<small class="text-muted">9 mins</small>'
+// 				+ '</div>')
+// 			}
+// 			else {
+// 				var postimagePath = response.split('/')
+// 				console.log("경로 : "+ postimagePath)
+// 				var postimageName = postimagePath[postimagePath.length-1]
+// 				console.log("이미지이름 : "+ postimageName)
+// 				postsImage = '/upload/'
+// 				postsImage += postimageName
+// 			}//else end
+// 			$(".card-body").append
+// 			("<img id='postsimg' src='"+ postsImage +"'>")
+// 			console.log($('.card-body').val()) //0
 		}, //success end 
 		error: function(request, status, error){
-			alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error);
+			alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); //200에러
 		} //error end 
 	});//ajax end 
 //}//function getPostsImage end 
 
+
+/* 포스트 전체 불러오기 3 - */
+var contents = "";
+$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
+	url: '/posts',
+	type: 'post',
+	data: {"id": user},
+	dataType: "json",
+	success: function(response){
+		//console.log(response) //arraylist 
+		//console.log(response[0].id) //list의 id 값 불러오기
+	}, //success end 
+	error: function(request, status, error){
+		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+	} //error end 
+});//ajax end
+
+/* 포스트 가져오기 */
+// var content = "";
+// var image = "";
+// var hashtag = "";
+
+// $.ajax({
+// 	url: "/postData", 
+// 	type: "post",
+// 	data: {
+// 		'id': id,
+//         'contents': content,
+//         'imagepath': image,
+//         'hashtag': hashtag,
+// 		'postDate': postDate
+// 	},
+// 	dataType: "json",
+// 	success: function(response){
+// 		alert(response)
+// 	}, 
+// 	error: function(request, status, error){
+//  		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+//  	} //error end 
+// }); //ajax end
 		
 		
  /* 회원 아이디에서만 올린 포스트로 분류하기 위해 DB (문자열) 불러오기 */
@@ -289,7 +337,7 @@ var postsImage = "";
 		 <!-- 게시물 첫째 줄 -->
 		 <div id="first-container">
             <div class="card-body" id="card-body3-1">
-            <canvas class="posts" id="postscanvas" ></canvas>
+            <canvas class="postscanvas" id="postcanvas" ></canvas>
             	<p class="card-text">게시물 내용</p>
               		<div class="d-flex justify-content-between align-items-center">
                 		<div class="btn-group">

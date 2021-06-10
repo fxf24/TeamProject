@@ -47,16 +47,15 @@ public class MainController {
 	//사용자 입력한 포스트 저장하기
 	@RequestMapping(value="/saveData", method=RequestMethod.POST)
 	@ResponseBody
-	public String saveData(String id, String content, String image, String hashtag, String postDate) {
-		System.out.println(id + "|"+ content + "|"+ image + "|"+ hashtag + "|" + postDate);
+	public String saveData(String id, String content, String image, String hashtag) {
+		System.out.println(id + "|"+ content + "|"+ image + "|"+ hashtag );
 		PostVO pvo = new PostVO();
 		pvo.setId(id);
 		pvo.setContents(content);
 		pvo.setImagepath(image);
 		pvo.setHashtag(hashtag);
-		pvo.setPostDate(postDate);
 		hhService.insertPostData(pvo);
-		return "{\"data\":\"포스트 저장 완료\"}";
+		return "{\"data\":\"포스트 저장 완료\"}"; //작성 클릭 시, 화면 상 alert - 1
 	}
 
 	@RequestMapping(value = "/getODjson", method = RequestMethod.POST)
@@ -95,6 +94,7 @@ public class MainController {
 	public String loginService(String id, String password) {
 		String result = "";
 		UserVO user = hhService.getOneUser(id);
+		System.out.println(user);
 		if(user != null) {
 			if(user.getPassword().equals(password)) {
 				result = "{\"data\":\"로그인 성공!\", \"user\":\""+user.getId()+"\"}";
@@ -112,6 +112,8 @@ public class MainController {
 		return "login/signup";
 	}
 
+	
+	//사용자 입력한 signup data 저장하기 
 	@RequestMapping(value = "/login/signup", method = RequestMethod.POST)
 	@ResponseBody
 	public String signupService(String id, String name, String email, String password, String telephone) {
@@ -182,32 +184,56 @@ public class MainController {
 	//게시물 수 불러오기 1 
 	@RequestMapping(value="/postsCount", method=RequestMethod.POST)
 	@ResponseBody
-	public List<PostVO> getPostsCount(String postDate, String id) throws IOException {
-		List<PostVO> countList = hhService.getPostsCount(postDate, id);
+	public List<PostVO> getPostsCount(String id) throws IOException {
+		List<PostVO> countList = null;
+		if (id != null || id !="") {
+			countList = hhService.getPostsCount(id);
+		}
+		System.out.println(countList);
 		System.out.println("게시물 수 불러오기 완료");
 		return countList;
 	}		
 	
-	//포스트 전체 불러오기 3 작동오류
-	@RequestMapping(value="/posts", method=RequestMethod.POST)
-    @ResponseBody
-    public List<PostVO> getPosts(String id, String contents, String imagepath, String hashtag, String postDate) throws IOException {
-        List<PostVO> post = hhService.getPosts(id, contents, imagepath, hashtag, postDate);
-        System.out.println("포스트 불러오기 완료");
-        return post;
-    }
-	
 	//포스트 이미지 불러오기 2 
 	@RequestMapping(value="/postsImage", method=RequestMethod.POST)
     @ResponseBody
-    public String getPostsImage(String id) throws IOException {
-        String postsImage = hhService.getPostsImage(id);
-		if(postsImage == null) {
-			postsImage = "0";
+    public List<PostVO> getPostsImage(String id) throws IOException {
+		List<PostVO> postsImage = null; 
+		if(id != null || id != "") {
+			postsImage = hhService.getPostsImage(id);
 		}
+		System.out.println(postsImage);
 		System.out.println("포스트 이미지 불러오기 완료");
 		return postsImage;
     }
+		
+	//포스트 전체 불러오기 3 
+	@RequestMapping(value="/posts", method=RequestMethod.POST)
+    @ResponseBody
+    public List<PostVO> getPosts(String id) throws IOException {
+		System.out.println("포스트 작성한 회원의 id는 "+id);
+		List<PostVO> post = null;
+		if (id != null || id != "") {
+			post = hhService.getPosts(id);
+		}
+        System.out.println("포스트 불러오기 완료");
+        return post;
+    }
+		
+//	//포스트 전체 불러오기 3 시도1
+//	@RequestMapping(value="/postData", method=RequestMethod.POST)
+//    @ResponseBody
+//    public String postData(String id, String contents, String imagepath, String hashtag, String postDate) {
+//		PostVO post = new PostVO();
+//		String getId = post.getId();
+//		String getContents = post.getContents();
+//		String getImagepath = post.getImagepath();
+//		String getHashtag = post.getHashtag();
+//		String getPostDate = post.getPostDate();
+//		hhService.insertPostData(post);
+//		return "{\""+getId+getContents+getImagepath+getHashtag+getPostDate+"\"}";
+//	}
+	
 	
 	@RequestMapping("/profile/editform")
 	public String editform() {

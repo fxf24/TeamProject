@@ -25,7 +25,7 @@
 #img {
 	position: absolute;
 	background: silver;
-  	top: 0;
+  	top: 7%;
   	right: 1100px;
     left: 13.5%;
     bottom: 100px;
@@ -41,7 +41,7 @@
 #imagecanvas {
 	position: absolute;
 	z-index: 4;
-  	top: 0;
+  	top: 7%;
   	right: 1300px;
     left: 20px;
     bottom: 100px;
@@ -57,20 +57,21 @@
 #fileimage {
 	position: absolute;
 	z-index: 4;
-  	top: 50%;
+  	top: 40%;
   	right: 0;
     left: 27%;
     bottom: 100px;
-    margin: 20px; /* (위 오른쪽 아래 왼쪽 순) */
+    margin: 40px; /* (위 오른쪽 아래 왼쪽 순) */
     cursor: pointer;
     width: 100px;
     height: 100px;
-	color: transparent;
+/* 	color: transparent; */
 	text-align: center;
 	line-height: 600%;
 }
 
 #plus {
+	top: 60%;
 	width: 70%; 
 	height: 70%;
 	border-radius: 300px; 
@@ -81,7 +82,7 @@
 	background: silver;
 	position: absolute;
 	z-index: 2;
-	top: 10%;
+	top: 5%;
 	left: 5%;
 	width: 15%;
 	height: 17%;
@@ -134,7 +135,7 @@
 #accountId {
 	position:absolute;
 	z-index: 2;
-	top: 3%;
+	top: 23%;
     left: 50%;
 	text-align: center;
 	font-family: inherit;
@@ -146,7 +147,7 @@
 #profileedit {
 	position:absolute;
 	z-index: 2;
-	top: 5%;
+	top: 25%;
     left: 60%;
 	text-align: center;
 	cursor:pointer;
@@ -158,8 +159,8 @@
 #profileposts {
 	position:absolute;
 	z-index: 2;
-	top:10%;
-    left:50%;
+	top: 30%;
+    left: 50%;
 	text-align: center;
 	font-family: inherit;
 	font-size: large;
@@ -170,7 +171,7 @@
 #follower {
 	position:absolute;
 	z-index: 2;
-	top:10%;
+	top:30%;
     left:60%;
 	text-align: center;
 	font-family: inherit;
@@ -181,7 +182,7 @@
 #follow {
 	position:absolute;
 	z-index: 2;
-	top:10%;
+	top: 30%;
     left:70%;
 	text-align: center;
 	font-family: inherit;
@@ -192,25 +193,26 @@
 #postupload {
 	position:absolute;
 	z-index: 2;
-	top: 15%;
+	top: 35%;
     left: 50%;
 }
 
 #postfont {
 	z-index: 2;
 	position:absolute;
-	top: 15%;
+	top: 35%;
     left: 0;
 	cursor:pointer;
-	background: silver;
+	background: rgb(227, 227, 227);
 	font-size: medium;
-	width: 180px;
+	width: 110px;
+	text-align: center;
 }
 
 #postuploadbtn {
 	position:absolute;
 	z-index: 2;
-	top: 15%;
+	top: 35%;
     left: 0;
     display: none;
 }
@@ -229,7 +231,7 @@
 #introduction {
 	position:absolute;
 	z-index: 2;
-	top: 20%;
+	top: 40%;
     left: 50%;
 	text-align: left;
 	z-index: 2;
@@ -257,10 +259,9 @@
 	justify-content: space-between;
 }
 
-#postscanvas {
+#postcanvas {
 	z-index: 3;
 	position: absolute;
-	border: 3px solid blue;
 	margin: 0; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;

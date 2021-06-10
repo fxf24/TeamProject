@@ -12,6 +12,7 @@
  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
+var user = sessionStorage.getItem("user") 
 $(document).ready(function(){
 	
 })//document ready end
@@ -21,7 +22,9 @@ function search(){
 }
 
 function profile(){
-	location.href = "/profile"
+	location.href = "/profile?id=" + user
+			
+	 
 }
 
 function signup_mainscroll(){

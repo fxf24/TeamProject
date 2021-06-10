@@ -56,10 +56,11 @@ function login(){
   		
   		success: function(response){
   			console.log(response.data)
-  			alert(response.data)
+  			alert(response.data) //로그인 성공!
   			sessionStorage.setItem("user", response.user)
   			if(response.user != null){
   				location.href = "/mainscroll"
+  				sessionStorage.getItem("user")
   			}		
   		},
   			

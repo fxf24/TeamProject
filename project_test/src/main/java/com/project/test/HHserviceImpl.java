@@ -75,17 +75,17 @@ public class HHserviceImpl implements HHservice{
 	}
 
 	@Override
-	public List<PostVO> getPostsCount(String postDate, String id) {
-		return hhdao.getPostsCount(postDate, id);
+	public List<PostVO> getPostsCount(String id) {
+		return hhdao.getPostsCount(id);
 	}
 
 	@Override
-	public List<PostVO> getPosts(String id, String contents, String imagepath, String hashtag, String postDate) {
-		return hhdao.getPosts(id, contents, imagepath, hashtag, postDate);
+	public List<PostVO> getPosts(String id) {
+		return hhdao.getPosts(id);
 	}
 
 	@Override
-	public String getPostsImage(String id) {
+	public List<PostVO> getPostsImage(String id) {
 		return hhdao.getPostsImage(id);
 	}
 

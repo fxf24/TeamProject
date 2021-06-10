@@ -18,13 +18,17 @@ select * from users where name LIKE #{name}||'%' order by name
 select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
 </select>
 
-<insert id="insertPostData" parameterType="postVO">
+
+
+<insert id="insertPostData" parameterType="postVO" >
 <selectKey resultType="int" keyProperty="postNum" order="BEFORE">
 	select posts_seq.nextval from dual
 </selectKey>
 insert into posts values(#{postNum}, #{id}, #{contents},
  #{imagepath}, #{hashtag}, sysdate)
 </insert>
+
+
 
 <select id="getPostNum" parameterType="int" resultType="postVO">
 select * from posts where postNum=#{postNum}
@@ -37,6 +41,7 @@ select * from posts where postNum=#{postNum}
 insert into users values(#{userNum}, #{id}, #{password},
  #{email}, #{name}, #{telephone}, null)
 </insert>
+
 <select id="getThumbsup" parameterType="int" resultType="thumbsupVO">
 select * from thumbsup where postNum=#{postNum}
 </select>
@@ -65,8 +70,9 @@ select profileImage from users where id=#{id}
 </select>
 
 <!-- 메인 프로필 DB 작업 -->
-<select id="getPostsCount" parameterType="postVO" resultType="postVO">
-select id, count(postDate) as totalpostDate from posts group by id, postDate order by postDate DESC
+<!-- 오류,, -->
+<select id="getPostsCount" parameterType="String" resultType="postVO">
+select id, postDate from posts where id=#{id} order by postDate DESC
 <!-- 	<if test="countList != null and countList.size != 0">
 		and count(postDate) in
 		<foreach item="countList" collection="countList" index="index" open="(" separator="," close=")">
@@ -75,12 +81,12 @@ select id, count(postDate) as totalpostDate from posts group by id, postDate ord
 	</if> -->
 </select>
 
-<select id="getPosts" parameterType="postVO" resultType="postVO">
+<select id="getPosts" parameterType="String" resultType="postVO">
 select * from posts where id=#{id} order by postDate DESC
 </select>
 
-<select id="getPostsImage" parameterType="postVO" resultType="String">
-select imagepath from posts where id=#{id} order by postDate DESC
+<select id="getPostsImage" parameterType="String" resultType="postVO">
+select postNum, id, imagepath, postDate from posts where id=#{id} order by postDate 
 </select>
 
 
