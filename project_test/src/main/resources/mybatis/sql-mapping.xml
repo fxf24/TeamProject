@@ -91,6 +91,19 @@ delete from comments where id=#{id} and commentNum=#{commentNum}
 <update id="UpdateComments" parameterType="commentsVO">
 update comments set comments=#{comments} where postNum=#{postNum} and id=#{id} and commentNum=#{commentNum}
 </update>
+
+<select id="getReply" parameterType="ReplyCommentsVO" resultType="replycommentsVO">
+select * from replyComments where postNum=#{postNum} and commentNum=#{commentNum} order by commentNum DESC
+</select>
+
+<update id="UpdateReply" parameterType="ReplycommentsVO">
+update replyComments set comments=#{comments} where postNum=#{postNum} and id=#{id} and replyNum=#{replyNum}
+</update>
+
+<delete id="DeleteReply" parameterType="ReplycommentsVO">
+delete from replyComments where id=#{id} and replyNum=#{replyNum}
+</delete>
+
 </mapper>
 
 
