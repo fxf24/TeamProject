@@ -59,7 +59,7 @@ function login(){
   			alert(response.data)
   			sessionStorage.setItem("user", response.user)
   			if(response.user != null){
-  				location.href = "/mainscroll"
+  				location.href = "/"
   			}		
   		},
   			

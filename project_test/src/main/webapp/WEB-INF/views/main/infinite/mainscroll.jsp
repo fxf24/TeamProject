@@ -182,7 +182,9 @@
 <script src="scripts/infinite-scroll.js"></script>
 <script src="scripts/messages.js"></script>
 <script>
+	//session에서 user데이터값을 받아오기
 	var user = sessionStorage.getItem("user")
+	
 	var list = []
 	$.ajax({
 			url :"/showposts",
@@ -279,7 +281,13 @@
 			div.querySelector('.bubble .hashId span').textContent = item.id;
 			div.querySelector('.contentsss').textContent = item.message;
 			div.querySelector('.bubble .posted-date').textContent = item.time;
-			div.querySelector('.hashtag').textContent = item.hashtag;
+			var hashtags = div.querySelector('.hashtag');
+			var hashtagSplit = item.hashtag.split("#");
+			for(var i = 1; i < hashtagSplit.length; i++){
+				hashtags.innerHTML += "<a href='https://search.shopping.naver.com/search/all?query="
+					+hashtagSplit[i]+"&cat_id=&frm=NVSHATC'>#"+hashtagSplit[i]+"</a>";
+			}
+			
 			
 			//image 설정
 			var img = div.querySelector('.bubble img');
