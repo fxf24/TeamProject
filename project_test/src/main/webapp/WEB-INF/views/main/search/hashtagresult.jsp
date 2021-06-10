@@ -160,6 +160,9 @@ function modalClick(){
 		$("#cdelete").fadeIn();
 		$("#updateMyComment").html("");
 		$(".commentEditModal").fadeOut();
+		$("#redit").fadeIn();
+		$("#rdelete").fadeIn();
+		$("#updateMyReply").html("");
 		$(".replyEditModal").fadeOut();
 	} else if(modalStatus==1) {
 		modalStatus = 0;
@@ -172,17 +175,14 @@ function modalContentClick(){
 		$("#cdelete").fadeIn();
 		$("#updateMyComment").html("");
 		$(".commentEditModal").fadeOut();
+		$("#redit").fadeIn();
+		$("#rdelete").fadeIn();
+		$("#updateMyReply").html("");
 		$(".replyEditModal").fadeOut();
 	}
 	editmodalState=0;
 } // modalContentClick end
 
-// //ESC키 입력
-// function esckey(){
-// 	if(window.event.keyCode == 27){
-// 		$(".modal").fadeOut();
-// 	}
-// }//function end
 
 function thumbsup(){ //좋아요 누르기 / 취소하기
 	var id = myid;
@@ -366,8 +366,7 @@ function FunctionGetProfileImage(commentList, i){
 						} //if end
 					}//for end
 					var totalThumbs = contents.length; // 좋아요 개수
-								
-					if(CheckCommentThumbsup == 0){ //좋아요가 눌려져 있지 않음
+						
 						$(".commentsList").append
 						("<div class=oneComment>"+
 						"<span><image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'></span>"+
@@ -376,28 +375,16 @@ function FunctionGetProfileImage(commentList, i){
 						"<span><p>"+commentList.commentsDate+"</p></span>"+
 						"<span class='commentUD' onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
 						"<i class='fas fa-ellipsis-h'></i></span></div>"+
-						"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'>"+
-						"<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>"+ 
-						"<span class='reply'>답글달기</span>"+
-						"<span class='seeReply' id='seeReply_"+cnt+"' onclick='ShowReply("+cnt+")' ondblclick='HideReply("+cnt+")'></span>"+
+						"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'></span>"+
+						"<span class='seeReply' id='seeReply_"+cnt+"' onclick='ShowReply("+cnt+")'></span>"+
+						"<span class='reply' id='reply_"+cnt+"' onclick='writeReply("+commentList.commentNum+", "+cnt+")'>답글달기</span>"+
 						"<div class='replyList' id='replyList_"+cnt+"'></div>"+ //style='display:none;'
 						"</div>");
-					} else if(CheckCommentThumbsup == 1){ //좋아요가 눌려져 있음
-						$(".commentsList").append
-						("<div class=oneComment>"+
-						"<span><image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'></span>"+
-						"<div><p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</p>"+
-						"<p class='contents' id='contents_"+cnt+"' style='text-align:left'> "+commentList.comments+"</p>"+
-						"<span><p>"+commentList.commentsDate+"</p></span>"+
-						"<span class='commentUD' onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
-						"<i class='fas fa-ellipsis-h'></i></span></div>"+
-						"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'>"+
-						"<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>"+
-						"<span class='reply'>답글달기</span>"+
-						"<span class='seeReply' id='seeReply_"+cnt+"' onclick='ShowReply("+cnt+")' ondblclick='HideReply("+cnt+")'></span>"+ // "+FunctionGetReply(commentList.commentNum, cnt)+"
-						"<div class='replyList' id='replyList_"+cnt+"'></div>"+ // style='display:none;'
-						"</div>");	
-					}// if else end			
+						if(CheckCommentThumbsup == 0){ //좋아요가 눌려있음
+							$(".commentThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>")
+						} else if(CheckCommentThumbsup == 1){ // 좋야요가 눌려있지않음
+							$(".commentThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>")
+						}// if else end	
 					CheckCommentThumbsup = 0;
 				},
 				error:function(request,status,error){
@@ -553,7 +540,6 @@ function updateEnterkey(){
 }
 function gotoUpdateComment(){ // 댓글 수정창 띄우기
 	if(confirm("댓글을 수정하시겠습니까?")){
-		//$("#cedit").fadeOut();
 		$("#cdelete").fadeOut();
 		$("#updateMyComment").html(
 		"<input id='updatebox' type='text' value='"+$("#contents_"+cntNum+"").text()+"' onkeyup='updateEnterkey()'>"+
@@ -644,9 +630,9 @@ function FunctionGetReply(commentNum, cnt){
 					$("#replyList_"+cnt+"").append(
 					"<div><img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
 					"<p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
-					"<span id='replycomments_"+cnt+"'><p>"+list[i].comments+"</p></span>"+
+					"<span id='replycomments_"+i+"'><p>"+list[i].comments+"</p></span>"+
 					"<p>"+list[i].commentsDate+"</p>"+
-					"<span class='commentUD' onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+")'>"+
+					"<span class='commentUD' onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
 					"<i class='fas fa-ellipsis-h'></i></span></div>")
 				}//for end
 			}//if end
@@ -660,18 +646,24 @@ function FunctionGetReply(commentNum, cnt){
 } //function end
 
 // 답글(대댓글) 보이기 / 숨기기
+var ReplyDivState = 0;
 function ShowReply(cnt){
-	$("#replyList_"+cnt+"").css("display", "block");
-}
-function HideReply(cnt){
-	$("#replyList_"+cnt+"").css("display", "none");
+	if(ReplyDivState==0){
+		$("#replyList_"+cnt+"").css("display", "block");	
+		ReplyDivState = 1;
+	} else {
+		$("#replyList_"+cnt+"").css("display", "none");
+		ReplyDivState = 0;
+	}
 }
 
-//댓글 수정 및 삭제
+
+//답글 수정 및 삭제
 var cntReplyNum = 0; //넘어온 답글 번호
 var cntRep = 0; // 넘어온 답글 일련번호 (cnt)
 var cntRepCommentNum = 0;  // 넘어온 댓글 번호
-function FunctionEditReply(id, replyNum, cnt, commentNum){ // 댓글 옆 ... 누르기
+var cntRepList = 0; // 넘어온 답글 번호
+function FunctionEditReply(id, replyNum, cnt, commentNum, i){ // 댓글 옆 ... 누르기
 	if(id!=myid){
 		alert("수정 및 삭제 권한이 없습니다.")
 	} else {
@@ -680,6 +672,7 @@ function FunctionEditReply(id, replyNum, cnt, commentNum){ // 댓글 옆 ... 누
 		cntReplyNum = replyNum;
 		cntRep = cnt; 
 		cntRepCommentNum = commentNum;
+		cntRepList = i; 
 	}
 }
 
@@ -693,14 +686,14 @@ function gotoUpdateReply(){ // 답글 수정창 띄우기
 		//$("#redit").fadeOut();
 		$("#rdelete").fadeOut();
 		$("#updateMyReply").html(
-		"<input id='updatebox' type='text' value='"+$("#replycomments_"+cntRep+"").text()+"' onkeyup='replyUpdateEnterkey()'>"+
+		"<input id='updatebox' type='text' value='"+$("#replycomments_"+cntRepList+"").text()+"' onkeyup='replyUpdateEnterkey()'>"+
 		"<input id='commentBtn' type='button' value='작성' onclick='UpdateReply()'>")
 	}
 }
 
-function UpdateReply(){ //댓글 수정하기
-	var update = String($("#updatebox").val()) //댓글입력창의 값을 추출
-	if(update == null || update.trim() == ""){ //댓글입력창에 값이 없을 경우
+function UpdateReply(){ //답글 수정하기
+	var update = String($("#updatebox").val()) //답글입력창의 값을 추출
+	if(update == null || update.trim() == ""){ //답글입력창에 값이 없을 경우
 		alert("내용을 입력해주세요!")
 	}
 	else if(confirm("답글을 수정하시겠습니까?")){
@@ -715,7 +708,6 @@ function UpdateReply(){ //댓글 수정하기
 			},
 			dataType : "text",
 			success : function(){
-				//var commentList = []
 				$("#replyList_"+cntRep+"").text("")				
 				FunctionGetReply(cntRepCommentNum, cntRep)
 				$("#myComment").val("") //댓글 등록후 작성창에 내용 삭제
@@ -741,7 +733,7 @@ function DeleteReply(){ // 답글 (대댓글) 삭제하기
 			dataType: "text",
 			success: function(){
 				alert("삭제가 완료되었습니다.")
-				//var blankList = []
+				var blankList = []
 				$(".commentsList").html("")
  				FunctionGetComment(postNum, blankList)
  				modalContentClick()	
@@ -752,6 +744,66 @@ function DeleteReply(){ // 답글 (대댓글) 삭제하기
 		})//ajax end
 	}//if end
 }//function end
+
+
+// 답글 남기기
+var writeReplyState = 0;
+function writeReply(commentNum, cnt){ //commentID, 
+	if(writeReplyState==0){
+		$("#reply_"+cnt+"").html(
+			"답글취소"+
+			"<div class='replyBox'><input type='text' class='writeReply' placeholder='답글을 입력하세요' onkeyup='Replyenterkey("+commentNum+", "+cnt+")'>"+
+			"<input id='replyBtn' type='button' value='작성' onclick='addReply("+commentNum+", "+cnt+")'></div>")
+		$(".replyBox").on('click', function(e){
+			e.preventDefault();
+			e.stopPropagation();
+		});	
+		writeReplyState = 1;
+	} else {
+		$("#reply_"+cnt+"").html("답글달기")
+		writeReplyState = 0;
+	}
+}
+
+
+// 답글 남길때 엔터키 누르기
+function Replyenterkey(commentNum, cnt){
+	if(window.event.keyCode == 13){
+		addReply(commentNum, cnt);
+	}
+}// function end
+
+// 답글 추가하기
+function addReply(commentNum, cnt){
+	var text = $(".writeReply").val(); // 답글입력창 값 추출
+	if(text == null || text.trim() == ""){ // 입력창에 값이 없을경우
+		alert("내용을 입력해주세요!")
+	}
+	else if(confirm("답글을 작성하시겠습니까?")){
+		$.ajax({
+			url: "/addreply",
+			type: "post",
+			data:{
+				"postNum": postNum,
+				"commentNum": commentNum,
+				"comments": text,
+				"id": myid
+			},
+			success:function(response){
+				$("#replyList_"+cnt+"").text("") // 답글창 초기화
+				FunctionGetReply(commentNum, cnt) // 답글 불러오기 함수
+				alert("답글 작성이 완료되었습니다.")
+				$(".writeReply").val("") //답글 등록후 작성창에 내용 삭제
+			},
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}// error end
+		}) //ajax end
+	}// if end
+}
+
+
+
 </script>
 </head>
 <body>
@@ -804,8 +856,8 @@ function DeleteReply(){ // 답글 (대댓글) 삭제하기
   background:rgba(244,238,238,1); border-radius:10px;
   position:fixed; top:50%; left:50%;
   margin-top:-100px; margin-left:-100px; z-index:9999; text-align:center'>
-  <div id="redit" onclick='gotoUpdateReply()' style='width:400px; height:90px; border:3px solid black'><p>댓글 수정</p></div>
-  <div id="rdelete" onclick='DeleteReply()' style='width:400px; height:90px; border:3px solid black'><p>댓글 삭제</p></div>
+  <div id="redit" onclick='gotoUpdateReply()' style='width:400px; height:90px; border:3px solid black'><p>답글 수정</p></div>
+  <div id="rdelete" onclick='DeleteReply()' style='width:400px; height:90px; border:3px solid black'><p>답글 삭제</p></div>
   <div id='updateMyReply'></div> <!-- 0.5초 또는 1초 있다가 나오게 변경해야할듯 -->
 </div>
 

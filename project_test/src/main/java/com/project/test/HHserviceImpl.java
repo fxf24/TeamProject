@@ -100,10 +100,10 @@ public class HHserviceImpl implements HHservice{
 		hhdao.DeleteComment(id, commentNum);		
 	}
 
-	@Override
-	public void DeleteCommentThumbs(int commentNum) {
-		hhdao.DeleteCommentThumbs(commentNum);
-	}
+//	@Override
+//	public void DeleteCommentThumbs(int commentNum) {
+//		hhdao.DeleteCommentThumbs(commentNum);
+//	}
 
 	@Override
 	public void UpdateComments(int postNum, String comments, String id, int commentNum) {
@@ -123,6 +123,11 @@ public class HHserviceImpl implements HHservice{
 	@Override
 	public void DeleteReply(String id, int replyNum) {
 		hhdao.DeleteReply(id, replyNum);	
+	}
+
+	@Override
+	public void AddReply(int postNum, int commentNum, String comments, String id) {
+		hhdao.AddReply(postNum, commentNum, comments, id);
 	}
 	
 	

@@ -181,13 +181,12 @@ public class SearchController {
 	@RequestMapping(value="/deletecomment", method=RequestMethod.POST)
 	@ResponseBody
 	public void DeleteComment(String id, int commentNum) {
-		CommentThumbsupVO tvo = new CommentThumbsupVO();
-		tvo.setCommentNum(commentNum);
-		service.DeleteCommentThumbs(commentNum);
+//		CommentThumbsupVO tvo = new CommentThumbsupVO();
+//		tvo.setCommentNum(commentNum);
+//		service.DeleteCommentThumbs(commentNum);
 		CommentsVO vo = new CommentsVO();
 		vo.setId(id);
 		vo.setCommentNum(commentNum);
-		//대댓글 삭제 기능도 추가해야함
 		service.DeleteComment(id, commentNum);
 	}
 	
@@ -235,5 +234,17 @@ public class SearchController {
 		vo.setId(id);
 		//service.DeleteCommentThumbs(commentNum); 대댓글 좋아요 기능 추가시 필요
 		service.DeleteReply(id, replyNum);
+	}
+	
+	// 답글 작성 기능
+	@RequestMapping(value="/addreply", method=RequestMethod.POST)
+	@ResponseBody
+	public void AddReply(int postNum, int commentNum, String comments, String id) {
+		ReplyCommentsVO cvo = new ReplyCommentsVO();
+		cvo.setPostNum(postNum);
+		cvo.setCommentNum(commentNum);
+		cvo.setComments(comments);
+		cvo.setId(id);
+		service.AddReply(postNum, commentNum,comments, id);
 	}
 }

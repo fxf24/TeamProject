@@ -80,9 +80,9 @@ delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
 select * from posts where id=#{user} order by postdate desc
 </select>
 
-<delete id="DeleteCommentThumbs" parameterType="int">
-delete from commentThumbsup where commentNum=#{commentNum}
-</delete>
+<!-- <delete id="DeleteCommentThumbs" parameterType="int"> -->
+<!-- delete from commentThumbsup where commentNum=#{commentNum} -->
+<!-- </delete> -->
 
 <delete id="DeleteComment" parameterType="commentsVO">
 delete from comments where id=#{id} and commentNum=#{commentNum}
@@ -103,6 +103,10 @@ update replyComments set comments=#{comments} where postNum=#{postNum} and id=#{
 <delete id="DeleteReply" parameterType="ReplycommentsVO">
 delete from replyComments where id=#{id} and replyNum=#{replyNum}
 </delete>
+
+<insert id="AddReply" parameterType="ReplycommentsVO">
+insert into replyComments values(reply_SEQ.nextval, #{id}, #{postNum}, #{commentNum}, #{comments}, sysdate)
+</insert>
 
 </mapper>
 
