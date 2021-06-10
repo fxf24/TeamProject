@@ -57,7 +57,7 @@ insert into comments values(#{commentNum}, #{id}, #{postNum}, #{comments}, sysda
 </insert>
 
 <select id="getComments" parameterType="int" resultType="commentsVO">
-select * from comments where postNum=#{posttNum} order by commentsDate DESC
+select * from comments where postNum=#{postNum} order by commentsDate DESC
 </select>
 
 <select id="getProfileImage" parameterType="UserVO" resultType="String">
@@ -82,6 +82,35 @@ select * from posts where id=#{id} order by postDate DESC
 <select id="getPostsImage" parameterType="postVO" resultType="String">
 select imagepath from posts where id=#{id} order by postDate DESC
 </select>
+
+
+<select id="getCommentThumbsup" parameterType="CommentThumbsupVO" resultType="commentthumbsupVO">
+select * from commentThumbsup where commentNum=#{commentNum}
+</select>
+
+<insert id="commentThumbsPlus" parameterType="commentthumbsupVO">
+insert into commentThumbsup values(commentThumbsup_SEQ.nextval, #{id}, #{commentNum})
+</insert>
+
+<delete id="commentThumbsMinus" parameterType="commentthumbsupVO">
+delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
+</delete>
+
+<select id="getUserPosts" parameterType="String" resultType="postVO">
+select * from posts where id=#{user} order by postdate desc
+</select>
+
+<delete id="DeleteCommentThumbs" parameterType="int">
+delete from commentThumbsup where commentNum=#{commentNum}
+</delete>
+
+<delete id="DeleteComment" parameterType="commentsVO">
+delete from comments where id=#{id} and commentNum=#{commentNum}
+</delete>
+
+<update id="UpdateComments" parameterType="commentsVO">
+update comments set comments=#{comments} where postNum=#{postNum} and id=#{id} and commentNum=#{commentNum}
+</update>
 
 </mapper>
 

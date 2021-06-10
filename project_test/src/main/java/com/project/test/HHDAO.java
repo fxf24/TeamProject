@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository("hhDAO")
 public interface HHDAO {
-
 	UserVO getOneUser(String id); //유저 한명 가져오기
 	List<UserVO> getUserID(String id); // 아이디 검색 리스트 반환
 	List<UserVO> getUserName(String name); // 이름 검색 리스트 반환
@@ -25,4 +24,12 @@ public interface HHDAO {
 	List<PostVO> getPostsCount(String postDate, String id); //프로필 게시물 수 불러오기
 	List<PostVO> getPosts(String id, String contents, String imagepath, String hashtag, String postDate); //프로필 목록에 포스트 전체 불러오기
 	String getPostsImage(String id); //프로필에 포스트 이미지 불러오기
+	
+	List<CommentThumbsupVO> getCommentThumbsup(int commentNum);//댓글 로드시 각 댓글의 좋아요 갯수 반환
+	void commentThumbsPlus(int commentNum, String id); // 댓글 좋아요 누르기
+	void commentThumbsMinus(int commentNum, String id); // 댓글 좋아요 취소
+	List<PostVO> getUserPosts(String user);//유저의 모든 포스트 데이터 반환
+	void DeleteComment(String id, int commentNum); // 댓글 지우기
+	void DeleteCommentThumbs(int commentNum); //댓글 지우기 전 댓글 좋아요 모두 삭제	
+	void UpdateComments(int postNum, String comments, String id, int commentNum);// 댓글 수정하기
 }

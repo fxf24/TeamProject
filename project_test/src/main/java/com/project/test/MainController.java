@@ -19,26 +19,31 @@ public class MainController {
 	NaverService naverService;
 	@Autowired
 	HHserviceImpl hhService;
-	
+
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
+	public String index() {
+		return "index";
+	}
+
 	@RequestMapping("/postupload")
 	public String uploadform() {
-		return "/main/postupload";
+		return "main/posts/postupload";
 	}
-	
-	@RequestMapping(value="/saveImage", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/saveImage", method = RequestMethod.POST)
 	@ResponseBody
-	public String saveImage(MultipartFile file) throws IOException{
+	public String saveImage(MultipartFile file) throws IOException {
 		String filename = file.getOriginalFilename();
 		System.out.println(filename);
-		//서버 저장 경로 설정
-		String savePath="c:/upload/";
-		//저장할 경로와 파일 이름 완성
+		// 서버 저장 경로 설정
+		String savePath = "c:/upload/";
+		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
-		//서버 저장
+		// 서버 저장
 		file.transferTo(savefile);
 		return "{\"data\":\"저장했습니다!\"}";
 	}
-	
+
 	//사용자 입력한 포스트 저장하기
 	@RequestMapping(value="/saveData", method=RequestMethod.POST)
 	@ResponseBody
@@ -53,36 +58,36 @@ public class MainController {
 		hhService.insertPostData(pvo);
 		return "{\"data\":\"포스트 저장 완료\"}";
 	}
-	
-	
-	@RequestMapping(value="/getODjson", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/getODjson", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadresult(MultipartFile file) throws IOException {
 		String filename = file.getOriginalFilename();
-		//서버 저장 경로 설정
-		String savePath="c:/upload/";
-		//저장할 경로와 파일 이름 완성
+		// 서버 저장 경로 설정
+		String savePath = "c:/upload/";
+		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
-		//서버 저장
+		// 서버 저장
 		file.transferTo(savefile);
-		
+
 		String odResult = naverService.getObjectDetectionService(filename);
 		String cfrResult = naverService.getCFRService(filename);
-		System.out.println(filename +":" + odResult);
+		System.out.println(filename + ":" + odResult);
 		System.out.println(cfrResult);
-		
-		return filename +"|" + odResult + "|" + cfrResult; 
+
+		return filename + "|" + odResult + "|" + cfrResult;
 	}
-	
+
 	@RequestMapping("/")
 	public String main() {
-		return "main/main";
+		return "main/infinite/mainscroll";
 	}
 
 	@RequestMapping("/login")
 	public String login() {
 		return "login/main";
 	}
+
 	
 	//사용자 입력 데이터 저장하기
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -101,12 +106,13 @@ public class MainController {
 		}
 		return result;
 	}
-	
+
 	@RequestMapping("/login/signup")
 	public String signup() {
 		return "login/signup";
 	}
-	@RequestMapping(value="/login/signup", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/login/signup", method = RequestMethod.POST)
 	@ResponseBody
 	public String signupService(String id, String name, String email, String password, String telephone) {
 		UserVO user = new UserVO();
@@ -118,24 +124,25 @@ public class MainController {
 		hhService.insertUserData(user);
 		return "{\"data\":\"유저 저장 완료\"}";
 	}
-	@RequestMapping(value="/getUserID", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/getUserID", method = RequestMethod.POST)
 	@ResponseBody
 	public String getOneUser(String id) {
 		String result = "";
 		UserVO user = hhService.getOneUser(id);
-		if(user != null) {
+		if (user != null) {
 			result = "{\"data\":\"사용할 수 없는 아이디 입니다!\"}";
-		}
-		else {
+		} else {
 			result = "{\"data\":\"사용할 수 있는 아이디 입니다!\"}";
 		}
 		return result;
 	}
 
+
 	/* 프로필 */ 
 	@RequestMapping("/profile")
 	public String profile() {
-		return "profile/main";
+		return "main/profile/main";
 	}
 	
 	//회원아이디 불러오기
@@ -204,7 +211,7 @@ public class MainController {
 	
 	@RequestMapping("/profile/editform")
 	public String editform() {
-		return "profile/editform";
+		return "main/profile/editform";
 	}
 
 	@RequestMapping("/profile/imageform")
@@ -215,18 +222,28 @@ public class MainController {
 	
 	
 	// 중복 방지를 위해 블록처리
-//	@RequestMapping("/search")
-//	public String search() {
-//		return "search/main";
-//	}
+	// @RequestMapping("/search")
+	// public String search() {
+	// return "search/main";
+	// }
 
 	@RequestMapping("/mainscroll")
 	public String mainscroll() {
-		return "infinite/mainscroll";
+		return "main/infinite/mainscroll";
 	}
+
 	@RequestMapping("/button")
 	public String button() {
-		return "button/button";
+		return "main/button/button";
+	}
+
+	@RequestMapping(value = "/showposts", method = RequestMethod.POST)
+	@ResponseBody
+	public List<PostVO> showPosts(String user){
+		List<PostVO> list = null;
+		if(user != null) {
+			list = hhService.getUserPosts(user);
+		}
+		return list;
 	}
 }
-

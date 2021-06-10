@@ -13,7 +13,6 @@
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
-	var user = sessionStorage.getItem("user")
 	
 })//document ready end
 
@@ -130,12 +129,12 @@ html, body {
 	</div>
 	    <li class="chat-item" data-id="{{id}}">
 	      <div class="bubble">
-	           	<div class=hashId>
-<!-- 
-아이디 표시 위치
- -->
-<span>id</span>
-		</div>
+	      <div class=hashId>
+					<!-- 
+					아이디 표시 위치
+					 -->
+					<span>id</span>
+			</div>
 	        <div class =plusBox>
 	        		<svg class="plusBoxIcon" viewBox="10 4 8 32">
 						<path id="plusBoxIcon" d="M 13.99999904632568 12.00000095367432 C 16.19999885559082 12.00000095367432 17.99999809265137 10.20000171661377 17.99999809265137 8.000000953674316 C 17.99999809265137 5.799999713897705 16.19999885559082 4 13.99999904632568 4 C 11.79999923706055 4 9.999999046325684 5.799999713897705 9.999999046325684 8.000000953674316 C 9.999999046325684 10.20000171661377 11.79999923706055 12.00000095367432 13.99999904632568 12.00000095367432 Z M 13.99999904632568 16.00000190734863 C 11.79999923706055 16.00000190734863 9.999999046325684 17.80000114440918 9.999999046325684 20.00000381469727 C 9.999999046325684 22.20000267028809 11.79999923706055 24.00000381469727 13.99999904632568 24.00000381469727 C 16.19999885559082 24.00000381469727 17.99999809265137 22.20000267028809 17.99999809265137 20.00000381469727 C 17.99999809265137 17.80000114440918 16.19999885559082 16.00000190734863 13.99999904632568 16.00000190734863 Z M 13.99999904632568 28.00000381469727 C 11.79999923706055 28.00000381469727 9.999999046325684 29.80000495910645 9.999999046325684 32.00000381469727 C 9.999999046325684 34.20000076293945 11.79999923706055 36 13.99999904632568 36 C 16.19999885559082 36 17.99999809265137 34.20000076293945 17.99999809265137 32.00000381469727 C 17.99999809265137 29.80000495910645 16.19999885559082 28.00000381469727 13.99999904632568 28.00000381469727 Z">
@@ -192,21 +191,21 @@ html, body {
 				<span>REPORT</span>
 			</div>
 		</div>
-	        <div class="meta">
+	      <div class="meta">
 		   <div class="timePost">
-<!--           
-시간 표시 위치
--->	
-<time class="posted-date"></time>
+			<!--           
+			시간 표시 위치
+			-->	
+			<div class="posted-date"></div>
 	  
 		   </div>
-	        </div>
+	      </div>
 <!--
 이미지 위치
 -->
-<img>
+<img id="postImage">
 
-	 	       <div id="contentsssssss">
+	 	    <div id="contentsssssss">
 			     <div id="contentsButtonPBox">
 					<div id="contentsUpButtonPBox">
 						<svg class="contentsUpButtonBright" viewBox="4 4 110 110">
@@ -245,21 +244,15 @@ html, body {
 						</svg>
 					</div>
 				</div>
-	     		   <p class="hashtag">
-<!-- 
-해시태그 위치 
--->
-#HASHTAG/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////</p>
+	     		<div class="hashtag">
+				<!-- 해시태그 위치 -->				
+				</div>
 
-				        <div class="contentsss">
-<!--
-게시물 내용 위치
--->
-<p>
-</p>
+				<div class="contentsss">
+				<!--게시물 내용 위치-->
 
-				        </div>
-				     </div>
+				</div>
+			</div>
 	        <div class="meta">
 			<!-- 여긴 x <time class="posted-date"></time> -->
 	        </div>
@@ -283,8 +276,24 @@ html, body {
   <script src="scripts/infinite-scroll.js"></script>
   <script src="scripts/messages.js"></script>
 <script>
-var INIT_TIME = new Date().getTime();
-const random1 = Math.floor(Math.random()*19);// 총 데이터 갯수, 현재 image0 ~19가 있음
+var user = sessionStorage.getItem("user")
+var list = []
+$.ajax({
+		url :"/showposts",
+		type : "post",
+		data : {"user" : user},
+		dataType : "json",
+		success : function(response){
+			list = response
+			console.log(user)
+			console.log(list)
+			console.log(list[0].id)
+		}, // success end
+		error : function(e){
+				console.log(e);
+		} // error end
+}); // ajax end		
+
 /**
  * Constructs a random item with a given id.
  * @param {number} id An identifier for the item.
@@ -304,18 +313,19 @@ function getItem(id) {
  
   return new Promise(function(resolve) {
     var item = {
-      id: id,
+      id: list[id].id,
       self: Math.random() < 0.1,
-      image: Math.random() < 100.0 / 100 ? Math.floor(Math.random()*20) : '',
-      time: new Date(Math.floor(INIT_TIME + id*20*1000 + Math.random()*20*1000)),
-      message: pickRandom(MESSAGES)
+      image: list[id].imagepath,
+      time: list[id].postDate,
+      message: list[id].contents,
+      hashtag: list[id].hashtag
     }
     if(item.image == '') {
       resolve(item);
       item.image = random1
     }
     var image = new Image();
-    image.src = 'images/image' + item.image + '.jpg';
+    image.src = '/upload/'  + item.image;
     image.addEventListener('load', function() {
       item.image = image;
       resolve(item);
@@ -344,8 +354,8 @@ ContentSource.prototype = {
       // Assume 50 ms per item.
       setTimeout(function() {
         var items = [];
-        for (var i = 0; i < Math.abs(count); i++) {
-          items[i] = getItem(this.nextItem_++);
+        for (var i = 0; i < list.length; i++) {
+          items[i] = getItem(i);
         }
         resolve(Promise.all(items));
       }.bind(this), 1000 /* Simulated 1 second round trip time */ );
@@ -359,16 +369,12 @@ ContentSource.prototype = {
   render: function(item, div) {
     // TODO: Different style?
     div = div || this.messageTemplate_.cloneNode(true);
-    div.dataset.id = item.id;
-	div.querySelector('.contentsss p').textContent = item.message;
-    div.querySelector('.bubble .posted-date').textContent = item.time.toString();
-
-/* image 위치////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+    div.querySelector('.bubble .hashId span').textContent = item.id;
+	div.querySelector('.contentsss').textContent = item.message;
+    div.querySelector('.bubble .posted-date').textContent = item.time;
+	div.querySelector('.hashtag').textContent = item.hashtag;
+    
+	//image 설정
     var img = div.querySelector('.bubble img');
     if(item.image !== '') {
       img.classList.remove('invisible');

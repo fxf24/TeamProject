@@ -89,8 +89,41 @@ public class HHserviceImpl implements HHservice{
 		return hhdao.getPostsImage(id);
 	}
 
-	
+	@Override
+	public List<CommentThumbsupVO> getCommentThumbsup(int commentNum) {
+		return hhdao.getCommentThumbsup(commentNum);
+	}
 
-	
-	
+	@Override
+	public void commentThumbsPlus(int commentNum, String id) {
+		hhdao.commentThumbsPlus(commentNum, id);
+		
+	}
+
+	@Override
+	public void commentThumbsMinus(int commentNum, String id) {
+		hhdao.commentThumbsMinus(commentNum, id);
+	}
+
+	@Override
+	public List<PostVO> getUserPosts(String id) {
+		return hhdao.getUserPosts(id);
+	}
+
+	@Override
+	public void DeleteComment(String id, int commentNum) {
+		hhdao.DeleteComment(id, commentNum);		
+	}
+
+	@Override
+	public void DeleteCommentThumbs(int commentNum) {
+		hhdao.DeleteCommentThumbs(commentNum);
+	}
+
+	@Override
+	public void UpdateComments(int postNum, String comments, String id, int commentNum) {
+		hhdao.UpdateComments(postNum, comments, id, commentNum);
+		
+	}
+
 }
