@@ -27,9 +27,10 @@ public interface HHDAO {
 	void commentThumbsMinus(int commentNum, String id); // 댓글 좋아요 취소
 	List<PostVO> getUserPosts(String user);//유저의 모든 포스트 데이터 반환
 	void DeleteComment(String id, int commentNum); // 댓글 지우기
-	void DeleteCommentThumbs(int commentNum); //댓글 지우기 전 댓글 좋아요 모두 삭제	
+//	void DeleteCommentThumbs(int commentNum); //댓글 지우기 전 댓글 좋아요 모두 삭제	
 	void UpdateComments(int postNum, String comments, String id, int commentNum);// 댓글 수정하기
 	List<ReplyCommentsVO> getReply(int commentNum, int postNum); //답글(대댓글) 불러오기
 	void UpdateReply(int postNum, String comments, String id, int replyNum); // 답글(대댓글) 수정하기
 	void DeleteReply(String id, int replyNum); //답글 삭제
+	void AddReply(int postNum, int commentNum, String comments, String id);// 답글 달기
 }
