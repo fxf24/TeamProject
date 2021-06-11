@@ -13,6 +13,7 @@ import com.project.test.CommentsVO;
 import com.project.test.HHservice;
 import com.project.test.PostVO;
 import com.project.test.ReplyCommentsVO;
+import com.project.test.ReplyThumbsupVO;
 import com.project.test.ThumbsupVO;
 import com.project.test.UserVO;
 
@@ -246,5 +247,34 @@ public class SearchController {
 		cvo.setComments(comments);
 		cvo.setId(id);
 		service.AddReply(postNum, commentNum,comments, id);
+	}
+	
+	
+	// 답글의 좋아요 불러오기
+	@RequestMapping(value="/getreplythumbsup", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReplyThumbsupVO> getReplyThumbsup(int replyNum) {
+		List<ReplyThumbsupVO> result = (List<ReplyThumbsupVO>)service.getReplyThumbsup(replyNum);	
+		return result;
+	}
+	
+	// 답글 좋아요 누르기
+	@RequestMapping("/replythumbsplus")
+	@ResponseBody
+	public void replyThumbsPlus(int replyNum, String id) {
+		ReplyThumbsupVO vo = new ReplyThumbsupVO();
+		vo.setReplyNum(replyNum);
+		vo.setId(id);
+		service.replyThumbsPlus(replyNum, id);
+	}
+	
+	// 답글 좋아요 취소
+	@RequestMapping("/replythumbsminus")
+	@ResponseBody
+	public void replyThumbsMinus(int replyNum, String id) {
+		ReplyThumbsupVO vo = new ReplyThumbsupVO();
+		vo.setReplyNum(replyNum);
+		vo.setId(id);
+		service.replyThumbsMinus(replyNum, id);
 	}
 }

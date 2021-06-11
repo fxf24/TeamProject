@@ -131,11 +131,6 @@ public class HHserviceImpl implements HHservice{
 		hhdao.DeleteComment(id, commentNum);		
 	}
 
-//	@Override
-//	public void DeleteCommentThumbs(int commentNum) {
-//		hhdao.DeleteCommentThumbs(commentNum);
-//	}
-
 	@Override
 	public void UpdateComments(int postNum, String comments, String id, int commentNum) {
 		hhdao.UpdateComments(postNum, comments, id, commentNum);
@@ -161,4 +156,19 @@ public class HHserviceImpl implements HHservice{
 		hhdao.AddReply(postNum, commentNum, comments, id);
 	}
 
+	@Override
+	public List<ReplyThumbsupVO> getReplyThumbsup(int replyNum) {
+		return hhdao.getReplyThumbsup(replyNum);
+	}
+
+	@Override
+	public void replyThumbsPlus(int replyNum, String id) {
+		hhdao.replyThumbsPlus(replyNum, id);
+	}
+
+	@Override
+	public void replyThumbsMinus(int replyNum, String id) {
+		hhdao.replyThumbsMinus(replyNum, id);
+	}
+	
 }
