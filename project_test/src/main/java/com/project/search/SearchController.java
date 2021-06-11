@@ -12,6 +12,7 @@ import com.project.test.CommentThumbsupVO;
 import com.project.test.CommentsVO;
 import com.project.test.HHservice;
 import com.project.test.PostVO;
+import com.project.test.ReplyCommentsVO;
 import com.project.test.ThumbsupVO;
 import com.project.test.UserVO;
 
@@ -180,9 +181,9 @@ public class SearchController {
 	@RequestMapping(value="/deletecomment", method=RequestMethod.POST)
 	@ResponseBody
 	public void DeleteComment(String id, int commentNum) {
-		CommentThumbsupVO tvo = new CommentThumbsupVO();
-		tvo.setCommentNum(commentNum);
-		service.DeleteCommentThumbs(commentNum);
+//		CommentThumbsupVO tvo = new CommentThumbsupVO();
+//		tvo.setCommentNum(commentNum);
+//		service.DeleteCommentThumbs(commentNum);
 		CommentsVO vo = new CommentsVO();
 		vo.setId(id);
 		vo.setCommentNum(commentNum);
@@ -199,5 +200,51 @@ public class SearchController {
 		vo.setId(id);
 		vo.setCommentNum(commentNum);
 		service.UpdateComments(postNum, comments, id, commentNum);
+	}
+	
+	// 대댓글(답글) 불러오기 기능
+	@RequestMapping(value="/getreply", method=RequestMethod.POST)
+	@ResponseBody
+	public List<ReplyCommentsVO> getReply(int commentNum, int postNum) {
+		ReplyCommentsVO vo = new ReplyCommentsVO();
+		vo.setPostNum(postNum);
+		vo.setCommentNum(commentNum);
+		List<ReplyCommentsVO> list = (List<ReplyCommentsVO>)service.getReply(commentNum, postNum);
+		return list;
+	}
+	
+	// 대댓글(답글) 수정하기 기능
+	@RequestMapping(value="/updatereply", method=RequestMethod.POST)
+	@ResponseBody
+	public void UpdateReply(int postNum, String comments, String id, int replyNum) {
+		ReplyCommentsVO vo = new ReplyCommentsVO();
+		vo.setPostNum(postNum);
+		vo.setComments(comments);
+		vo.setId(id);
+		vo.setReplyNum(replyNum);
+		service.UpdateReply(postNum, comments, id, replyNum);
+	}
+	
+	// 답글(대댓글) 지우기 기능
+	@RequestMapping(value="/deletereply", method=RequestMethod.POST)
+	@ResponseBody
+	public void DeleteReply(String id, int replyNum) {
+		ReplyCommentsVO vo = new ReplyCommentsVO();
+		vo.setReplyNum(replyNum);
+		vo.setId(id);
+		//service.DeleteCommentThumbs(commentNum); 대댓글 좋아요 기능 추가시 필요
+		service.DeleteReply(id, replyNum);
+	}
+	
+	// 답글 작성 기능
+	@RequestMapping(value="/addreply", method=RequestMethod.POST)
+	@ResponseBody
+	public void AddReply(int postNum, int commentNum, String comments, String id) {
+		ReplyCommentsVO cvo = new ReplyCommentsVO();
+		cvo.setPostNum(postNum);
+		cvo.setCommentNum(commentNum);
+		cvo.setComments(comments);
+		cvo.setId(id);
+		service.AddReply(postNum, commentNum,comments, id);
 	}
 }

@@ -69,16 +69,8 @@ select * from comments where postNum=#{postNum} order by commentsDate DESC
 select profileImage from users where id=#{id}
 </select>
 
-<!-- 메인 프로필 DB 작업 -->
-<!-- 오류,, -->
 <select id="getPostsCount" parameterType="String" resultType="postVO">
 select id, postDate from posts where id=#{id} order by postDate DESC
-<!-- 	<if test="countList != null and countList.size != 0">
-		and count(postDate) in
-		<foreach item="countList" collection="countList" index="index" open="(" separator="," close=")">
-		#{countList}
-		</foreach>
-	</if> -->
 </select>
 
 <select id="getPosts" parameterType="String" resultType="postVO">
@@ -106,9 +98,9 @@ delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
 select * from posts where id=#{user} order by postdate desc
 </select>
 
-<delete id="DeleteCommentThumbs" parameterType="int">
-delete from commentThumbsup where commentNum=#{commentNum}
-</delete>
+<!-- <delete id="DeleteCommentThumbs" parameterType="int"> -->
+<!-- delete from commentThumbsup where commentNum=#{commentNum} -->
+<!-- </delete> -->
 
 <delete id="DeleteComment" parameterType="commentsVO">
 delete from comments where id=#{id} and commentNum=#{commentNum}
@@ -117,6 +109,22 @@ delete from comments where id=#{id} and commentNum=#{commentNum}
 <update id="UpdateComments" parameterType="commentsVO">
 update comments set comments=#{comments} where postNum=#{postNum} and id=#{id} and commentNum=#{commentNum}
 </update>
+
+<select id="getReply" parameterType="ReplyCommentsVO" resultType="replycommentsVO">
+select * from replyComments where postNum=#{postNum} and commentNum=#{commentNum} order by commentNum DESC
+</select>
+
+<update id="UpdateReply" parameterType="ReplycommentsVO">
+update replyComments set comments=#{comments} where postNum=#{postNum} and id=#{id} and replyNum=#{replyNum}
+</update>
+
+<delete id="DeleteReply" parameterType="ReplycommentsVO">
+delete from replyComments where id=#{id} and replyNum=#{replyNum}
+</delete>
+
+<insert id="AddReply" parameterType="ReplycommentsVO">
+insert into replyComments values(reply_SEQ.nextval, #{id}, #{postNum}, #{commentNum}, #{comments}, sysdate)
+</insert>
 
 </mapper>
 

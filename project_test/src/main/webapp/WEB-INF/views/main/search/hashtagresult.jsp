@@ -82,13 +82,15 @@ $(document).ready(function(){
 				} // error end
 		}); // ajax end	
 }); //ready function end
+
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
 var CheckCommentThumbsup = 0; //댓글창에 좋아요를 눌렀는지 체크??
-var myid = "aiu10"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
-//var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
+//var myid = "aiu10"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
+
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
 	$("body").css("overflow-y", "hidden")
@@ -111,8 +113,7 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 						
 			var profileImagePath = FunctionGetContentProfileImage(postID); // 게시글 작성자의 프로필 이미지 불러오기	
 			FunctionGetComment(postNum, commentList) // 댓글 가져오기 함수
-			
-			
+						
 			$(".modalContent").append(
 				"<div class=modalHeader><i class='far fa-window-close fa-3x' id='windowClose' onclick='modalClick()'></i>"+
 				"<div class='postDate'>게시일 : "+contents.postDate+"</div>"+
@@ -136,8 +137,8 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 			} // for end
 			FunctionThumbsupSearch(postNum) // 좋아요 불러오기
 		}, //success end
-		error : function(e){
-			console.log(e)
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		} // error end
 	}); //outer ajax end
 }// function end
@@ -159,6 +160,10 @@ function modalClick(){
 		$("#cdelete").fadeIn();
 		$("#updateMyComment").html("");
 		$(".commentEditModal").fadeOut();
+		$("#redit").fadeIn();
+		$("#rdelete").fadeIn();
+		$("#updateMyReply").html("");
+		$(".replyEditModal").fadeOut();
 	} else if(modalStatus==1) {
 		modalStatus = 0;
 	} // elseif end
@@ -170,16 +175,14 @@ function modalContentClick(){
 		$("#cdelete").fadeIn();
 		$("#updateMyComment").html("");
 		$(".commentEditModal").fadeOut();
+		$("#redit").fadeIn();
+		$("#rdelete").fadeIn();
+		$("#updateMyReply").html("");
+		$(".replyEditModal").fadeOut();
 	}
 	editmodalState=0;
 } // modalContentClick end
 
-// //ESC키 입력
-// function esckey(){
-// 	if(window.event.keyCode == 27){
-// 		$(".modal").fadeOut();
-// 	}
-// }//function end
 
 function thumbsup(){ //좋아요 누르기 / 취소하기
 	var id = myid;
@@ -199,8 +202,8 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 				//console.log("토탈 : "+totalThumbs)
 				$(".thumbsupButton").html("<i class='fas fa-heart fa-2x'></i>")
 			},
-			error : function(e){
-				console.log(e)
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			} // error end
 		}); // ajax end
 	} 
@@ -220,8 +223,8 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 				//console.log("토탈 : "+totalThumbs)
 				$(".thumbsupButton").html("<i class='far fa-heart fa-2x'></i>")
 			},
-			error : function(e){
-				console.log(e)
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			} // error end
 		}); // ajax end
 	}// else end
@@ -257,8 +260,8 @@ function FunctionThumbsupSearch(postNum){
 				"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");						
 			}// if else end	
 		},
-		error : function(e){
-			console.log(e)
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		} // error end 
 	}); // ajax end
 }
@@ -318,14 +321,14 @@ function FunctionGetComment(postNum, commentList){
 				}// for end
 			}
 		},//success end
-		error : function(e){
-			console.log(e)
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}//error end
 	})//ajax end
 } //function end
 
 
-//댓글 프로필 이미지 반환, 내용 작성
+//댓글 프로필 이미지, 내용 반환
 var CheckCommentThumbsup = 0; //현재 게시물 좋아요를 눌렀는지 판단
 function FunctionGetProfileImage(commentList, i){
 	var profileImage = "";
@@ -363,49 +366,37 @@ function FunctionGetProfileImage(commentList, i){
 						} //if end
 					}//for end
 					var totalThumbs = contents.length; // 좋아요 개수
-					//console.log(totalThumbs)
-					//<i class='far fa-heart fa'></i> 좋아요 "+totalThumbs+"개
-					
-					if(CheckCommentThumbsup == 0){ //좋아요가 눌려져 있지 않음
+						
 						$(".commentsList").append
 						("<div class=oneComment>"+
 						"<span><image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'></span>"+
 						"<div><p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</p>"+
-						"<p class='contents_"+cnt+"' style='text-align:left'> "+commentList.comments+"</p>"+
+						"<p class='contents' id='contents_"+cnt+"' style='text-align:left'> "+commentList.comments+"</p>"+
 						"<span><p>"+commentList.commentsDate+"</p></span>"+
 						"<span class='commentUD' onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
 						"<i class='fas fa-ellipsis-h'></i></span></div>"+
-						"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'>"+
-						"<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>"+ 
-						"<span class='reply' onclick=''>답글달기</span>"+
-						"<div class=replyList></div>"+
-						"</div>")
-					} else if(CheckCommentThumbsup == 1){ //좋아요가 눌려져 있음
-						$(".commentsList").append
-						("<div class=oneComment>"+
-						"<span><image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'></span>"+
-						"<div><p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</p>"+
-						"<p class='contents_"+cnt+"' style='text-align:left'> "+commentList.comments+"</p>"+
-						"<span><p>"+commentList.commentsDate+"</p></span>"+
-						"<span class='commentUD' onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
-						"<i class='fas fa-ellipsis-h'></i></span></div>"+
-						"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'>"+
-						"<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>"+
-						"<span class='reply' onclick=''>답글달기</span>"+
-						"<div class=reply></div>"+
-						"</div>")
-					}// if else end	
+						"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'></span>"+
+						"<span class='seeReply' id='seeReply_"+cnt+"' onclick='ShowReply("+cnt+")'></span>"+
+						"<span class='reply' id='reply_"+cnt+"' onclick='writeReply("+commentList.commentNum+", "+cnt+")'>답글달기</span>"+
+						"<div class='replyList' id='replyList_"+cnt+"'></div>"+ //style='display:none;'
+						"</div>");
+						if(CheckCommentThumbsup == 0){ //좋아요가 눌려있음
+							$(".commentThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>")
+						} else if(CheckCommentThumbsup == 1){ // 좋야요가 눌려있지않음
+							$(".commentThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 </span>")
+						}// if else end	
 					CheckCommentThumbsup = 0;
 				},
-				error : function(e){
-					console.log(e)
+				error:function(request,status,error){
+				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				} // error end 
 			}); // ajax end	
 		},
-		error: function(e){
-			console.log(e)
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}//error end
 	})//ajax end	
+	FunctionGetReply(commentList.commentNum, cnt) 
 }// function end
 
 //댓글에 좋아요 누르기
@@ -430,8 +421,8 @@ function commentThumbsup(CheckCommentThumbsup, commentNum, totalThumbs, cnt){
 				$(".commentThumbsup_"+cnt+"").attr("onclick", "commentThumbsup("+CheckCommentThumbsup+", "+commentNum+", "+totalThumbs+", "+cnt+")") //클릭 속성 내 Check~값 변경
 				$(".commentThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
 			},
-			error : function(e){
-				console.log(e)
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			} // error end
 		}); // ajax end
 	} 
@@ -451,8 +442,8 @@ function commentThumbsup(CheckCommentThumbsup, commentNum, totalThumbs, cnt){
 				$(".commentThumbsup_"+cnt+"").attr("onclick", "commentThumbsup("+CheckCommentThumbsup+", "+commentNum+", "+totalThumbs+", "+cnt+")") //클릭 속성 내 Check~값 변경
 				$(".commentThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
 			},
-			error : function(e){
-				console.log(e)
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			} // error end
 		}); // ajax end
 	}// else end
@@ -482,8 +473,8 @@ function FunctionGetContentProfileImage(postID){
 				profileImage += imageName
 			} // else end
 		},
-		error: function(e){
-			console.log(e)
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}//error end
 	}); //ajax end
 	return profileImage;
@@ -495,7 +486,7 @@ function wordsearch(){
 	f.submit();
 }//function end
 
-
+//댓글 달기
 function FunctionCommentThumbs(){
 	var myComment = $("#myComment").val() //댓글입력창의 값을 추출
 	if(myComment == null || myComment.trim() == ""){ //댓글입력창에 값이 없을 경우
@@ -542,12 +533,16 @@ function FunctionEditComment(id, commentNum, cnt){ // 댓글 옆 ... 누르기
 	}
 }
 
+function updateEnterkey(){
+	if(window.event.keyCode == 13){
+		UpdateComment();
+	}
+}
 function gotoUpdateComment(){ // 댓글 수정창 띄우기
 	if(confirm("댓글을 수정하시겠습니까?")){
-		//$("#cedit").fadeOut();
 		$("#cdelete").fadeOut();
 		$("#updateMyComment").html(
-		"<input id='updatebox' type='text' value='"+$(".contents_"+cntNum+"").text()+"'>"+
+		"<input id='updatebox' type='text' value='"+$("#contents_"+cntNum+"").text()+"' onkeyup='updateEnterkey()'>"+
 		"<input id='commentBtn' type='button' value='작성' onclick='UpdateComment()'>")
 		console.log(postNum)
 	}
@@ -603,12 +598,212 @@ function DeleteComment(){ // 댓글 삭제하기
  				FunctionGetComment(postNum, blankList)
  				modalContentClick()	
 			},
-			error: function(e){
-				console.log(e)
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}// error end
 		})//ajax end
 	}//if end
 }//function end
+
+//답글 불러오기
+function FunctionGetReply(commentNum, cnt){
+	$.ajax({
+		url: "/getreply",
+		type: "post",
+		data: {
+			"commentNum" : commentNum,
+			"postNum" : postNum
+		},
+		asyns: false,
+		dataType: "json",
+		success: function(response){
+			var list = [];
+			for(var i in response){
+				list.push(response[i])
+			}//for end
+			
+			if(list.length!=0){
+				for(var i=0; i<list.length; i++){
+					var profileImagePath = FunctionGetContentProfileImage(list[i].id)
+
+					$("#seeReply_"+cnt+"").text("답글 "+list.length+"개");
+					$("#replyList_"+cnt+"").append(
+					"<div><img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
+					"<p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
+					"<span id='replycomments_"+i+"'><p>"+list[i].comments+"</p></span>"+
+					"<p>"+list[i].commentsDate+"</p>"+
+					"<span class='commentUD' onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
+					"<i class='fas fa-ellipsis-h'></i></span></div>")
+				}//for end
+			}//if end
+		},
+		error: function(e){
+			console.log(e)
+		}
+	});
+	$("#replyList_"+cnt+"").css("display","none")
+// 	commentNum: 121 / comments: "대댓글1" / commentsDate: "2021-06-10 01:22:42" / id: "aiu10"/ postNum: 37 / replyNum: 1
+} //function end
+
+// 답글(대댓글) 보이기 / 숨기기
+var ReplyDivState = 0;
+function ShowReply(cnt){
+	if(ReplyDivState==0){
+		$("#replyList_"+cnt+"").css("display", "block");	
+		ReplyDivState = 1;
+	} else {
+		$("#replyList_"+cnt+"").css("display", "none");
+		ReplyDivState = 0;
+	}
+}
+
+
+//답글 수정 및 삭제
+var cntReplyNum = 0; //넘어온 답글 번호
+var cntRep = 0; // 넘어온 답글 일련번호 (cnt)
+var cntRepCommentNum = 0;  // 넘어온 댓글 번호
+var cntRepList = 0; // 넘어온 답글 번호
+function FunctionEditReply(id, replyNum, cnt, commentNum, i){ // 댓글 옆 ... 누르기
+	if(id!=myid){
+		alert("수정 및 삭제 권한이 없습니다.")
+	} else {
+		$(".replyEditModal").fadeIn();
+		editmodalState=1;
+		cntReplyNum = replyNum;
+		cntRep = cnt; 
+		cntRepCommentNum = commentNum;
+		cntRepList = i; 
+	}
+}
+
+function replyUpdateEnterkey(){
+	if(window.event.keyCode == 13){
+		UpdateReply();
+	}
+}
+function gotoUpdateReply(){ // 답글 수정창 띄우기
+	if(confirm("답글을 수정하시겠습니까?")){
+		//$("#redit").fadeOut();
+		$("#rdelete").fadeOut();
+		$("#updateMyReply").html(
+		"<input id='updatebox' type='text' value='"+$("#replycomments_"+cntRepList+"").text()+"' onkeyup='replyUpdateEnterkey()'>"+
+		"<input id='commentBtn' type='button' value='작성' onclick='UpdateReply()'>")
+	}
+}
+
+function UpdateReply(){ //답글 수정하기
+	var update = String($("#updatebox").val()) //답글입력창의 값을 추출
+	if(update == null || update.trim() == ""){ //답글입력창에 값이 없을 경우
+		alert("내용을 입력해주세요!")
+	}
+	else if(confirm("답글을 수정하시겠습니까?")){
+		$.ajax({
+			url: "/updatereply",
+			type: "post",
+			data : {
+				"postNum": postNum,
+				"comments": update,
+				"id" : myid,
+				"replyNum" : cntReplyNum
+			},
+			dataType : "text",
+			success : function(){
+				$("#replyList_"+cntRep+"").text("")				
+				FunctionGetReply(cntRepCommentNum, cntRep)
+				$("#myComment").val("") //댓글 등록후 작성창에 내용 삭제
+				alert("답글 수정이 완료되었습니다.")
+				modalContentClick()			
+			},
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}//error
+		}) //ajax end
+	}//if end
+}
+
+function DeleteReply(){ // 답글 (대댓글) 삭제하기
+	if(confirm("댓글을 삭제하시겠습니까?")){
+		$.ajax({
+			url: "/deletereply",
+			type: "post",
+			data: {
+				"id" : myid,
+				"replyNum" : cntReplyNum
+			},
+			dataType: "text",
+			success: function(){
+				alert("삭제가 완료되었습니다.")
+				var blankList = []
+				$(".commentsList").html("")
+ 				FunctionGetComment(postNum, blankList)
+ 				modalContentClick()	
+			},
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}// error end
+		})//ajax end
+	}//if end
+}//function end
+
+
+// 답글 남기기
+var writeReplyState = 0;
+function writeReply(commentNum, cnt){ //commentID, 
+	if(writeReplyState==0){
+		$("#reply_"+cnt+"").html(
+			"답글취소"+
+			"<div class='replyBox'><input type='text' class='writeReply' placeholder='답글을 입력하세요' onkeyup='Replyenterkey("+commentNum+", "+cnt+")'>"+
+			"<input id='replyBtn' type='button' value='작성' onclick='addReply("+commentNum+", "+cnt+")'></div>")
+		$(".replyBox").on('click', function(e){
+			e.preventDefault();
+			e.stopPropagation();
+		});	
+		writeReplyState = 1;
+	} else {
+		$("#reply_"+cnt+"").html("답글달기")
+		writeReplyState = 0;
+	}
+}
+
+
+// 답글 남길때 엔터키 누르기
+function Replyenterkey(commentNum, cnt){
+	if(window.event.keyCode == 13){
+		addReply(commentNum, cnt);
+	}
+}// function end
+
+// 답글 추가하기
+function addReply(commentNum, cnt){
+	var text = $(".writeReply").val(); // 답글입력창 값 추출
+	if(text == null || text.trim() == ""){ // 입력창에 값이 없을경우
+		alert("내용을 입력해주세요!")
+	}
+	else if(confirm("답글을 작성하시겠습니까?")){
+		$.ajax({
+			url: "/addreply",
+			type: "post",
+			data:{
+				"postNum": postNum,
+				"commentNum": commentNum,
+				"comments": text,
+				"id": myid
+			},
+			success:function(response){
+				$("#replyList_"+cnt+"").text("") // 답글창 초기화
+				FunctionGetReply(commentNum, cnt) // 답글 불러오기 함수
+				alert("답글 작성이 완료되었습니다.")
+				$(".writeReply").val("") //답글 등록후 작성창에 내용 삭제
+			},
+			error:function(request,status,error){
+			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}// error end
+		}) //ajax end
+	}// if end
+}
+
+
+
 </script>
 </head>
 <body>
@@ -656,6 +851,16 @@ function DeleteComment(){ // 댓글 삭제하기
   <div id='updateMyComment'></div> <!-- 0.5초 또는 1초 있다가 나오게 변경해야할듯 -->
 </div>
 	
+<div class="replyEditModal"
+  style='display:none; width:400px; height:200px;
+  background:rgba(244,238,238,1); border-radius:10px;
+  position:fixed; top:50%; left:50%;
+  margin-top:-100px; margin-left:-100px; z-index:9999; text-align:center'>
+  <div id="redit" onclick='gotoUpdateReply()' style='width:400px; height:90px; border:3px solid black'><p>답글 수정</p></div>
+  <div id="rdelete" onclick='DeleteReply()' style='width:400px; height:90px; border:3px solid black'><p>답글 삭제</p></div>
+  <div id='updateMyReply'></div> <!-- 0.5초 또는 1초 있다가 나오게 변경해야할듯 -->
+</div>
+
 <i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
 
 </body>
