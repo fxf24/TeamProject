@@ -13,7 +13,6 @@ public interface HHDAO {
 	List<UserVO> getUserName(String name); // 이름 검색 리스트 반환
 	List<PostVO> getHashtag(String hashtag); // 해시태그 검색 리스트 반환
 	void insertPostData(PostVO pvo);//포스트데이터 저장
-	
 	List<PostVO> getPostNum(int postNum);  // 포스트번호 검색, 리스트 반환
 	void insertUserData(UserVO uvo);
 	List<ThumbsupVO> getThumbsup(int postNum); //좋아요 갯수, 누른 사람 목록 반환
@@ -22,11 +21,12 @@ public interface HHDAO {
 	void addComments(int postNum, String comments, String id); //댓글 추가
 	List<CommentsVO> getComments(int postNum); // 작성한 댓글 불러오기
 	String getProfileImage(String id); // 프로필 사진만 불러오기
-	
+	UserVO getProfileUser(String id); //프로필 유저 한 명 불러오기
+	void updateUserProfileData(String id, String profileImage); //회원의 프로필 수정 저장
+	List<UserVO> getOneProfileImage(String id); //회원의 프로필 사진 불러오기
 	List<PostVO> getPostsCount(String id); //프로필 게시물 수 불러오기
 	List<PostVO> getPosts(String id); //프로필 목록에 포스트 전체 불러오기
 	List<PostVO> getPostsImage(String id); //프로필에 포스트 이미지 불러오기
-	
 	List<CommentThumbsupVO> getCommentThumbsup(int commentNum);//댓글 로드시 각 댓글의 좋아요 갯수 반환
 	void commentThumbsPlus(int commentNum, String id); // 댓글 좋아요 누르기
 	void commentThumbsMinus(int commentNum, String id); // 댓글 좋아요 취소

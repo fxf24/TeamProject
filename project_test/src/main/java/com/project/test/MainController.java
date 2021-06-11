@@ -113,7 +113,7 @@ public class MainController {
 	}
 
 	
-	//사용자 입력한 signup data 저장하기 
+	//회원가입 유저정보 저장하기 
 	@RequestMapping(value = "/login/signup", method = RequestMethod.POST)
 	@ResponseBody
 	public String signupService(String id, String name, String email, String password, String telephone) {
@@ -123,10 +123,12 @@ public class MainController {
 		user.setEmail(email);
 		user.setPassword(password);
 		user.setTelephone(telephone);	
+//		user.setProfileImage(profileImage);
 		hhService.insertUserData(user);
 		return "{\"data\":\"유저 저장 완료\"}";
 	}
 
+	//아이디 중복확인
 	@RequestMapping(value = "/getUserID", method = RequestMethod.POST)
 	@ResponseBody
 	public String getOneUser(String id) {
@@ -147,38 +149,95 @@ public class MainController {
 		return "main/profile/main";
 	}
 	
-	//회원아이디 불러오기 - 미작동 
-	@RequestMapping(value="/profileaccount", method=RequestMethod.POST)
+	//회원아이디 주소창에 표시
+	@RequestMapping(value="/profileAccount", method=RequestMethod.GET)
 	@ResponseBody
-	public UserVO profileaccount(String id) {
-		UserVO user= null;
-		UserVO uvo = new UserVO();
-		uvo.setId(id);
-		user = (UserVO) hhService.getOneUser(id);
-		System.out.println("유저 저장 완료");
-		return user;
-		//return "{\"data\":\"유저 저장 완료\"}";
-	}	
+	public String profileAccount(String id) {
+		return "/profile/main";
+	}
 	
-	@RequestMapping(value="/saveProfileImage", method=RequestMethod.GET)
+	//유저정보 불러오기 
+	@RequestMapping(value = "/oneProfileUser", method = RequestMethod.POST)
+	@ResponseBody
+	public String oneProfileUser(String id, String profileImage) {
+		UserVO user = new UserVO();
+		user.setId(id);
+		user.setProfileImage(profileImage);
+		if (profileImage == null || profileImage =="") {
+			hhService.insertUserData(user);
+		}
+		return "{\"data\":\"유저 불러오기 완료\"}";
+	}
+	
+	//프로필 유저 정보 가져오기 - 정상작동
+	@RequestMapping(value = "/getProfileUser", method = RequestMethod.POST)
+	@ResponseBody
+	public UserVO getProfileUser(String id) {
+		UserVO profileUser = null;
+		if (id != null || id !="") {
+			profileUser = hhService.getProfileUser(id);
+		}
+		//System.out.println("프로필 유저 정보 : " + profileUser);
+		return profileUser;
+	}
+	
+	//저장된 프로필 사진 불러오기 - 정상작동
+	@RequestMapping(value = "/getOneProfileImage", method = RequestMethod.POST)
+	@ResponseBody
+	public List<UserVO> getOneProfileImage(String id) throws IOException {
+		List<UserVO> oneImage = null;
+		if (id != null || id !="") {
+			oneImage = hhService.getOneProfileImage(id);
+		}
+		//System.out.println("저장된 프로필 사진은 : " + oneImage);
+		//System.out.println("저장된 프로필 사진 불러오기 완료");
+		return oneImage;
+	}
+	
+	@RequestMapping(value="/uploadProfileImage", method=RequestMethod.GET)
 	public String uploadprofileimageform() {
 		return "/profile/main";
 	}
-
-	//프로필 이미지 업로드 받아오기
-	@RequestMapping(value="/saveProfileImage", method=RequestMethod.POST)
+	
+	//프로필 업로드 - 작동오류
+	@RequestMapping(value = "/uploadProfileImage", method = RequestMethod.POST)
 	@ResponseBody
-	public String saveprofileimage(MultipartFile file) throws IOException{
+	public String uploadProfileImage(MultipartFile file) throws IOException {
 		String filename = file.getOriginalFilename();
-		System.out.println(filename);
-		//서버 저장 경로 설정
-		String savePath="c:/profile/";
-		//저장할 경로와 파일 이름 완성
+		// 서버 저장 경로 설정
+		String savePath = "c:/profile/";
+		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
-		//서버 저장
+		// 서버 저장
 		file.transferTo(savefile);
-		System.out.println("파일을 저장했습니다.");
+		System.out.println("업로드하기 위한 이미지 파일명: " + filename);
 		return "{\"filename\":\""+filename+"\"}";
+	}
+
+	//프로필 사진 저장 - 정상작동
+	@RequestMapping(value = "/saveProfileImage", method = RequestMethod.POST)
+	@ResponseBody
+	public String saveProfileImage(MultipartFile file) throws IOException {
+		String filename = file.getOriginalFilename();
+		//System.out.println("저장한 프로필 사진명:" + filename);
+		// 서버 저장 경로 설정
+		String savePath = "c:/profile/";
+		// 저장할 경로와 파일 이름 완성
+		File savefile = new File(savePath + filename);
+		// 서버 저장
+		file.transferTo(savefile);
+		return "{\"data\":\"저장했습니다!\"}";
+	}
+
+	//사용자 업로드한 프로필 이미지 저장하기 - 정상작동
+	@RequestMapping(value="/updateUserProfileData", method=RequestMethod.POST)
+	@ResponseBody
+	public void updateUserProfileData(String id, String profileImage) {
+		//System.out.println(id + "|"+ profileImage);
+		UserVO uvo = new UserVO();
+		uvo.setId(id);
+		uvo.setProfileImage(profileImage);
+		hhService.updateUserProfileData(id, profileImage);
 	}
 		
 	//게시물 수 불러오기 1 
@@ -189,8 +248,8 @@ public class MainController {
 		if (id != null || id !="") {
 			countList = hhService.getPostsCount(id);
 		}
-		System.out.println("게시물 개수 불러오기 위한 리스트=" + countList);
-		System.out.println("게시물 수 불러오기 완료");
+		//System.out.println("게시물 개수 불러오기 위한 리스트=" + countList);
+		//System.out.println("게시물 수 불러오기 완료");
 		return countList;
 	}		
 	
@@ -202,8 +261,8 @@ public class MainController {
 		if(id != null || id != "") {
 			postsImage = hhService.getPostsImage(id);
 		}
-		System.out.println("포스트 이미지들을 프로필 게시물 목록에 불러오기 위한 리스트=" + postsImage);
-		System.out.println("포스트 이미지 불러오기 완료");
+		//System.out.println("포스트 이미지들을 프로필 게시물 목록에 불러오기 위한 리스트=" + postsImage);
+		//System.out.println("포스트 이미지 불러오기 완료");
 		return postsImage;
     }
 		
@@ -211,31 +270,17 @@ public class MainController {
 	@RequestMapping(value="/posts", method=RequestMethod.POST)
     @ResponseBody
     public List<PostVO> getPosts(String id) throws IOException {
-		System.out.println("포스트 작성한 회원의 id는 "+id);
+		//System.out.println("포스트 작성한 회원의 id는 "+id);
 		List<PostVO> post = null;
 		if (id != null || id != "") {
 			post = hhService.getPosts(id);
 		}
-		System.out.println("회원이 업로드한 프로필 게시물 전체=" + post);
-        System.out.println("포스트 불러오기 완료");
+		//System.out.println("회원이 업로드한 프로필 게시물 전체=" + post);
+        //System.out.println("포스트 불러오기 완료");
         return post;
     }
 		
-//	//포스트 전체 불러오기 3 시도1
-//	@RequestMapping(value="/postData", method=RequestMethod.POST)
-//    @ResponseBody
-//    public String postData(String id, String contents, String imagepath, String hashtag, String postDate) {
-//		PostVO post = new PostVO();
-//		String getId = post.getId();
-//		String getContents = post.getContents();
-//		String getImagepath = post.getImagepath();
-//		String getHashtag = post.getHashtag();
-//		String getPostDate = post.getPostDate();
-//		hhService.insertPostData(post);
-//		return "{\""+getId+getContents+getImagepath+getHashtag+getPostDate+"\"}";
-//	}
-	
-	
+
 	@RequestMapping("/profile/editform")
 	public String editform() {
 		return "main/profile/editform";

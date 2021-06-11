@@ -218,6 +218,9 @@ function uniqueID(){
 					</svg>
 					<div id="nameBoxFont">
 							<span>이름</span>
+<!-- 							<span id="profileImage"> -->
+<!-- 								<img id="profileImg" src="/profile/basicprofileimage.jpg" style="display:none;"> -->
+<!-- 							</span> -->
 					</div>
 				</div>
 			 </div>

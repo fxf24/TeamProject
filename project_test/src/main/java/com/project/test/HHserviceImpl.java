@@ -75,6 +75,22 @@ public class HHserviceImpl implements HHservice{
 	}
 
 	@Override
+	public UserVO getProfileUser(String id) {
+		UserVO result = hhdao.getProfileUser(id);
+		return result;
+	}
+
+	@Override
+	public void updateUserProfileData(String id, String profileImage) {
+		hhdao.updateUserProfileData(id, profileImage);
+	}
+	
+	@Override
+	public List<UserVO> getOneProfileImage(String id) {
+		return hhdao.getOneProfileImage(id);
+	}
+
+	@Override
 	public List<PostVO> getPostsCount(String id) {
 		return hhdao.getPostsCount(id);
 	}
