@@ -86,11 +86,12 @@ $(document).ready(function(){
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
 var CheckCommentThumbsup = 0; //댓글창에 좋아요를 눌렀는지 체크??
 var CheckReplyThumbsup = 0; //답글창에 좋아요를 눌렀는지 체크 
-//var myid = "aiu10"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
-var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
+var myid = "admin1"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+//var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
+
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").fadeIn();
@@ -617,7 +618,7 @@ function FunctionGetReply(commentNum, cnt){
 			"commentNum" : commentNum,
 			"postNum" : postNum
 		},
-		asyns: false,
+		//asyns: false,
 		dataType: "json",
 		success: function(response){
 			var list = [];
@@ -628,17 +629,21 @@ function FunctionGetReply(commentNum, cnt){
 			if(list.length!=0){
 				for(var i=0; i<list.length; i++){
 					var profileImagePath = FunctionGetContentProfileImage(list[i].id)
-					var total = getReplyThumbsup(list[i].replyNum, i)
-					
+
+					var result = getReplyTotal(list[i].replyNum, i)
+					var total = result[0]; // 총 좋아요 개수
+					var RTState = result[1]; //좋아요 여부
 					$("#seeReply_"+cnt+"").text("답글 "+list.length+"개");
 					$("#replyList_"+cnt+"").append(
 					"<div><img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
 					"<p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
 					"<span id='replycomments_"+i+"'><p>"+list[i].comments+"</p></span>"+
 					"<p>"+list[i].commentsDate+"</p>"+
-					"<span class=ReplyThumbsup_"+i+" onclick='ClickReplyThumbsup("+CheckReplyThumbsup+", "+list[i].replyNum+", "+i+", "+total+")'></span>"+ 
+					"<span class=ReplyThumbsup_"+i+" onclick='ClickReplyThumbsup("+list[i].replyNum+", "+i+")'></span>"+ 
 					"<span class='commentUD' onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
 					"<i class='fas fa-ellipsis-h'></i></span></div>");
+					
+					getReplyThumbsup(list[i].replyNum, i)
 				}//for end
 			}//if end
 		},
@@ -808,10 +813,38 @@ function addReply(commentNum, cnt){
 	}// if end
 }
 
+function getReplyTotal(replyNum, i){ //답글 좋아요 개수 불러오기
+	var total = 0;
+	var ReplyThumbsupState = 0
+	$.ajax({
+		url: "/getreplythumbsup",
+		type: "post",
+		data: {
+			"replyNum" : replyNum
+		},
+		async: false,
+		dataType: "json",
+		success: function(response){
+			total = response.length;
+			for(var i=0; i<response.length; i++){
+				if(response[i].id == myid){
+					ReplyThumbsupState = 1	
+				}//if end
+			}//for end
+// 			list.push(total)
+// 			list.push(ReplyThumbsupState)
+		},
+		error:function(request,status,error){
+		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}// error end
+	}) // ajax end
+	return {total, ReplyThumbsupState};
+}
 
 function getReplyThumbsup(replyNum, i){ //답글에 좋아요 불러오기
 	var cnt = i; // 답글 일련번호(?)
-	var total = 0; //좋아요 개수
+	var total = 0;
+	var ReplyThumbsupState = 0;
 	$.ajax({
 		url: "/getreplythumbsup",
 		type: "post",
@@ -820,33 +853,31 @@ function getReplyThumbsup(replyNum, i){ //답글에 좋아요 불러오기
 		},
 		dataType: "json",
 		success: function(response){
-			CheckReplyThumbsup == 0
+			total = response.length;
 			for(var i=0; i<response.length; i++){
-// 				list.push(response[i]);
 				if(response[i].id == myid){
-					CheckReplyThumbsup = 1; // 이미 좋아요를 눌러뒀음
+					ReplyThumbsupState = 1	
 				}//if end
-			}// for end	
-	
-			total = response.length;	
-
-			if(CheckReplyThumbsup == 0){
-				$(".ReplyThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+total+"개 ")
-			} else if(CheckReplyThumbsup == 1){
+			}//for end
+			if(ReplyThumbsupState == 0){
+				$(".ReplyThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+total+"개 ")					
+			}//if end
+			else if(ReplyThumbsupState = 1){ // 이미 좋아요를 눌러뒀음
 				$(".ReplyThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+total+"개 ")
-			}	
+			}//else if end		
 		},
 		error:function(request,status,error){
 		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 		}// error end
 	}) // ajax end
-	return total;
 } //function end
 
 //답글 좋아요 누르기
-function ClickReplyThumbsup(cntCheck ,replyNum, i, total){
-	var rtTotal = 0;
-	if(cntCheck == 0){ //좋아요가 눌려져 있지 않은 경우
+function ClickReplyThumbsup(replyNum, i){
+	getReplyTotal(replyNum, i) // [total, ReplyThumbsupState]
+	var total = getReplyTotal(replyNum, i).total
+	var ReplyThumbsupState = getReplyTotal(replyNum, i).ReplyThumbsupState
+	if(ReplyThumbsupState == 0){ //좋아요가 눌려져 있지 않은 경우
 		$.ajax({
 			url: "/replythumbsplus",
 			type: "get",
@@ -854,18 +885,19 @@ function ClickReplyThumbsup(cntCheck ,replyNum, i, total){
 				"replyNum" : replyNum,
 				"id" : myid
 			},
+			async: false,
 			success: function(){
-				rtTotal = total + 1;
+				var cntTotal = total+1;
 				$(".ReplyThumbsup_"+i+"").removeAttr("onclick") //클릭 속성 제거
- 				$(".ReplyThumbsup_"+i+"").attr("onclick", "ClickReplyThumbsup("+1+", "+replyNum+", "+i+", "+rtTotal+")") //클릭 속성 내 Check~값 변경
-				$(".ReplyThumbsup_"+i+"").html("<i class='fas fa-heart'></i> 좋아요 "+rtTotal+"개 ")
+ 				$(".ReplyThumbsup_"+i+"").attr("onclick", "ClickReplyThumbsup("+replyNum+", "+i+")") //클릭 속성 내 Check~값 변경
+				$(".ReplyThumbsup_"+i+"").html("<i class='fas fa-heart'></i> 좋아요 "+cntTotal+"개 ")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}// error end
 		}); // ajax end
 	}// if end
-	else if(cntCheck == 1){ //좋아요가 눌려있는경우
+	else if(ReplyThumbsupState == 1){ //좋아요가 눌려있는경우
 		$.ajax({
 			url: "/replythumbsminus",
 			type: "get",
@@ -874,17 +906,17 @@ function ClickReplyThumbsup(cntCheck ,replyNum, i, total){
 				"id" : myid
 			},
 			success: function(){
-				rtTotal = total - 1;				
- 				$(".ReplyThumbsup_"+i+"").removeAttr("onclick") //클릭 속성 제거
- 				$(".ReplyThumbsup_"+i+"").attr("onclick", "ClickReplyThumbsup("+0+", "+replyNum+", "+i+", "+rtTotal+")") //클릭 속성 내 Check~값 변경
-				$(".ReplyThumbsup_"+i+"").html("<i class='far fa-heart'></i> 좋아요 "+rtTotal+"개 ")
+				var cntTotal = total-1;				
+	 			$(".ReplyThumbsup_"+i+"").removeAttr("onclick") //클릭 속성 제거
+	 			$(".ReplyThumbsup_"+i+"").attr("onclick", "ClickReplyThumbsup("+replyNum+", "+i+")") //클릭 속성 내 Check~값 변경
+				$(".ReplyThumbsup_"+i+"").html("<i class='far fa-heart'></i> 좋아요 "+cntTotal+"개 ")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 			}// error end
 		}); // ajax end
-	}
-}
+	}// else if end
+}// function end
 
 
 </script>
