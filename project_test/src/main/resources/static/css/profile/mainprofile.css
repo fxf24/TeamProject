@@ -1,5 +1,8 @@
 @charset "UTF-8";
-
+* {
+ margin: 0;
+ padding: 0;
+}
 /* 1. 프로필 메인 상단 
 - 고정 정보 (프로필사진, 회원아이디, 프로필편집) */
 
@@ -243,25 +246,19 @@
 - 업로드 정보 (게시물 목록들) */
 
 #main-container {
-	z-index: 1;
 	background: pink;
-	border: 3px solid pink;
-	position: relative;
-	width: 1110px; 
-	height: 1150px;
-  	margin: auto; /* (위 오른쪽 아래 왼쪽 순) 50px 20px 0 30px*/
+    display: flex;
+	width: 150em;
+	height: 90em;
+	margin: auto;
 } 
 
-
-/* 첫째 줄 동적 구현 캔버스, 불러올 이미지  */
-.card-body{
-	display: flex; 
-	justify-content: space-between;
-}
-
-#postcanvas {
+.postscanvas {
 	z-index: 3;
-	position: absolute;
+	border: 3px solid blue;
+    display: flex;
+/*     justify-content: space-around; */
+/* 	align-items: flex-start; */
 	margin: 0; /* (위 오른쪽 아래 왼쪽 순) */
 	width: 300px;
 	height: 300px;
@@ -273,112 +270,129 @@
 }
 
 
-/* 첫째 줄 정적 모양 형성 */ 
-#card-body3-1 {
+/* 게시물 목록 */ 
+div.flex-container {
+  display: flex;
+    overflow: hidden;
+
+}
+
+div.flex-item{
+	background: silver;
+	border: 3px solid blue;
+/*   flex-basis: 33.3%; */
+  display: flex;
+  flex-flow: wrap-reverse;
+  flex-wrap: wrap;
+  flex-direction: column-reverse; 
+  flex: auto;
+  justify-content: space-around;
+  align-items: flex-end;
+  align-content: space-around;
+  width: 20em;
+  height: 20em;
+	max-width: inherit;
+	max-height: inherit;
+/*   text-align: justify; */
+} 
+
+/* #card-body3-1 {
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 30px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: flex-start;
+	margin: 5%;
 	width: 300px;
 	height: 300px;
-	padding: 10px;
+	padding: 0;
 	text-align: center;
 }
 
 #card-body3-2{
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 30px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: center;
+	margin: 5%;
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
 
 #card-body3-3 {
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 30px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: flex-end;
+	margin: 5%;
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
-}
-
-/* 둘째 줄 */ 
-
-#second-contatiner {
-	z-index: 3;
-	position: relative;
-	clear: both; 
+	padding: 0;
 }
 
 #card-body2-1 {
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 400px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: flex-start;
+	margin: 45% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
 
 #card-body2-2{
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 400px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: center;
+	margin: 45% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
 
 #card-body2-3 {
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 400px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: flex-end;
+	margin: 45% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
-
-/* 셋째 줄 */ 
 
 #card-body1-1 {
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 770px 0 0 30px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: flex-start;
+	margin: 85% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
 
 #card-body1-2{
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 770px 0 0 400px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: center;
+	margin: 85% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
 
 #card-body1-3 {
 	z-index: 2;
 	background: gray;
-	position: absolute;
-	margin: 770px 0 0 770px; /* (위 오른쪽 아래 왼쪽 순) */
+    display: flex;
+	justify-content: flex-end;
+	margin: 85% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
 	width: 300px;
 	height: 300px;
-	padding: 10px;
-	text-align: center;
+	padding: 0;
 }
+ */

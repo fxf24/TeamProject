@@ -57,7 +57,7 @@
 							//이미지 로드
 							var image = new Image()
 							image.src = "/upload/" + filename
-							image.onload = function() {
+							image.onload = function() { //(하은)
 								var maxWidth = 400; 
 								var maxHeight = 400;
 								var width = image.width;

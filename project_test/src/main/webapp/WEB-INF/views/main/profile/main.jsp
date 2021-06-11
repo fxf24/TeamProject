@@ -126,40 +126,52 @@ $(document).ready(function(){
 			console.log(response) //array(접속 회원 아이디의 포스트 개수)
 			
 			for(var i=0; i< response.length; i++){
-				//console.log(response[i]); //최상단의 하나의 포스트 {}
-						
+				console.log(response[i]); //최상단의 하나의 포스트 {, , , ... , }
+				
 				var onePost = response[i];
 				//console.log(onePost.imagepath.split("/")) //["iu.png"]
+				//var postNum = onePost.postNum.split("|"); 
 				var imageName = onePost.imagepath.split("/"); 
 				var onePostDate = onePost.postDate.split("|"); 
 				//console.log(onePost.postDate.split("/")) //["2021-06-10 22:40:46"]
 				
 				//이미지 출력이 날짜 내림차순으로 - sql ASC
+// 						 <div id="first-container">
+//             <div class="card-body" id="card-body3-1">
+//             <canvas class="postscanvas" id="postcanvas" ></canvas>
+
 				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
-				var postcanvas = document.getElementById("postcanvas")//htmlobject타입
-				var context = postcanvas.getContext("2d")
-				
-				//이미지 로드
-				var image = new Image()
-				image.src = "/upload/" + imageName //반복문으로 인해 가장 최근 포스트 = 최상단
-				image.onload = function() {
-					var maxWidth = 300; 
-					var maxHeight = 300;
-					var width = image.width;
-					var height = image.height;
+				//var postcanvas = $('.postscanvas') //typesrror = is not a function(getContext)
+				//for (var i in postNum) {
+					$(".card-body").append('<canvas class="postscanvas" id="postcanvas'+onePostDate+'" width="300" height="300"  ></canvas>')
+					//postscanvas class 에 특정 id="postcanvas'+postNum[i]+'" 변수로 지정
+					//var canvasCertainId = getElementsById('postcanvas') + onePostDate
+					var postscanvas = document.getElementsById(canvasCertainId )
+					var context = postscanvas.getContext("2d")
 					
-					if(width > maxWidth){
-						height = height/(width / maxWidth) ;
-						width = maxWidth;
+					//이미지 로드
+					var image = new Image()
+					image.src = "/upload/" + imageName //반복문으로 인해 가장 최근 포스트 = 최상단
+					image.onload = function() {
+						var maxWidth = 300; 
+						var maxHeight = 300;
+						var width = image.width;
+						var height = image.height;
 						
-					}else{
-						if(height > maxHeight){
-							width = width/(height/ maxHeight);
-							height = maxHeight;
-						}//중첩 if ends
-					}//if end 
-					context.drawImage(image, 0, 0, width, height)
-				} //image onload function end
+						if(width > maxWidth){
+							height = height/(width / maxWidth) ;
+							width = maxWidth;
+							
+						}else{
+							if(height > maxHeight){
+								width = width/(height/ maxHeight);
+								height = maxHeight;
+							}//중첩 if ends
+						}//if end 
+						context.drawImage(image, 0, 0, width, height)
+					} //image onload function end
+				//}//for end 	
+				
 			}//for end	
 // 			if(response == "0"){ //포스트 사진이 없을 때
 // 				$(".card-body").append
@@ -335,133 +347,27 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
 
 	<div id="main-container">
 		 <!-- 게시물 첫째 줄 -->
-		 <div id="first-container">
-            <div class="card-body" id="card-body3-1">
-            <canvas class="postscanvas" id="postcanvas" ></canvas>
-            	<p class="card-text">게시물 내용</p>
-              		<div class="d-flex justify-content-between align-items-center">
-                		<div class="btn-group">
-                			<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                		</div>
-                		<small class="text-muted">9 mins</small>
-              		</div>
+		 <div class="flex-container">
+            <div class="flex-item" id="card-body3-1">3-1
+            <%-- <canvas class="postscanvas" id="postcanvas" ></canvas> --%>
+<!--             	<p class="card-text">게시물 내용</p> -->
+<!--               		<div class="d-flex justify-content-between align-items-center"> -->
+<!--                 		<div class="btn-group"> -->
+<!--                 			<button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
+<!--                   			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
+<!--                 		</div> -->
+<!--                 		<small class="text-muted">9 mins</small> -->
+<!--               		</div> -->
             	</div>
-
-
-
-            <div class="card-body" id="card-body3-2" >
-              <p class="card-text">게시물 내용</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-
-        
-
-            <div class="card-body" id="card-body3-3" >
-              <p class="card-text">게시물 내용</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-		    
-		 </div>   
-		
-
-		<!-- 게시물 둘째 줄 -->
-		<div id="second-contatiner">
-            <div class="card-body"  id="card-body2-1">
-            	<p class="card-text">게시물 내용</p>
-              		<div class="d-flex justify-content-between align-items-center">
-                		<div class="btn-group">
-                			<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                		</div>
-                		<small class="text-muted">9 mins</small>
-              		</div>
-            </div>
-
-
-
-            <div class="card-body"  id="card-body2-2" >
-              <p class="card-text">게시물 내용</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-
-        
-
-            <div class="card-body"  id="card-body2-3" >
-              <p class="card-text">게시물 내용</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-            
-		</div>       
-
-		
-		<!-- 게시물 셋째 줄 -->
-		<div id="third-contatiner">
-            <div class="card-body"  id="card-body1-1">
-            	<p class="card-text">게시물 내용</p>
-              		<div class="d-flex justify-content-between align-items-center">
-                		<div class="btn-group">
-                			<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                		</div>
-                		<small class="text-muted">9 mins</small>
-              		</div>
-            	</div>
-		
-
-
-            <div class="card-body"  id="card-body1-2" >
-              <p class="card-text">게시물 내용</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-
-        
-
-            <div class="card-body"  id="card-body1-3" >
-              <p class="card-text">게시물 내용</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-            
+            <div class="flex-item" id="card-body3-2" >3-2</div>
+            <div class="flex-item" id="card-body3-3" >3-3</div>
+            <div class="flex-item"  id="card-body2-1">2-1</div>
+            <div class="flex-item"  id="card-body2-2" >2-2</div>
+            <div class="flex-item"  id="card-body2-3" >2-3</div>
+            <div class="flex-item"  id="card-body1-1">1-1</div>
+            <div class="flex-item"  id="card-body1-2" >1-2</div>
+            <div class="flex-item"  id="card-body1-3" >1-3</div>
         </div> 
-          
-          
-          
 	</div>       
 </div>
 		

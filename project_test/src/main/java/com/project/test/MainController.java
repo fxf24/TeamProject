@@ -147,7 +147,7 @@ public class MainController {
 		return "main/profile/main";
 	}
 	
-	//회원아이디 불러오기
+	//회원아이디 불러오기 - 미작동 
 	@RequestMapping(value="/profileaccount", method=RequestMethod.POST)
 	@ResponseBody
 	public UserVO profileaccount(String id) {
@@ -189,7 +189,7 @@ public class MainController {
 		if (id != null || id !="") {
 			countList = hhService.getPostsCount(id);
 		}
-		System.out.println(countList);
+		System.out.println("게시물 개수 불러오기 위한 리스트=" + countList);
 		System.out.println("게시물 수 불러오기 완료");
 		return countList;
 	}		
@@ -202,7 +202,7 @@ public class MainController {
 		if(id != null || id != "") {
 			postsImage = hhService.getPostsImage(id);
 		}
-		System.out.println(postsImage);
+		System.out.println("포스트 이미지들을 프로필 게시물 목록에 불러오기 위한 리스트=" + postsImage);
 		System.out.println("포스트 이미지 불러오기 완료");
 		return postsImage;
     }
@@ -216,6 +216,7 @@ public class MainController {
 		if (id != null || id != "") {
 			post = hhService.getPosts(id);
 		}
+		System.out.println("회원이 업로드한 프로필 게시물 전체=" + post);
         System.out.println("포스트 불러오기 완료");
         return post;
     }
