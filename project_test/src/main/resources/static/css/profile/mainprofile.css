@@ -272,7 +272,7 @@
 
 /* 게시물 목록 */ 
 div.flex-container {
-  display: flex;
+	display: flex;
     overflow: hidden;
 
 }
@@ -280,20 +280,19 @@ div.flex-container {
 div.flex-item{
 	background: silver;
 	border: 3px solid blue;
-/*   flex-basis: 33.3%; */
-  display: flex;
-  flex-flow: wrap-reverse;
-  flex-wrap: wrap;
-  flex-direction: column-reverse; 
-  flex: auto;
-  justify-content: space-around;
-  align-items: flex-end;
-  align-content: space-around;
-  width: 20em;
-  height: 20em;
+	flex-basis: 33.3%;
+	display: flex;
+	flex-flow: wrap-reverse;
+	flex-wrap: wrap;
+	flex-direction: column-reverse; 
+	flex: auto;
+	justify-content: space-around;
+	align-items: flex-end;
+	align-content: space-around;
+	width: 20em;
+	height: 20em;
 	max-width: inherit;
 	max-height: inherit;
-/*   text-align: justify; */
 } 
 
 /* #card-body3-1 {
