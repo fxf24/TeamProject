@@ -33,4 +33,7 @@ public interface HHDAO {
 	void UpdateReply(int postNum, String comments, String id, int replyNum); // 답글(대댓글) 수정하기
 	void DeleteReply(String id, int replyNum); //답글 삭제
 	void AddReply(int postNum, int commentNum, String comments, String id);// 답글 달기
+	List<ReplyThumbsupVO> getReplyThumbsup(int replyNum); //답글에 눌린 좋아요 불러오기
+	void replyThumbsPlus(int replyNum, String id); //답글 좋아요 누르기
+	void replyThumbsMinus(int replyNum, String id); //답글 좋아요 취소
 }

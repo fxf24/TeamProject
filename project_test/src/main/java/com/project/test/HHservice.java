@@ -27,4 +27,7 @@ public interface HHservice {
 	void UpdateReply(int postNum, String comments, String id, int replyNum);
 	void DeleteReply(String id, int replyNum);
 	void AddReply(int postNum, int commentNum, String comments, String id);
+	List<ReplyThumbsupVO> getReplyThumbsup(int replyNum);
+	void replyThumbsPlus(int replyNum, String id);
+	void replyThumbsMinus(int replyNum, String id);
 }

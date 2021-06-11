@@ -129,6 +129,22 @@ public class HHserviceImpl implements HHservice{
 	public void AddReply(int postNum, int commentNum, String comments, String id) {
 		hhdao.AddReply(postNum, commentNum, comments, id);
 	}
+
+	@Override
+	public List<ReplyThumbsupVO> getReplyThumbsup(int replyNum) {
+		return hhdao.getReplyThumbsup(replyNum);
+	}
+
+	@Override
+	public void replyThumbsPlus(int replyNum, String id) {
+		hhdao.replyThumbsPlus(replyNum, id);
+	}
+
+	@Override
+	public void replyThumbsMinus(int replyNum, String id) {
+		hhdao.replyThumbsMinus(replyNum, id);
+	}
+	
 	
 	
 }

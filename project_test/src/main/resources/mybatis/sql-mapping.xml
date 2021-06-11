@@ -108,6 +108,17 @@ delete from replyComments where id=#{id} and replyNum=#{replyNum}
 insert into replyComments values(reply_SEQ.nextval, #{id}, #{postNum}, #{commentNum}, #{comments}, sysdate)
 </insert>
 
+<select id="getReplyThumbsup" parameterType="int" resultType="replythumbsupVO">
+select * from replyThumbsup where replyNum=#{replyNum}
+</select>
+
+<insert id="replyThumbsPlus" parameterType="replythumbsupVO">
+insert into replyThumbsup values(replyThumbsup_SEQ.nextval, #{id}, #{replyNum})
+</insert>
+
+<delete id="replyThumbsMinus" parameterType="replythumbsupVO">
+delete from replyThumbsup where replyNum=#{replyNum} and id=#{id}
+</delete>
 </mapper>
 
 
