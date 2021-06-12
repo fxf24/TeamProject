@@ -15,11 +15,12 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<br><br><br><br><br><br><br><br>
 <form action="/search" method="post" >
 	<input type="text" name="searchWord">
 	<input type="submit" value="search">
 </form>
-<i class='fas fa-heart'></i>
-<i class='far fa-heart'></i>
+<i class='fas fa-heart'>s는 찬 하트</i>
+<i class='far fa-heart'>r은 빈 하트</i>
 </body>
 </html>

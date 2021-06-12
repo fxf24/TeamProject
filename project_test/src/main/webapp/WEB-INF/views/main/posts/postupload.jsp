@@ -170,7 +170,6 @@
 						dataType: 'json',
 						success: function (response) {
 							location.href = "/profile?id=" + user
-							sessionStorage.setItem("pvo", response.pvo)
 						},
 
 						error: function (request, status, error) {

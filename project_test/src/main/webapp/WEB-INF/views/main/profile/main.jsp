@@ -5,7 +5,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <% 
 	request.setCharacterEncoding("UTF-8");
-	String id = request.getParameter("id");
 	Date nowTime = new Date();
 	SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 %>
@@ -21,33 +20,36 @@
 
 <!-- 상단 고정 스타일 css 연결  -->
 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css">
-	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
+<!-- 	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css"> -->
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 <script>
-var user = sessionStorage.getItem("user") //유저 아이디 가져오기 (String id, String name, String email, String password, String telephone)
 $(document).ready(function(){
-	/* 게시물 업로드 - 포스트 작성으로 이동 */
-	$('#postupload').click(function(){
-		location.href = "/postupload"
-	});
-	
-	$("#fileimage").click(function(e){
-		document.imageform.target_url.value = document.getElementById('img').src;
-		e.preventDefault()
-		 $('#file').click();
+var user = sessionStorage.getItem("user")
+if (user == null) {
+	if (confirm("로그인해주세요!")) {
+		location.href = "/login"
+	}else {
+		/* 게시물 업로드 - 포스트 작성으로 이동 */
+		$('#postupload').click(function(){
+			location.href = "/postupload"
+		});
 		
-	});
-	
-<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
+		/* + 아이콘 클릭 시, 프로필 업로드용 파일 열기 */
+// 		$("#fileimage").click(function(e){ //input file의 label
+// 			document.imageform.target_url.value = document.getElementById('img').src;
+// 			e.preventDefault()
+// 			$('#file').click()
+// 		});
+		
 	/* 프로필 사진 업로드  */
- 	$("#uploadprofile").click(function(event){
+ 	$("#uploadprofile").click(function(event){ //프로필 사진 업로드 클릭 
 		event.preventDefault() 
 
 		var form = $("#imageform")[0]
 		var formData = new FormData(form)
 		formData.append("file", $("#inputProfile")[0].files[0]) 
 		$.ajax({
-			url:'/saveProfileImage',
+			url:'/uploadProfileImage',
 			type:'post',
 			data: formData,
 			cache: false,
@@ -62,10 +64,11 @@ $(document).ready(function(){
 				var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 				var context = imagecanvas.getContext("2d")
 				
-				//<img id="img" src="/image/basicprofileimage.jpg" alt="프로필 사진을 지정해주세요" >
+				//<img id="img" src="" >
 				//이미지 로드
-				var profileimg = document.getElementById('img').src
-				var image = new Image()				
+				var image = new Image()	
+				image.style.display = "absolute"
+				image.style.zIndex = "3"
 				image.src = "/profile/" + filename
 				image.onload = function(){
 					var maxWidth = 250; 
@@ -93,114 +96,236 @@ $(document).ready(function(){
 				alert('error : ' + e.message)
 			} //error end 
 		});//ajax end 
-
+		
 	}); //uploadprofile click function end 
+		} //else end (로그인 시) 
+} //if end 로그인 했을 때만 프로필 조회 가능 
 	
-/* 게시물 수 불러오기 1*/ 
-		$.ajax({ 
-		url: '/postsCount',
-		type: 'post',
-		data: {"id": user},
-		dataType: "json",
-		success: function(response){
- 			//console.log(response) // Array(response.length) 
- 			//console.log(response.length)
-			var postscount = response.length //게시물 개수
-			var postsword = $('#profileposts').text(); 
-			$('#profileposts').text(postsword + "\n" + "\n" + postscount); //게시물 + 갯수
-		}, //success end 
-		error:function(request,status,error){
-		    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
-		}//error end
-	});//ajax end  
+});//document ready end
+
+var user = sessionStorage.getItem("user")
+//var profileimgSrc = document.getElementById('img').src
+
+if (user == null) {
+	if (confirm("로그인해주세요!")) {
+		location.href = "/login"
+		}
+} else {
+	
+<!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
+/* 프로필 사진 자동 저장 - 작동 정상 (사진이 업로드가 되지 않는게 문제) */
+function saveProfileImage() { //프로필 사진 업로드 클릭 시 
+var $canvas = document.getElementById('imagecanvas');
+var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
+
+var blobBin = atob(imgDataUrl.split(',')[1]); // base64 데이터 디코딩
+var array = [];
+for (var i = 0; i < blobBin.length; i++) {
+	array.push(blobBin.charCodeAt(i));
+}
+      var file = new Blob([new Uint8Array(array)], {
+          name: '$("#inputProfile")[0].files[0]',
+          type: 'image/png'
+      }); // Blob 생성					
+var formdata = new FormData(); // formData 생성
+var fileValue = $("#inputProfile").val().split("\\");
+var fileName = fileValue[fileValue.length - 1];
+formdata.append("file", file, fileName);	// file data 추가
+
+$.ajax({
+	type: 'post',
+	url: '/saveProfileImage',
+	data: formdata,
+	processData: false,	// data 파라미터 강제 string 변환 방지!!
+	contentType: false,	// application/x-www-form-urlencoded; 방지!!
+	success: function (response) {
+	}
+}); //ajax end 	
+
+/* 프로필 이미지 정보 DB에 저장 - view 작동 불가??*/
+$.ajax({ 
+	type: 'post',
+	url: '/updateUserProfileData',
+	data: {
+		'id': user,
+		"profileImage": fileName
+	},
+	dataType: 'json',
+	success: function (response) {
+		console.log(response) //안나와
+	},
+	error: function (request, status, error) {
+		//alert("success에 실패 했습니다.");
+		console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+	}
+})	
+} //saveProfileImage() function end		
+
+
+var profileImg = null;
+/* 프로필 유저 정보 가져오기 - 테스트용 */
+$.ajax({ 
+	url:'/getProfileUser',
+	type:'post',
+	data: {
+		"id": user,
+		"profileImage": profileImg
+		},		
+	dataType: "json",
+	success: function(response){
+		//console.log(response)
+	},
+	error: function(request, status, error){
+		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+	} //error end 
+});//ajax end
+
+// $.ajax({ 
+// 	url:'/getProfileUser',
+// 	type:'post',
+// 	data: {"id": user},		
+// 	dataType: "json",
+// 	success: function(response){
+// 		console.log(response)
+// 	},
+// 	error: function(request, status, error){
+// 		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+// 	} //error end 
+// });//ajax end
+
+
+/* 기존에 저장한 프로필 사진 불러오기 */
+$.ajax({ 
+	url:'/getOneProfileImage',
+	type:'post',
+	data: {
+		"id": user,
+		"profileImage": profileImg //is not defined -> null로 고정
+		},
+	dataType: "json",
+	success: function(response){
+		console.log(response) //1의 행
+		var profileImage = response[0].profileImage
+		console.log(profileImage) //null
+ 		if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 
+ 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
+			var context = imagecanvas.getContext("2d")
+ 			profileImage = 'basicprofileimage.jpg';
+			var img = document.getElementById('img');
+			img.style.display = "none"
+			img.src = "/profile/" + profileImage
+ 			img.onload = function() {
+				var maxWidth = 250; 
+				var maxHeight = 250;
+				var width = img.width;
+				var height = img.height;
+				
+				if(width > maxWidth){
+					height = height/(width / maxWidth) ;
+					width = maxWidth;
+					
+				}else{
+					if(height > maxHeight){
+						width = width/(height/ maxHeight);
+						height = maxHeight;
+					}//중첩 if ends
+				}//if end 
+				context.drawImage(img, 0, 0, width, height)	
+			} //onload end 
+ 		} //if end
+// 		else {
+			//var imagePath = response.split("/")
+			//var imageName = imagePath[imagePath.length-1]
+// 			profileImage = '/profile/'
+// 			profileImage += imageName
+		
+// 			imageName.onload = function() {
+// 				var maxWidth = 250; 
+// 				var maxHeight = 250;
+// 				var width = imageName.width;
+// 				var height = imageName.height;
+				
+// 				if(width > maxWidth){
+// 					height = height/(width / maxWidth) ;
+// 					width = maxWidth;
+					
+// 				}else{
+// 					if(height > maxHeight){
+// 						width = width/(height/ maxHeight);
+// 						height = maxHeight;
+// 					}//중첩 if ends
+// 				}//if end 
+// 				context.drawImage(imageName, 0, 0, width, height)	
+// 			} //image onload function end
+//		}//else end
+
+	}, //success end 
+	error: function(request, status, error){
+		//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+	} //error end 
+});//ajax end 
+	
+/* 회원아이디, 게시물 수 불러오기 1*/ 
+$.ajax({ 
+url: '/postsCount',
+type: 'post',
+data: {"id": user},
+dataType: "json",
+success: function(response){
+	//console.log(response) // Array(response.length) 
+	//console.log(response.length)
+	var postscount = response.length //게시물 개수
+	var postsword = $('#profileposts').text(); 
+	$('#profileposts').text(postsword + "\n" + "\n" + postscount + "\n"); //게시물 + 갯수
+	$('#accountId').text("\n" + user + "\n"); //회원아이디
+}, //success end 
+error:function(request,status,error){
+    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
+}//error end
+});//ajax end  
 
 
 /* 포스트 이미지 불러오기 2 */
-//function getPostsImage(id, postDate, postsList){
-	$.ajax({ //postupload 이미지 불러오기
-		url:'/postsImage',
-		type:'post',
-		data: {"id": user},
-		dataType: "json",
-		success: function(response){
-			console.log(response) //array(접속 회원 아이디의 포스트 개수)
-			
-			for(var i=0; i< response.length; i++){
-				console.log(response[i]); //최상단의 하나의 포스트 {, , , ... , }
-				
-				var onePost = response[i];
-				//console.log(onePost.imagepath.split("/")) //["iu.png"]
-				//var postNum = onePost.postNum.split("|"); 
-				var imageName = onePost.imagepath.split("/"); 
-				var onePostDate = onePost.postDate.split("|"); 
-				//console.log(onePost.postDate.split("/")) //["2021-06-10 22:40:46"]
-				
-				//이미지 출력이 날짜 내림차순으로 - sql ASC
-// 						 <div id="first-container">
-//             <div class="card-body" id="card-body3-1">
-//             <canvas class="postscanvas" id="postcanvas" ></canvas>
+$.ajax({ //로그인한 상태로 들어오면 자동 출력
+	url:'/postsImage',
+	type:'post',
+	data: {"id": user},
+	dataType: "json",
+	success: function(response){
+		//console.log(response) //array(접속 회원 아이디의 포스트 개수)
+		for(var i=0; i< response.length; i++){
+			//console.log(response[i]); //최상단의 하나의 포스트 {, , , ... , }
+			var onePost = response[i];
+			//console.log(onePost.imagepath.split("/")) //["iu.png"]
+			var imageName = onePost.imagepath.split("/"); 
 
-				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
-				//var postcanvas = $('.postscanvas') //typesrror = is not a function(getContext)
-				//for (var i in postNum) {
-					$(".card-body").append('<canvas class="postscanvas" id="postcanvas'+onePostDate+'" width="300" height="300"  ></canvas>')
-					//postscanvas class 에 특정 id="postcanvas'+postNum[i]+'" 변수로 지정
-					//var canvasCertainId = getElementsById('postcanvas') + onePostDate
-					var postscanvas = document.getElementsById(canvasCertainId )
-					var context = postscanvas.getContext("2d")
-					
-					//이미지 로드
-					var image = new Image()
-					image.src = "/upload/" + imageName //반복문으로 인해 가장 최근 포스트 = 최상단
-					image.onload = function() {
-						var maxWidth = 300; 
-						var maxHeight = 300;
-						var width = image.width;
-						var height = image.height;
-						
-						if(width > maxWidth){
-							height = height/(width / maxWidth) ;
-							width = maxWidth;
-							
-						}else{
-							if(height > maxHeight){
-								width = width/(height/ maxHeight);
-								height = maxHeight;
-							}//중첩 if ends
-						}//if end 
-						context.drawImage(image, 0, 0, width, height)
-					} //image onload function end
-				//}//for end 	
+			$(".flex-item").append('<img src="/upload/'+imageName+' " style="border: 3px solid silver">')
+			imageName.onload = function() {
+				var maxWidth = 300; 
+				var maxHeight = 300;
+				var width = imageName.width;
+				var height = imageName.height;
 				
-			}//for end	
-// 			if(response == "0"){ //포스트 사진이 없을 때
-// 				$(".card-body").append
-// 				("<div class='card-body' ></div>" + "<p class='card-text'>게시물 내용</p>"
-//    				+ "<div class='d-flex justify-content-between align-items-center'>"
-// 					+ '<div class="btn-group">'
-// 					+ '<button type="button" class="btn btn-sm btn-outline-secondary">View</button>'
-// 					+ '<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>'
-// 					+ '</div>'
-// 					+ '<small class="text-muted">9 mins</small>'
-// 				+ '</div>')
-// 			}
-// 			else {
-// 				var postimagePath = response.split('/')
-// 				console.log("경로 : "+ postimagePath)
-// 				var postimageName = postimagePath[postimagePath.length-1]
-// 				console.log("이미지이름 : "+ postimageName)
-// 				postsImage = '/upload/'
-// 				postsImage += postimageName
-// 			}//else end
-// 			$(".card-body").append
-// 			("<img id='postsimg' src='"+ postsImage +"'>")
-// 			console.log($('.card-body').val()) //0
-		}, //success end 
-		error: function(request, status, error){
-			alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); //200에러
-		} //error end 
-	});//ajax end 
-//}//function getPostsImage end 
+				if(width > maxWidth){
+					height = height/(width / maxWidth) ;
+					width = maxWidth;
+					
+				}else{
+					if(height > maxHeight){
+						width = width/(height/ maxHeight);
+						height = maxHeight;
+					}//중첩 if ends
+				}//if end 
+				context.drawImage(image, 0, 0, width, height)	
+			} //image onload function end
+
+		} //for end 
+	}, //success end 
+	error: function(request, status, error){
+		//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+	} //error end 
+});//ajax end 
+
 
 
 /* 포스트 전체 불러오기 3 - */
@@ -219,58 +344,8 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
 	} //error end 
 });//ajax end
 
-/* 포스트 가져오기 */
-// var content = "";
-// var image = "";
-// var hashtag = "";
 
-// $.ajax({
-// 	url: "/postData", 
-// 	type: "post",
-// 	data: {
-// 		'id': id,
-//         'contents': content,
-//         'imagepath': image,
-//         'hashtag': hashtag,
-// 		'postDate': postDate
-// 	},
-// 	dataType: "json",
-// 	success: function(response){
-// 		alert(response)
-// 	}, 
-// 	error: function(request, status, error){
-//  		alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
-//  	} //error end 
-// }); //ajax end
-		
-		
- /* 회원 아이디에서만 올린 포스트로 분류하기 위해 DB (문자열) 불러오기 */
-// console.log($("#card-body3-1").append())
-// $.ajax({
-// 	type: 'post',
-// 	url: '/saveData',
-// 	data: {
-// 		'id': user, 'content': $("#contents").val(), 'image': fileName,
-// 		'hashtag': $("#hashtags").text() + $("#names").val()
-// 	},
-// 	dataType: 'json',
-
-// 	success: function (response) {
-// 		alert(response.data)
-// 		location.href = "/"
-		
-// 	},
-
-// 	error: function (request, status, error) {
-// 		alert("success에 실패 했습니다.");
-// 		console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-// 	}
-// }); //ajax end
-
- 	 
-});//document ready end
-
-
+} //else end
 
 </script>	
 </head>
@@ -286,15 +361,17 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
 	<div id="info-container"> 
       <!-- 프로필 사진은 회원이 업로드한 것으로 지정 - js 구현  -->
 		<div id="profileimage"> 
-			<canvas id="imagecanvas" width=250 height=250></canvas>
+			<canvas id="imagecanvas" width=250 height=250 style="border-radius: 300px; border: 5px solid pink"></canvas>
 			<img id="img" src=" " >
 		</div>
-		<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" action="/saveProfileImage" method="post">
-			<label id="fileimage" for="inputProfile"><img id="plus" src="/images/plus.png"></label>
+		<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" method="post">
+				<label id="fileimage" for="inputProfile">
+					<img id="plus" src="/images/plus.png">
+				</label>
 			<div id="profileimgbox"> 
-				<input name="file" type="file" id="inputProfile" accept="image/*" multiple   ><br>
+				<input name="file" type="file" id="inputProfile"><br>
 				<input type="hidden" name ="target_url">
-				<button id="uploadprofile" > 프로필 사진 업로드 </button>
+				<button id="uploadprofile" onclick="saveProfileImage()" > 프로필 사진 업로드 </button>
 			</div>
 		</form>
 	</div> 
@@ -302,12 +379,8 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
         	<table>
         		<tr>
         			<td class="certaininfo">
-						<span id="accountId"> <%=id %>&nbsp; </span>
-							<!--         프로필 편집 클릭 시, 새로운 창으로 이동 - js 구현  -->
+						<span id="accountId"> &nbsp; </span>
         					<button type="button" id=profileedit onclick="location.href='profile/editform'">프로필 편집</button>
-        					<!-- <form id="profile_edit" name="editform" ENCTYPE="multipart/form-data" action="editform.jsp"> 
-        						<input name="profile_edit" type="button" value="프로필 편집">
-       						</form> -->
         				<br>
 					</td>
 				</tr>
@@ -324,11 +397,6 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
 				<div id="postupload"> 
         			<label id="postfont"> 게시물 업로드 </label>
     			</div>
-<!--         			게시물 업로드 카메라와 연결
-        			<input type="file" id="file" name="camera" capture="camera" accept="image/*">
-        			<img id="pic" style="width:100%;" >
-        			<input type="hidden" name = "camera_url"> -->
-        			
         			
 			<tr> 
 				<td> 
@@ -339,7 +407,7 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
 			     </td>
 			</tr>
 	</table>
-</div>
+
 
 <!-- 게시물 -->
 <!-- 목록은 최근에 업로드한 것이 위에 위치하도록 (순서는 거꾸로 - 3(첫째 줄), 2(둘째 줄), 1(셋째 줄))
@@ -348,28 +416,10 @@ $.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에
 	<div id="main-container">
 		 <!-- 게시물 첫째 줄 -->
 		 <div class="flex-container">
-            <div class="flex-item" id="card-body3-1">3-1
-            <%-- <canvas class="postscanvas" id="postcanvas" ></canvas> --%>
-<!--             	<p class="card-text">게시물 내용</p> -->
-<!--               		<div class="d-flex justify-content-between align-items-center"> -->
-<!--                 		<div class="btn-group"> -->
-<!--                 			<button type="button" class="btn btn-sm btn-outline-secondary">View</button> -->
-<!--                   			<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> -->
-<!--                 		</div> -->
-<!--                 		<small class="text-muted">9 mins</small> -->
-<!--               		</div> -->
-            	</div>
-            <div class="flex-item" id="card-body3-2" >3-2</div>
-            <div class="flex-item" id="card-body3-3" >3-3</div>
-            <div class="flex-item"  id="card-body2-1">2-1</div>
-            <div class="flex-item"  id="card-body2-2" >2-2</div>
-            <div class="flex-item"  id="card-body2-3" >2-3</div>
-            <div class="flex-item"  id="card-body1-1">1-1</div>
-            <div class="flex-item"  id="card-body1-2" >1-2</div>
-            <div class="flex-item"  id="card-body1-3" >1-3</div>
+            <div class="flex-item" id="card-body"></div>
         </div> 
 	</div>       
-</div>
+
 		
 
 </main>
