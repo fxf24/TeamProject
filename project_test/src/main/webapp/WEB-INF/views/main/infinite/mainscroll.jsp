@@ -22,7 +22,7 @@ function search(){
 }
 
 function profile(){
-	location.href = "/profile?id=" + user //로그인채로 mainscroll - profile 접속 표시 (하은)
+	location.href = "/profile" 
 }
 </script>
 

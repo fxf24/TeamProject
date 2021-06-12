@@ -213,7 +213,7 @@ $.ajax({
  			profileImage = 'basicprofileimage.jpg';
 			var img = document.getElementById('img');
 			img.style.display = "none"
-			img.src = "/profile/" + profileImage
+			img.src = "/images/" + profileImage
  			img.onload = function() {
 				var maxWidth = 250; 
 				var maxHeight = 250;
