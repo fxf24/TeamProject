@@ -205,7 +205,7 @@ public class MainController {
 	public String uploadProfileImage(MultipartFile file) throws IOException {
 		String filename = file.getOriginalFilename();
 		// 서버 저장 경로 설정
-		String savePath = "c:/profile/";
+		String savePath = "/usr/mydir/profile/";
 		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
 		// 서버 저장
