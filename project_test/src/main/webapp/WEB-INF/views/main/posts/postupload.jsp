@@ -226,7 +226,7 @@
 					내용 입력<br>
 					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
 					<div id="sysdate"><%=sf.format(nowTime)%></div>
-					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
+					<button type="button" id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 				</form>
 			</div>
 		</div>
