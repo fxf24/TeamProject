@@ -36,7 +36,7 @@ public class MainController {
 		String filename = file.getOriginalFilename();
 		System.out.println(filename);
 		// 서버 저장 경로 설정
-		String savePath = "c:/upload/";
+		String savePath = "/usr/mydir/upload/";
 		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
 		// 서버 저장
@@ -63,7 +63,7 @@ public class MainController {
 	public String uploadresult(MultipartFile file) throws IOException {
 		String filename = file.getOriginalFilename();
 		// 서버 저장 경로 설정
-		String savePath = "c:/upload/";
+		String savePath = "/usr/mydir/upload/";
 		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
 		// 서버 저장
@@ -221,7 +221,7 @@ public class MainController {
 		String filename = file.getOriginalFilename();
 		//System.out.println("저장한 프로필 사진명:" + filename);
 		// 서버 저장 경로 설정
-		String savePath = "c:/profile/";
+		String savePath = "/usr/mydir/profile/";
 		// 저장할 경로와 파일 이름 완성
 		File savefile = new File(savePath + filename);
 		// 서버 저장
