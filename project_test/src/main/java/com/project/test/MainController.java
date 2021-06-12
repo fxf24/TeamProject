@@ -148,12 +148,12 @@ public class MainController {
 	public String profile() {
 		return "main/profile/main";
 	}
-	
+		
 	//회원아이디 주소창에 표시
 	@RequestMapping(value="/profileAccount", method=RequestMethod.GET)
 	@ResponseBody
 	public String profileAccount(String id) {
-		return "/profile/main";
+		return "main/profile/main";
 	}
 	
 	//유저정보 불러오기 
@@ -196,7 +196,7 @@ public class MainController {
 	
 	@RequestMapping(value="/uploadProfileImage", method=RequestMethod.GET)
 	public String uploadprofileimageform() {
-		return "/profile/main";
+		return "main/profile/main";
 	}
 	
 	//프로필 업로드 - 작동오류
