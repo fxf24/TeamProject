@@ -169,7 +169,7 @@
 						},
 						dataType: 'json',
 						success: function (response) {
-							location.href = "/profile?id=" + user
+							location.href = "/"
 						},
 
 						error: function (request, status, error) {
