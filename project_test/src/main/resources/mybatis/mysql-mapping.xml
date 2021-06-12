@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.test.HHDAO">
+<select id="getOneUser" parameterType="String" resultType="userVO">
+select * from users where id= #{id}
+</select>
+
+<select id="getUserID" parameterType="String" resultType="userVO">
+select * from users where id LIKE Concat(Ifnull(#{id}, ''),'%') order by id 
+</select>
+
+<select id="getUserName" parameterType="String" resultType="userVO">
+select * from users where name LIKE Concat(Ifnull(#{name}, ''),'%') order by name
+</select>
+
+<select id="getHashtag" parameterType="String" resultType="postVO">
+select * from posts where hashtag LIKE Concat('%',Ifnull(#{hashtag}, ''),'%')
+</select>
+
+<insert id="insertPostData" parameterType="postVO" >
+insert into posts(id, contents, imagePath, hashtag, postDate) values(#{id}, #{contents},
+ #{imagepath}, #{hashtag}, sysdate())
+</insert>
+
+<select id="getPostNum" parameterType="int" resultType="postVO">
+select * from posts where postNum=#{postNum}
+</select>
+
+<insert id="insertUserData" parameterType="userVO">
+insert into users(id, password, email, name, telephone, profileImage) values(#{id}, #{password},
+ #{email}, #{name}, #{telephone}, null)
+</insert>
+
+<select id="getThumbsup" parameterType="int" resultType="thumbsupVO">
+select * from thumbsup where postNum=#{postNum}
+</select>
+
+<insert id="thumbsPlus" parameterType="thumbsupVO">
+insert into thumbsup(id, postNum) values(#{id}, #{postNum})
+</insert>
+
+<delete id="thumbsMinus" parameterType="thumbsupVO">
+delete from thumbsup where id=#{id} and postNum=#{postNum}
+</delete>
+
+<insert id="addComments" parameterType="commentsVO">
+insert into comments (id, postNum, comments, commentsDate) values(#{id}, #{postNum}, #{comments}, sysdate())
+</insert>
+
+<select id="getComments" parameterType="int" resultType="commentsVO">
+select * from comments where postNum=#{postNum} order by commentsDate DESC
+</select>
+
+<select id="getProfileImage" parameterType="UserVO" resultType="String">
+select profileImage from users where id=#{id}
+</select>
+
+<select id="getProfileUser" parameterType="String" resultType="userVO">
+select * from users where id= #{id}
+</select>
+
+<update id="updateUserProfileData" parameterType="UserVO">
+update users set profileImage=#{profileImage} where id=#{id}
+</update>
+
+<select id="getOneProfileImage" parameterType="String" resultType="UserVO">
+select id, profileImage from users where id=#{id} 
+</select>
+
+<select id="getPostsCount" parameterType="String" resultType="postVO">
+select id, postDate from posts where id=#{id} order by postDate DESC
+</select>
+
+<select id="getPosts" parameterType="String" resultType="postVO">
+select * from posts where id=#{id} order by postDate DESC 
+</select>
+
+<select id="getPostsImage" parameterType="String" resultType="postVO">
+select postNum, id, imagePath, postDate from posts where id=#{id} order by postDate DESC
+</select>
+
+
+<select id="getCommentThumbsup" parameterType="CommentThumbsupVO" resultType="commentthumbsupVO">
+select * from commentThumbsup where commentNum=#{commentNum}
+</select>
+
+<insert id="commentThumbsPlus" parameterType="commentthumbsupVO">
+insert into commentThumbsup (id, commentNum) values(#{id}, #{commentNum})
+</insert>
+
+<delete id="commentThumbsMinus" parameterType="commentthumbsupVO">
+delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
+</delete>
+
+<select id="getUserPosts" parameterType="String" resultType="postVO">
+select * from posts where id=#{user} order by postDate desc
+</select>
+
+<!-- <delete id="DeleteCommentThumbs" parameterType="int"> -->
+<!-- delete from commentThumbsup where commentNum=#{commentNum} -->
+<!-- </delete> -->
+
+<delete id="DeleteComment" parameterType="commentsVO">
+delete from comments where id=#{id} and commentNum=#{commentNum}
+</delete>
+
+<update id="UpdateComments" parameterType="commentsVO">
+update comments set comments=#{comments} where postNum=#{postNum} and id=#{id} and commentNum=#{commentNum}
+</update>
+
+<select id="getReply" parameterType="ReplyCommentsVO" resultType="replycommentsVO">
+select * from replyComments where postNum=#{postNum} and commentNum=#{commentNum} order by commentNum DESC
+</select>
+
+<update id="UpdateReply" parameterType="ReplycommentsVO">
+update replyComments set comments=#{comments} where postNum=#{postNum} and id=#{id} and replyNum=#{replyNum}
+</update>
+
+<delete id="DeleteReply" parameterType="ReplycommentsVO">
+delete from replyComments where id=#{id} and replyNum=#{replyNum}
+</delete>
+
+<insert id="AddReply" parameterType="ReplycommentsVO">
+insert into replyComments(id, postNum, commentNum, comments, commentsDate) values(#{id}, #{postNum}, #{commentNum}, #{comments}, sysdate())
+</insert>
+
+<select id="getReplyThumbsup" parameterType="int" resultType="replythumbsupVO">
+select * from replyThumbsup where replyNum=#{replyNum}
+</select>
+
+<insert id="replyThumbsPlus" parameterType="replythumbsupVO">
+insert into replyThumbsup(id, replyNum) values(#{id}, #{replyNum})
+</insert>
+
+<delete id="replyThumbsMinus" parameterType="replythumbsupVO">
+delete from replyThumbsup where replyNum=#{replyNum} and id=#{id}
+</delete>
+</mapper>
+
+
+
+
