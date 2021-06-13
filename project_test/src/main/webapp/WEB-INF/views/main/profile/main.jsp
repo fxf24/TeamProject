@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 	<link href="/css/HHhead.css" rel="stylesheet" type="text/css"> -->
  	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
+  	<link href="/css/profile/postmodal.css" rel="stylesheet" type="text/css">	
+  	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
 		$(document).ready(function(){
@@ -16,6 +17,9 @@
 		$('#postfont').click(function(){
 			location.href = "/postupload"
 		});
+			
+
+
 			
 			/*  프로필 이미지 업로드 - 파일 저장 - 출력 */
 		 	$("#uploadprofile").click(function(event){ //프로필 사진 업로드 클릭 
@@ -289,18 +293,14 @@
 						var onePost = response[i];
 						//console.log(onePost.imagepath.split("/")) //["iu.png"]
 						var imageName = onePost.imagepath.split("/"); 
+						var postDate = onePost.postDate.split("/"); 
 						
-//		 				var postsList = [];
-//		 				var postsImage = postsList.$(".flex-item").append('<img id="posts" src="/upload/'+imageName+' "style="border: 4em solid transparent; padding:1.25em; ">')
-//		 				for(var j = 0; j < list.length; j++){
-//		 					postsList[j] = postsImage[j]
-//		 				}
-						
-//		 				$("#post-container").append(
-//		 						$('.flex-container').append(
-//		 								$(".flex-item").append('<img src="/upload/'+imageName+' " style="border: 3px solid silver">')))
-								
-						$(".flex-item").append('<img src="/upload/'+imageName+' " style="border: 3px solid silver">')
+// if문 추가하기 - 수직정렬 아이콘(1) | 수평수직정렬 아이콘 
+						$(".flex-item").append(
+								'<div class="postImageDate">'+
+								'<div class="pD" >'+postDate+'</div>'+
+								'<img class="postImage" src="/upload/'+imageName+' " onclick="clickimage()" style="border: 3px solid silver;cursor: pointer;"></div>')
+
 						imageName.onload = function() {
 							var maxWidth = 300; 
 							var maxHeight = 300;
@@ -321,32 +321,93 @@
 						} //image onload function end
 			
 					} //for end 
+														
 				}, //success end 
 				error: function(request, status, error){
 					//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
 				} //error end 
 			});//ajax end 
 			
+
+// 			<div class="postModal" onclick="postModalClick()">
+// 			<div class="psotModalContent" onclick="postModalContentClick()">
+// 			</div>
+// 		</div>
 			
-			
-			/* 포스트 전체 불러오기 3 - */
-			var contents = "";
+var pDtext = $(".pD").text()			
+	/* 포스트 전체 불러오기 3 - */
+function clickimage(){
+	/* 포스트 모달창 띄우기 */
+//	console.log("준비")
+	$(".postModal").fadeIn();
+	$("body").css("overflow-y", "hidden")
+	$("html").css("overflow-y", "hidden")
+	$(".postModalContent").text("")		
+
+				
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 				url: '/posts',
 				type: 'post',
 				data: {"id": user},
 				dataType: "json",
 				success: function(response){
-					//console.log(response) //arraylist 
+					console.log(response) //arraylist 
+					
+// 						contents: "자연스러운 드라마 짤"
+// 						hashtag: "#handbag #handbag #tie #최강희"
+// 						id: "admin"
+// 						imagepath: "gangheebag.jpg"
+// 						postDate: "2021-06-13 01:53:16"
+// 						postNum: 77
+
+
 					//console.log(response[0].id) //list의 id 값 불러오기
+					for (var i in response){
+
+						var onePost = response[i]; //포스트 하나의 내용 
+						//console.log(onePost.imagepath.split("/")) //["iu.png"]
+						//var id = onePost.id.split("/"); 
+						var imageName = onePost.imagepath.split("/"); 
+						var postContent = onePost.contents.split("/"); 
+						var hashTag = onePost.hashtag.split("/"); 
+						var postDate = onePost.postDate.split("/"); 
+
+
+
+ 						if(pDtext  == postDate){ //클릭한 이미지의 동일한 내용이 출력되도록 - 오류
+
+							$(".postModalContent").append(
+							"<div class='onePostContent'><div class='postID'>user</div>"+
+							"<div><img class='postImage' src='/upload/"+imageName+" ' onclick='clickimage()' style='border: 3px solid silver'></div>"+ 
+							"<div class='postContent'>"+postContent+"</div>"+
+							"<div class='hashTag'>"+hashTag+"</div>"+
+ 							"<div class='postDate'>"+postDate+"</div></div>")
+ 						}//if end
+
+					
+					} //for end  
+					
+
+
 				}, //success end 
-				error: function(request, status, error){
-					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
-				} //error end 
+ 				error: function(e){
+ 					console.log(e)
+// 					alert("포스트 내용 불러오기에 실패했습니다.")
+// 					request, status, error
+// 					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+ 				} //error end 
+				
 			});//ajax end
+		} //clickimage() end	
 
-
-		} //else end
+function postModalClick(){
+	$(".postModal").fadeOut();	
+		}//postModalClick() end
+		
+} //ifelse end (회원만 가능)
+		
+		
+		var contents = ""; //팔로워 저장하는 리스트
 
 </script>	
 </head>
@@ -625,6 +686,12 @@
 						        </div>
 						         
 							</div>       	
+			
+			
+						<div class="postModal" onclick="postModalClick()">
+							<div class="postModalContent" onclick="postModalContentClick()">
+							</div>
+						</div>
 			
 
 			

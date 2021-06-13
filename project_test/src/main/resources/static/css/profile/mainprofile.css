@@ -183,7 +183,7 @@
 	/* 1 - 프로필 상단 전체*/
 	#mainPBox1{
 		position: relative;
-		width: 75.729vw;
+		width: 45.729vw;
 		height: 28.6875vw;
 		left: 12.135vw;
 		top: 10.323vw;
@@ -645,7 +645,7 @@
     /* 2 - 게시물 등록 */
     #post-container {
    	order: 2; 
-/*    	background: black; */
+   	background: black;
 	position: inherit;
 	height: 93.593vw;
 	top: 17.458vw;
@@ -658,16 +658,26 @@
    	order: 3;
     }
     
+    /* 포스트 이미지들 */ 
    	.flex-item {
    	position: absolute;
    	order: 3;
 	height: 93.593vw;
 /* 	top: 26.458vw; */
-	width:71.729vw;
-	left: 1.735vw;   	
+	width: 75.729vw;
+/* 	left: 1.735vw;   	 */
 	top: 0;
-/* 	background: gray; */
+	background: gray;
 	}
+	
+/* 	포스트 이미지 출력 append 추가 */
+	.pD {
+/* 	color: transparent; */
+   	position: absolute;
+	background: yellow;
+	width: 300px;
+	}
+	
 	
 	#posts {
 	top: 87.458vw;
