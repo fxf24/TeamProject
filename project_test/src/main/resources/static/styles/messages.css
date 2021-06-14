@@ -110,7 +110,7 @@ li {
     margin-top: 2em;
     background: #fff;
     box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
-    /* width: 60%; */
+    width: 60%;
     /* margin-left: 172px; */
 }
 
@@ -135,6 +135,8 @@ li {
 .posted-date {
     font-size: 0.9em;
     color: rgba(38, 153, 251, 1);
+    text-align: end;
+    margin-right: 2.5em;
 }
 
 .bubble p:first-child {
