@@ -4,26 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="author"/>
-<meta name="viewport" content="width=device-width">
-<title>Infinite Scroll</title>
-<script>
-var user = sessionStorage.getItem("user") //프로필 연결용 세션 유지 (하은)
-$(document).ready(function(){
-	
-})//document ready end
-
-function search(){
-	location.href = "/search"
-}
-
-function profile(){
-	location.href = "/profile?id=" + user //로그인채로 mainscroll - profile 접속 표시 (하은)
-}
-</script>
-<link href='styles/messages.css' rel='stylesheet' type='text/css'>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="author"/>
+	<meta name="viewport" content="width=device-width">
+	<title>Infinite Scroll</title>
+	<link href='styles/messages.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div id="templates">
@@ -38,12 +24,8 @@ function profile(){
 		
 		</div>
 	</div>
-	<li class="chat-item" data-id="{{id}}">
+	<li class="card__main chat-item" data-id="{{id}}">
 		<div class="bubble">
-			<!-- 아이디 표시 위치 -->
-			<span class="hashId"></span>
-			<!-- 시간 위치 -->
-			<div class="posted-date"></div>
 			<div class ="main__right">
 				<i class="far fa-eye-slash">Invisible</i>
 				<i class="fas fa-share-alt">Share</i>
@@ -93,51 +75,22 @@ function profile(){
 					<span>REPORT</span>
 				</div>
 			</div> <!-- main__right -->
-	      	<div class="meta">
-			<!-- 시간 표시 위치 -->	
+			
+			<!-- 아이디 표시 위치 -->
+			<span class="hashId"></span>
+			<!-- 시간 위치 -->
+			<div class="posted-date"></div>
+			<!-- 이미지 위치 -->
+			<img id="postImage" class="card__img">
+			<div class="card__updown">
+				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-down"></i>
 			</div>
-<!--
-이미지 위치
--->
-			<img id="postImage">
-	 	    <div id="contentsssssss">
-				<div id="contentsButtonPBox">
-					<div id="contentsUpButtonPBox">
-						<svg class="contentsUpButtonBright" viewBox="4 4 110 110">
-							<path id="contentsUpButtonBright" d="M 8 0 L 46 0 C 50.4182777 0 54 3.58172178 54 8 L 54 46 C 54 50.4182777 50.4182777 54 46 54 L 8 54 C 3.58172178 54 0 50.4182777 0 46 L 0 8 C 0 3.58172178 3.58172178 0 8 0 Z" />
-						</svg>
-						<svg class="contentsUpButtonShadow">
-							<rect id="contentsUpButtonShadow" rx="8" ry="8" x="0" y="0" width="54" height="54" />
-						</svg>
-						<svg class="contentsUpButtonBox">
-							<rect id="contentsUpButtonBox" rx="8" ry="8" x="0" y="0" width="54" height="54" />
-						</svg>
-						<svg class="contentsUpButton" viewBox="2.239 9.452 28 14">
-							<path id="contentsUpButton" d="M 28.3153247 23.1462574 C 28.7579002 23.5542335 29.4690742 23.5542335 29.908596 23.1462574 C 30.3481197 22.7382831 30.3501548 22.0792465 29.908596 21.6722221 L 17.0352535 9.75822067 C 16.5957336 9.35024642 15.8845596 9.35024642 15.4419851 9.75822067 L 2.56864213 21.6722221 C 2.12911915 22.0801963 2.12911915 22.739233 2.56864213 23.1462574 C 3.01019978 23.5542316 3.72238969 23.5542316 4.16191244 23.1462574 L 16.2386207 12.2802467 L 28.3143081 23.1462574 Z" />
-						</svg>
-					</div>
-					<div id="contentsDownButtonPBox">
-						<svg class="contentsDownButtonBright" viewBox="4 4 110 110">
-							<path id="contentsDownButtonBright" d="M 8 0 L 46 0 C 50.4182777 0 54 3.58172178 54 8 L 54 46 C 54 50.4182777 50.4182777 54 46 54 L 8 54 C 3.58172178 54 0 50.4182777 0 46 L 0 8 C 0 3.58172178 3.58172178 0 8 0 Z" />
-						</svg>
-						<svg class="contentsDownButtonShadow">
-							<rect id="contentsDownButtonShadow" rx="8" ry="8" x="0" y="0" width="54" height="54" />
-						</svg>
-						<svg class="contentsDownButtonBox">
-							<rect id="contentsDownButtonBox" rx="8" ry="8" x="0" y="0" width="54" height="54" />
-						</svg>
-						<svg class="contentsDownButton" viewBox="2.239 9.452 28 14">
-							<path id="contentsDownButton" d="M 28.3153247 9.75822067 C 28.7579002 9.35024642 29.4690742 9.35024642 29.908596 9.75822067 C 30.3481197 10.1661958 30.3501548 10.8252315 29.908596 11.2322559 L 17.0352535 23.1462593 C 16.5957336 23.5542335 15.8845596 23.5542335 15.4419851 23.1462593 L 2.56864213 11.2322568 C 2.12911915 10.8242826 2.12911915 10.165246 2.56864213 9.75822257 C 3.01019978 9.35024738 3.72238969 9.35024738 4.16191244 9.75822257 L 16.2386207 20.6242332 L 28.3143081 9.75822257 Z" />
-						</svg>
-					</div>
-				</div>
-	     		<div class="hashtag">
+	 	    <div id="card__body">
 				<!-- 해시태그 위치 -->				
-				</div>
-
-				<div class="contentsss">
+	     		<div class="hashtag"></div>
 				<!--게시물 내용 위치-->
-				</div>
+				<div class="contentsss"></div>
 			</div>
 		</div>
 	</li>
@@ -145,8 +98,6 @@ function profile(){
 	<li class="chat-item tombstone" data-id="{{id}}">
 		<div class="bubble" id="beforeBubble">
 	      	<div class =plusBox></div>
-			<p></p>
-			<p></p>
 			<p></p>
 		</div>
 	</li>
@@ -160,7 +111,7 @@ function profile(){
 <script src="scripts/messages.js"></script>
 <script>
 	//session에서 user데이터값을 받아오기
-	var user = sessionStorage.getItem("user")
+	var user = sessionStorage.getItem("user") //프로필 연결용 세션 유지 (하은)
 	
 	var list = []
 	$.ajax({
@@ -190,12 +141,7 @@ function profile(){
 			return a[Math.floor(Math.random() * a.length)];
 		}
 
-	/* 데이터 랜덤 전송위치 ///////////////////////////////////////////////////////////////////////////////////////////////
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+	/* 데이터 랜덤 전송위치 */
 	
 		return new Promise(function(resolve) {
 			var item = {
@@ -267,7 +213,7 @@ function profile(){
 			
 			
 			//image 설정
-			var img = div.querySelector('.bubble img');
+			var img = div.querySelector('.card__img');
 			if(item.image !== '') {
 			img.classList.remove('invisible');
 			img.src = item.image.src;
