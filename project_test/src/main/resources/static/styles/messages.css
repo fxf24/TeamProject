@@ -187,7 +187,7 @@ li {
   background: #F9D7FF;
 }*/
 
-.bubble p:first-child {
+.contentsss{
     position: relative;
     top: -100px;
     left: -40px;
@@ -199,7 +199,7 @@ li {
     /* 	display: none; */
 }
 
-.contentsss {
+.contentsbox {
     position: relative;
     top: 0px;
     left: -96px;

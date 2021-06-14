@@ -4,18 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="/style/messages980.css" media="(max-width: 980px)" rel="stylesheet">
 <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
- <meta name="author"/>
- <meta name="viewport" content="width=device-width">
- <title>Infinite Scroll</title>
- <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="author"/>
+<meta name="viewport" content="width=device-width">
+<title>Infinite Scroll</title>
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 var user = sessionStorage.getItem("user") //프로필 연결용 세션 유지 (하은)
 $(document).ready(function(){
-	
-})//document ready end
+if($(window).width() > 428) {
+         $(".logo-image").attr("src", "/loginimage/logo.png");
+     } else {
+         $(".logo-image").attr("src", "/loginimage/mobilelogo.png");
+     }
+});//document ready end
 
 function search(){
 	location.href = "/search"
@@ -170,9 +175,10 @@ function profile(){
 	     		<div class="hashtag">
 				<!-- 해시태그 위치 -->				
 				</div>
-
-				<div class="contentsss">
-				<!--게시물 내용 위치-->
+				<div class=contentsbox>
+					<div class="contentsss">
+					<!--게시물 내용 위치-->
+					</div>
 				</div>
 			</div>
 	        <div class="meta">

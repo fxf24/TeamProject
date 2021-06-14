@@ -24,7 +24,7 @@
 <script>
 $(document).ready(function(){
 	//id, name, hashtag 버튼 클릭시 각각의 화면 출력
-	$("#idbutton").on('click', function(){
+/* 	$("#idbutton").on('click', function(){
 		$('#idSearch').css("display", "block");
 		$('#nameSearch').css("display", "none");
 		$('#hashtagSearch').css("display", "none");
@@ -40,7 +40,13 @@ $(document).ready(function(){
 		$('#idSearch').css("display", "none");
 		$('#nameSearch').css("display", "none");
 		$('#hashtagSearch').css("display", "block");
-	})
+	}) */
+	  $('#searchbar').on("keyup",function(key){
+	        if(key.keyCode==13) {
+	    		$("#spanbefore").css("display", "block");
+	    		$("#spanafter").css("display", "block");
+	    		$(".resultnum").css("display", "block");
+	  }})//총 검색결과 갯수
 			
 	var searchMessage = $("#searchbar").val();
 	//main에서 넘어오는 search값 전달, id 검색	
@@ -141,6 +147,7 @@ $(document).ready(function(){
 			success : function(response){
 				//console.log(response)
 				var list = response;
+				var totalHashtag = list.length;
 				if(list.length==0){ //검색 결과가 없을 때
 					$(".hashtagSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 				} else {
@@ -310,7 +317,36 @@ function search(){
 			}) // ajax end
 		} //else end
 	}// search function end
-
+	function searchSelect(value){
+	     if(value == 1){
+		    $('#idSearch').css("display", "block");
+		    $('#nameSearch').css("display", "none");
+		    $('#hashtagSearch').css("display", "none");
+	        }
+	        if(value == 2){
+	        $('#idSearch').css("display", "none");
+	        $('#nameSearch').css("display", "block");
+	        $('#hashtagSearch').css("display", "none");
+	        }
+	        if(value == 3){
+		    $('#idSearch').css("display", "none");
+		    $('#nameSearch').css("display", "none");
+		    $('#hashtagSearch').css("display", "block");
+		    }
+	     }//병전님이 만든 맨 위 내용 셀렉트박스용으로 수정
+function result() {
+		//# ~~~ 검색결과
+	if (window.event.keyCode == 13) {
+		const resultvalue = document.getElementById('searchbar').value;
+		document.getElementById("result").innerText = resultvalue;
+	} 
+}
+	function resultnum() {
+		//검색결과 갯수
+		if (window.event.keyCode == 13) {
+			document.getElementById("resultnum").innerText = totalHashtag;
+		} 
+	}
 function enterkey(){
 	//  엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
 	if(window.event.keyCode == 13){
@@ -333,14 +369,24 @@ function moveToName(value){
 </script>
 </head>
 <body>
-<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey()" placeholder="검색어를 입력하세요">
+<div id=inputPBox>
+<select class="seachSelect" name="seachSelect" onchange="searchSelect($(this).val());">>
+<!--     <option hidden'"disabled="disabled" selected="selected" value=""> search  
+                   </option>-->
+                   <option id="idbutton" value="1">아이디</option>
+                   <option id="namebutton" value="2">이름</option>
+                   <option id="hashtagbutton" value="3">해시태그</option>
+                  </select>
+<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey(); result();resultnum();" placeholder="검색어를 입력하세요">
+<div id=searchIconBox>
 <i class="fas fa-search fa-3x" id=fa-search type="submit" id="searchbutton" onclick="search()"></i>
-
+<!-- </div>
 <button id="idbutton">아이디</button>
 <button id="namebutton">이름</button>
-<button id="hashtagbutton">해시태그</button><br>
+<button id="hashtagbutton">해시태그</button><br>  셀렉트 박스로 변경했어요 - 다현-->
 <!-- 색상은 구분을 위해 임시 지정 , css 스타일 적용 필요 -->
 <div id="messageWindow">
+	<div id=resultSortPBox><div id=resultSortBox1><div id="spanbefore">#</div><span id="result"></span><div id="spanafter">&nbsp검색결과</div></div><div id=resultSortBox2><div class="resultnum">총&nbsp</div><span id="resultnum" class="resultnum"></span><div class="resultnum">개 결과가 나왔습니다.</div></div></div>
 	<div id="idSearch"> <!-- default view -->
 		<div class=idSearchList id=idSearchList></div>
 	</div>
