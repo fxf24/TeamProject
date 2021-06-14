@@ -10,6 +10,10 @@ html {
 
 html,
 body {
+    margin-top: 10em;
+    /* text-align: center; */
+    /* height: 100%; */
+    position: absolute;
     height: 100%;
     margin: 0;
     padding: 0;
@@ -23,7 +27,7 @@ li {
 }
 
 #templates {
-    position: inherit;
+    /* position: inherit; */
     width: 1920px;
     height: 0px;
     background-color: rgba(244, 238, 238, 1);
@@ -33,21 +37,21 @@ li {
 }
 
 #chat-timeline {
-    margin: 0;
-    padding: 0;
     overflow-x: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
-    /* position: absolute; */
-    box-sizing: border-box;
-    contain: layout;
+    /* box-sizing: border-box; */
+    /* contain: layout; */
     will-change: transform;
     background-color: rgba(244, 238, 238, 1);
+    /* position: absolute; */
 }
 
 .chat-item {
+    display: flex;
+    justify-content: center;
     /* display: flex;
     padding: 57px 0;
     width: 100%;
@@ -63,12 +67,18 @@ li {
     min-width: 48px;
 }
 
+.card__icon__button {
+    margin: 0.5rem;
+}
+
+
+/* 
 .chat-item .contents p {
     margin: 0;
     word-wrap: break-word;
     font-size: 13px;
     text-overflow: ellipsis;
-}
+} */
 
 #card__body {
     /* position: relative; */
@@ -83,8 +93,8 @@ li {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    line-height: 1.2em;
-    font-size: 25px;
+    line-height: 1em;
+    font-size: 1.2em;
     color: rgb(59, 76, 90);
     /*     word-break: break-word;
  */
@@ -95,31 +105,31 @@ li {
 }
 
 .bubble {
-    top: 533px;
-    color: #333;
+    /* top: 533px; */
+    /* color: #333; */
+    margin-top: 2em;
     background: #fff;
     box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
-    position: relative;
-    width: 678px;
-    margin-left: 172px;
+    /* width: 60%; */
+    /* margin-left: 172px; */
 }
 
-.main__right {
+
+/* .main__right {
     height: 282px;
     background: white;
     box-shadow: 0 3px 2px rgba(0, 0, 0, 0.1);
     width: 370px;
-    position: absolute;
     top: 0px;
     margin: 0px;
     left: 778px;
     z-index: 8888;
-}
+} */
 
 .posted-date::before {
-    font-size: 16px;
-    top: -8px;
-    margin-bottom: 1000px;
+    /* font-size: 16px; */
+    /* top: -8px; */
+    /* margin-bottom: 1000px; */
 }
 
 .posted-date {
@@ -128,14 +138,14 @@ li {
 }
 
 .bubble p:first-child {
-    position: relative;
+    /* position: relative;
     top: -100px;
     left: -40px;
     width: 550px;
     margin: auto;
     padding: 0px;
     text-overflow: ellipsis;
-    word-break: break-word;
+    word-break: break-word; */
     /* 	display: none; */
 }
 
@@ -146,11 +156,12 @@ li {
     /*     display: none; 踰꾪듉�겢由� �썑 �굹�샂 //////////////////////////////////////////////// */
 }
 
-.from-me .bubble::before {
+
+/* .from-me .bubble::before {
     left: 100%;
     border-width: 10px 10px 0 0;
     border-color: #F9D7FF transparent transparent transparent;
-}
+} */
 
 .state {
     display: none;
@@ -273,11 +284,11 @@ li {
 
 .reportIcon4 {
     overflow: visible;
-    position: absolute;
+    /* position: absolute; */
     width: 12px;
     height: 1px;
-    left: 25px;
-    top: 18px;
+    /* left: 25px; */
+    /* top: 18px; */
     transform: matrix(1, 0, 0, 1, 0, 0);
 }
 
@@ -348,66 +359,4 @@ li {
     font-weight: normal;
     font-size: 36px;
     color: rgba(0, 0, 0, 1);
-}
-
-#plusBoxIcon {
-    fill: rgba(0, 0, 0, 1);
-}
-
-.plusBoxIcon {
-    overflow: visible;
-    position: absolute;
-    width: 7px;
-    height: 28px;
-    left: -190px;
-    top: 20px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
-    z-index: 4444;
-}
-
-#favoriteIcon1 {
-    fill: rgba(0, 0, 0, 1);
-}
-
-.favoriteIcon1 {
-    overflow: visible;
-    position: absolute;
-    width: 30px;
-    height: 27px;
-    left: -270px;
-    top: 20px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
-    z-index: 4444;
-}
-
-#favoriteIcon2 {
-    fill: rgba(241, 168, 187, 1);
-    display: none;
-}
-
-.favoriteIcon2 {
-    overflow: visible;
-    position: absolute;
-    width: 30px;
-    height: 27px;
-    left: -270px;
-    top: 20px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
-    z-index: 5555;
-}
-
-#favoriteIcon3 {
-    fill: rgba(255, 0, 66, 1);
-    display: none;
-}
-
-.favoriteIcon3 {
-    overflow: visible;
-    position: absolute;
-    width: 30px;
-    height: 27px;
-    left: -270px;
-    top: 20px;
-    transform: matrix(1, 0, 0, 1, 0, 0);
-    z-index: 6666;
 }

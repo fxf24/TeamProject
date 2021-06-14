@@ -12,26 +12,14 @@
 	<link href='styles/messages.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
+	<!-- 여기가 infinite-scroll을 생성 -->
+	<div id="chat-timeline"></div>
+	<!-- card 구성 -->
 	<div id="templates">
-		<div id= mainBarBox>
-			<div class="card__main chat-item" data-id="{{id}}">
-				<div class="bubble">
-					<div class ="main__right">
-						<i class="far fa-eye-slash">Invisible</i>
-						<i class="fas fa-share-alt">Share</i>
-						<i class="fas fa-bell">Report</i>
-						<svg class="plusBoxIcon" viewBox="10 4 8 32">
-							<path id="plusBoxIcon" d="M 13.99999904632568 12.00000095367432 C 16.19999885559082 12.00000095367432 17.99999809265137 10.20000171661377 17.99999809265137 8.000000953674316 C 17.99999809265137 5.799999713897705 16.19999885559082 4 13.99999904632568 4 C 11.79999923706055 4 9.999999046325684 5.799999713897705 9.999999046325684 8.000000953674316 C 9.999999046325684 10.20000171661377 11.79999923706055 12.00000095367432 13.99999904632568 12.00000095367432 Z M 13.99999904632568 16.00000190734863 C 11.79999923706055 16.00000190734863 9.999999046325684 17.80000114440918 9.999999046325684 20.00000381469727 C 9.999999046325684 22.20000267028809 11.79999923706055 24.00000381469727 13.99999904632568 24.00000381469727 C 16.19999885559082 24.00000381469727 17.99999809265137 22.20000267028809 17.99999809265137 20.00000381469727 C 17.99999809265137 17.80000114440918 16.19999885559082 16.00000190734863 13.99999904632568 16.00000190734863 Z M 13.99999904632568 28.00000381469727 C 11.79999923706055 28.00000381469727 9.999999046325684 29.80000495910645 9.999999046325684 32.00000381469727 C 9.999999046325684 34.20000076293945 11.79999923706055 36 13.99999904632568 36 C 16.19999885559082 36 17.99999809265137 34.20000076293945 17.99999809265137 32.00000381469727 C 17.99999809265137 29.80000495910645 16.19999885559082 28.00000381469727 13.99999904632568 28.00000381469727 Z" />
-						</svg>
-						<svg class="favoriteIcon1" viewBox="2 3 30 27">
-							<path id="favoriteIcon1" d="M 17 30 L 14.824997 28.057767 C 7.0999984 21.186378 2 16.654495 2 11.092643 C 2 6.5607643 5.6299982 2.9999997 10.249997 2.9999997 C 12.859997 2.9999997 15.364994 4.1918258 16.999996 6.0752062 C 18.634998 4.1918258 21.139997 2.9999997 23.749998 2.9999997 C 28.369993 2.9999997 31.999998 6.5607643 31.999998 11.092643 C 31.999998 16.654495 26.89999 21.18638 19.174995 28.072484 L 16.999996 30.000001 Z" />
-						</svg>
-						<svg class="favoriteIcon2" viewBox="2 3 30 27">
-							<path id="favoriteIcon2" d="M 17 30 L 14.824997 28.057767 C 7.0999984 21.186378 2 16.654495 2 11.092643 C 2 6.5607643 5.6299982 2.9999997 10.249997 2.9999997 C 12.859997 2.9999997 15.364994 4.1918258 16.999996 6.0752062 C 18.634998 4.1918258 21.139997 2.9999997 23.749998 2.9999997 C 28.369993 2.9999997 31.999998 6.5607643 31.999998 11.092643 C 31.999998 16.654495 26.89999 21.18638 19.174995 28.072484 L 16.999996 30.000001 Z" />
-						</svg>
-						<svg class="favoriteIcon3" viewBox="2 3 30 27">
-							<path id="favoriteIcon3" d="M 17 30 L 14.824997 28.057767 C 7.0999984 21.186378 2 16.654495 2 11.092643 C 2 6.5607643 5.6299982 2.9999997 10.249997 2.9999997 C 12.859997 2.9999997 15.364994 4.1918258 16.999996 6.0752062 C 18.634998 4.1918258 21.139997 2.9999997 23.749998 2.9999997 C 28.369993 2.9999997 31.999998 6.5607643 31.999998 11.092643 C 31.999998 16.654495 26.89999 21.18638 19.174995 28.072484 L 16.999996 30.000001 Z" />
-						</svg>
+		<div id="mainBarBox">
+			<div class="card__main chat-item container" data-id="{{id}}">
+				<div class="bubble col-9">
+					<%-- <div class ="main__right">
 						<svg class="invisibleIcon" viewBox="1 3 40 30">
 							<path id="invisibleIcon" d="M 21.009094 9.3157882 C 26.02956 9.3157882 30.104137 12.852629 30.104137 17.210527 C 30.104137 18.236843 29.867666 19.200000 29.449291 20.100000 L 34.760799 24.710527 C 37.507503 22.721052 39.672122 20.147369 41.000003 17.210527 C 37.853118 10.278946 30.085947 5.3684215 20.990903 5.3684215 C 18.444292 5.3684215 16.00682 5.7631578 13.751249 6.4736838 L 17.680309 9.8842096 C 18.717144 9.5210514 19.82674 9.3157882 21.009094 9.3157882 Z M 2.8190088 5.0052638 L 6.9663476 8.6052627 L 7.8030924 9.3315782 C 4.7835378 11.36842 2.4188265 14.08421 1 17.210527 C 4.1468849 24.142105 11.914052 29.052631 21.009094 29.052631 C 23.828557 29.052631 26.52069 28.578948 28.976354 27.726316 L 29.740337 28.389472 L 35.07003 33 L 37.380176 30.994735 L 5.1291499 3 L 2.8190088 5.0052638 Z M 12.878126 13.736841 L 15.697589 16.184213 C 15.606637 16.51579 15.552068 16.863159 15.552068 17.210527 C 15.552068 19.831579 17.98954 21.947368 21.009094 21.947368 C 21.409276 21.947368 21.809457 21.900001 22.191448 21.821052 L 25.010913 24.268419 C 23.792177 24.789472 22.446109 25.105264 21.009094 25.105264 C 15.988630 25.105264 11.914052 21.568422 11.914052 17.210527 C 11.914052 15.963158 12.277852 14.794735 12.878125 13.736841 Z M 20.718051 12.505263 L 26.447931 17.478948 L 26.48431 17.226318 C 26.48431 14.605262 24.046838 12.489472 21.027284 12.489472 L 20.718051 12.505263 Z" />
 						</svg>
@@ -64,30 +52,43 @@
 						<div id="reportFont">
 							<span>REPORT</span>
 						</div>
-					</div> <!-- main__right -->
+					</div> <!-- main__right --> --%>
 					
 					<!-- 아이디 표시 위치 -->
-					<span class="hashId fs-4 align-middle "></span>
+					<span class="hashId fs-4  "></span>
 					<!-- 시간 위치 -->
 					<div class="posted-date"></div>
 					<!-- 이미지 위치 -->
-					<div class="d-flex justify-content-center">
-						<img id="postImage" class="card__img">
-					</div>
-					<div class="card__updown">
-						<i class="fas fa-chevron-up"></i>
-						<i class="fas fa-chevron-down"></i>
-						<i class="fas fa-heart"></i>
-						<i class="fas fa-ellipsis-v"></i>
-						<div class="dropdown">
-							<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-								Dropdown button
-							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action</a></li>
-								<li><a class="dropdown-item" href="#">Something else here</a></li>
-							</ul>
+					<img id="postImage" class="card__img d-flex justify-content-center">
+					<!-- card 내용 -->
+					<div class="card__icon d-flex text-end">
+						<div class="card__icon__left">
+							
+						</div>
+						<div class="card__icon__right justify-content-end">
+							<i class="card__icon__button fas fa-chevron-up"></i>
+							<i class="card__icon__button fas fa-chevron-down"></i>
+							<i class="card__icon__button fas fa-heart"></i>
+								<button class="btn dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class=" fas fa-ellipsis-v"></i>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+									<li>
+										<a class="dropdown-item" href="#">
+											<i class=" far fa-eye-slash m-1">Invisible</i>
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#">
+											<i class=" fas fa-share-alt m-1">Share</i>
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item m-1" href="#">
+											<i class=" fas fa-bell m-1">Report</i>
+										</a>
+									</li>
+								</ul>
 						</div>
 					</div>
 					<div id="card__body">
@@ -100,15 +101,12 @@
 			</div>
 		</div>
 	
-		<div class="chat-item tombstone" data-id="{{id}}">
-			<div class="bubble__tombstone" >
-				<div class ="plusBox"></div>
-				<p></p>
-			</div>
+		<div class="tombstone" data-id="{{id}}">
+			<div class ="plusBox"></div>
+			<p></p>
 		</div>
 	</div>
-	<!-- 여기가 infinite-scroll을 생성 -->
-	<div id="chat-timeline"></div>
+	
 </body>
 
 <script src="es6-promise.js"></script>
@@ -178,8 +176,8 @@
 	
 	function ContentSource() {
 		// Collect template nodes to be cloned when needed.
-		this.tombstone_ = document.querySelector("#templates > .chat-item.tombstone");
-		this.messageTemplate_ = document.querySelector("#templates >#mainBarBox > .chat-item:not(.tombstone)");
+		this.tombstone_ = document.querySelector(".tombstone");
+		this.messageTemplate_ = document.querySelector(".chat-item:not(.tombstone)");
 		this.nextItem_ = 0;
 	}
 
@@ -221,8 +219,8 @@
 			if(item.image !== '') {
 			img.classList.remove('invisible');
 			img.src = item.image.src;
-			img.style.minWidth = '30em';
-			img.style.maxWidth = '50em';
+			img.style.width = '60%';
+			// img.style.maxWidth = '';
 			img.style.height = 'auto';
 			// img.width = item.image.width;
 			// img.height = item.image.height;
