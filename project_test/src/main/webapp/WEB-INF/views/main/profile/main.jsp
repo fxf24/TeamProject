@@ -12,6 +12,7 @@
 		<script>
 		$(document).ready(function(){
 			var user = sessionStorage.getItem("user")
+
 			
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
 		$('#postfont').click(function(){
@@ -287,20 +288,22 @@
 				data: {"id": user},
 				dataType: "json",
 				success: function(response){
-					//console.log(response) //array(접속 회원 아이디의 포스트 개수)
+					console.log(response) //array(접속 회원 아이디의 포스트 개수)
 					for(var i=0; i< response.length; i++){
 						//console.log(response[i]); //최상단의 하나의 포스트 {, , , ... , }
 						var onePost = response[i];
 						//console.log(onePost.imagepath.split("/")) //["iu.png"]
 						var imageName = onePost.imagepath.split("/"); 
 						var postDate = onePost.postDate.split("/"); 
-						
+						var postNumber = onePost.postNum;
+						//console.log(postNumber)
+
+							
 // if문 추가하기 - 수직정렬 아이콘(1) | 수평수직정렬 아이콘 
 						$(".flex-item").append(
 								'<div class="postImageDate">'+
-								'<div class="pD" >'+postDate+'</div>'+
-								'<img class="postImage" src="/upload/'+imageName+' " onclick="clickimage()" style="border: 3px solid silver;cursor: pointer;"></div>')
-
+								'<div class="pD" >"'+postNumber+'"</div>'+
+								'<img class="postImages" id="'+postNumber+'" src="/upload/'+imageName+' " onclick="clickImage('+postNumber+')" style="border: 3px solid silver;cursor: pointer;"></div>')
 						imageName.onload = function() {
 							var maxWidth = 300; 
 							var maxHeight = 300;
@@ -320,8 +323,10 @@
 							context.drawImage(image, 0, 0, width, height)	
 						} //image onload function end
 			
-					} //for end 
-														
+					} //for i end 
+					
+
+						
 				}, //success end 
 				error: function(request, status, error){
 					//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
@@ -333,25 +338,28 @@
 // 			<div class="psotModalContent" onclick="postModalContentClick()">
 // 			</div>
 // 		</div>
-			
-var pDtext = $(".pD").text()			
+
+var imageName = ""
+var postContent = ""
+var hashTag = ""
+var postDate = ""
+
 	/* 포스트 전체 불러오기 3 - */
-function clickimage(){
+function clickImage(postNumber){
+		
 	/* 포스트 모달창 띄우기 */
 //	console.log("준비")
 	$(".postModal").fadeIn();
 	$("body").css("overflow-y", "hidden")
 	$("html").css("overflow-y", "hidden")
 	$(".postModalContent").text("")		
-
-				
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 				url: '/posts',
 				type: 'post',
 				data: {"id": user},
 				dataType: "json",
 				success: function(response){
-					console.log(response) //arraylist 
+					//console.log(response) //arraylist 
 					
 // 						contents: "자연스러운 드라마 짤"
 // 						hashtag: "#handbag #handbag #tie #최강희"
@@ -360,34 +368,39 @@ function clickimage(){
 // 						postDate: "2021-06-13 01:53:16"
 // 						postNum: 77
 
-
 					//console.log(response[0].id) //list의 id 값 불러오기
 					for (var i in response){
 
 						var onePost = response[i]; //포스트 하나의 내용 
+						//console.log(onePost) //array로 i개만큼 
+
 						//console.log(onePost.imagepath.split("/")) //["iu.png"]
 						//var id = onePost.id.split("/"); 
-						var imageName = onePost.imagepath.split("/"); 
-						var postContent = onePost.contents.split("/"); 
-						var hashTag = onePost.hashtag.split("/"); 
-						var postDate = onePost.postDate.split("/"); 
-
-
-
- 						if(pDtext  == postDate){ //클릭한 이미지의 동일한 내용이 출력되도록 - 오류
-
+						var imageName = onePost.imagepath.split("/")[0]; 
+						var postContent = onePost.contents.split("/")[0]; 
+						var hashTag = onePost.hashtag.split("/")[0]; 
+						var postDate = onePost.postDate.split("/")[0]; 
+						//console.log(postDate) //array로 i개만큼 
+						var postNum = onePost.postNum; 
+						//console.log(postNum) //모든 게시물 번호 
+							
+						if (postNum == postNumber) {
+							
 							$(".postModalContent").append(
-							"<div class='onePostContent'><div class='postID'>user</div>"+
-							"<div><img class='postImage' src='/upload/"+imageName+" ' onclick='clickimage()' style='border: 3px solid silver'></div>"+ 
-							"<div class='postContent'>"+postContent+"</div>"+
-							"<div class='hashTag'>"+hashTag+"</div>"+
- 							"<div class='postDate'>"+postDate+"</div></div>")
- 						}//if end
-
-					
+									"<div class='postID'>"+user+"</div>"+
+									"<div class='onePostContent'><div><img class='postImage' src='/upload/"+imageName+" ' ></div>"+ 
+									"<div class='postContent'>"+postContent+"</div>"+
+									"<div class='hashTag'>"+hashTag+"</div>"+
+		 							"<div class='postDate'>"+postDate+"</div></div>")
+	 							for(var i in hashtag){
+	 								$(".postModalContent").append(
+	 										$(".hashTag").append(
+	 												"<a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
+	 										+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"))
+	 							} // for end		 							
+						} //if end
+						
 					} //for end  
-					
-
 
 				}, //success end 
  				error: function(e){
@@ -404,13 +417,25 @@ function postModalClick(){
 	$(".postModal").fadeOut();	
 		}//postModalClick() end
 		
-} //ifelse end (회원만 가능)
+
+		
+} //if end 
+/* 			else { //타회원이 다른 회원의 프로필 조회 시,
+	
+	
+}//ifelse end (회원만 가능) */
 		
 		
 		var contents = ""; //팔로워 저장하는 리스트
 
 </script>	
 </head>
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 <body>
 
 				<div id="main">
