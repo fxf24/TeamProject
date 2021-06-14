@@ -23,7 +23,7 @@
 
 			
 			/*  프로필 이미지 업로드 - 파일 저장 - 출력 */
-		 	$("#uploadprofile").click(function(event){ //프로필 사진 업로드 클릭 
+		 	$("#upload").click(function(event){ //프로필 사진 업로드 클릭 
 				event.preventDefault() 
 
 				var form = $("#imageform")[0]
@@ -209,7 +209,7 @@
 					success: function (response) {
 						var json = JSON.parse(response)
 						var filename = json.filename
-						console.log(json.filename);
+						console.log(json.filename);  //undefined
 						
 					}
 				
@@ -222,22 +222,22 @@
 
 		/*  프로필 사진 저장 - user DB에 프로필 이미지 추가 업데이트 */
 		function updateProfileImage(fileName) {
-			$.ajax({ 
+			$.ajax({
 				type: 'post',
 				url: '/updateUserProfileData',
-				data: { 
+				data: {
 					"id": user,
 					"profileImage" : fileName 
 					},
 				dataType: 'json',
 				success: function (response) {
-
+							//console.log(response)
 				},
 				error: function (request, status, error) {
 					//alert("success에 실패 했습니다.");
-					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); //200에러 
 				}
-			})	//ajax end
+			});	//ajax end
 			
 
 		} //updateProfileImage() end
@@ -465,13 +465,14 @@ function postModalClick(){
 <!-- 								</svg> -->
 								
 							<!-- 이미지 -->
-								<canvas id="imagecanvas" width=250 height=250 style="border-radius:19em; border:5px solid pink"></canvas>
-<!-- 									<img id="unnamed_2" src="unnamed_2.png" srcset="unnamed_2.png 1x, unnamed_2@2x.png 2x"> -->
-									<img id="img" src=" " >
+
 									<div id="uploadSettingBox">
-										<span><button id="uploadprofile"><img id="upload" src="/profileImage/uploadicon.png" style="cursor:pointer;width:3em; height:3em;"></button></span>
-										<span><button id="settingprofile" onclick="saveProfileImage()"><img id="save" src="/profileImage/saveicon.png" style="cursor:pointer;width:3em; height:3em;"></button></span>
-									</div>
+										<canvas id="imagecanvas" width=250 height=250></canvas>
+<!-- 									<img id="unnamed_2" src="unnamed_2.png" srcset="unnamed_2.png 1x, unnamed_2@2x.png 2x"> -->
+										<img id="img" src=" " >									
+										<span><img id="upload" src="/profileImage/uploadicon.png" ></span>
+										<span><button id="settingprofile" onclick="saveProfileImage()"><img id="save" src="/profileImage/saveicon.png" ></button></span>
+									
 							
 							<!-- 캔버스 -->
 <!-- 							<svg class="roundLine"> -->
@@ -490,10 +491,12 @@ function postModalClick(){
 							
 							<!-- 이미지 업로드 구현 -->	
 							<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" method="post">
-								<label id="fileimage" for="inputProfile"><img id="plus" src="/profileImage/plus.png" style="cursor:pointer;width:3em; height:3em;"></label>
+								<label id="fileimage" for="inputProfile"><img id="plus" src="/profileImage/plus.png"></label>
 								<input name="file" type="file" id="inputProfile" style="display:none;" ><br>
 								<input type="hidden" name ="target_url">
 							</form>
+							
+							</div>
 						</div>
 						
 				</div>
@@ -513,7 +516,7 @@ function postModalClick(){
 									
 							<!-- 게시물 | 팔로워 | 팔로우 수는 저장된 데이터의 수 그대로 불러오기 -->
 									<div id="pff">
-										<span class="secondline" id="profileposts">&nbsp;게시물 &nbsp; </span>
+										<span class="secondline" id="profileposts">&nbsp;게시물&nbsp; </span>
 				        				<span class="secondline" id="follower">&nbsp;팔로워 &nbsp; </span>
 				        				<span class="secondline" id="follow">&nbsp;팔로우 &nbsp; </span>
 									</div>
@@ -583,22 +586,22 @@ function postModalClick(){
 									
 									<div id="subImgFont">
 										<div id="working">
-											<span>working</span>
+											<span></span>
 										</div>
 										<div id="dancing">
-											<span>dancing</span>
+											<span></span>
 										</div>
 										<div id="qwee">
-											<span>qwee</span>
+											<span></span>
 										</div>
 										<div id="TT">
-											<span>TT</span>
+											<span></span>
 										</div>
 										<div id="LOL">
-											<span>LOL</span>
+											<span></span>
 										</div>
 										<div id="aiii">
-											<span>aiii</span>
+											<span></span>
 										</div>
 									</div>
 					

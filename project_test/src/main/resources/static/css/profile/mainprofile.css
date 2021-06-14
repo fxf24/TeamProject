@@ -282,16 +282,30 @@
 	
 	/* 프로필 업로드, 저장 영역 */
 	#uploadSettingBox {
-		width:13.5vw;
-    	height:3vw;
-    	top: 10vw;
+		position: absolute;
+		width:16.275vw;
+    	height:20vw;
+    	top: 1.758vw;
+    	left: 2vw;
+/*     	background: yellow; */
 	}
-	
+	#imagecanvas {
+/* 		background: yellow; */
+		width: 15vw;
+		height: 15vw;
+		border-radius: 20vw; 
+		border: 0.45vw solid pink;
+	}
 	#upload {
 		position: absolute;
 		justify-content: flex-start;
 		border-radius: 1vw; 
 		left: 3.8vw;		
+		top: 16vw;
+		cursor: pointer;
+		width: 3.5vw; 
+		height: 3.5vw;
+/* 		background: green; */
 	}
 	
 	#save {
@@ -299,6 +313,11 @@
 		justify-content: flex-end;
 		border-radius: 0.05vw; 
 		left: 8vw;
+		top: 16vw;
+		cursor: pointer;
+		width: 3.5vw; 
+		height: 3.5vw;
+/* 		background: green;	 */	
 	}
 	
 	#unnamed_2 {
@@ -332,7 +351,11 @@
 		left: 12vw;
 		top: 11vw;
 		transform: matrix(1,0,0,1,0,0);
-		border-radius: 20em; 
+		border-radius: 20vw; 
+		cursor:pointer;
+		width:3vw; 
+		height:3vw;
+		
 	}
 	
 	#Heart {

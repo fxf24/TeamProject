@@ -189,7 +189,7 @@ public class MainController {
 		if (id != null || id !="") {
 			oneImage = hhService.getOneProfileImage(id);
 		}
-		//System.out.println("저장된 프로필 사진은 : " + oneImage);
+	System.out.println("저장된 프로필 사진은 : " + oneImage);
 		//System.out.println("저장된 프로필 사진 불러오기 완료");
 		return oneImage;
 	}
@@ -199,7 +199,7 @@ public class MainController {
 		return "main/profile/main";
 	}
 	
-	//프로필 업로드 - 작동오류
+	//프로필 업로드 - 정상작동 
 	@RequestMapping(value = "/uploadProfileImage", method = RequestMethod.POST)
 	@ResponseBody
 	public String uploadProfileImage(MultipartFile file) throws IOException {
@@ -219,7 +219,7 @@ public class MainController {
 	@ResponseBody
 	public String saveProfileImage(MultipartFile file) throws IOException {
 		String filename = file.getOriginalFilename();
-		//System.out.println("저장한 프로필 사진명:" + filename);
+		System.out.println("저장한 프로필 사진명:" + filename);
 		// 서버 저장 경로 설정
 		String savePath = "c:/profile/";
 		// 저장할 경로와 파일 이름 완성
@@ -233,7 +233,7 @@ public class MainController {
 	@RequestMapping(value="/updateUserProfileData", method=RequestMethod.POST)
 	@ResponseBody
 	public void updateUserProfileData(String id, String profileImage) {
-		//System.out.println(id + "|"+ profileImage);
+		System.out.println(id + "|"+ profileImage);
 		UserVO uvo = new UserVO();
 		uvo.setId(id);
 		uvo.setProfileImage(profileImage);
