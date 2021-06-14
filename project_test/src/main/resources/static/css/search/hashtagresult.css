@@ -150,7 +150,7 @@ html, body{
 	#goToTopBtn{
 		position:fixed;
 		top:90%;
-		right:5%;
+		right:5%;	
 		z-index:9999;
 		color:#f1a8bb;
 	}
@@ -159,3 +159,119 @@ html, body{
 		transition:0.2s;
 		
 	}
+	
+/* 댓글편집창 */
+.commentEditModal{
+	display:none; 
+	justify-content: center;
+	align-items: center;
+	width:300px; 
+	height:100px;
+	background:rgba(244,238,238,1); 
+	z-index:9999;
+	text-align:center;
+	flex-direction: column;
+	position:fixed; top:50%; left:50%;
+    margin-top:-100px; margin-left:-100px;
+}
+
+#cedit{
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	width:300px;
+	height:50px;
+	border:1px solid #EFC0C0;
+}
+#cedit:hover{
+	background-color:#EFC0C0;
+}
+.cedit{
+	vertical-align: middle;
+}
+#cdelete{
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	width:300px; 
+	height:50px; 
+	border:1px solid #EFC0C0;
+}
+#cdelete:hover{
+	background-color:#EFC0C0;
+}
+.cdelete{
+	vertical-align: middle;
+}
+#updateMyComment{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#commentupdatebox{
+	width:230px;
+	height:50px;
+}
+#sendBtn{
+	width:70px;
+	height:50px;
+}
+/*답글 편집창 */
+.replyEditModal{
+	display:none; 
+	justify-content: center;
+	align-items: center;
+	width:300px; 
+	height:100px;
+	background:rgba(244,238,238,1); 
+	z-index:9999;
+	text-align:center;
+	flex-direction: column;
+	position:fixed; top:50%; left:50%;
+    margin-top:-100px; margin-left:-100px;
+}
+#redit{
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	width:300px; 
+	height:50px; 
+	border:1px solid #EFC0C0;
+}
+#redit:hover{
+	background-color:#EFC0C0;
+}
+.redit{
+	vertical-align: middle;
+}
+#rdelete{
+	display:flex;
+	justify-content: center;
+	align-items:center;
+	width:300px; 
+	height:50px;
+	border:1px solid #EFC0C0;
+	vertical-align: middle;
+}
+#rdelete:hover{
+	background-color:#EFC0C0;
+}
+.rdelete{
+	vertical-align: middle;
+}
+
+#updateMyReply{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+#replyupdatebox{
+	width:230px;
+	height:50px;
+}
+#sendBtn{
+	width:70px;
+	height:50px;
+}
