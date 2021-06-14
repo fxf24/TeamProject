@@ -22,8 +22,9 @@ function search(){
 }
 
 function profile(){
-	location.href = "/profile?id=" + user //로그인채로 mainscroll - profile 접속 표시 (하은)
+	location.href = "/profile" 
 }
+</script>
 
 <link href='styles/messages.css' rel='stylesheet' type='text/css'>
 </head>
@@ -209,8 +210,6 @@ function profile(){
 			success : function(response){
 				list = response
 				console.log(user)
-				console.log(list)
-				console.log(list[0].id)
 			}, // success end
 			error : function(e){
 					console.log(e);

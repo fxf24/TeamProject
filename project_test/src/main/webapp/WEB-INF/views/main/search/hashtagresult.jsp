@@ -11,7 +11,8 @@
 <script src="https://kit.fontawesome.com/5e5186ce3e.js" crossorigin="anonymous"></script>
 <head>
 <meta charset="UTF-8">
-<link href="/css/search/modal.css" rel="stylesheet" type="text/css">
+<link href="/css/search/modal834.css" media="screen and (min-width: 429px) and (max-width: 834px)" rel="stylesheet">
+<link href="/css/search/modal1920.css" media="screen and (min-width: 834px)" rel="stylesheet">
 <link href="/css/search/hashtagresult.css" rel="stylesheet" type="text/css">
 <title>HashHershe</title>
 <script src="/jquery-3.2.1.min.js"></script>
@@ -86,14 +87,15 @@ $(document).ready(function(){
 var CheckThumbsup = 0; //모달창을 띄웠을 때 기존에 좋아요를 눌렀는지 체크
 var CheckCommentThumbsup = 0; //댓글창에 좋아요를 눌렀는지 체크??
 var CheckReplyThumbsup = 0; //답글창에 좋아요를 눌렀는지 체크 
-var myid = "admin1"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
-//var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
+//var myid = "admin1"; // 현재 로그인한 아이디를 세션에서 받아옴, 현재 테스트용 admin으로 설정
+var myid = sessionStorage.getItem("user") //로그인한 아이디를 세션에서 받아오는 방법
 var postNum = 0; // 클릭한 이미지의 포스트번호 저장
 var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
 
 
 function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
+	$(".modal").css("display","flex")
 	$(".modal").fadeIn();
 	$("body").css("overflow-y", "hidden")
 	$("html").css("overflow-y", "hidden")
@@ -115,28 +117,61 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 						
 			var profileImagePath = FunctionGetContentProfileImage(postID); // 게시글 작성자의 프로필 이미지 불러오기	
 			FunctionGetComment(postNum, commentList) // 댓글 가져오기 함수
-						
-			$(".modalContent").append(
-				"<div class=modalHeader><i class='far fa-window-close fa-3x' id='windowClose' onclick='modalClick()'></i>"+
-				"<div class='postDate'>게시일 : "+contents.postDate+"</div>"+
-				"<div class='postProfileImage' onclick=location.href='/profile?id="+contents.id+"'><img class=commentImage src='"+profileImagePath+"'></div>"+ //
-				"<div class='postID'>아이디 : <a href='/profile?id="+contents.id+"'>"+contents.id+"</a></div><div>")
+			
+			console.log(hashtag)
 			$(".modalContent").append(
 				"<div class='modalArticle'>"+
-				"<img class='contentsImage' src='/upload/"+imageName[imageName.length-1]+"' ondblclick='thumbsup()'></div>"+ // admin을 이후 세션 id값으로 변경
-				"<div class='modalAside'><div class='commentsTitle'>댓글"+
-				"<div class='commentsList'></div>"+
-				"<div class='postComment'><input id='myComment' type='text' onkeyup='enterkey(\""+contents.postNum+"\")' placeholder='댓글을 입력하세요'>"+
-	 			"<input id='commentBtn' type='button' value='작성' onclick='addComment(\""+contents.postNum+"\")'></div>"+
-				"</div></div>")
-			$(".modalContent").append("<p class='postContents'>내용 : "+contents.contents+"</p>")
-			$(".modalContent").append("<div class='postHashtag'></div>")
+					"<img class='contentsImage' src='/upload/"+imageName[imageName.length-1]+"' ondblclick='thumbsup()'>"+
+				"</div>")
+					
+			$(".modalContent").append(
+			"<div class=modalSection>"+
+				"<div class=modalHeader>"+
+					"<div class=Header1>"+
+						"<div class=Header1-1>"+
+							"<div class='postProfileImage'>"+
+								"<img class=postImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+contents.id+"'>"+
+							"</div>"+ 						
+						"</div>"+ //header1-1
+						"<div class=Header1-2>"+
+							"<div class=postIDX>"+
+								"<div class='postID'><a id=postID href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>"+
+								"<div class='windowClose'><i class='far fa-window-close fa-2x' onclick='modalClick()'></i></div>"+
+							"</div>"+ //postIDx
+							"<div class='postDate'>"+
+								"<p id=postDate>"+contents.postDate+"</p>"+
+							"</div>"+ // postDate
+						"</div>"+ //header1-2
+					"</div>"+ //Header1
+					"<div class=Header2>"+
+						//"<div class='postHashtag'></div>"+
+						"<div class='postContents'><p id=postContents>"+contents.contents+"</p></div>"+
+					"</div>"+ //Header2
+				"</div>"+ //modalHeader
+				
+				"<div class=modalComment>"+
+				"</div>"+ //modalComment
+				
+				"<div class=postComment>"+
+					"<div><input id='myComment' type='text' onkeyup='enterkey(\""+contents.postNum+"\")' placeholder='댓글을 입력하세요'></div>"+
+					"<div><input id='commentBtn' type='button' value='작성' onclick='addComment(\""+contents.postNum+"\")'></div>"+	
+				"</div>"+
+				
+				"<div class=modalFooter>"+
+					"<div class=LikeImage></div>"+
+					"<div class=TotalLike></div>"+
+				"</div>"+//modalFooter
+			"</div>") //modalSection 여기가 문제
+			
+			var tag = "";
 			for(var i in hashtag){
-				$(".modalContent").append(
-						$(".postHashtag").append(
-								"<a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
-						+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"))
+				tag += "<p class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
+					+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</p>"
+				//$(".postHashtag").append(
+				//"<p class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
+				//+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</p>")
 			} // for end
+			$(".postContents").prepend(tag)
 			FunctionThumbsupSearch(postNum) // 좋아요 불러오기
 		}, //success end
 		error:function(request,status,error){
@@ -200,9 +235,9 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 			success : function(response){
 				totalThumbs = totalThumbs+1;
 				CheckThumbsup = parseInt(response);
-				$(".postThumbsup").text(" 좋아요 : "+totalThumbs+"명이 좋아합니다.")
+				$(".TotalLike").html(totalThumbs+"명이 좋아합니다.")
 				//console.log("토탈 : "+totalThumbs)
-				$(".thumbsupButton").html("<i class='fas fa-heart fa-2x'></i>")
+				$(".LikeImage").html("<i class='fas fa-heart'></i>")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -221,9 +256,9 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 			success : function(response){
 				totalThumbs = totalThumbs-1;
 				CheckThumbsup = parseInt(response);
-				$(".postThumbsup").text(" 좋아요 : "+totalThumbs+"명이 좋아합니다.")
+				$(".TotalLike").text(totalThumbs+"명이 좋아합니다.")
 				//console.log("토탈 : "+totalThumbs)
-				$(".thumbsupButton").html("<i class='far fa-heart fa-2x'></i>")
+				$(".LikeImage").html("<i class='far fa-heart'></i>")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -231,6 +266,7 @@ function thumbsup(){ //좋아요 누르기 / 취소하기
 		}); // ajax end
 	}// else end
 } // function thumbsup end
+
 //좋아요 개수, 좋아요 누른 사람 반환
 function FunctionThumbsupSearch(postNum){
 	$.ajax({ 
@@ -251,15 +287,16 @@ function FunctionThumbsupSearch(postNum){
 			totalThumbs = contents.length; // 좋아요 개수
 			//console.log(totalThumbs)
 			if(CheckThumbsup == 0){ //좋아요가 눌려져 있지 않음
-				$(".modalContent").append
-				("<div class='thumbsupBox'><span class='thumbsupButton' onclick='thumbsup()'>"+
-				"<i class='far fa-heart fa-2x'></i></span>"+
-				"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");
+				$(".LikeImage").attr("onclick", "thumbsup()")
+				$(".LikeImage").html
+				("<i class='far fa-heart'></i>")
+				$(".TotalLike").html(totalThumbs+"명이 좋아합니다.")
+				
 			} else { //좋아요가 눌려져 있음
-				$(".modalContent").append
-				("<div class='thumbsupBox'><span class='thumbsupButton' onclick='thumbsup()'>"+
-				"<i class='fas fa-heart fa-2x'></i></span>"+
-				"<span class='postThumbsup'> 좋아요 : "+totalThumbs+"명이 좋아합니다.</span></div>");						
+				$(".LikeImage").attr("onclick", "thumbsup()")
+				$(".LikeImage").html
+				("<i class='fas fa-heart'></i>")
+				$(".TotalLike").html(totalThumbs+"명이 좋아합니다.")					
 			}// if else end	
 		},
 		error:function(request,status,error){
@@ -288,7 +325,7 @@ function addComment(postNum){
 			success : function(response){
 				//console.log(response)
 				var commentList = []
-				$(".commentsList").text("") // 댓글창 초기화				
+				$(".modalComment").text("") // 댓글창 초기화				
 				FunctionGetComment(postNum, commentList)
 				$("#myComment").val("") //댓글 등록후 작성창에 내용 삭제
 				alert("댓글 작성이 완료되었습니다.")
@@ -315,7 +352,7 @@ function FunctionGetComment(postNum, commentList){
 			}
 			//console.log(commentList)
 			if(commentList.length==0){
-				$(".commentsList").html("<p class=commentEmpty>댓글이 없습니다.</p>")
+				$(".modalComment").html("<p class=commentEmpty>댓글이 없습니다.</p>")
 			} // if end
 			else { // 댓글 불러오기
 				// 프로필 사진 불러오기
@@ -370,24 +407,52 @@ function FunctionGetProfileImage(commentList, i){
 					}//for end
 					var totalThumbs = contents.length; // 좋아요 개수
 						
-					$(".commentsList").append
-					("<div class=oneComment>"+
-					"<span><image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'></span>"+
-					"<div><p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</p>"+
-					"<p class='contents' id='contents_"+cnt+"' style='text-align:left'> "+commentList.comments+"</p>"+
-					"<span><p>"+commentList.commentsDate+"</p></span>"+
-					"<span class='commentUD' onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
-					"<i class='fas fa-ellipsis-h'></i></span></div>"+
-					"<span class=commentThumbsup_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'></span>"+
-					"<span class='seeReply' id='seeReply_"+cnt+"' onclick='ShowReply("+cnt+")'></span>"+
-					"<span class='reply' id='reply_"+cnt+"' onclick='writeReply("+commentList.commentNum+", "+cnt+")'>답글달기</span>"+
-					"<div class='replyList' id='replyList_"+cnt+"'></div>"+ //style='display:none;'
-					"</div>");
+					$(".modalComment").append(
+					"<div class=OneComment>"+ //댓글 하나
+				        "<div class=Comment1>"+
+				        	"<div class=Comment1-1>"+
+				            	"<div class=oneCommentProfileImage>"+
+				            		"<image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'>"+
+				           		"</div>"+
+				           	"</div>"+ //Comment1-1
+				           	"<div class=Comment1-2>"+
+					            "<div class=CommentIDX>"+
+					                "<div class=CommentID>"+
+					                	"<a id=CommentID onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</a>"+
+					                "</div>"+
+					                "<div class=CommentSet onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
+					                	"<i class='fas fa-ellipsis-h' id=CommentSet></i>"+
+					                "</div>"+
+					            "</div>"+
+					            "<div class=CommentDate>"+
+					            	"<p id=CommentDate>"+commentList.commentsDate+"</p>"+
+					            "</div>"+
+				            "</div>"+ //Comment1-2
+				        "</div>"+
+				        "<div class=Comment2>"+
+				            "<div class=CommentContents>"+
+				            	"<p class='contents' id='contents_"+cnt+"' style='text-align:left'> "+commentList.comments+"</p>"+
+				            "</div>"+
+				            "<div class=CommentBox>"+
+				                "<div class=CommentLike>"+
+				                    "<div class=CommentLikeImage_"+cnt+" onclick='commentThumbsup("+CheckCommentThumbsup+", "+commentList.commentNum+", "+totalThumbs+", "+cnt+")'></div>"+
+				                    "<div class=CommentTotalLike></div>"+
+				                "</div>"+
+				                "<div class=CommentTotalReply id='seeReply_"+cnt+"' onclick='ShowReply("+cnt+")'></div>"+
+				                "<div class=CommentAddReply id='reply_"+cnt+"' onclick='writeReply("+commentList.commentNum+", "+cnt+")'>답글달기</div>"+
+				         	  "</div>"+
+				         	 "<div class='replyBox' id='replyBox_"+cnt+"'></div>"+
+				        "</div>"+
+				    "</div>"+ // oneComment	
+				   
+				    
+				    "<div class=OneReply id='replyList_"+cnt+"'></div>")
+					
 					
 					if(CheckCommentThumbsup == 0){ //좋아요가 눌려있음
-						$(".commentThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
+						$(".CommentLikeImage_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
 					} else if(CheckCommentThumbsup == 1){ // 좋야요가 눌려있지않음
-						$(".commentThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
+						$(".CommentLikeImage_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
 					}// if else end	
 					CheckCommentThumbsup = 0;
 				},
@@ -421,9 +486,9 @@ function commentThumbsup(CheckCommentThumbsup, commentNum, totalThumbs, cnt){
 				totalThumbs = totalThumbs+1;
 				CheckCommentThumbsup = 1; //parseInt(response);
 				//console.log(CheckCommentThumbsup)
-				$(".commentThumbsup_"+cnt+"").removeAttr("onclick") //클릭 속성 제거
-				$(".commentThumbsup_"+cnt+"").attr("onclick", "commentThumbsup("+CheckCommentThumbsup+", "+commentNum+", "+totalThumbs+", "+cnt+")") //클릭 속성 내 Check~값 변경
-				$(".commentThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
+				$(".CommentLikeImage_"+cnt+"").removeAttr("onclick") //클릭 속성 제거
+				$(".CommentLikeImage_"+cnt+"").attr("onclick", "commentThumbsup("+CheckCommentThumbsup+", "+commentNum+", "+totalThumbs+", "+cnt+")") //클릭 속성 내 Check~값 변경
+				$(".CommentLikeImage_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -442,9 +507,9 @@ function commentThumbsup(CheckCommentThumbsup, commentNum, totalThumbs, cnt){
 			success : function(response){
 				totalThumbs = totalThumbs-1;
 				CheckCommentThumbsup = 0; //parseInt(response);
-				$(".commentThumbsup_"+cnt+"").removeAttr("onclick") //클릭 속성 제거
-				$(".commentThumbsup_"+cnt+"").attr("onclick", "commentThumbsup("+CheckCommentThumbsup+", "+commentNum+", "+totalThumbs+", "+cnt+")") //클릭 속성 내 Check~값 변경
-				$(".commentThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
+				$(".CommentLikeImage_"+cnt+"").removeAttr("onclick") //클릭 속성 제거
+				$(".CommentLikeImage_"+cnt+"").attr("onclick", "commentThumbsup("+CheckCommentThumbsup+", "+commentNum+", "+totalThumbs+", "+cnt+")") //클릭 속성 내 Check~값 변경
+				$(".CommentLikeImage_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+totalThumbs+"개 ")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -511,7 +576,7 @@ function FunctionCommentThumbs(){
 			success : function(response){
 				//console.log(response)
 				var commentList = []
-				$(".commentsList").text("") // 댓글창 초기화				
+				$(".OneComment").text("") // 댓글창 초기화				
 				FunctionGetComment(postNum, commentList)
 				$("#myComment").val("") //댓글 등록후 작성창에 내용 삭제
 				alert("댓글 작성이 완료되었습니다.")
@@ -571,7 +636,7 @@ function UpdateComment(){ //댓글 수정하기
 			dataType : "text",
 			success : function(){
 				var commentList = []
-				$(".commentsList").text("") // 댓글창 초기화				
+				$(".modalComment").text("") // 댓글창 초기화				
 				FunctionGetComment(postNum, commentList)
 				$("#myComment").val("") //댓글 등록후 작성창에 내용 삭제
 				alert("댓글 수정이 완료되었습니다.")
@@ -598,7 +663,7 @@ function DeleteComment(){ // 댓글 삭제하기
 			success: function(){
 				alert("삭제가 완료되었습니다.")
 				var blankList = []
-				$(".commentsList").html("")
+				$(".modalComment").html("")
  				FunctionGetComment(postNum, blankList)
  				modalContentClick()	
 			},
@@ -635,13 +700,35 @@ function FunctionGetReply(commentNum, cnt){
 					var RTState = result[1]; //좋아요 여부
 					$("#seeReply_"+cnt+"").text("답글 "+list.length+"개");
 					$("#replyList_"+cnt+"").append(
-					"<div><img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
-					"<p style='float:left; font-weight:bold' onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
-					"<span id='replycomments_"+i+"'><p>"+list[i].comments+"</p></span>"+
-					"<p>"+list[i].commentsDate+"</p>"+
-					"<span class=ReplyThumbsup_"+i+" onclick='ClickReplyThumbsup("+list[i].replyNum+", "+i+")'></span>"+ 
-					"<span class='commentUD' onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
-					"<i class='fas fa-ellipsis-h'></i></span></div>");
+					"<div class=Reply1>"+
+						"<div class=Reply1-1>"+
+				            "<div class=oneReplyProfileImage>"+
+				            	"<img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
+				            "</div>"+
+			            "</div>"+ // Reply1-1
+			            "<div class=Reply1-2>"+
+				            "<div class=ReplyIDX>"+
+				                "<div class=ReplyID>"+
+				             	   "<p id=ReplyID onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
+				                "</div>"+
+				                "<div class=ReplySet onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
+				                	"<i class='fas fa-ellipsis-h'></i>"+
+				                "</div>"+
+				            "</div>"+
+				            "<div class=ReplyDate>"+
+				            	"<p id=ReplyDate>"+list[i].commentsDate+"</p>"+
+				            "</div>"+			            	
+			            "</div>"+ // Reply1-2
+			        "</div>"+
+			        "<div class=Reply2>"+
+			            "<div class=ReplyContents id='replycomments_"+i+"'><p>"+list[i].comments+"</p></div>"+
+			            "<div class=ReplyBox>"+
+			                "<div class=ReplyLike>"+
+			                    "<div class=ReplyLikeImage_"+i+" onclick='ClickReplyThumbsup("+list[i].replyNum+", "+i+")'></div>"+
+			                    "<div class=ReplyTotalLike_"+i+"></div>"+
+			                "</div>"+
+			            "</div>"+
+			        "</div>")	
 					
 					getReplyThumbsup(list[i].replyNum, i)
 				}//for end
@@ -660,7 +747,7 @@ function FunctionGetReply(commentNum, cnt){
 var ReplyDivState = 0;
 function ShowReply(cnt){
 	if(ReplyDivState==0){
-		$("#replyList_"+cnt+"").css("display", "block");	
+		$("#replyList_"+cnt+"").css("display", "flex");	
 		ReplyDivState = 1;
 	} else {
 		$("#replyList_"+cnt+"").css("display", "none");
@@ -745,7 +832,7 @@ function DeleteReply(){ // 답글 (대댓글) 삭제하기
 			success: function(){
 				alert("삭제가 완료되었습니다.")
 				var blankList = []
-				$(".commentsList").html("")
+				$(".modalComment").html("")
  				FunctionGetComment(postNum, blankList)
  				modalContentClick()	
 			},
@@ -761,10 +848,10 @@ function DeleteReply(){ // 답글 (대댓글) 삭제하기
 var writeReplyState = 0;
 function writeReply(commentNum, cnt){ //commentID, 
 	if(writeReplyState==0){
-		$("#reply_"+cnt+"").html(
-			"답글취소"+
-			"<div class='replyBox'><input type='text' class='writeReply' placeholder='답글을 입력하세요' onkeyup='Replyenterkey("+commentNum+", "+cnt+")'>"+
-			"<input id='replyBtn' type='button' value='작성' onclick='addReply("+commentNum+", "+cnt+")'></div>")
+		$("#reply_"+cnt+"").html("답글취소");
+		$("#replyBox_"+cnt+"").html(
+		"<input type='text' class='writeReply' placeholder='답글을 입력하세요' onkeyup='Replyenterkey("+commentNum+", "+cnt+")'>"+
+		"<input class='replyBtn' type='button' value='작성' onclick='addReply("+commentNum+", "+cnt+")'>");
 		$(".replyBox").on('click', function(e){
 			e.preventDefault();
 			e.stopPropagation();
@@ -772,6 +859,7 @@ function writeReply(commentNum, cnt){ //commentID,
 		writeReplyState = 1;
 	} else {
 		$("#reply_"+cnt+"").html("답글달기")
+		$("#replyBox_"+cnt+"").html("")
 		writeReplyState = 0;
 	}
 }
@@ -860,10 +948,12 @@ function getReplyThumbsup(replyNum, i){ //답글에 좋아요 불러오기
 				}//if end
 			}//for end
 			if(ReplyThumbsupState == 0){
-				$(".ReplyThumbsup_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+total+"개 ")					
+				$(".ReplyLikeImage_"+cnt+"").html("<i class='far fa-heart'></i> 좋아요 "+total+"개")
+// 				$(".ReplyTotalLike_"+cnt+"").html("좋아요 "+total+"개")
 			}//if end
 			else if(ReplyThumbsupState = 1){ // 이미 좋아요를 눌러뒀음
-				$(".ReplyThumbsup_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+total+"개 ")
+				$(".ReplyLikeImage_"+cnt+"").html("<i class='fas fa-heart'></i> 좋아요 "+total+"개")
+// 				$(".ReplyTotalLike_"+cnt+"").html("좋아요 "+total+"개")
 			}//else if end		
 		},
 		error:function(request,status,error){
@@ -888,9 +978,10 @@ function ClickReplyThumbsup(replyNum, i){
 			async: false,
 			success: function(){
 				var cntTotal = total+1;
-				$(".ReplyThumbsup_"+i+"").removeAttr("onclick") //클릭 속성 제거
- 				$(".ReplyThumbsup_"+i+"").attr("onclick", "ClickReplyThumbsup("+replyNum+", "+i+")") //클릭 속성 내 Check~값 변경
-				$(".ReplyThumbsup_"+i+"").html("<i class='fas fa-heart'></i> 좋아요 "+cntTotal+"개 ")
+				$(".ReplyLikeImage_"+i+"").removeAttr("onclick") //클릭 속성 제거
+ 				$(".ReplyLikeImage_"+i+"").attr("onclick", "ClickReplyThumbsup("+replyNum+", "+i+")") //클릭 속성 내 Check~값 변경
+				$(".ReplyLikeImage_"+i+"").html("<i class='fas fa-heart'></i> 좋아요 "+cntTotal+"개")
+// 				$(".ReplyTotalLike_"+i+"").html("좋아요 "+cntTotal+"개")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -907,9 +998,10 @@ function ClickReplyThumbsup(replyNum, i){
 			},
 			success: function(){
 				var cntTotal = total-1;				
-	 			$(".ReplyThumbsup_"+i+"").removeAttr("onclick") //클릭 속성 제거
-	 			$(".ReplyThumbsup_"+i+"").attr("onclick", "ClickReplyThumbsup("+replyNum+", "+i+")") //클릭 속성 내 Check~값 변경
-				$(".ReplyThumbsup_"+i+"").html("<i class='far fa-heart'></i> 좋아요 "+cntTotal+"개 ")
+	 			$(".ReplyLikeImage_"+i+"").removeAttr("onclick") //클릭 속성 제거
+	 			$(".ReplyLikeImage_"+i+"").attr("onclick", "ClickReplyThumbsup("+replyNum+", "+i+")") //클릭 속성 내 Check~값 변경
+				$(".ReplyLikeImage_"+i+"").html("<i class='far fa-heart'></i> 좋아요 "+cntTotal+"개")
+// 				$(".ReplyTotalLike_"+i+"").html("좋아요 "+cntTotal+"개")
 			},
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -923,7 +1015,7 @@ function ClickReplyThumbsup(replyNum, i){
 </head>
 <body>
 <h1>해시태그 검색 리스트</h1>
-<form action="/search" method="post" name="searchForm">
+<form action="/search" method="post" name="searchForm" accept-charset="utf-8">
 <div class="bar">
 	<input type="text" id=searchbar name="searchWord" value='#<%=hashtag %>'>
 <!-- 	<input type="submit" value="search"> -->
@@ -977,6 +1069,5 @@ function ClickReplyThumbsup(replyNum, i){
 </div>
 
 <i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
-
 </body>
 </html>

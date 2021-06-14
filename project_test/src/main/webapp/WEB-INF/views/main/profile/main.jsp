@@ -14,16 +14,11 @@
 		$(document).ready(function(){
 			var user = sessionStorage.getItem("user")
 
-
-			
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
 		$('#postfont').click(function(){
 			location.href = "/postupload"
 		});
-			
 
-
-			
 			/*  프로필 이미지 업로드 - 파일 저장 - 출력 */
 		 	$("#upload").click(function(event){ //프로필 사진 업로드 클릭 
 				event.preventDefault() 
@@ -170,6 +165,7 @@
 			
 			});//document ready end
 
+<<<<<<< HEAD
 			
 		
 		var user = sessionStorage.getItem("user")
@@ -250,9 +246,6 @@
 			
 
 		} //updateProfileImage() end
-
-
-
 
 
 			/* 프로필 유저 이미지 유지 */

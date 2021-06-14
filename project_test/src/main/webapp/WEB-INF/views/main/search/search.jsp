@@ -283,10 +283,10 @@ function search(){
 				} else {
 					for(var i in list){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
-						//console.log("HASHTAG = "+hashtag)
+						console.log("HASHTAG = "+hashtag)
 						for(var tag in hashtag){
 							if(searchMessage == hashtag[tag].substring(0, length)){
-								hashtagArr.push(hashtag[tag]);
+								hashtagArr.push(hashtag[tag].trim());
 								hashtagArr.sort();
 							} // for end							
 						}// for tag end
