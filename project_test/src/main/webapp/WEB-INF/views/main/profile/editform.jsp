@@ -12,7 +12,7 @@
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 
 <!-- 상단 고정 스타일 css 연결  -->
-<!-- 	<link href="/css/profile/editprofile.css" rel="stylesheet" type="text/css"> -->
+	<link href="/css/profile/editprofile.css" rel="stylesheet" type="text/css">
 
 <script>
 var user = sessionStorage.getItem("user") //유저 아이디 가져오기

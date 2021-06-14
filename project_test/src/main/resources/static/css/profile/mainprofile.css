@@ -673,7 +673,7 @@
    	order: 2; 
 /*    	background: black; */
 	position: inherit;
-	height: 93.593vw;
+	height: 2903.593vw;
 	top: 17.458vw;
 	width: 75.729vw;
 	left: 12.135vw;
@@ -736,18 +736,19 @@
 	.postModalContent{
 	position: absolute;
 	width: 45.729vw;
-	height: 38.729vw;
-	  background:rgba(244,238,238,1); 
-	  border-radius:10px;
+	height: 35.729vw;
+	  background: rgba(244,238,238,1); 
+	  border-radius: 3vw;
 	  order: 8;
-	  top:32vw; 
-	  left:58%;
-	  margin-top:-400px; 
-	  margin-left:-450px;
-	  box-sizing:border-box; 
-	  padding:74px 0;
-	  line-height:23px; 
-	  cursor:pointer;
+	  top: 6vw; 
+	  left: 25vw;
+	  margin-top: 0; 
+	  margin-left: 0;
+	  box-sizing: border-box; 
+	  padding: 0;
+	  line-height: 1vw; 
+	  cursor: pointer;
+	  overflow: hidden;
 	
 	}	
 
@@ -764,13 +765,17 @@
 	
 	.postID {
 	position: absolute;
-/* 	background: yellow; */
+	background: yellow;
 	display: flex;
-	width: 8.729vw;
-	height: 1.529vw;	
+	width: 10.729vw;
+	height: 2.529vw;	
 	top: 2.579vw;
 	left:2.657vw;
 	order: 1;
+	font-family: fantasy;
+	font-size: xx-large; 
+	word-spacing: 5vw;
+	line-height: 3vw;
 	}
 	
 	.postImage {
@@ -778,10 +783,11 @@
 /* 	background: yellow; */
 	display: flex;
 	width: 25.729vw;
-	height: 24.729vw;	
-	top: 2.123vw;
+	height: 25.729vw;	
+	top: 0;
 	order: 1;
 	left:1.657vw;
+	border: 0.204vw solid silver;
 	}
 	
 	.postContent {
@@ -789,26 +795,27 @@
 /* 	background: yellow; */
 	display: flex;
 	width: 15.729vw;
-	height: 15.729vw;	
-	top: 2.123vw;
+	height: 18.729vw;	
+	top: 0.384vw;
 	order: 1;
-	left:28.347vw;	
+	left:28.447vw;	
 	font-family: inherit;
 	font-weight: bold;
-	font-size: small;
+	font-size: medium;
+
 	}
 	
 	.hashTag {
 	position: absolute;
-/* 	background: yellow; */
+	background: yellow;
 	display: flex;
 	width: 15.729vw;
 	height: 6.429vw;	
-	top: 18.372vw;
+	top: 14.372vw;
 	order: 1;
 	left:28.347vw;	
 	font-weight: bold;
-	font-size: small;		
+	font-size: medium;		
 	}
 	
 	.postDate {
@@ -817,7 +824,7 @@
 	display: flex;
 	width: 15.729vw;
 	height: 1.534vw;	
-	top: 25.342vw;
+	top: 24.342vw;
 	order: 1;
 	left:28.347vw;	
 	font-weight: bold;

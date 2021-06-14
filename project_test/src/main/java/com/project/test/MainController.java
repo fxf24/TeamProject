@@ -172,12 +172,9 @@ public class MainController {
 	//프로필 유저 정보 가져오기 - 정상작동
 	@RequestMapping(value = "/getProfileUser", method = RequestMethod.POST)
 	@ResponseBody
-	public UserVO getProfileUser(String id) {
-		UserVO profileUser = null;
-		if (id != null || id !="") {
-			profileUser = hhService.getProfileUser(id);
-		}
-		//System.out.println("프로필 유저 정보 : " + profileUser);
+	public UserVO getProfileUser(String profileImage) {
+		UserVO profileUser = hhService.getProfileUser(profileImage);
+		//System.out.println("유저의 프로필 이미지 : " + profileUser);
 		return profileUser;
 	}
 	
@@ -226,7 +223,8 @@ public class MainController {
 		File savefile = new File(savePath + filename);
 		// 서버 저장
 		file.transferTo(savefile);
-		return "{\"data\":\"저장했습니다!\"}";
+		//return "{\"data\":\"저장했습니다!\"}";
+		return "{\"filename\":\""+filename+"\"}";
 	}
 
 	//사용자 업로드한 프로필 이미지 저장하기 - 정상작동
@@ -234,9 +232,9 @@ public class MainController {
 	@ResponseBody
 	public void updateUserProfileData(String id, String profileImage) {
 		System.out.println(id + "|"+ profileImage);
-		UserVO uvo = new UserVO();
-		uvo.setId(id);
-		uvo.setProfileImage(profileImage);
+		UserVO user = new UserVO();
+		user.setId(id);
+		user.setProfileImage(profileImage);
 		hhService.updateUserProfileData(id, profileImage);
 	}
 		
@@ -267,7 +265,7 @@ public class MainController {
     }
 		
 	//포스트 전체 불러오기 3 
-	@RequestMapping(value="/posts", method=RequestMethod.POST)
+	@RequestMapping(value="/posts", method=RequestMethod.GET)
     @ResponseBody
     public List<PostVO> getPosts(String id) throws IOException {
 		//System.out.println("포스트 작성한 회원의 id는 "+id);

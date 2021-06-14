@@ -10,8 +10,10 @@
   	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
+		var profileUser = sessionStorage.getItem("profileUser")
 		$(document).ready(function(){
 			var user = sessionStorage.getItem("user")
+
 
 			
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
@@ -103,7 +105,6 @@
 									var context = imagecanvas.getContext("2d")
 						 			profileImage = 'basicprofileimage.jpg';
 										var img = document.getElementById('img');
-										img.style.display = "none"
 										img.src = "/profile/" + profileImage
 							 			img.onload = function() {
 											var maxWidth = 250; 
@@ -129,7 +130,7 @@
 										var context = imagecanvas.getContext("2d")
 							 			profileImage = fileName;
 								 			var img = document.getElementById('img');
-											img.style.display = "none"
+											//img.style.display = "none"
 											img.src = "/profile/" + profileImage
 								 			img.onload = function() {
 												var maxWidth = 250; 
@@ -156,7 +157,7 @@
 					//	 			profileImage += imageName
 					
 								}//else end
-				
+								//sessionStorage.setItem("updateProfileImg", profileImage)
 							}, //success end 
 							error: function(request, status, error){
 								//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
@@ -170,8 +171,9 @@
 			});//document ready end
 
 			
-			
+		
 		var user = sessionStorage.getItem("user")
+		var profileUser = sessionStorage.getItem("profileUser")	
 		//var profileimgSrc = document.getElementById('img').src
 
 		if (user == null) {
@@ -204,12 +206,18 @@
 					type: 'post',
 					url: '/saveProfileImage',
 					data: formdata,
+					dataType: "json",
 					processData: false,	// data 파라미터 강제 string 변환 방지!!
 					contentType: false,	// application/x-www-form-urlencoded; 방지!!
 					success: function (response) {
-						var json = JSON.parse(response)
-						var filename = json.filename
-						console.log(json.filename);  //undefined
+						//console.log(response) //{filename: "eunsu.jpg"}
+						var fileName = response.filename
+						console.log(fileName)
+						//sessionStorage.setItem("updateProfileImg", fileName)
+						
+// 						var json = JSON.parse(response)
+// 						var fileName = json.fileName
+// 						console.log(json.fileName);  //undefined
 						
 					}
 				
@@ -219,7 +227,7 @@
 				
 			} //saveProfileImage() function end		
 			
-
+			
 		/*  프로필 사진 저장 - user DB에 프로필 이미지 추가 업데이트 */
 		function updateProfileImage(fileName) {
 			$.ajax({
@@ -229,12 +237,13 @@
 					"id": user,
 					"profileImage" : fileName 
 					},
-				dataType: 'json',
 				success: function (response) {
-							//console.log(response)
+							alert("프로필 사진을 저장했습니다!")
+							sessionImage(fileName)
 				},
 				error: function (request, status, error) {
 					//alert("success에 실패 했습니다.");
+					alert("프로필 이미지를 등록해주세요!")
 					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); //200에러 
 				}
 			});	//ajax end
@@ -246,21 +255,35 @@
 
 
 
-			/* 프로필 유저 정보 가져오기 - 테스트용 */
+			/* 프로필 유저 이미지 유지 */
+			function sessionImage(fileName) {
 			$.ajax({ 
 				url:'/getProfileUser',
 				type:'post',
-				data: {"id": user},		
+				data: {"profileImage": fileName},		
 				dataType: "json",
 				success: function(response){
-					console.log(response)
+					console.log(response) //{id: "eunsu", password: "eunsu", email: "eunsu@gmail.com", name: "은수", telephone: "010-0000-7890", …}
+// 					email: "eunsu@gmail.com"
+// 						id: "eunsu"
+// 						name: "은수"
+// 						password: "eunsu"
+// 						profileImage: "eunsu.jpg"
+// 						telephone: "010-0000-7890"
+// 						userno: 43
+				
+					console.log(response.profileImage)
+					sessionStorage.setItem("profileUser", response.profileImage)
+					
 				},
 				error: function(request, status, error){
 					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
 				} //error end 
 			});//ajax end
-			
-			
+		} //sessionImage(fileName) end	
+
+var profileUser = sessionStorage.getItem("profileUser")		
+		
 			/* 회원아이디, 게시물 수 불러오기 1*/ 
 			$.ajax({ 
 			url: '/postsCount',
@@ -355,7 +378,7 @@ function clickImage(postNumber){
 	$(".postModalContent").text("")		
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 				url: '/posts',
-				type: 'post',
+				type: 'get',
 				data: {"id": user},
 				dataType: "json",
 				success: function(response){
@@ -372,13 +395,14 @@ function clickImage(postNumber){
 					for (var i in response){
 
 						var onePost = response[i]; //포스트 하나의 내용 
-						//console.log(onePost) //array로 i개만큼 
+						console.log(onePost) //array로 i개만큼 
 
 						//console.log(onePost.imagepath.split("/")) //["iu.png"]
 						//var id = onePost.id.split("/"); 
 						var imageName = onePost.imagepath.split("/")[0]; 
 						var postContent = onePost.contents.split("/")[0]; 
 						var hashTag = onePost.hashtag.split("/")[0]; 
+						console.log(hashTag)
 						var postDate = onePost.postDate.split("/")[0]; 
 						//console.log(postDate) //array로 i개만큼 
 						var postNum = onePost.postNum; 
@@ -387,27 +411,22 @@ function clickImage(postNumber){
 						if (postNum == postNumber) {
 							
 							$(".postModalContent").append(
-									"<div class='postID'>"+user+"</div>"+
+									"<div class='postID'>@"+user+"</div>"+
 									"<div class='onePostContent'><div><img class='postImage' src='/upload/"+imageName+" ' ></div>"+ 
 									"<div class='postContent'>"+postContent+"</div>"+
-									"<div class='hashTag'>"+hashTag+"</div>"+
+									"<div class='hashTag'><a class='hashTagLink' href='https://search.shopping.naver.com/search/all?query="
+										+hashTag+"&cat_id=&frm=NVSHATC' target='_blank'>"+hashTag+"</a>&nbsp</div>"+
 		 							"<div class='postDate'>"+postDate+"</div></div>")
-	 							for(var i in hashtag){
-	 								$(".postModalContent").append(
-	 										$(".hashTag").append(
-	 												"<a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
-	 										+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</a>&nbsp"))
-	 							} // for end		 							
+	 	 							
 						} //if end
 						
 					} //for end  
 
 				}, //success end 
- 				error: function(e){
- 					console.log(e)
+ 				error: function(request, status, error){
 // 					alert("포스트 내용 불러오기에 실패했습니다.")
 // 					request, status, error
-// 					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+ 					console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
  				} //error end 
 				
 			});//ajax end

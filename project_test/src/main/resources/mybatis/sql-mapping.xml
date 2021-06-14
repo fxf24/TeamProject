@@ -66,14 +66,14 @@ select profileImage from users where id=#{id}
 </select>
 
 <select id="getProfileUser" parameterType="String" resultType="userVO">
-select * from users where id= #{id}
+select * from users where profileImage=#{profileImage}
 </select>
 
-<update id="updateUserProfileData" parameterType="UserVO">
+<update id="updateUserProfileData" parameterType="userVO">
 update users set profileImage=#{profileImage} where id=#{id}
 </update>
 
-<select id="getOneProfileImage" parameterType="String" resultType="UserVO">
+<select id="getOneProfileImage" parameterType="String" resultType="userVO">
 select id, profileImage from users where id=#{id} 
 </select>
 
