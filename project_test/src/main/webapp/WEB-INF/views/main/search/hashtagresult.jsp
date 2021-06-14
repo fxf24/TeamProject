@@ -165,8 +165,8 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 			
 			var tag = "";
 			for(var i in hashtag){
-				tag += "<p class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
-					+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</p>"
+				tag += "<p><a class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
+					+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"<a></p>"
 				//$(".postHashtag").append(
 				//"<p class=hashtagLink href='https://search.shopping.naver.com/search/all?query="
 				//+hashtag[i]+"&cat_id=&frm=NVSHATC' target='_blank'>#"+hashtag[i]+"</p>")

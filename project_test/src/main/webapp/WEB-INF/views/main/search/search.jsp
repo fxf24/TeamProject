@@ -308,6 +308,7 @@ function search(){
 							("<p><a class=hashtagList href='hashtagresult?hashtag="+i+"'>"+"#"+i+"</a></p>");
 							//("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArrtest[i]+"'>"+"#"+hashtagArrtest[i]+"</a></p>");
 						}// for end
+						$("#resultNum").text(hashtagSet.size)
 					}// else end
 				}// else
 			}, // success end
@@ -386,7 +387,7 @@ function moveToName(value){
 <button id="hashtagbutton">해시태그</button><br>  셀렉트 박스로 변경했어요 - 다현-->
 <!-- 색상은 구분을 위해 임시 지정 , css 스타일 적용 필요 -->
 <div id="messageWindow">
-	<div id=resultSortPBox><div id=resultSortBox1><div id="spanbefore">#</div><span id="result"></span><div id="spanafter">&nbsp검색결과</div></div><div id=resultSortBox2><div class="resultnum">총&nbsp</div><span id="resultnum" class="resultnum"></span><div class="resultnum">개 결과가 나왔습니다.</div></div></div>
+	<div id=resultSortPBox><div id=resultSortBox1><div id="spanbefore">#</div><span id="result"></span><div id="spanafter">&nbsp검색결과</div></div><div id=resultSortBox2><div class="resultnum">총&nbsp</div><span id="resultNum" class="resultnum"></span><div class="resultnum">개 결과가 나왔습니다.</div></div></div>
 	<div id="idSearch"> <!-- default view -->
 		<div class=idSearchList id=idSearchList></div>
 	</div>
