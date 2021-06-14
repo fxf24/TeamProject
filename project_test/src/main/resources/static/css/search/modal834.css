@@ -1,0 +1,537 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+a{
+	text-decoration:none;
+	color:black;
+}
+p{
+	margin:0;
+	padding:0;
+}
+a:hover{
+	text-decoration: underline;
+	color:black;
+}
+.modal{ 
+	display:none;
+	justify-content: center;
+    align-items: center;
+	width:100%; 
+	height:100%; 
+	background: rgba(0,0,0,0.8); 
+	margin:0;
+	padding:0;
+}
+
+.modalContent{
+  display:flex;
+  width:300px; height:600px;
+  flex-direction:column;
+  background: rgba(244,238,238,1);
+}
+
+.modalArticle{
+	display:flex;
+	justify-content: center;
+	background-color:white;
+}
+
+.contentsImage{
+	display: flex;
+	flex-direction:column;
+	width: 300px;
+	height: 300px;
+}
+
+.modalSection{
+	display:flex;
+	flex-direction:column;
+	width:300px;
+	height:500px;
+}
+
+/* 헤더 */
+.modalHeader{
+	display:flex;
+	flex-direction:column;
+	width:300px;
+	height:100px; 
+}
+
+.Header1{
+	display:flex;
+	width:300px;
+	height:50px;
+}
+.Header1-1{
+	display:flex;
+	width:50px;
+	height:50px;
+}
+.postProfileImage{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+/* 	width: 100px; */
+	cursor:pointer;
+}
+
+.postImage{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	margin-left:5px;
+	margin-top:5px;
+}
+
+.Header2{
+	display:flex;
+	width:300px;
+	height:50px;
+/* 	flex-direction:column; */
+	overflow-y:scroll;
+}
+
+.Header2::-webkit-scrollbar {
+	width:5px;
+}
+.Header2::-webkit-scrollbar-thumb{
+	background-color:#EFC0C0;
+}
+.Header2::-webkit-scrollbar-track{
+	background-color:rgba(244,238,238,1);
+}
+
+.Header1-2{
+	display:flex;
+	width:250px;
+	height:50px;
+	flex-direction:column;
+}
+.postIDX{
+	display:flex;
+	width:250px;
+	height:25px;
+	flex-direction:row;
+}
+
+.windowClose{
+	display: flex;
+	width:25px;
+	height:25px;
+	justify-content:flex-end;
+	z-index: 1;
+	color: #EFC0C0;
+	padding:5px;
+}
+.windowClose:hover{
+	color:#f1a8bb;
+}
+
+.postID{
+	display:flex;
+	width: 250px;
+	height: 25px;
+	cursor: pointer;
+	align-items: center;
+	margin-left:10px;
+}
+#postID{
+	font-size:1.15rem;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.postDate{
+	display:flex;
+	width: 250px;
+	height: 25px;
+	margin-left:10px;
+/* 	align-items:center; */
+}
+#postDate{
+	font-size:1rem;
+	vertical-align: middle;
+}
+
+.hashtagLink{
+	float:left;
+	font-size:1rem;
+	font-weight: bold;
+	color: #1E90FF;
+	vertical-align: middle;
+	margin:0;
+}
+.hashtagLink:hover{
+	text-decoration: underline;
+	color:#1E90FF;
+}
+
+.postContents{
+	width: 280px;
+	font-size:1rem;
+	margin-left:10px;
+	margin-right:5px;
+	float:left;
+}
+#postContents{
+	display:flex;
+	width: 280px;
+	flex-direction:column;
+}
+
+.modalContent{
+	display:flex;
+	
+}
+
+/* ####################### 댓글 ###################3 */
+.modalComment{
+	display:flex;
+	flex-direction: column;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	width:300px;
+	height:150px;
+	background-color:rgba(245,245,245,1);
+}
+
+.modalComment::-webkit-scrollbar {
+	width:5px;
+}
+.modalComment::-webkit-scrollbar-thumb{
+	background-color: #EFC0C0;
+}
+.modalComment::-webkit-scrollbar-track{
+	background-color:rgba(245,245,245,1);
+}
+
+.commentEmpty{
+	text-align:center;
+}
+
+.Comment1{
+	display:flex;
+/* 	width:390px; */
+	height:50px;
+}
+.Comment1-1{
+	display:flex;
+	width:50px;
+	height:50px;
+}
+.oneCommentProfileImage{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:50px;
+	height:50px;
+	cursor:pointer;
+}
+.commentImage{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	margin-left:5px;
+	margin-top:5px;
+}
+
+.Comment1-2{
+	display:flex;
+/* 	width:340px; */
+	height:50px;
+	flex-direction:column;
+}
+.CommentIDX{
+	display:flex;
+	width:250px;
+	height:25px;
+	flex-direction:row;
+}
+.CommentID{
+	display:flex;
+	width: 200px;
+	height: 25px;
+	cursor: pointer;
+	align-items: center;
+	margin-left:10px;
+}
+
+#CommentID{
+	font-size:1.15rem;
+	font-weight: bold;
+	vertical-align: middle;
+}
+#CommentID:hover{
+	text-decoration: underline;
+}
+.CommentSet{
+	display: flex;
+	width:50px;
+	height:25px;
+	justify-content:center;
+	align-items: center;
+	z-index: 1;
+	cursor:pointer;
+
+}
+
+#CommentSet:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+
+.CommentDate{
+	display:flex;
+/* 	width: 350px; */
+	height: 25px;
+	padding-left:10px;
+/* 	align-items:center; */
+}
+#CommentDate{
+	display:flex;
+	font-size:1rem;
+	align-items: center;
+}
+.CommentDate{
+	vertical-align: middle;
+}
+
+.Comment2{
+	display:flex;
+/* 	width:400px; */
+	flex-direction:column;
+/* 	height:50px; */
+/* 	flex-direction:column; */
+}
+
+.CommentContents{
+	width: 280px;
+	font-size:1rem;
+	padding: 10px 5px 10px 10px;
+}
+.CommentBox{
+	display:flex;
+	width:280px;
+	flex-direction:row;
+	justify-content:space-around;
+}
+.CommentLike{
+	display:flex;
+	cursor:pointer;
+}
+.CommentLike:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.CommentTotalReply{
+	cursor:pointer;
+}
+.CommentTotalReply:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.CommentAddReply{
+	cursor:pointer;
+}
+.CommentAddReply:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.replyBox{
+	display:flex;
+	justify-content:center;
+	margin:5px;
+}
+.writeReply{
+	width:250px;
+	border: 1px solid #EFC0C0;	
+}
+.writeReply::-webkit-input-placeholder { text-align: center; }
+.replyBtn{
+	width:50px;
+	border: 1px solid #EFC0C0;
+}
+
+/* ################## 답글창 ####################*/
+
+.OneReply{
+	display:flex;
+	margin-left:30px;
+	flex-direction:column;
+}
+.Reply1{
+	margin:0;
+	display:flex;
+	height:50px;
+}
+.Reply1-1{
+	display:flex;
+	justify-content:flex-end;
+	width:50px;
+	height:50px;
+}
+.oneReplyProfileImage{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	width:50px;
+	height:50px;
+	cursor:pointer;
+}
+.commentImage{
+	width: 50px;
+	height: 50px;
+	border-radius: 25px;
+	margin-top:5px;
+}
+
+.Reply1-2{
+	display:flex;
+/* 	width:340px; */
+	height:50px;
+	flex-direction:column;
+}
+.ReplyIDX{
+	display:flex;
+	width:210px;
+	height:25px;
+	flex-direction:row;
+}
+.ReplyID{
+	display:flex;
+	width: 160px;
+	height: 25px;
+	cursor: pointer;
+	align-items: center;
+	margin-left:10px;
+}
+
+#ReplyID{
+	font-size:1.15rem;
+	font-weight: bold;
+	vertical-align: middle;
+}
+#ReplyID:hover{
+	text-decoration: underline;
+}
+.ReplySet{
+	display: flex;
+	width:50px;
+	height:25px;
+	justify-content:center;
+	align-items: center;
+	z-index: 1;
+	cursor:pointer;
+}
+
+#ReplySet:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.ReplyDate{
+	display:flex;
+	width: 165px;
+	height: 25px;
+	padding-left:10px;
+}
+#ReplyDate{
+	display:flex;
+	font-size:1rem;
+	align-items: center;
+}
+.ReplyDate{
+	vertical-align: middle;
+}
+
+.Reply2{
+	display:flex;
+/* 	width:400px; */
+	flex-direction:column;
+/* 	height:50px; */
+/* 	flex-direction:column; */
+}
+
+.ReplyContents{
+	width: 265px;
+	font-size:1rem;
+	padding: 10px 5px 10px 10px;
+}
+.ReplyBox{
+	display:flex;
+	width:265px;
+	flex-direction:row;
+	justify-content:space-around;
+}
+.ReplyLike{
+	display:flex;
+	cursor:pointer;
+}
+.ReplyLike:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.ReplyTotalReply{
+	cursor:pointer;
+}
+.ReplyTotalReply:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.ReplyAddReply{
+	cursor:pointer;
+}
+.ReplyAddReply:hover{
+	border-radius:3px;
+	background-color: #EFC0C0;
+}
+
+.replyBox{
+	display:flex;
+	justify-content:flex-start;
+	margin:5px;
+}
+
+
+/* ################## 댓글 입력창 ################ */
+.postComment{
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	height:25px;
+}
+#myComment{
+	width: 240px;
+	height:25px;
+	border: 1px solid #EFC0C0;
+}
+#myComment::-webkit-input-placeholder { text-align: center; }
+#commentBtn{
+	width: 50px;
+	height:25px;
+	border: 1px solid #EFC0C0;
+}
+
+
+
+/*################# 게시글 좋아요 #####################*/
+.modalFooter{
+	display:flex;
+	justify-content: center;
+}
+
+.LikeImage{
+	margin-right:5px;
+}

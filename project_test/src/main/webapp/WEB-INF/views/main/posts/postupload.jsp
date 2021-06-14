@@ -67,7 +67,8 @@
 									height = height/(width / maxWidth) ;
 									width = maxWidth;
 									
-								}else{
+								}
+								else{
 									if(height > maxHeight){
 										width = width/(height/ maxHeight);
 										height = maxHeight;
@@ -84,7 +85,6 @@
 								var faces = cfrjson.faces
 
 								for (var i = 0; i < names.length; i++) {
-									//if(confidence[i]>=0.9){
 									var y1 = boxes[i][0] * height
 									var x1 = boxes[i][1] * width
 									var y2 = boxes[i][2] * height
@@ -109,13 +109,13 @@
 										$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query=" + celebrity + "&cat_id=&frm=NVSHATC'>#" + celebrity + " </a>")
 									} //if end
 								} //for end
-
-							} //image onload end
-						},
+							}//image onload end
+						},//success end
+						
 						error: function (response) {
 							alert("사진아이콘을 눌러 사진을 선택 후, 분석을 해주세요")
-						}
-					})
+						}//error end
+					})//ajax end
 				}) //fileUpload onclick end
 			}) //document ready end
 
@@ -155,7 +155,7 @@
 							console.log(response.data)
 						}
 
-					});
+					});//saveImage ajax end
 
 					console.log($("#hashtags").text())
 					$.ajax({ 
@@ -169,14 +169,14 @@
 						},
 						dataType: 'json',
 						success: function (response) {
-							location.href = "/profile?id=" + user
+							location.href = "/"
 						},
 
 						error: function (request, status, error) {
 							alert("success에 실패 했습니다.");
 							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 						}
-					})
+					})//saveData ajax end
 				}//else end
 				
 			}//saveImage() end
@@ -226,7 +226,7 @@
 					내용 입력<br>
 					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
 					<div id="sysdate"><%=sf.format(nowTime)%></div>
-					<button id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
+					<button type="button" id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
 				</form>
 			</div>
 		</div>

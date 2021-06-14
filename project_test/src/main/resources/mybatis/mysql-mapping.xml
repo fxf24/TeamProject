@@ -7,23 +7,20 @@ select * from users where id= #{id}
 </select>
 
 <select id="getUserID" parameterType="String" resultType="userVO">
-select * from users where id LIKE #{id}||'%' order by id 
+select * from users where id LIKE Concat(Ifnull(#{id}, ''),'%') order by id 
 </select>
 
 <select id="getUserName" parameterType="String" resultType="userVO">
-select * from users where name LIKE #{name}||'%' order by name
+select * from users where name LIKE Concat(Ifnull(#{name}, ''),'%') order by name
 </select>
 
 <select id="getHashtag" parameterType="String" resultType="postVO">
-select * from posts where hashtag LIKE '%'||#{hashtag}||'%'
+select * from posts where hashtag LIKE Concat('%',Ifnull(#{hashtag}, ''),'%')
 </select>
 
 <insert id="insertPostData" parameterType="postVO" >
-<selectKey resultType="int" keyProperty="postNum" order="BEFORE">
-	select posts_seq.nextval from dual
-</selectKey>
-insert into posts values(#{postNum}, #{id}, #{contents},
- #{imagepath}, #{hashtag}, sysdate)
+insert into posts(id, contents, imagePath, hashtag, postDate) values(#{id}, #{contents},
+ #{imagepath}, #{hashtag}, sysdate())
 </insert>
 
 <select id="getPostNum" parameterType="int" resultType="postVO">
@@ -31,10 +28,7 @@ select * from posts where postNum=#{postNum}
 </select>
 
 <insert id="insertUserData" parameterType="userVO">
-<selectKey resultType="int" keyProperty="userNum" order="BEFORE">
-	select users_seq.nextval from dual
-</selectKey>
-insert into users values(#{userNum}, #{id}, #{password},
+insert into users(id, password, email, name, telephone, profileImage) values(#{id}, #{password},
  #{email}, #{name}, #{telephone}, null)
 </insert>
 
@@ -43,7 +37,7 @@ select * from thumbsup where postNum=#{postNum}
 </select>
 
 <insert id="thumbsPlus" parameterType="thumbsupVO">
-insert into thumbsup values(thumbsup_SEQ.nextval, #{id}, #{postNum})
+insert into thumbsup(id, postNum) values(#{id}, #{postNum})
 </insert>
 
 <delete id="thumbsMinus" parameterType="thumbsupVO">
@@ -51,10 +45,7 @@ delete from thumbsup where id=#{id} and postNum=#{postNum}
 </delete>
 
 <insert id="addComments" parameterType="commentsVO">
-<selectKey keyProperty="commentNum" resultType="integer" order="BEFORE">
-select comments_SEQ.NEXTVAL from dual
-</selectKey>
-insert into comments values(#{commentNum}, #{id}, #{postNum}, #{comments}, sysdate)
+insert into comments (id, postNum, comments, commentsDate) values(#{id}, #{postNum}, #{comments}, sysdate())
 </insert>
 
 <select id="getComments" parameterType="int" resultType="commentsVO">
@@ -66,14 +57,14 @@ select profileImage from users where id=#{id}
 </select>
 
 <select id="getProfileUser" parameterType="String" resultType="userVO">
-select * from users where profileImage=#{profileImage}
+select * from users where id= #{id}
 </select>
 
-<update id="updateUserProfileData" parameterType="userVO">
+<update id="updateUserProfileData" parameterType="UserVO">
 update users set profileImage=#{profileImage} where id=#{id}
 </update>
 
-<select id="getOneProfileImage" parameterType="String" resultType="userVO">
+<select id="getOneProfileImage" parameterType="String" resultType="UserVO">
 select id, profileImage from users where id=#{id} 
 </select>
 
@@ -86,7 +77,7 @@ select * from posts where id=#{id} order by postDate DESC
 </select>
 
 <select id="getPostsImage" parameterType="String" resultType="postVO">
-select postNum, id, imagepath, postDate from posts where id=#{id} order by postDate DESC
+select postNum, id, imagePath, postDate from posts where id=#{id} order by postDate DESC
 </select>
 
 
@@ -95,7 +86,7 @@ select * from commentThumbsup where commentNum=#{commentNum}
 </select>
 
 <insert id="commentThumbsPlus" parameterType="commentthumbsupVO">
-insert into commentThumbsup values(commentThumbsup_SEQ.nextval, #{id}, #{commentNum})
+insert into commentThumbsup (id, commentNum) values(#{id}, #{commentNum})
 </insert>
 
 <delete id="commentThumbsMinus" parameterType="commentthumbsupVO">
@@ -103,7 +94,7 @@ delete from commentThumbsup where id=#{id} and commentNum=#{commentNum}
 </delete>
 
 <select id="getUserPosts" parameterType="String" resultType="postVO">
-select * from posts where id=#{user} order by postdate desc
+select * from posts where id=#{user} order by postDate desc
 </select>
 
 <!-- <delete id="DeleteCommentThumbs" parameterType="int"> -->
@@ -131,7 +122,7 @@ delete from replyComments where id=#{id} and replyNum=#{replyNum}
 </delete>
 
 <insert id="AddReply" parameterType="ReplycommentsVO">
-insert into replyComments values(reply_SEQ.nextval, #{id}, #{postNum}, #{commentNum}, #{comments}, sysdate)
+insert into replyComments(id, postNum, commentNum, comments, commentsDate) values(#{id}, #{postNum}, #{commentNum}, #{comments}, sysdate())
 </insert>
 
 <select id="getReplyThumbsup" parameterType="int" resultType="replythumbsupVO">
@@ -139,7 +130,7 @@ select * from replyThumbsup where replyNum=#{replyNum}
 </select>
 
 <insert id="replyThumbsPlus" parameterType="replythumbsupVO">
-insert into replyThumbsup values(replyThumbsup_SEQ.nextval, #{id}, #{replyNum})
+insert into replyThumbsup(id, replyNum) values(#{id}, #{replyNum})
 </insert>
 
 <delete id="replyThumbsMinus" parameterType="replythumbsupVO">

@@ -1,397 +1,832 @@
 @charset "UTF-8";
-* {
- margin: 0;
- padding: 0;
-}
-/* 1. 프로필 메인 상단 
-- 고정 정보 (프로필사진, 회원아이디, 프로필편집) */
 
-#info-container {
-	z-index: 1;
-	background: silver;
-	position: relative;
-	margin: auto;
-	width: 1110px;
-	height: 300px;
-}
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		border: none;
+	}
 
-#profileiamge { 
-	z-index: 3;
-	background: silver;
-	position: absolute;
-	clear: both; 
-	width: 500px;
-	height: 200px;
-	margin: 20px;
-}
+	.mediaViewInfo {
+		--web-view-name: 0;
+		--web-view-id: 0;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	:root {
+		--web-view-ids: 0;
+	}
 
-#img {
-	position: absolute;
-	background: silver;
-  	top: 7%;
-  	right: 1100px;
-    left: 13.5%;
-    bottom: 100px;
-    margin: 3px 20px 20px 20px; /* (위 오른쪽 아래 왼쪽 순) */
-	width: 250px; 
-	height: 250px;
-	border-radius: 300px; 
-	cursor: pointer;
-	text-align:center;
-	line-height: 200%;
-}
-
-#imagecanvas {
-	position: absolute;
-	z-index: 4;
-  	top: 7%;
-  	right: 1300px;
-    left: 20px;
-    bottom: 100px;
-    margin: 0px 50px 20px 150px; /* (위 오른쪽 아래 왼쪽 순) */
-	width: 250px; 
-	height: 250px;
-	border-radius: 300px; 
-	border: 10px solid pink
+	#main {
+		position: absolute;
+		width: 100vw;
+		height: 141.3021vw; 
+		background-color: rgba(244,238,238,1);
+		overflow: hidden;
+		--web-view-name: 0;
+		--web-view-id: 0;
+		--web-scale-on-resize: true;
+		--web-enable-deep-linking: true;
+	}
+	#mainPBox0{
+		position: relative;
+		width: 100.vw;
+		height: 73.3333vw;
+		left: 0vw;
+		top: -4.115vw;
+		box-sizing: border-box;
+	}
+	#line {
+		stroke: rgba(165,165,165,1);
+		stroke-width: 0.156vw;
+	}
 	
-}
-
-/* 프로필 사진 파일 label - input file 버튼 대체수단 */
-#fileimage {
-	position: absolute;
-	z-index: 4;
-  	top: 40%;
-  	right: 0;
-    left: 27%;
-    bottom: 100px;
-    margin: 40px; /* (위 오른쪽 아래 왼쪽 순) */
-    cursor: pointer;
-    width: 100px;
-    height: 100px;
-/* 	color: transparent; */
-	text-align: center;
-	line-height: 600%;
-}
-
-#plus {
-	top: 60%;
-	width: 70%; 
-	height: 70%;
-	border-radius: 300px; 
-}
-
-/* 프로필 사진 업로드 기능 박스 - 차후에 모달창으로 연결 처리 */
-#profileimgbox {
-	background: silver;
-	position: absolute;
-	z-index: 2;
-	top: 5%;
-	left: 5%;
-	width: 15%;
-	height: 17%;
-    margin: 200px 20px 20px 500px; /* (위 오른쪽 아래 왼쪽 순) */
-
-}
-
-/* input file - hidden (프로필 사진 업로드 담당) */
-#inputProfile {
-	display: none;
-	text-align: center;
-	line-height: 200%;
-}
-
-#uploadprofile {
-	cursor: pointer;
-}
-
-#modal{ 
-	position:absolute;
-	z-index: 5;
-	width: 100%; 
-	height: 100%; 
-	background: rgba(0,0,0,0.8);  
-	top:0; 
-	left:0; 
-	padding: 0;
-	display: none;
-	background-size: color;
-}
-
-#modalContent{
-  width:50%; height:50%;
-  background:#fff; 
-  border-radius:10px;
-  position:absolute; 
-  top:30%; 
-  left:40%;
-  margin-top:-100px; 
-  margin-left:-200px;
-  text-align:center;
-  box-sizing:border-box; 
-  padding:74px 0;
-  line-height:23px; 
-  cursor:pointer;
-  display: none;
-}
-
-/* 회원 아이디(계정) */
-#accountId {
-	position:absolute;
-	z-index: 2;
-	top: 23%;
-    left: 50%;
-	text-align: center;
-	font-family: inherit;
-	font-size: xx-large;
-	font-weight: bold;
-}
-
-/* 프로필 편집 버튼 */
-#profileedit {
-	position:absolute;
-	z-index: 2;
-	top: 25%;
-    left: 60%;
-	text-align: center;
-	cursor:pointer;
-}
-
-/* 게시물 | 팔로워 | 팔로우 
-게시물 업로드 (카메라, 앨범, (폰, pc))*/
-
-#profileposts {
-	position:absolute;
-	z-index: 2;
-	top: 30%;
-    left: 50%;
-	text-align: center;
-	font-family: inherit;
-	font-size: large;
-	font-weight: bold;
+	/* 2 - 게시물 */
+	.line {
+		position: absolute;
+		width: 100vw;
+		top:46.458vw;
+		order: 2;
+		background: pink;
+	}
 	
-}
-
-#follower {
-	position:absolute;
-	z-index: 2;
-	top:30%;
-    left:60%;
-	text-align: center;
-	font-family: inherit;
-	font-size: large;
-	font-weight: bold;
-}
-
-#follow {
-	position:absolute;
-	z-index: 2;
-	top: 30%;
-    left:70%;
-	text-align: center;
-	font-family: inherit;
-	font-size: large;
-	font-weight: bold;	
-}
-
-#postupload {
-	position:absolute;
-	z-index: 2;
-	top: 35%;
-    left: 50%;
-}
-
-#postfont {
-	z-index: 2;
-	position:absolute;
-	top: 35%;
-    left: 0;
-	cursor:pointer;
-	background: rgb(227, 227, 227);
-	font-size: medium;
-	width: 110px;
-	text-align: center;
-}
-
-#postuploadbtn {
-	position:absolute;
-	z-index: 2;
-	top: 35%;
-    left: 0;
-    display: none;
-}
-
-/* #upload_camera {
-	position:absolute;
-	top: 45%;
-    left: 200%;
-    text-align: center;
-	cursor:pointer;
-	display: none;
+	/* 3 - 게시물 정렬 아이콘, 검색 아이콘 */
+	#mainboardPBox {
+		position: inherit;
+		width: 73.3333vw;
+		height: 10.593vw;
+		left: 13.3333vw;
+		top: 15.74vw;
+		order: 3;
+/* 		background: maroon; */
+	}
+	#dashboard1 {
+		fill: rgba(0,11,46,1);
+	}
+	.dashboard1 {
+		position: absolute;
+		width: 2.7666vw;
+		height: 2.7144vw;
+		left: 1.846vw;
+		top: 5.466vw;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#dashboard1Button{
+		fill:black; /* transparent; */
+		position: absolute;
+		width: 6.4583vw;
+		height: 13.5417vw;
+		left: 0vw;
+		top: 0.052vw;
+	}
+	.dashboard2{
+		fill: transparent;
+		position: absolute;
+		width: 2.8646vw;
+		height: 2.8646vw;
+		left: 8.2vw;
+		top: 5.3281vw;
+	}
+	.dashboard2sub1{
+		position: absolute;
+		width: 1.0729vw;
+		height: 1.0729vw;
+	}
+	.dashboard2sub2{
+		position: absolute;
+		width: 1.0729vw;
+		height: 1.0729vw;
+		top: 1.8125vw;
+	}
+	.dashboard2sub3 {
+		position: absolute;
+		width: 1.0729vw;
+		height: 1.0729vw;
+		left: 1.8125vw;
+	}
+	.dashboard2sub4 {
+		position: absolute;
+		width: 1.0729vw;
+		height: 1.0729vw;
+		left: 1.8125vw;
+		top: 1.8125vw;
+	}
+	#dashboard2Button {
+		fill:black; /* transparent; */
+		position: absolute;
+		width: 6.458vw;
+		height: 13.542vw;
+		left: 6.458vw;
+		top: 0.052vw;
+	}
+	.dashboard3 {
+		width: 2.865vw;
+		position: absolute;
+		height: 2.135vw;
+		left: 14.74vw;
+		top: 5.604vw;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#dashboard3Button {
+		fill:black; /* transparent; */
+		position: absolute;
+		width: 6.458vw;
+		height: 13.542vw;
+		left: 12.917vw;
+		top: 0.052vw;
+	}
+	#searchBar{
+		fill: rgba(255,255,255,1);
+	}
+	.searchBar {
+		position: absolute;
+		width: 29.53vw;
+		height: 4.427vw;
+		left: 21.302vw;
+		top: 4.6745vw;
+	}
+	#searchBarButton {
+		fill:black; /* transparent; */
+		position: absolute;
+		width: 33.385vw;
+		height: 13.5417vw;
+		left: 19.375vw;
+		top: 0.052vw;
+	}
+	#searchIcon{
+		fill: rgba(0,0,0,1);
+	}
+	.searchIcon{
+		position: absolute;
+		width: 3.437vw;
+		height: 3.385vw;
+		transform-origin: center;
+		left: 54.76vw;
+		top: 5vw;
+	}
+	#searchButton {
+		fill: transparent;
+		position: absolute;
+		width: 7.8125vw;
+		height: 13.594vw;
+		left: 52.76vw;
+		top: 0vw;
+	}
+	#space3 {
+		fill: transparent;
+	}
+	.space3 {
+		position: absolute;
+		width: 12.76vw;
+		height: 13.5417vw;
+		left: 60.573vw;
+		top: 0.0521vw;
+	}
 	
-} */
+	/* 1 - 프로필 상단 전체*/
+	#mainPBox1{
+		position: relative;
+		width: 45.729vw;
+		height: 28.6875vw;
+		left: 12.135vw;
+		top: 10.323vw;
+		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
+		order: 1;
+/* 		background: orange; */
+	}
+	
+	/* 3 - 북마크*/
+	#bookmarkPbox0 {	
+		position: absolute;
+		width: 11.146vw;
+		height: 11.302vw;
+		left: 64.583vw;
+		top: 0.052vw;
+		order: 3;
+		z-index: 10;
+/* 		background: purple; */
+	}
+	#bookmarkPbox1 {
+		position: absolute;
+		width: 11.146vw;
+		height: 11.302vw;
+		left: 0vw;
+		top: 0vw;
+	}
+	#bookmarkPbox2{
+		position: absolute;
+		width: 9.7135vw;
+		height: 9.479vw;
+		left: 0vw;
+		top: 0vw;
+	}
+	#markRoundShadow{
+		filter: blur(0.25vw);
+		fill: rgba(0,0,0,0.2);
+	}
+	.markRoundShadow{
+		position: absolute;
+		width: 13.4375vw;
+		height: 13.4375vw;
+		left: 1.2708vw;
+		top: 1.0417vw;
+	}
+	#bookmarkRBox{
+		fill: rgba(255,255,255,1);
+	}
+	.bookmarkRBox{
+		position: absolute;
+		width: 8.4375vw;
+		height: 8.4375vw;
+		left: 0.625vw;
+		top: 0.52vw;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#markRoundBright {
+		filter: blur(0.7813vw);
+		fill: rgba(255,255,255,0.2);
+	}
+	.markRoundBright {
+		position: absolute;
+		width: 13.125vw;
+		height: 13.125vw;
+		left: -1vw;
+		top: -1vw;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#bookmark2 {
+		fill: rgba(0,11,46,1);
+	}
+	.bookmark2 {
+		position: absolute;
+		width: 2.083vw;
+		height: 3.3333vw;
+		left: 3.854vw;
+		top: 3.3854vw;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#roundBright {
+		opacity: 0.8;
+		filter: blur(0.2604vw);
+		fill: rgba(255,255,255,0.102);
+	}
+	.roundBright {
+		position: absolute;
+		width: 15.8854vw;
+		height: 15.8854vw;
+		left: 0vw;
+		top: 0vw;
+	}
+	
+	/* 프로필 업로드, 저장 영역 */
+	#uploadSettingBox {
+		position: absolute;
+		width:16.275vw;
+    	height:20vw;
+    	top: 1.758vw;
+    	left: 2vw;
+/*     	background: yellow; */
+	}
+	#imagecanvas {
+/* 		background: yellow; */
+		width: 15vw;
+		height: 15vw;
+		border-radius: 20vw; 
+		border: 0.45vw solid pink;
+	}
+	#upload {
+		position: absolute;
+		justify-content: flex-start;
+		border-radius: 1vw; 
+		left: 3.8vw;		
+		top: 16vw;
+		cursor: pointer;
+		width: 3.5vw; 
+		height: 3.5vw;
+/* 		background: green; */
+	}
+	
+	#save {
+		position: absolute;	
+		justify-content: flex-end;
+		border-radius: 0.05vw; 
+		left: 8vw;
+		top: 16vw;
+		cursor: pointer;
+		width: 3.5vw; 
+		height: 3.5vw;
+/* 		background: green;	 */	
+	}
+	
+	#unnamed_2 {
+		position: absolute;
+		width: 14.2188vw;
+		height: 14.2188vw;
+		left: 2.76vw;
+		top: 0.729vw;
+	}
+	#roundLine {
+		fill: transparent;
+		stroke: rgba(241,168,187,1);
+		stroke-width: 0.1563vw;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+	}
+	.roundLine {
+		position: inherit;
+		position: absolute;
+		width: 15.625vw;
+		height: 15.625vw;
+		left: 2.0313vw;
+		top: 0vw;
+	}
+	#plus {
+		position: absolute;
+		width: 2.8125vw;
+		height: 2.4479vw;
+		left: 12vw;
+		top: 11vw;
+		transform: matrix(1,0,0,1,0,0);
+		border-radius: 20vw; 
+		cursor:pointer;
+		width:3vw; 
+		height:3vw;
+		
+	}
+	
+	#Heart {
+		fill: rgba(239,74,53,1);
+	}
+	.Heart {	
+		position: absolute;
+		width: 2.8125vw;
+		height: 2.4479vw;
+		left: 14.0417vw;
+		top: 11.927vw;
+		transform: matrix(1,0,0,1,0,0);
+	}
+	#subImgBox {
+		position: absolute;
+		width: 73.4375vw;
+		height: 7.8646vw;
+		left: 1.25vw;
+		display:flex;
+		justify-content: space-between;
+	}
+/* 	#subImg1 {
+		width: 7.8125vw;
+		height: 7.8125vw;
+		left: 0vw;
+		top: 0vw;
+	} */
+/* 	#subImg2{
+		width: 7.8125vw;
+		height: 7.8125vw;
+		left: 0vw;
+		top: 0vw;
+	} */
+/* 	#subImg3 {
+		width: 7.8125vw;
+		height: 7.8125vw;
+		left: 001vw;
+		top: 0vw;
+	} */
+/* 	#subImg4 {
+		width: 7.8125vw;
+		height: 7.8125vw;
+		left: 0vw;
+		top: 0vw;
+	} */
+/* 	#subImg5 {
+		
+		width: 7.8125vw;
+		height: 7.8125vw;
+		left: 0.023vw;
+		top: 0vw;
+	} */
+/* 	#subImg6 {
+		width: 7.8125vw;
+		height: 7.8125vw;
+		left: 0vw;
+		top: 0vw;
+	} */
+	#subImgFont {
+		position: absolute;
+		width: 73.802vw;
+		height: 2.8125vw;
+		left: 1.927vw;
+		top: 8.698vw;
+		
+	}
+	#working {
+		position: absolute;
+		left: 0vw;
+		top: 0.2083vw;		
+		width: 6.6667vw;
+		white-space: nowrap;
+		line-height: 6.25vw;
+		margin-top: -2.1875vw;
+		font-style: normal;
+		font-size: 1.875vw;
+		color: rgba(34,34,34,1);
+	}
+	#dancing {
+		position: absolute;
+		left: 13.3854vw;
+		top: 0.208vw;
+		width: 6.6667vw;
+		white-space: nowrap;
+		line-height: 6.25vw;
+		margin-top: -2.1875vw;
+		font-style: normal;
+		font-size: 1.875vw;
+		color: rgba(34,34,34,1);
+	}
+	#qwee {
+		position: absolute;
+		left: 25.5729vw;
+		top: 0.2083vw;
+		width: 7.8646vw;
+		white-space: nowrap;
+		line-height: 6.25vw;
+		margin-top: -2.1875vw;
+		font-family: WCG Play Fun;
+		font-style: normal;
+		font-size: 1.875vw;
+		color: rgba(34,34,34,1);
+	}
+	#TT {
+		position: absolute;
+		left: 41.1458vw;
+		top: 0vw;
+		width: 2.344vw;
+		white-space: nowrap;
+		line-height: 6.2500vw;
+		margin-top: -2.1875vw;
+		font-style: normal;
+		font-size: 1.875vw;
+		color: rgba(34,34,34,1);
+	}
+	#LOL {
+		position: absolute;
+		left: 54.1146vw;
+		top: 0.104vw;
+		width: 3.2813vw;
+		white-space: nowrap;
+		line-height: 6.25vw;
+		margin-top: -2.1875vw;
+		font-style: normal;
+		font-size: 1.875vw;
+		color: rgba(34,34,34,1);
+	}
+	#aiii {
+		position: absolute;
+		left: 64.948vw;
+		top: 0.2083vw;
+		width: 8.906vw;
+		white-space: nowrap;
+		line-height: 6.25vw;
+		margin-top: -2.1875vw;
+		font-family: WCG Play Fun Pop;
+		font-style: normal;
+		font-size: 1.875vw;
+		color: rgba(34,34,34,1);
+	}
+	
+	/* 5 - 스토리 하이라이트 */
+	.subImgPBox {
+		fill: transparent;
+		position: inherit;
+/* 		stroke: rgba(112,112,112,1);
+		stroke-width: 0.0521vw;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto; */
+		width: 75.729vw;
+		height: 14.51vw;
+		left: 0vw;
+		top: 5.5vw;
+		order: 5;
+		z-index: 10;
+/* 		background: navy; */
+	}
+	
+	/* 2 - 프로필 정보 */
+	#idFontPBox {
+		position:inherit;
+		width: 46.927vw;
+		height: 22.5833vw;
+		left: 17.656vw;
+		top: 7vw;
+		order: 2;
+		z-index:10;
+		overflow: visible;
+		margin-top: -6vw;
+/* 		background: lime; */
+/* 		display: flex;
+   		justify-content: start;
+   		align-content: flex-start;
+ */	}
+	#accountBox {
+		position: absolute;
+		left: 6.1563vw;
+		top: 0.3vw;
+		width: 25.2604vw;
+		white-space: nowrap;
+		font-style: normal;
+		font-size: 3.1250vw;
+		color: rgba(34,34,34,1);
+	}
+	#accountId {
+		font-family: inherit;	
+		font-weight:bold;
 
-/* 소개 */
-#introduction {
-	position:absolute;
-	z-index: 2;
-	top: 40%;
-    left: 50%;
-	text-align: left;
-	z-index: 2;
-}
-
-
-
-/* 2. 프로필 메인 가운데 단 
-- 업로드 정보 (게시물 목록들) */
-
-#main-container {
-	background: pink;
-    display: flex;
-	width: 150em;
-	height: 90em;
-	margin: auto;
-} 
-
-.postscanvas {
-	z-index: 3;
-	border: 3px solid blue;
-    display: flex;
-/*     justify-content: space-around; */
-/* 	align-items: flex-start; */
-	margin: 0; /* (위 오른쪽 아래 왼쪽 순) */
-	width: 300px;
-	height: 300px;
+	}
+	#profileedit {
+		font-family: inherit;	
+		font-weight:bold;
+	}
+	#pff {
+		position: absolute;
+		left: 5.1563vw;
+		top: 6vw;
+		width: 6.1458vw;
+		white-space: nowrap;
+		font-style: normal;
+		font-size: 2.76vw;
+		color: rgba(34,34,34,0.502);
+	}
+	#postupload {
+		position: absolute;
+		left: 6.1563vw;
+		top: 10.467vw;
+		width: 6.1458vw;
+		white-space: nowrap;
+		font-style: normal;
+		font-size: 2.76vw;
+		color: rgba(34,34,34,0.502);	
+	}
+	#postfont {
+		cursor: pointer;
+		font-family: inherit;	
+		font-weight:bold;
+	}
+	#introduction {
+		position: absolute;
+		left: 6.1563vw;
+		top: 15.567vw;
+		width: 6.1458vw;
+		white-space: nowrap;
+		font-style: normal;
+		font-size: 2.76vw;
+		color: rgba(34,34,34,0.502);	
+	}
+	#moment {
+		position: absolute;
+		left: 5.1563vw;
+		top: 7.8646vw;
+		width: 9.948vw;
+		white-space: nowrap;
+		font-style: normal;
+		font-size: 2.6563vw;
+		color: rgba(34,34,34,1);
+	}
+	#media_2046gmailcom {
+		position: absolute;
+		left: 5.1563vw;
+		top: 11.0417vw;
+		width: 30vw;
+		white-space: nowrap;
+		font-style: normal;
+		font-size: 2.7083vw;
+		color: rgba(0,168,255,1);
+	}
+	#idFontBox{
+		fill: transparent;
+		position: absolute;
+		stroke: rgba(112,112,112,1);
+		stroke-width: 0.0521vw;
+		stroke-linejoin: miter;
+		stroke-linecap: butt;
+		stroke-miterlimit: 4;
+		shape-rendering: auto;
+		width: 41.7708vw;
+		height: 14.5833vw;
+		left: 5.1563vw;
+		top: 0vw;
+	}
+	#space0{
+		fill: transparent;
+		position: absolute;
+		width: 5.1563vw;
+		height: 14.5833vw;
+		left: 0vw;
+		top: 0vw;
+	}
+	
+	/* 1 - 프로필 이미지*/
+	.profilePBox{
+	position: absolute;
+	height: 19.625vw;
+	order: 1;
+	z-index: 10;
+/* 	background: pink; */
+	}
+/* 	.profileBox{
+	display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    } */
+    
+    /* 4 - 스토리하이라이트 그림만*/
+    .space1{
+    position:inherit;
+    width:75.729vw;
+    height:18.552vw;
+    order: 4;
+/*     background: aqua; */
+    top: 17.0417vw;
+     }    
+     
+     /* 6 - 스토리하이라이트 이름만 */
+    .space2{
+    width:75.729vw;
+    height:15.729vw;
+	align-content:flex-end;
+	order: 6;
+/* 	background: yellow; */
+	top: 25.0417vw;
+     }
+     .dashboard2Box{
+	position: absolute;
+    top: 5.3385vw;
+    left: 8.1927vw;
+    }
+    
+    /* 2 - 게시물 등록 */
+    #post-container {
+   	order: 2; 
+/*    	background: black; */
+	position: inherit;
+	height: 2903.593vw;
+	top: 17.458vw;
+	width: 75.729vw;
+	left: 12.135vw;
+    }
+    
+    .flex-container {
+	position: absolute;
+   	order: 3;
+    }
+    
+    /* 포스트 이미지들 */ 
+   	.flex-item {
+   	position: absolute;
+   	order: 3;
+	height: 93.593vw;
+/* 	top: 26.458vw; */
+	width: 75.729vw;
+/* 	left: 0.5vw;   	 */
 	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0; 
-	padding: 0;
-}
-
-
-/* 게시물 목록 */ 
-div.flex-container {
+/* 	background: gray; */
 	display: flex;
-    overflow: hidden;
-
-}
-
-div.flex-item{
-	background: silver;
-	border: 3px solid blue;
-	flex-basis: 33.3%;
-	display: flex;
-	flex-flow: wrap-reverse;
 	flex-wrap: wrap;
-	flex-direction: column-reverse; 
-	flex: auto;
-	justify-content: space-around;
-	align-items: flex-end;
-	align-content: space-around;
-	width: 20em;
-	height: 20em;
-	max-width: inherit;
-	max-height: inherit;
-} 
+	}
+	
+/* 	포스트 이미지 출력 append 추가 */
+	.pD {
+ 	color: transparent; 
+   	position: absolute;
+    order: 3;  	
+/* 	background: yellow; */
+	width: 25vw;
+	height: 1vw;
+	flex-flow: row;
 
-/* #card-body3-1 {
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: flex-start;
-	margin: 5%;
-	width: 300px;
-	height: 300px;
-	padding: 0;
-	text-align: center;
-}
+	
+	}
+	.postImages {
+	width: 25vw;
+	height: 25vw;
+	left: 0.5vw;
+   	
+	}
+	
+	#posts {
+	top: 87.458vw;
+	}
+	
 
-#card-body3-2{
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: center;
-	margin: 5%;
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
+	
+	.postModal{ 
+		position:fixed;
+		width:100%; 
+		height:100%; 
+		background: rgba(0,0,0,0.8); 
+		top:0; 
+		left:0; 
+		display:none;
+	
+	}
+	.postModalContent{
+	position: absolute;
+	width: 45.729vw;
+	height: 35.729vw;
+	  background: rgba(244,238,238,1); 
+	  border-radius: 3vw;
+	  order: 8;
+	  top: 6vw; 
+	  left: 25vw;
+	  margin-top: 0; 
+	  margin-left: 0;
+	  box-sizing: border-box; 
+	  padding: 0;
+	  line-height: 1vw; 
+	  cursor: pointer;
+	  overflow: hidden;
+	
+	}	
 
-#card-body3-3 {
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: flex-end;
-	margin: 5%;
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
+	.onePostContent {
+	position: absolute;
+	display: flex;
+	width: 45.729vw;
+	height: 30.729vw;	
+	top: 6.858vw;
+/* 	background: green; */
+	z-index: 1;
+	order: 2;	
+	}
+	
+	.postID {
+	position: absolute;
+	background: yellow;
+	display: flex;
+	width: 10.729vw;
+	height: 2.529vw;	
+	top: 2.579vw;
+	left:2.657vw;
+	order: 1;
+	font-family: fantasy;
+	font-size: xx-large; 
+	word-spacing: 5vw;
+	line-height: 3vw;
+	}
+	
+	.postImage {
+	position: absolute;
+/* 	background: yellow; */
+	display: flex;
+	width: 25.729vw;
+	height: 25.729vw;	
+	top: 0;
+	order: 1;
+	left:1.657vw;
+	border: 0.204vw solid silver;
+	}
+	
+	.postContent {
+	position: absolute;
+/* 	background: yellow; */
+	display: flex;
+	width: 15.729vw;
+	height: 18.729vw;	
+	top: 0.384vw;
+	order: 1;
+	left:28.447vw;	
+	font-family: inherit;
+	font-weight: bold;
+	font-size: medium;
 
-#card-body2-1 {
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: flex-start;
-	margin: 45% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
-
-#card-body2-2{
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: center;
-	margin: 45% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
-
-#card-body2-3 {
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: flex-end;
-	margin: 45% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
-
-#card-body1-1 {
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: flex-start;
-	margin: 85% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
-
-#card-body1-2{
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: center;
-	margin: 85% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
-
-#card-body1-3 {
-	z-index: 2;
-	background: gray;
-    display: flex;
-	justify-content: flex-end;
-	margin: 85% 5% 0 5%; (위 오른쪽 아래 왼쪽 순)
-	width: 300px;
-	height: 300px;
-	padding: 0;
-}
- */
+	}
+	
+	.hashTag {
+	position: absolute;
+	background: yellow;
+	display: flex;
+	width: 15.729vw;
+	height: 6.429vw;	
+	top: 14.372vw;
+	order: 1;
+	left:28.347vw;	
+	font-weight: bold;
+	font-size: medium;		
+	}
+	
+	.postDate {
+	position: absolute;
+/* 	background: yellow; */
+	display: flex;
+	width: 15.729vw;
+	height: 1.534vw;	
+	top: 24.342vw;
+	order: 1;
+	left:28.347vw;	
+	font-weight: bold;
+	font-size: small;			
+	}

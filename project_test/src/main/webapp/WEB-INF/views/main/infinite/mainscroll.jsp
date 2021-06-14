@@ -126,8 +126,6 @@
 			success : function(response){
 				list = response
 				console.log(user)
-				console.log(list)
-				console.log(list[0].id)
 			}, // success end
 			error : function(e){
 					console.log(e);

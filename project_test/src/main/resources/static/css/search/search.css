@@ -70,7 +70,7 @@ a:hover {
 
 #searchbar {
     width: 500px;
-    height: 50px;
+    height: 65px;
     border: 3px soild;
     font-size: 20px;
     border-radius: 10px;
@@ -119,6 +119,8 @@ a:hover {
 
 #messageWindow {
     width: 100%;
+    display: block;
+	justify-content: center;
 }
 
 @keyframes blink-effect {
@@ -192,3 +194,63 @@ ul {
     transform: scale(1.5);
     transition: 0.2s;
 }
+
+select {
+    -webkit-appearance:none; /* 크롬 화살표 없애기 */
+    -moz-appearance:none; /* 파이어폭스 화살표 없애기 */
+    appearance:none /* 화살표 없애기 */
+}
+select {
+	text-align-last: center;
+    height: 65px;
+    width: 150px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px rgb(50 50 50 / 10%), 0px 2px 4px rgb(60 60 60 / 10%);
+    margin-inline: 3vw;
+    color: rgba(0,0,0,0.4);
+}
+#spanbefore{
+	font-size:2.8646em;
+	color: rgba(38,153,251,1);
+	display: none;
+	margin-top: 0.3vh;
+} 
+#result{
+	font-size:2.8646em;
+	color: rgba(38,153,251,1);
+}
+#spanafter{
+	font-size:3.125em;
+	color: rgba(0,0,0,1);
+	display: none;
+	margin-top: -0.7vh;
+}
+#inputPBox{
+	left: -3vh;
+    position: fixed;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+#searchIconBox{
+	display: inline-flex;
+	margin-top: 8px;
+}
+#main{
+	padding-top: 260px;
+}
+.resultnum{
+	font-size:2.1875em;
+	color: rgba(175,175,175,1);
+	display: none;
+}
+#resultSortPBox{
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+#resultSortBox1{display: inline-flex;}
+#resultSortBox2{display: inline-flex;}
