@@ -278,7 +278,9 @@ a:hover{
 	align-items: center;
 	z-index: 1;
 	cursor:pointer;
+
 }
+
 #CommentSet:hover{
 	border-radius:3px;
 	background-color: #EFC0C0;
@@ -368,11 +370,13 @@ a:hover{
 	flex-direction:column;
 }
 .Reply1{
+	margin:0;
 	display:flex;
 	height:50px;
 }
 .Reply1-1{
 	display:flex;
+	justify-content:flex-end;
 	width:50px;
 	height:50px;
 }
@@ -399,18 +403,19 @@ a:hover{
 }
 .ReplyIDX{
 	display:flex;
-	width:215px;
+	width:210px;
 	height:25px;
 	flex-direction:row;
 }
 .ReplyID{
 	display:flex;
-	width: 165px;
+	width: 160px;
 	height: 25px;
 	cursor: pointer;
 	align-items: center;
 	margin-left:10px;
 }
+
 #ReplyID{
 	font-size:1.15rem;
 	font-weight: bold;
@@ -428,11 +433,11 @@ a:hover{
 	z-index: 1;
 	cursor:pointer;
 }
+
 #ReplySet:hover{
 	border-radius:3px;
 	background-color: #EFC0C0;
 }
-
 
 .ReplyDate{
 	display:flex;

@@ -595,6 +595,7 @@ function FunctionEditComment(id, commentNum, cnt){ // 댓글 옆 ... 누르기
 	if(id!=myid){
 		alert("수정 및 삭제 권한이 없습니다.")
 	} else {
+		$(".commentEditModal").css("display", "flex");
 		$(".commentEditModal").fadeIn();
 		editmodalState=1;
 		cntCommentNum = commentNum;
@@ -611,14 +612,14 @@ function gotoUpdateComment(){ // 댓글 수정창 띄우기
 	if(confirm("댓글을 수정하시겠습니까?")){
 		$("#cdelete").fadeOut();
 		$("#updateMyComment").html(
-		"<input id='updatebox' type='text' value='"+$("#contents_"+cntNum+"").text()+"' onkeyup='updateEnterkey()'>"+
-		"<input id='commentBtn' type='button' value='작성' onclick='UpdateComment()'>")
+		"<input id='commentupdatebox' type='text' value='"+$("#contents_"+cntNum+"").text()+"' onkeyup='updateEnterkey()'>"+
+		"<input id='sendBtn' type='button' value='작성' onclick='UpdateComment()'>")
 		console.log(postNum)
 	}
 }
 
 function UpdateComment(){ //댓글 수정하기
-	var update = String($("#updatebox").val()) //댓글입력창의 값을 추출
+	var update = String($("#commentupdatebox").val()) //댓글입력창의 값을 추출
 	if(update == null || update.trim() == ""){ //댓글입력창에 값이 없을 경우
 		alert("내용을 입력해주세요!")
 	}
@@ -712,7 +713,7 @@ function FunctionGetReply(commentNum, cnt){
 				             	   "<p id=ReplyID onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
 				                "</div>"+
 				                "<div class=ReplySet onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
-				                	"<i class='fas fa-ellipsis-h'></i>"+
+				                	"<i class='fas fa-ellipsis-h' id=ReplySet></i>"+
 				                "</div>"+
 				            "</div>"+
 				            "<div class=ReplyDate>"+
@@ -765,6 +766,7 @@ function FunctionEditReply(id, replyNum, cnt, commentNum, i){ // 댓글 옆 ... 
 	if(id!=myid){
 		alert("수정 및 삭제 권한이 없습니다.")
 	} else {
+		$(".replyEditModal").css("display", "flex")
 		$(".replyEditModal").fadeIn();
 		editmodalState=1;
 		cntReplyNum = replyNum;
@@ -784,13 +786,13 @@ function gotoUpdateReply(){ // 답글 수정창 띄우기
 		//$("#redit").fadeOut();
 		$("#rdelete").fadeOut();
 		$("#updateMyReply").html(
-		"<input id='updatebox' type='text' value='"+$("#replycomments_"+cntRepList+"").text()+"' onkeyup='replyUpdateEnterkey()'>"+
-		"<input id='commentBtn' type='button' value='작성' onclick='UpdateReply()'>")
+		"<input id='replyupdatebox' type='text' value='"+$("#replycomments_"+cntRepList+"").text()+"' onkeyup='replyUpdateEnterkey()'>"+
+		"<input id='sendBtn' type='button' value='작성' onclick='UpdateReply()'>")
 	}
 }
 
 function UpdateReply(){ //답글 수정하기
-	var update = String($("#updatebox").val()) //답글입력창의 값을 추출
+	var update = String($("#replyupdatebox").val()) //답글입력창의 값을 추출
 	if(update == null || update.trim() == ""){ //답글입력창에 값이 없을 경우
 		alert("내용을 입력해주세요!")
 	}
@@ -1048,23 +1050,15 @@ function ClickReplyThumbsup(replyNum, i){
 	</div>
 </div>
 
-<div class="commentEditModal"
-  style='display:none; width:400px; height:200px;
-  background:rgba(244,238,238,1); border-radius:10px;
-  position:fixed; top:50%; left:50%;
-  margin-top:-100px; margin-left:-100px; z-index:9999; text-align:center'>
-  <div id="cedit" onclick='gotoUpdateComment()' style='width:400px; height:90px; border:3px solid black'><p>댓글 수정</p></div>
-  <div id="cdelete" onclick='DeleteComment()' style='width:400px; height:90px; border:3px solid black'><p>댓글 삭제</p></div>
+<div class="commentEditModal">
+  <div id="cedit" onclick='gotoUpdateComment()'><p class=cedit>댓글 수정</p></div>
+  <div id="cdelete" onclick='DeleteComment()'><p class=cedit>댓글 삭제</p></div>
   <div id='updateMyComment'></div> <!-- 0.5초 또는 1초 있다가 나오게 변경해야할듯 -->
 </div>
 	
-<div class="replyEditModal"
-  style='display:none; width:400px; height:200px;
-  background:rgba(244,238,238,1); border-radius:10px;
-  position:fixed; top:50%; left:50%;
-  margin-top:-100px; margin-left:-100px; z-index:9999; text-align:center'>
-  <div id="redit" onclick='gotoUpdateReply()' style='width:400px; height:90px; border:3px solid black'><p>답글 수정</p></div>
-  <div id="rdelete" onclick='DeleteReply()' style='width:400px; height:90px; border:3px solid black'><p>답글 삭제</p></div>
+<div class="replyEditModal">
+  <div id="redit" onclick='gotoUpdateReply()'><p class=redit>답글 수정</p></div>
+  <div id="rdelete" onclick='DeleteReply()'><p class=rdelete>답글 삭제</p></div>
   <div id='updateMyReply'></div> <!-- 0.5초 또는 1초 있다가 나오게 변경해야할듯 -->
 </div>
 
