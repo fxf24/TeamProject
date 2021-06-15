@@ -69,8 +69,8 @@ a:hover {
 /*°Ë»öÃ¢*/
 
 #searchbar {
-    width: 500px;
-    height: 65px;
+	width: 15em;
+    height: 2.5em;
     border: 3px soild;
     font-size: 20px;
     border-radius: 10px;
@@ -81,6 +81,7 @@ a:hover {
 #fa-search {
     display: block;
     margin-left: 1em;
+    font-size: 2.4em !important;
 }
 
 #fa-search:hover {
@@ -203,8 +204,8 @@ select {
 }
 select {
 	text-align-last: center;
-    height: 65px;
-    width: 150px;
+	height: 2.5em;
+    width: 6em;
     font-size: 20px;
     font-weight: bold;
     border-radius: 10px;
