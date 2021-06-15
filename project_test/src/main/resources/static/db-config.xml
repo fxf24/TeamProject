@@ -20,8 +20,8 @@
 	
 	<!--3. sql mapping 파일 설정-->
 	<mappers>
-<!-- 		<mapper resource = "mybatis/sql-mapping.xml"/> -->
-		<mapper resource = "mybatis/mysql-mapping.xml"/>
+		<mapper resource = "mybatis/sql-mapping.xml"/>
+<!-- 		<mapper resource = "mybatis/mysql-mapping.xml"/> -->
 	</mappers> 
 	 
 </configuration>
