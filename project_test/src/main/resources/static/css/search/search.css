@@ -215,17 +215,25 @@ select {
 #spanbefore{
 	font-size:2.8646em;
 	color: rgba(38,153,251,1);
-	display: none;
+	display: block; /* none ############################ */
 	margin-top: 0.3vh;
 } 
-#result{
+#idresult{
+	font-size:2.8646em;
+	color: rgba(38,153,251,1);
+}
+#nameresult{
+	font-size:2.8646em;
+	color: rgba(38,153,251,1);
+}
+#hashtagresult{
 	font-size:2.8646em;
 	color: rgba(38,153,251,1);
 }
 #spanafter{
 	font-size:3.125em;
 	color: rgba(0,0,0,1);
-	display: none;
+	display: block; /* none ############################ */
 	margin-top: -0.7vh;
 }
 #inputPBox{
@@ -241,12 +249,12 @@ select {
 	margin-top: 8px;
 }
 #main{
-	padding-top: 260px;
+	padding-top: 100px;
 }
 .resultnum{
 	font-size:2.1875em;
 	color: rgba(175,175,175,1);
-	display: none;
+	display: block;
 }
 #resultSortPBox{
 	display: flex;

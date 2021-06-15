@@ -24,7 +24,7 @@
 <script>
 $(document).ready(function(){
 	//id, name, hashtag 버튼 클릭시 각각의 화면 출력
-/* 	$("#idbutton").on('click', function(){
+ 	$("#idbutton").on('click', function(){
 		$('#idSearch').css("display", "block");
 		$('#nameSearch').css("display", "none");
 		$('#hashtagSearch').css("display", "none");
@@ -40,15 +40,22 @@ $(document).ready(function(){
 		$('#idSearch').css("display", "none");
 		$('#nameSearch').css("display", "none");
 		$('#hashtagSearch').css("display", "block");
-	}) */
-	  $('#searchbar').on("keyup",function(key){
-	        if(key.keyCode==13) {
-	    		$("#spanbefore").css("display", "block");
-	    		$("#spanafter").css("display", "block");
-	    		$(".resultnum").css("display", "block");
-	  }})//총 검색결과 갯수
+	})
+// 	  $('#searchbar').on("keyup",function(key){
+// 	        if(key.keyCode==13) {
+// 	    		$("#spanbefore").css("display", "block");
+// 	    		$("#spanafter").css("display", "block");
+// 	    		$(".resultnum").css("display", "block");
+// 	  }})//총 검색결과 갯수
 			
 	var searchMessage = $("#searchbar").val();
+	document.getElementById("idresult").innerHTML = searchMessage;
+	document.getElementById("nameresult").innerHTML = searchMessage;
+	document.getElementById("hashtagresult").innerHTML = searchMessage;
+	$(".idresultSortPBox").css("display", "none");
+	$(".nameresultSortPBox").css("display", "none");
+	$(".hashtagresultSortPBox").css("display", "none");
+	
 	//main에서 넘어오는 search값 전달, id 검색	
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
 		$(".idSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
@@ -64,6 +71,8 @@ $(document).ready(function(){
 				if(list.length==0){ //검색 결과가 없을 때
 					$(".idSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
+					$(".idresultSortPBox").css("display", "flex");
+					document.getElementById("idresultNum").innerHTML = list.length;
 					for(var i in list){ //결과 반환
 						var userImage = list[i].profileImage
 						var userID = list[i].id
@@ -106,6 +115,8 @@ $(document).ready(function(){
 				if(list.length==0){ // 검색결과가 없을때
 					$(".nameSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
+					$(".nameresultSortPBox").css("display", "flex");
+					document.getElementById("nameresultNum").innerHTML = list.length;
 					for(var i in list){ //결과 반환
 						var userImage = list[i].profileImage
 						var userName = list[i].name
@@ -147,7 +158,6 @@ $(document).ready(function(){
 			success : function(response){
 				//console.log(response)
 				var list = response;
-				var totalHashtag = list.length;
 				if(list.length==0){ //검색 결과가 없을 때
 					$(".hashtagSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
 				} else {
@@ -155,16 +165,18 @@ $(document).ready(function(){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
 						console.log(response)
 						for(var tag in hashtag){
-							if(!hashtagArr.includes(hashtag[tag]) && //중복된 태그 검사 && 검색어와 태그 일치 여부 검사
-								searchMessage == hashtag[tag].substring(0, length)){
-									hashtagArr.push(hashtag[tag]);
-									hashtagArr.sort();																	
+							if(searchMessage == hashtag[tag].substring(0, length)){
+								hashtagArr.push(hashtag[tag].trim());
+								hashtagArr.sort();												
 							} // if end								
 						}// for tag end
 					} // for i end
 					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
 						$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 					} else {
+						var hashSet = new Set(hashtagArr)
+						$(".hashtagresultSortPBox").css("display", "flex");
+						document.getElementById("hashtagresultNum").innerHTML = hashtagSet.size;
 						for(var i in hashtagArr){ //결과 반환
 							$(".hashtagSearchList").append
 							("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a></p>");		
@@ -178,7 +190,6 @@ $(document).ready(function(){
 			}) // ajax end
 		} //else end
 }); //ready end
-
 //search버튼 클릭 시 검색결과 반환 함수
 function search(){ 
 	var searchMessage = $("#searchbar").val(); // 검색어 입력
@@ -187,9 +198,18 @@ function search(){
 	$(".nameSearchList").text("");
 	$(".hashtagSearchList").text(""); 
 	
+	document.getElementById("idresult").innerHTML = searchMessage;
+	document.getElementById("nameresult").innerHTML = searchMessage;
+	document.getElementById("hashtagresult").innerHTML = searchMessage;
+	$(".idresultSortPBox").css("display", "none");
+	$(".nameresultSortPBox").css("display", "none");
+	$(".hashtagresultSortPBox").css("display", "none");
+	
+	
 	// id 검색결과
 	if(searchMessage==null || searchMessage==""){ //검색어가 없을 때
 		$(".idSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
+		$(".idresultSortPBox").css("display", "none");
 	} else {
 		$.ajax({
 			url :"/idsearch",
@@ -202,6 +222,8 @@ function search(){
 				if(list.length==0){ //검색 결과가 없을 때
 					$(".idSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
+					$(".idresultSortPBox").css("display", "flex");
+					document.getElementById("idresultNum").innerHTML = list.length;
 					for(var i in list){ //결과 반환
 						var userImage = list[i].profileImage
 						var userID = list[i].id
@@ -232,6 +254,7 @@ function search(){
 	// name 검색 결과
 	if(searchMessage==null || searchMessage==""){ //검색어가 없을 때
 		$(".nameSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
+		$(".nameresultSortPBox").css("display", "none");
 	} else {
 		$.ajax({
 			url :"/namesearch",
@@ -244,6 +267,8 @@ function search(){
 				if(list.length==0){ //검색 결과가 없을 때
 					$(".nameSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
+					$(".nameresultSortPBox").css("display", "flex");
+					document.getElementById("nameresultNum").innerHTML = list.length;
 					for(var i in list){ //결과 반환
 						$(".nameSearchList").append
 						var userImage = list[i].profileImage
@@ -276,6 +301,7 @@ function search(){
 	var hashtagArr = []; //검색어의 중복을 방지하기 위한 array
 	if(searchMessage==null||searchMessage==""){ //검색어가 없을 때
 		$(".hashtagSearchList").html("<div class=resultNone>검색어를 입력하세요.</div>");
+		$(".hashtagresultSortPBox").css("display", "none");
 	} else {
 		$.ajax({
 			url :"/hashtagsearch",
@@ -283,14 +309,14 @@ function search(){
 			data : {"hashtag" : searchMessage},
 			dataType : "json",
 			success : function(response){
-				//console.log("hashtag result = "+response)
+				console.log(response)
 				var list = response;
 				if(list.length==0){ //검색 결과가 없을 때
 					$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 				} else {
 					for(var i in list){
 						var hashtag = list[i].hashtag.substr(1,).split("#"); //hashtag 검색 결과를 #를 기준으로 나눔
-						console.log("HASHTAG = "+hashtag)
+// 						console.log("HASHTAG = "+hashtag)
 						for(var tag in hashtag){
 							if(searchMessage == hashtag[tag].substring(0, length)){
 								hashtagArr.push(hashtag[tag].trim());
@@ -298,17 +324,19 @@ function search(){
 							} // for end							
 						}// for tag end
 					} // for i end
+					console.log("console.log(hashtagArr)")
+					console.log(hashtagArr)
 					if(hashtagArr.length==0){ //위 조건과 맞는 결과가 없을 때
 						$(".hashtagSearchList").html("<div class=resultNone>검색 결과가 없습니다.</div>");
 					} else {
 						var hashtagSet = new Set(hashtagArr)
-						console.log(hashtagSet)
+						$(".hashtagresultSortPBox").css("display", "flex");
+						document.getElementById("hashtagresultNum").innerHTML = hashtagSet.size;
 						for(let i of hashtagSet){ //결과 반환
 							$(".hashtagSearchList").append
 							("<p><a class=hashtagList href='hashtagresult?hashtag="+i+"'>"+"#"+i+"</a></p>");
 							//("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArrtest[i]+"'>"+"#"+hashtagArrtest[i]+"</a></p>");
-						}// for end
-						$("#resultNum").text(hashtagSet.size)
+						}// for end				
 					}// else end
 				}// else
 			}, // success end
@@ -335,19 +363,7 @@ function search(){
 		    $('#hashtagSearch').css("display", "block");
 		    }
 	     }//병전님이 만든 맨 위 내용 셀렉트박스용으로 수정
-function result() {
-		//# ~~~ 검색결과
-	if (window.event.keyCode == 13) {
-		const resultvalue = document.getElementById('searchbar').value;
-		document.getElementById("result").innerText = resultvalue;
-	} 
-}
-	function resultnum() {
-		//검색결과 갯수
-		if (window.event.keyCode == 13) {
-			document.getElementById("resultnum").innerText = totalHashtag;
-		} 
-	}
+
 function enterkey(){
 	//  엔터키 입력(a - 97  0 - 48 엔터키 - 13)하면 send  함수 동일 효과
 	if(window.event.keyCode == 13){
@@ -360,25 +376,23 @@ function moveToID(value){
 	var url = "/profile?id="+value;
 	location.href = url;
 }
-
 function moveToName(value){
 	console.log(value)
 	var url = "/profile?name="+value;
 	location.href = url;
 }
-
 </script>
 </head>
 <body>
 <div id=inputPBox>
-<select class="seachSelect" name="seachSelect" onchange="searchSelect($(this).val());">>
+<select class="searchSelect" name="searchSelect" onchange="searchSelect($(this).val());">>
 <!--     <option hidden'"disabled="disabled" selected="selected" value=""> search  
                    </option>-->
                    <option id="idbutton" value="1">아이디</option>
                    <option id="namebutton" value="2">이름</option>
                    <option id="hashtagbutton" value="3">해시태그</option>
                   </select>
-<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey(); result();resultnum();" placeholder="검색어를 입력하세요">
+<input type="text" id="searchbar" value="<%=searchword%>" onkeyup="enterkey();" placeholder="검색어를 입력하세요">
 <div id=searchIconBox>
 <i class="fas fa-search fa-3x" id=fa-search type="submit" id="searchbutton" onclick="search()"></i>
 <!-- </div>
@@ -389,14 +403,49 @@ function moveToName(value){
 </div></div>
 <div id=main>
 <div id="messageWindow">
-	<div id=resultSortPBox><div id=resultSortBox1><div id="spanbefore">#</div><span id="result"></span><div id="spanafter">&nbsp검색결과</div></div><div id=resultSortBox2><div class="resultnum">총&nbsp</div><span id="resultNum" class="resultnum"></span><div class="resultnum">개 결과가 나왔습니다.</div></div></div>
 	<div id="idSearch"> <!-- default view -->
+		<div id=resultSortPBox class=idresultSortPBox>
+			<div id=resultSortBox1>
+				<div id="spanbefore">#</div>
+					<span id="idresult"></span>
+					<div id="spanafter">&nbsp검색결과</div>
+				</div>
+			<div id=resultSortBox2>
+				<div class="resultnum">총&nbsp</div>
+				<span id="idresultNum" class="resultnum"></span>
+				<div class="resultnum">개 결과가 있습니다.</div>
+			</div>
+		</div>
 		<div class=idSearchList id=idSearchList></div>
 	</div>
 	<div id="nameSearch">
+		<div id=resultSortPBox class=nameresultSortPBox>
+			<div id=resultSortBox1>
+				<div id="spanbefore">#</div>
+					<span id="nameresult"></span>
+					<div id="spanafter">&nbsp검색결과</div>
+				</div>
+			<div id=resultSortBox2>
+				<div class="resultnum">총&nbsp</div>
+				<span id="nameresultNum" class="resultnum"></span>
+				<div class="resultnum">개 결과가 있습니다.</div>
+			</div>
+		</div>
 		<div class=nameSearchList></div>
 	</div>
 	<div id="hashtagSearch">
+		<div id=resultSortPBox class=hashtagresultSortPBox>
+			<div id=resultSortBox1>
+				<div id="spanbefore">#</div>
+					<span id="hashtagresult"></span>
+					<div id="spanafter">&nbsp검색결과</div>
+				</div>
+			<div id=resultSortBox2>
+				<div class="resultnum">총&nbsp</div>
+				<span id="hashtagresultNum" class="resultnum"></span>
+				<div class="resultnum">개 결과가 있습니다.</div>
+			</div>
+		</div>
 		<div class=hashtagSearchList></div>
 	</div>
 </div>
