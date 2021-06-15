@@ -176,7 +176,7 @@ $(document).ready(function(){
 					} else {
 						var hashSet = new Set(hashtagArr)
 						$(".hashtagresultSortPBox").css("display", "flex");
-						document.getElementById("hashtagresultNum").innerHTML = hashtagSet.size;
+						document.getElementById("hashtagresultNum").innerHTML = hashSet.size;
 						for(var i in hashtagArr){ //결과 반환
 							$(".hashtagSearchList").append
 							("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a></p>");		
