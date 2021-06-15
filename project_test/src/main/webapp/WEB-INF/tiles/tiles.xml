@@ -9,7 +9,7 @@
         <definition name="base" template="/WEB-INF/views/layout/base.jsp">
             <put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
             <!-- <put-attribute name="body" value="/views/jsp/layout/base.jsp" />  -->
-            <put-attribute name="right" value="/WEB-INF/views/layout/footer.jsp" />
+            <!-- <put-attribute name="right" value="/WEB-INF/views/layout/footer.jsp" /> -->
         </definition>
        
         <definition name="main/*/*" extends="base">
