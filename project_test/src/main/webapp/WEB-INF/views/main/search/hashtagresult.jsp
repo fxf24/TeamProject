@@ -1016,6 +1016,7 @@ function ClickReplyThumbsup(replyNum, i){
 </script>
 </head>
 <body>
+<div id="main"style="position: relative;padding-bottom:100vh";>
 <h1>해시태그 검색 리스트</h1>
 <form action="/search" method="post" name="searchForm" accept-charset="utf-8">
 <div class="bar">
@@ -1063,5 +1064,6 @@ function ClickReplyThumbsup(replyNum, i){
 </div>
 
 <i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
+</div>
 </body>
 </html>
