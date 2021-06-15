@@ -45,10 +45,10 @@
 	.line {
 		position: absolute;
 		width: 100vw;
-		top:46.458vw;
+		top:40.458vw;
 		order: 2;
 		background: pink;
-		height: 3px;
+		height: 7.979vw;
 	}
 	
 	/* 3 - 게시물 정렬 아이콘, 검색 아이콘 */
@@ -57,7 +57,7 @@
 		width: 73.3333vw;
 		height: 10.593vw;
 		left: 13.3333vw;
-		top: 15.74vw;
+		top: 9.64vw;
 		order: 3;
 /* 		background: maroon; */
 	}
@@ -509,9 +509,9 @@
 		stroke-miterlimit: 4;
 		shape-rendering: auto; */
 		width: 75.729vw;
-		height: 14.51vw;
+		height: 5.51vw;
 		left: 0vw;
-		top: 5.5vw;
+		top: 5.524vw;
 		order: 5;
 		z-index: 10;
 /* 		background: navy; */
@@ -648,16 +648,16 @@
     .space1{
     position:inherit;
     width:75.729vw;
-    height:18.552vw;
+    height:2.552vw;
     order: 4;
 /*     background: aqua; */
-    top: 17.0417vw;
+    top: 15.0417vw;
      }    
      
      /* 6 - 스토리하이라이트 이름만 */
     .space2{
     width:75.729vw;
-    height:15.729vw;
+    height:7.729vw;
 	align-content:flex-end;
 	order: 6;
 /* 	background: yellow; */
@@ -675,9 +675,10 @@
 /*    	background: black; */
 	position: inherit;
 	height: 2903.593vw;
-	top: 17.458vw;
+	top: 9.558vw;
 	width: 75.729vw;
 	left: 12.135vw;
+	overflow: hidden;
     }
     
     .flex-container {
@@ -739,7 +740,7 @@
 	width: 45.729vw;
 	height: 35.729vw;
 	  background: rgba(244,238,238,1); 
-	  border-radius: 3vw;
+	  border-radius: 1.324vw;
 	  order: 8;
 	  top: 6vw; 
 	  left: 25vw;
@@ -766,7 +767,7 @@
 	
 	.postID {
 	position: absolute;
-	background: yellow;
+/* 	background: yellow; */
 	display: flex;
 	width: 10.729vw;
 	height: 2.529vw;	
@@ -808,7 +809,7 @@
 	
 	.hashTag {
 	position: absolute;
-	background: yellow;
+/* 	background: yellow; */
 	display: flex;
 	width: 15.729vw;
 	height: 6.429vw;	

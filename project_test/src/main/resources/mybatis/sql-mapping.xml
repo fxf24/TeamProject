@@ -69,6 +69,11 @@ select profileImage from users where id=#{id}
 select * from users 
 </select>
 
+<select id="getOthersProfileUser" resultType="userVO">
+select * from users 
+</select>
+
+
 <select id="getProfileUser" parameterType="String" resultType="userVO">
 select * from users where profileImage=#{profileImage}
 </select>
@@ -80,6 +85,7 @@ update users set profileImage=#{profileImage} where id=#{id}
 <select id="getOneProfileImage" parameterType="String" resultType="userVO">
 select id, profileImage from users where id=#{id} 
 </select>
+
 
 <select id="getPostsCount" parameterType="String" resultType="postVO">
 select id, postDate from posts where id=#{id} order by postDate DESC

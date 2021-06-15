@@ -172,11 +172,11 @@ public class MainController {
 		return oneProfileUser;
 	}
 	
-	@RequestMapping(value = "/oneProfileUser", method=RequestMethod.POST)
+	@RequestMapping(value = "/othersProfileUser", method=RequestMethod.GET)
 	@ResponseBody
-	public List<UserVO> getOneProfileUserService() {
-		List<UserVO> oneProfileUser = hhService.getOneProfileUser();
-		return oneProfileUser;
+	public List<UserVO> getOthersProfileUser() {
+		List<UserVO> othersProfileUser = hhService.getOthersProfileUser();
+		return othersProfileUser;
 	}
 	
 	//프로필 유저 정보 가져오기 - 정상작동

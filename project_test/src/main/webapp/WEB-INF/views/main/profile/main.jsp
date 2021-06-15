@@ -174,11 +174,11 @@
 		var user = sessionStorage.getItem("user")
 		var profileUser = sessionStorage.getItem("profileUser")	
 		//var profileimgSrc = document.getElementById('img').src
-		// 		var getLink = location.search
-		// 		var getPostId = getLink.split("=")
-		// 		var getOnlyId = getPostId[1]
-		// 		console.log(getOnlyId)			
-		// 		alert(getOnlyId) //undefined or id 
+// 				var getLink = location.search
+// 				var getPostId = getLink.split("=")
+// 				var getOnlyId = getPostId[1]
+// 				console.log(getOnlyId)	//undefined		
+// 				alert(getOnlyId) //undefined or id 
 		
 
 //function getProfileImage(profileImage) {
@@ -187,27 +187,31 @@
 			url: '/oneProfileUser',
 			dataType: 'json',
 			success: function(response){
-				console.log(response)
-
+				console.log(response) //array
+				var user0 = response[3].id
+				console.log(user0) //eunsu
 			// 0: {id: "admin", password: "admin", email: "admin@naver.com", name: "administrator", telephone: "010-1234-5678", …}
 			// 1: {id: "admin2", password: "admin2", email: "admin2@naver.com", name: "administrator2", telephone: "010-2345-7890", …}
 			// 2: {id: "elin", password: "12345678", email: "elincreator2126@gmail.com", name: "하은", telephone: "010-8888-9999", …}
 			// 3: {id: "eunsu", password: "eunsu", email: "eunsu@gmail.com", name: "은수", telephone: "010-0000-7890", …}
 			// length: 4							
-// 				var userno = response[0].userno
-// 				console.log(userno)
-// 				var userNumber = response[i].userno
-// 				console.log(userNumber)
+ 				var userno = response[0].userno
+ 				console.log(userno) //1
+//  				var userNumber = response[i].userno
+//  				console.log(userNumber) 
 					for (var i=0; i < response.length; i++){
-						var userId = response[i].id.split("/")
-						console.log(userId)
+						var userId = response[i].id
+						console.log(userId) //[" "]
 						
 						if (userId == user) { //자신의 프로필 접속 가능 
+							alert("자신의 프로필 접속을 유지합니다!")
 							meProfile(userId)
-							break; 
+							//location.href = "/profile"
+							 
 						} else  { //타인 프로필 접속 가능 
-							location.href = "/profile/account?id=" + userId
-							otherProfile(userId)		
+							//alert("타인의 프로필로 접속합니다!")
+							//location.href = "/profile/account?id=" + userId
+							//otherProfile(userId)		
 								
 						} //else end 
 						
@@ -223,19 +227,19 @@
 		
 
 	if (user == null) {
-		
 			if (confirm("로그인해주세요!")) {
 				location.href = "/login"
-			}else { //자신 프로필 접속, 타인 프로필 접속 구분
-				meProfile(userId)
-					function otherProfile(userId) {
-						sessionStorage.getItem("user")	
-								if (userId != user) {
-									alert("타인 프로필로 접속 성공")
-									location.href = "/profile/account?id=" + userId
-									}//if end 
+					}
+	}else { //자신 프로필 접속, 타인 프로필 접속 구분
+			//meProfile(userId)
+// 					function otherProfile(userId) {
+// 						sessionStorage.getItem("user")	
+// 								if (userId != user) {
+// 									//alert("타인 프로필로 접속 성공")
+// 									//location.href = "/profile/account?id=" + userId
+// 									}//if end 
 						 			
-							} //function end
+// 							} //function end
 							
 var user = sessionStorage.getItem("user")
 					
@@ -283,7 +287,7 @@ function meProfile(userId) {
 				updateProfileImage(fileName)
 				
 			} //saveProfileImage() function end		
-			
+
 			
 		/*  프로필 사진 저장 - user DB에 프로필 이미지 추가 업데이트 */
 		function updateProfileImage(fileName) {
@@ -291,7 +295,7 @@ function meProfile(userId) {
 				type: 'post',
 				url: '/updateUserProfileData',
 				data: {
-					"id": user,
+					"id": userId,
 					"profileImage" : fileName 
 					},
 				success: function (response) {
@@ -342,21 +346,22 @@ function meProfile(userId) {
 			$.ajax({ 
 			url: '/postsCount',
 			type: 'post',
-			data: {"id": user},
+			data: {"id": userId},
 			dataType: "json",
 			success: function(response){
-				console.log(response) // Array(response.length) 
+				//console.log(response) // Array(response.length) 
 				//console.log(response.length)
-				var postscount = response.length //게시물 개수
-				//var postId = response[0].id.split("|") //타인 프로필 넘겨줄 데이터 
-				console.log(postId)
-				var postsword = $('#profileposts').text(); 
-				$('#profileposts').text(postsword + "\n" + "\n" + postscount + "\n"); //게시물 + 갯수
-				$('#accountId').text("\n" + user + "\n"); //회원아이디
+				var postsCount = response.length //게시물 개수
+				var postId = response[0].id
+				//console.log(postId)
+				var postsWord = $('#profileposts').text(); 
+				$('#profileposts').text(postsWord + "\n" + "\n" + postsCount + "\n"); //게시물 + 갯수
+				$('#accountId').text("\n" + userId + "\n"); //회원아이디
 				
 			}, //success end 
 			error:function(request,status,error){
-			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
+				alert("회원 아이디와 게시물 수를 불러오기에 실패했습니다.")
+			    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
 			    
 			}//error end
 			});//ajax end  
@@ -366,7 +371,7 @@ function meProfile(userId) {
 			$.ajax({ //로그인한 상태로 들어오면 자동 출력
 				url:'/postsImage',
 				type:'post',
-				data: {"id": user},
+				data: {"id": userId},
 				dataType: "json",
 				success: function(response){
 					console.log(response) //array(접속 회원 아이디의 포스트 개수)
@@ -374,8 +379,10 @@ function meProfile(userId) {
 							//console.log(response[i]); //최상단의 하나의 포스트 {, , , ... , }
 							var onePost = response[i];
 							//console.log(onePost.imagepath.split("/")) //["iu.png"]
-							var imageName = onePost.imagepath.split("/"); 
-							var postDate = onePost.postDate.split("/"); 
+							var imageName = onePost.imagepath
+							//console.log(imageName)
+							var postDate = onePost.postDate 
+							//console.log(postDate)
 							var postNumber = onePost.postNum;
 							//console.log(postNumber)
 	
@@ -438,7 +445,7 @@ function clickImage(postNumber){
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 				url: '/posts',
 				type: 'get',
-				data: {"id": user},
+				data: {"id": userId},
 				dataType: "json",
 				success: function(response){
 					//console.log(response) //arraylist 
@@ -495,12 +502,11 @@ function postModalClick(){
 	$(".postModal").fadeOut();	
 }//postModalClick() end
 
-		
-				} //meProfile(userId) end 	
-		
-			} // else end 
+} //meProfile(userId) end 					
+
 			
-	} //최종 if end 
+		} // else end 	
+			
 		
 		var contents = ""; //팔로워 저장하는 리스트
 
