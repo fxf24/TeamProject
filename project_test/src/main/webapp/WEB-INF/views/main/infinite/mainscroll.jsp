@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Infinite Scroll</title>
 	<link href='styles/messages.css' rel='stylesheet' type='text/css'>
+	<link href='styles/messages980.css' media="screen and (max-width: 980px)" rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<!-- 여기가 infinite-scroll을 생성 -->
@@ -154,19 +155,18 @@
 			message: list[id].contents,
 			hashtag: list[id].hashtag
 			}
-			if(item.image == '') {
-			resolve(item);
-			item.image = random1
+			if(item.image === '') {
+				resolve(item);
 			}
 			var image = new Image();
 			image.src = '/upload/'  + item.image;
 			image.addEventListener('load', function() {
-			item.image = image;
-			resolve(item);
+				item.image = image;
+				resolve(item);
 			});
 			image.addEventListener('error', function() {
-			item.image = '';
-			resolve(item);
+				item.image = '';
+				resolve(item);
 			});
 		});
 
@@ -182,14 +182,13 @@
 
 	ContentSource.prototype = {
 		fetch: function(count) {
-			// Fetch at least 30 or count more objects for display.
-			count = Math.max(30, count);
 			return new Promise(function(resolve, reject) {
 			// Assume 50 ms per item.
 			setTimeout(function() {
+				console.log('fetch')
 				var items = [];
 				for (var i = 0; i < list.length; i++) {
-				items[i] = getItem(i);
+					items[i] = getItem(i);
 				}
 				resolve(Promise.all(items));
 			}.bind(this), 1000 /* Simulated 1 second round trip time */ );
@@ -202,6 +201,8 @@
 
 		render: function(item, div) {
 			// TODO: Different style?
+// 			console.log('render')
+// 			console.log(div|| this.messageTemplate_.cloneNode(true))
 			div = div || this.messageTemplate_.cloneNode(true);
 			div.querySelector('.hashId').textContent = item.id;
 			div.querySelector('.card__content').textContent = item.message;
@@ -253,5 +254,46 @@
 			);
 
 	});
-	</script>
+// $(document).ready(function(){
+// 	var count = 0;
+// 	//스크롤 바닥 감지
+// 	window.onscroll = function(e) {
+// 	    //추가되는 임시 콘텐츠
+// 	    //window height + window scrollY 값이 document height보다 클 경우,
+// 	if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+// 	   //실행할 로직 (콘텐츠 추가)
+// 	   count++;
+// 	   var div = document.querySelector(".chat-item:not(.tombstone)")
+// 	   div.querySelector('.hashId').textContent = list[count].id;
+// 		div.querySelector('.card__content').textContent = list[count].message;
+// 		div.querySelector('.posted-date').textContent = list[count].time;
+// 		var hashtags = div.querySelector('.hashtag');
+// 		var hashtagSplit = list[count].hashtag.split("#");
+// 		for(var i = 1; i < hashtagSplit.length; i++){
+// 			hashtags.innerHTML += "<a href='https://search.shopping.naver.com/search/all?query="
+// 				+hashtagSplit[i]+"&cat_id=&frm=NVSHATC'>#"+hashtagSplit[i]+" </a>";
+// 		}
+		
+// 		//image 설정
+// 		var img = div.querySelector('.card__img');
+// 		if(item.image !== '') {
+// 		img.classList.remove('invisible');
+// 		img.src = item.image.src;
+// 		img.style.width = '60%';
+// 		// img.style.maxWidth = '';
+// 		img.style.height = 'auto';
+// 		// img.width = item.image.width;
+// 		// img.height = item.image.height;
+// 		} else {
+// 		img.src = '';
+// 		img.classList.add('invisible');
+// 		}
+	   
+// 	   //article에 추가되는 콘텐츠를 append
+// 	   $('#chat-timeline').append(div);
+// 	}
+// };
+// })
+	
+</script>
 </html>

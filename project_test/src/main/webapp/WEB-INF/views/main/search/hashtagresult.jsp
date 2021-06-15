@@ -130,12 +130,12 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 					"<div class=Header1>"+
 						"<div class=Header1-1>"+
 							"<div class='postProfileImage'>"+
-								"<img class=postImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+contents.id+"'>"+
+								"<img class=postImage src='"+profileImagePath+"' onclick=location.href='/profile/account?id="+contents.id+"'>"+
 							"</div>"+ 						
 						"</div>"+ //header1-1
 						"<div class=Header1-2>"+
 							"<div class=postIDX>"+
-								"<div class='postID'><a id=postID href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>"+
+								"<div class='postID'><a id=postID href='/profile/account?id="+contents.id+"'>"+contents.id+"</a></div>"+
 								"<div class='windowClose'><i class='far fa-window-close fa-2x' onclick='modalClick()'></i></div>"+
 							"</div>"+ //postIDx
 							"<div class='postDate'>"+
@@ -386,7 +386,7 @@ function FunctionGetProfileImage(commentList, i){
 			else {
 				var imagePath = response.split("/")
 				var imageName = imagePath[imagePath.length-1]
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			}//else end
 			
@@ -412,13 +412,13 @@ function FunctionGetProfileImage(commentList, i){
 				        "<div class=Comment1>"+
 				        	"<div class=Comment1-1>"+
 				            	"<div class=oneCommentProfileImage>"+
-				            		"<image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'>"+
+				            		"<image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile/account?id="+commentList.id+"'>"+
 				           		"</div>"+
 				           	"</div>"+ //Comment1-1
 				           	"<div class=Comment1-2>"+
 					            "<div class=CommentIDX>"+
 					                "<div class=CommentID>"+
-					                	"<a id=CommentID onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</a>"+
+					                	"<a id=CommentID onclick=location.href='/profile/account?id="+commentList.id+"'> "+commentList.id+"</a>"+
 					                "</div>"+
 					                "<div class=CommentSet onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
 					                	"<i class='fas fa-ellipsis-h' id=CommentSet></i>"+
@@ -538,7 +538,7 @@ function FunctionGetContentProfileImage(postID){
 				//console.log("경로 : "+ imagePath)
 				var imageName = imagePath[imagePath.length-1]
 				//console.log("이미지이름 : "+ imageName)
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			} // else end
 		},
@@ -704,13 +704,13 @@ function FunctionGetReply(commentNum, cnt){
 					"<div class=Reply1>"+
 						"<div class=Reply1-1>"+
 				            "<div class=oneReplyProfileImage>"+
-				            	"<img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
+				            	"<img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile/account?id="+list[i].id+"'>"+
 				            "</div>"+
 			            "</div>"+ // Reply1-1
 			            "<div class=Reply1-2>"+
 				            "<div class=ReplyIDX>"+
 				                "<div class=ReplyID>"+
-				             	   "<p id=ReplyID onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
+				             	   "<p id=ReplyID onclick=location.href='/profile/account?id="+list[i].id+"'>"+list[i].id+"</p>"+
 				                "</div>"+
 				                "<div class=ReplySet onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
 				                	"<i class='fas fa-ellipsis-h' id=ReplySet></i>"+
@@ -1016,7 +1016,11 @@ function ClickReplyThumbsup(replyNum, i){
 </script>
 </head>
 <body>
+<<<<<<< HEAD
+=======
+<div id="main"style="position: relative;padding-bottom:100vh";>
 <h1>해시태그 검색 리스트</h1>
+>>>>>>> f879570bb23615437406f1ddeaf4dbd3f73954c2
 <form action="/search" method="post" name="searchForm" accept-charset="utf-8">
 <div class="bar">
 	<input type="text" id=searchbar name="searchWord" value='#<%=hashtag %>'>
@@ -1063,5 +1067,6 @@ function ClickReplyThumbsup(replyNum, i){
 </div>
 
 <i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
+</div>
 </body>
 </html>

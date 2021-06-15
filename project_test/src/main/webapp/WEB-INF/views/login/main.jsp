@@ -56,14 +56,15 @@ function login(){
   		
   		success: function(response){
   			console.log(response.data)
-  			alert(response.data) //로그인 성공!
-  			sessionStorage.setItem("user", response.user)
-  			if(response.user != null){
-  				location.href = "/mainscroll" //login - mainscroll 연결 위해 (하은) 
-  				sessionStorage.getItem("user") //login - mainscroll - profile 까지 session 등록 (하은)
-//  				location.href = "/"
-
-  			}		
+  			if(response.data == "로그인 성공!"){
+  				alert(response.data) //로그인 성공!
+  				sessionStorage.setItem("user", response.user)
+  				location.href = "/"
+  			}
+  			else{
+  				alert(response.data) //로그인 실패
+  				location.href = "/login"
+  			}	
   		},
   			
   		error:function(request,status,error){

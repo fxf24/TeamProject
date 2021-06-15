@@ -538,8 +538,7 @@ function postModalClick(){
 
 									<div id="uploadSettingBox">
 										<canvas id="imagecanvas" width=250 height=250></canvas>
-<!-- 									<img id="unnamed_2" src="unnamed_2.png" srcset="unnamed_2.png 1x, unnamed_2@2x.png 2x"> -->
-										<img id="img" src=" " >									
+<!-- 									<img id="unnamed_2" src="unnamed_2.png" srcset="unnamed_2.png 1x, unnamed_2@2x.png 2x"> -->								
 										<span><img id="upload" src="/profileImage/uploadicon.png" ></span>
 										<span><button id="settingprofile" onclick="saveProfileImage()"><img id="save" src="/profileImage/saveicon.png" ></button></span>
 									

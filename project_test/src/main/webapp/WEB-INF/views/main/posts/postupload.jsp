@@ -14,7 +14,9 @@
 		<!-- Bootstrap -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
 			integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="/jquery-3.2.1.min.js"></script>
@@ -22,15 +24,13 @@
 			$(document).ready(function () {
 				var user = sessionStorage.getItem("user")
 				
-				/////////////////////////
-				var input = document.querySelector('input');
-				input.style.opacity = 0;
-				// 이미지 분석
-				var button = document.querySelector('button');
-				// button.style.opacity = 0;
 				$("#fileUpload").on('click', function(event) {
 					event.preventDefault()
-
+					var input = document.querySelector('input');
+					input.style.opacity = 0;
+					// 이미지 분석
+					var button = document.querySelector('button');
+					// button.style.opacity = 0;
 					var form = $("#fileForm")[0]
 					var formData = new FormData(form)
 					formData.append("file", $("#selectedFile")[0].files[0])
@@ -45,66 +45,50 @@
 							var filename = responseSplit[0]
 							var odjson = JSON.parse(responseSplit[1])
 							var cfrjson = JSON.parse(responseSplit[2])
-
 							//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
 							var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-							var context = imagecanvas.getContext("2d")
-							context.fillStyle = "red"
-							context.font = '15px batang'
-							context.strokeStyle = 'green'
-							context.lineWidth = 3
 
 							//이미지 로드
 							var image = new Image()
 							image.src = "/upload/" + filename
+							
 							image.onload = function() { //(하은)
-								var maxWidth = 400; 
-								var maxHeight = 400;
 								var width = image.width;
 								var height = image.height;
 								
-								if(width > maxWidth){
-									height = height/(width / maxWidth) ;
-									width = maxWidth;
-									
-								}
-								else{
-									if(height > maxHeight){
-										width = width/(height/ maxHeight);
-										height = maxHeight;
-									}//중첩 if ends
-								}//if end 
+								imagecanvas.width = image.width
+								imagecanvas.height = image.height 
+								
+								var context = imagecanvas.getContext("2d")
+								context.fillStyle = "red"
+								context.font = '15px batang'
+								context.strokeStyle = 'green'
+								context.lineWidth = 3
+								
 								context.drawImage(image, 0, 0, width, height)
-
 								//od json
 								var names = odjson.predictions[0].detection_names
 								var confidence = odjson.predictions[0].detection_scores
 								var boxes = odjson.predictions[0].detection_boxes
-
 								//cfr json 
 								var faces = cfrjson.faces
-
 								for (var i = 0; i < names.length; i++) {
 									var y1 = boxes[i][0] * height
 									var x1 = boxes[i][1] * width
 									var y2 = boxes[i][2] * height
 									var x2 = boxes[i][3] * width
-
 									if (!(names[i] == "person")) {
 										//이름 : 00% 출력
 										context.fillText(names[i] + " : " + parseInt(confidence[i] * 100) + "%", x1 , y1 )
-
 										//사각형 그려서 출력
 										context.strokeRect(x1 , y1 , x2 - x1, y2 - y1)
 										$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query=" + names[i] + "&cat_id=&frm=NVSHATC'>#" + names[i] + " </a>")
 									}//if end
 								}//for end
-
 								//cfr데이터를 해쉬태그로 추가해주기
 								for (var i = 0; i < faces.length; i++) {
 									var celebrity = faces[i].celebrity.value
 									var confidence = faces[i].celebrity.confidence
-
 									if (confidence > 0.5) {
 										$("#hashtags").append("<a href='https://search.shopping.naver.com/search/all?query=" + celebrity + "&cat_id=&frm=NVSHATC'>#" + celebrity + " </a>")
 									} //if end
@@ -118,7 +102,6 @@
 					})//ajax end
 				}) //fileUpload onclick end
 			}) //document ready end
-
 						
 			function saveImage() {
 				var user = sessionStorage.getItem("user")
@@ -130,7 +113,6 @@
 				} else {
 					var $canvas = document.getElementById('imagecanvas');
 					var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
-
 					var blobBin = atob(imgDataUrl.split(',')[1]); // base64 데이터 디코딩
 					var array = [];
 					for (var i = 0; i < blobBin.length; i++) {
@@ -144,7 +126,6 @@
                     var fileValue = $("#selectedFile").val().split("\\");
 					var fileName = fileValue[fileValue.length - 1];
 					formdata.append("file", file, fileName);	// file data 추가
-
 					$.ajax({
 						type: 'post',
 						url: '/saveImage',
@@ -154,9 +135,7 @@
 						success: function (response) {
 							console.log(response.data)
 						}
-
 					});//saveImage ajax end
-
 					console.log($("#hashtags").text())
 					$.ajax({ 
 						type: 'post',
@@ -171,7 +150,6 @@
 						success: function (response) {
 							location.href = "/"
 						},
-
 						error: function (request, status, error) {
 							alert("success에 실패 했습니다.");
 							console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -198,37 +176,28 @@
 		</script>
 	</head>
 	<style>
-		* {
-			margin: 0%;
-			padding: 0;
-		}
-		body {
-			padding-top: 50px;
-		}
 	</style>
 
 	<body>
-		<div class="container">
-			<div class="row">
-				<form id="fileForm" method=post enctype="multipart/form-data" class="col-4">
-					<canvas id="imagecanvas" width=400 height=400 style="border: 2px solid pink"></canvas>
-					<div>
-						<button id="fileUpload">이미지 분석</button>
-						<label for="selectedFile"><i class="far fa-images fa-2x"></i></label>
-						<input id="selectedFile" type="file" name="file"><br>
-					</div>
-					<h5>해쉬태그 입력</h5>
-					<div id="hashtags"></div>
-					<input id="names" type="text">
-				</form>
-				<div class="col-1"></div>
-				<form class="col-6">
-					내용 입력<br>
-					<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
-					<div id="sysdate"><%=sf.format(nowTime)%></div>
-					<button type="button" id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
-				</form>
-			</div>
+		<div id="postupload">
+			<form id="fileForm"	method=post enctype="multipart/form-data" class="col-4">
+				<canvas id="imagecanvas" width=400 height=400 style="border: 2px solid pink"></canvas>
+				<div>
+					<button type=button id="fileUpload">이미지 분석</button>
+					<label for="selectedFile"><i class="far fa-images fa-2x"></i></label>
+					<input id="selectedFile" type="file" name="file"><br>
+				</div>
+				<h5>해쉬태그 입력</h5>
+				<div id="hashtags"></div>
+				<input id="names" type="text">
+			</form>
+			<div class="col-1"></div>
+			<form class="col-6">
+				내용 입력<br>
+				<textarea maxlength="3000" id="contents" cols="100" onkeydown="resize(this)" onkeyup="resize(this)" style="min-height: 150px;" ></textarea><br>
+				<div id="sysdate"><%=sf.format(nowTime)%></div>
+				<button type="button" id="postUpload" onclick="saveImage()" class="btn btn-primary">작성</button>
+			</form>
 		</div>
 	</body>
 
