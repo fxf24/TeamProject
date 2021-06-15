@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Infinite Scroll</title>
 	<link href='styles/messages.css' rel='stylesheet' type='text/css'>
+	<link href='styles/messages980.css' media="screen and (max-width: 980px)" rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<!-- 여기가 infinite-scroll을 생성 -->
@@ -200,8 +201,8 @@
 
 		render: function(item, div) {
 			// TODO: Different style?
-			console.log('render')
-			console.log(div|| this.messageTemplate_.cloneNode(true))
+// 			console.log('render')
+// 			console.log(div|| this.messageTemplate_.cloneNode(true))
 			div = div || this.messageTemplate_.cloneNode(true);
 			div.querySelector('.hashId').textContent = item.id;
 			div.querySelector('.card__content').textContent = item.message;

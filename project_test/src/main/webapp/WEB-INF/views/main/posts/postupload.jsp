@@ -49,12 +49,7 @@
 
 							//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
 							var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-							var context = imagecanvas.getContext("2d")
-							context.fillStyle = "red"
-							context.font = '15px batang'
-							context.strokeStyle = 'green'
-							context.lineWidth = 3
-
+							
 							//이미지 로드
 							var image = new Image()
 							image.src = "/upload/" + filename
@@ -66,9 +61,11 @@
 								imagecanvas.width = image.width
 								imagecanvas.height = image.height 
 								
-								
-								console.log(image.width)
-								console.log(image.height)
+								var context = imagecanvas.getContext("2d")
+								context.fillStyle = "red"
+								context.font = '15px batang'
+								context.strokeStyle = 'green'
+								context.lineWidth = 3
 								
 								context.drawImage(image, 0, 0, width, height)
 
