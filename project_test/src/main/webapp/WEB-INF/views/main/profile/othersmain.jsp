@@ -10,10 +10,74 @@
   	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
-		var profileUser = sessionStorage.getItem("profileUser")
-		$(document).ready(function(){
-			var user = sessionStorage.getItem("user")
+// 		var getLink = location.search
+// 		var getPostId = getLink.split("=")
+// 		var getOnlyId = getPostId[1]
+		//console.log(getOnlyId)
+		//alert(getOnlyId)
+// 		var getId = decodeURI(getOnlyId)
+// 		getHtml(getId);
+//		console.log(getId)
+		
+//		var user = sessionStorage.getItem("user")
+// 		var profileUser = sessionStorage.getItem("profileUser")
+ 		// 			profile?id=아이디
+		// 			profile?name=이름
+			
+			//검색에서 넘어온 url에서 아이디 타인, 자신 구분 
+			var getLink = location.search
+			var getPostAccount = getLink.split("=") //[id=아이디], [name=이름]
+			var property = getPostAccount[0] //id, name
+			var getOnlyAccount = getPostAccount[1] //아이디, 이름	- 2가지로 구분 
+	// 		console.log(getOnlyAccount)			
+	// 		alert(getOnlyAccount)
 
+	
+		$.ajax({
+			type: 'get',
+			url: '/oneProfileUser',
+			dataType: 'json',
+			success: function(response){
+				console.log(response)
+					for (var i=0; i < response.length; i++){
+					var userId = response[i].id.split("/")
+					console.log(userId)
+					var userName = response[i].name.split("/")
+					
+				if ( property == "id" || property == "name" ) { //아이디로 넘어왔을 때  id=elin id=admin 
+					
+						if ( getOnlyAccount == userId || getOnlyAccount == userName ) {
+								break;
+								//othersProfile(getOnlyAccount, userId, userName)
+								othersProfile(getOnlyAccount)
+								//var user = sessionStorage.getItem("user")
+							//}else if (getOnlyAccount == user) { //자신의 프로필 - main으로 이동 
+		 						//location.href = "/profile" 	
+								//break; 
+							
+							} else {
+							
+							} //else end 
+											
+						} //if end 
+						
+					} //for end 
+			}, 
+			error: function(request, status, error){
+				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+			}
+			
+		}); //ajax end 			
+						
+		
+		
+		$(document).ready(function(){
+			//var user = sessionStorage.getItem("user")
+			var getLink = location.search
+			var getPostAccount = getLink.split("=") //[id=아이디], [name=이름]
+			var property = getPostAccount[0] //id, name
+			var getOnlyAccount = getPostAccount[1] //아이디, 이름	- 2가지로 구분 
+			
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
 		$('#postfont').click(function(){
 			location.href = "/postupload"
@@ -30,7 +94,7 @@
 				
 				$.ajax({
 					url:'/uploadProfileImage',
-					type:'post',
+					type:'get',
 					data: formData, 
 					cache: false,
 					processData:false,
@@ -88,14 +152,12 @@
 					$.ajax({ 
 						url:'/getOneProfileImage',
 						type:'post',
-						data: { "id": user },
+						data: { "id": getOnlyAccount },
 						dataType: "json",
 						success: function(response){
 							console.log(response) //1의 행
 							var profileImage = response[0].profileImage
 							console.log(profileImage) //null or 이미지파일명
-							//var userNo = response[0].userNo
-							//console.log(userNo)
 						 		
 							if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
 						 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
@@ -154,9 +216,6 @@
 					//	 			profileImage += imageName
 					
 								}//else end
-								
-								//getProfileImage(profileImage)
-								
 								//sessionStorage.setItem("updateProfileImg", profileImage)
 							}, //success end 
 							error: function(request, status, error){
@@ -169,77 +228,9 @@
 				
 			
 			});//document ready end
-			
-		
-		var user = sessionStorage.getItem("user")
-		var profileUser = sessionStorage.getItem("profileUser")	
-		//var profileimgSrc = document.getElementById('img').src
-		// 		var getLink = location.search
-		// 		var getPostId = getLink.split("=")
-		// 		var getOnlyId = getPostId[1]
-		// 		console.log(getOnlyId)			
-		// 		alert(getOnlyId) //undefined or id 
-		
 
-//function getProfileImage(profileImage) {
-	$.ajax({
-			type: 'get',
-			url: '/oneProfileUser',
-			dataType: 'json',
-			success: function(response){
-				console.log(response)
+function othersProfile(getOnlyAccount) {
 
-			// 0: {id: "admin", password: "admin", email: "admin@naver.com", name: "administrator", telephone: "010-1234-5678", …}
-			// 1: {id: "admin2", password: "admin2", email: "admin2@naver.com", name: "administrator2", telephone: "010-2345-7890", …}
-			// 2: {id: "elin", password: "12345678", email: "elincreator2126@gmail.com", name: "하은", telephone: "010-8888-9999", …}
-			// 3: {id: "eunsu", password: "eunsu", email: "eunsu@gmail.com", name: "은수", telephone: "010-0000-7890", …}
-			// length: 4							
-// 				var userno = response[0].userno
-// 				console.log(userno)
-// 				var userNumber = response[i].userno
-// 				console.log(userNumber)
-					for (var i=0; i < response.length; i++){
-						var userId = response[i].id.split("/")
-						console.log(userId)
-						
-						if (userId == user) { //자신의 프로필 접속 가능 
-							meProfile(userId)
-							break; 
-						} else  { //타인 프로필 접속 가능 
-							location.href = "/profile/account?id=" + userId
-							otherProfile(userId)		
-								
-						} //else end 
-						
-					} //for end 
-			},
-			error: function(request, status, error){
-				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-			}
-			
-		}); //ajax end 		
-//} //getProfileImage(profileImage) end 		
-
-		
-
-	if (user == null) {
-		
-			if (confirm("로그인해주세요!")) {
-				location.href = "/login"
-			}else { //자신 프로필 접속, 타인 프로필 접속 구분
-				meProfile(userId)
-					function otherProfile(userId) {
-						sessionStorage.getItem("user")	
-								if (userId != user) {
-									alert("타인 프로필로 접속 성공")
-									location.href = "/profile/account?id=" + userId
-									}//if end 
-						 			
-							} //function end
-							
-var user = sessionStorage.getItem("user")
-					
-function meProfile(userId) {
 			/*  프로필 사진 저장 - 이미지 파일형식 변환  */
 			function saveProfileImage() { //프로필 사진 업로드 클릭 시 
 				var $canvas = document.getElementById('imagecanvas');
@@ -291,7 +282,7 @@ function meProfile(userId) {
 				type: 'post',
 				url: '/updateUserProfileData',
 				data: {
-					"id": user,
+					"id": getOnlyAccount,
 					"profileImage" : fileName 
 					},
 				success: function (response) {
@@ -336,24 +327,24 @@ function meProfile(userId) {
 			});//ajax end
 		} //sessionImage(fileName) end	
 
-		var profileUser = sessionStorage.getItem("profileUser")		
+var profileUser = sessionStorage.getItem("profileUser")		
 
 			/* 회원아이디, 게시물 수 불러오기 1*/ 
 			$.ajax({ 
 			url: '/postsCount',
 			type: 'post',
-			data: {"id": user},
+			data: {"id": getOnlyAccount},
 			dataType: "json",
 			success: function(response){
 				console.log(response) // Array(response.length) 
 				//console.log(response.length)
 				var postscount = response.length //게시물 개수
-				//var postId = response[0].id.split("|") //타인 프로필 넘겨줄 데이터 
+				var postId = response[0].id.split("|")
 				console.log(postId)
 				var postsword = $('#profileposts').text(); 
 				$('#profileposts').text(postsword + "\n" + "\n" + postscount + "\n"); //게시물 + 갯수
-				$('#accountId').text("\n" + user + "\n"); //회원아이디
-				
+				$('#accountId').text("\n" + getOnlyAccount + "\n"); //회원아이디
+				//getPost(postId)
 			}, //success end 
 			error:function(request,status,error){
 			    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error); 
@@ -366,7 +357,7 @@ function meProfile(userId) {
 			$.ajax({ //로그인한 상태로 들어오면 자동 출력
 				url:'/postsImage',
 				type:'post',
-				data: {"id": user},
+				data: {"id": getOnlyAccount},
 				dataType: "json",
 				success: function(response){
 					console.log(response) //array(접속 회원 아이디의 포스트 개수)
@@ -413,8 +404,7 @@ function meProfile(userId) {
 					//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
 				} //error end 
 			});//ajax end 
- 
-
+			
 
 // 			<div class="postModal" onclick="postModalClick()">
 // 			<div class="psotModalContent" onclick="postModalContentClick()">
@@ -438,7 +428,7 @@ function clickImage(postNumber){
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 				url: '/posts',
 				type: 'get',
-				data: {"id": user},
+				data: {"id": getOnlyAccount},
 				dataType: "json",
 				success: function(response){
 					//console.log(response) //arraylist 
@@ -470,7 +460,7 @@ function clickImage(postNumber){
 						if (postNum == postNumber) {
 							
 							$(".postModalContent").append(
-									"<div class='postID'>@"+user+"</div>"+
+									"<div class='postID'>@"+getOnlyAccount+"</div>"+
 									"<div class='onePostContent'><div><img class='postImage' src='/upload/"+imageName+" ' ></div>"+ 
 									"<div class='postContent'>"+postContent+"</div>"+
 									"<div class='hashTag'><a class='hashTagLink' href='https://search.shopping.naver.com/search/all?query="
@@ -493,16 +483,12 @@ function clickImage(postNumber){
 
 function postModalClick(){
 	$(".postModal").fadeOut();	
-}//postModalClick() end
+		}//postModalClick() end
+		
 
-		
-				} //meProfile(userId) end 	
-		
-			} // else end 
+			} // othersProfile(getOnlyAccount)
 			
-	} //최종 if end 
-		
-		var contents = ""; //팔로워 저장하는 리스트
+		var contents = ""; //팔로워 저장하는 리스트 */
 
 </script>	
 </head>
