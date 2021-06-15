@@ -1016,8 +1016,7 @@ function ClickReplyThumbsup(replyNum, i){
 </script>
 </head>
 <body>
-<div id="main" style="position: relative;padding-bottom:100vh">
-
+<div id="main" style="position: relative; padding-bottom:100vh;">
 <form action="/search" method="post" name="searchForm" accept-charset="utf-8">
 <div class="bar">
 	<input type="text" id=searchbar name="searchWord" value='#<%=hashtag %>'>

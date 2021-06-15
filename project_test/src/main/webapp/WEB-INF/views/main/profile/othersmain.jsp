@@ -10,354 +10,94 @@
   	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
-		var profileUser = sessionStorage.getItem("profileUser")
-		$(document).ready(function(){
-			var user = sessionStorage.getItem("user")
-
-		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
-		$('#postfont').click(function(){
-			location.href = "/postupload"
-		});
-
-			/*  프로필 이미지 업로드 - 파일 저장 - 출력 */
-		 	$("#upload").click(function(event){ //프로필 사진 업로드 클릭 
-				event.preventDefault() 
-
-				var form = $("#imageform")[0]
-				var formData = new FormData(form)
-				formData.append("file", $("#inputProfile")[0].files[0])
-				var fileName = ""
-				
-				$.ajax({
-					url:'/uploadProfileImage',
-					type:'post',
-					data: formData, 
-					cache: false,
-					processData:false,
-					contentType:false,
-					success: function(response){
-						console.log(response)
-						var json = JSON.parse(response)
-						fileName = json.filename
-						console.log(json.filename);
-						
-		 				//캔버스에 이미지 로드(canvas 태그 + canvas 자바스크립트 라이브러리)
-						var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-						var context = imagecanvas.getContext("2d")
-						
-						//<img id="img" src="" >
-						//이미지 로드
-						var image = new Image()	
-						image.style.display = "absolute"
-						image.style.zIndex = "3"
-						image.src = "/profile/" + fileName
-						image.onload = function(){
-							var maxWidth = 250; 
-							var maxHeight = 250;
-							var width = image.width;
-							var height = image.height;
-							
-							if(width > maxWidth){
-								height = height/(width / maxWidth) ;
-								width = maxWidth;
-								
-							}else{
-								if(height > maxHeight){
-									width = width/(height/ maxHeight);
-									height = maxHeight;
-								}//중첩 if ends
-							}//if end 
-							context.drawImage(image, 0, 0, width, height)
-
-						}//image.onload function end  
-					}, //success end 
-					error: function(e){
-						console.log(e)
-						alert('error : ' + e.message)
-					} //error end 
-					
-				});//ajax end 
-				
-				showProfileImage(fileName)
-				
-			}); //uploadprofile click function end 
-
-		
-				/* 업로드 - 프로필 사진 출력 - 유지 */ //Cannot write uploaded file to disk!
-				function showProfileImage(fileName) {
-					$.ajax({ 
-						url:'/getOneProfileImage',
-						type:'post',
-						data: { "id": user },
-						dataType: "json",
-						success: function(response){
-							console.log(response) //1의 행
-							var profileImage = response[0].profileImage
-							console.log(profileImage) //null or 이미지파일명
-							//var userNo = response[0].userNo
-							//console.log(userNo)
-						 		
-							if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
-						 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-									var context = imagecanvas.getContext("2d")
-						 			profileImage = 'basicprofileimage.jpg';
-										var img = document.getElementById('img');
-										img.src = "/profile/" + profileImage
-							 			img.onload = function() {
-											var maxWidth = 250; 
-											var maxHeight = 250;
-											var width = img.width;
-											var height = img.height;
-											
-											if(width > maxWidth){
-												height = height/(width / maxWidth) ;
-												width = maxWidth;
-												
-											}else{
-												if(height > maxHeight){
-													width = width/(height/ maxHeight);
-													height = maxHeight;
-												}//중첩 if ends
-											}//if end 
-											context.drawImage(img, 0, 0, width, height)	
-										} //onload end 
-						 		
-								} else { //저장된 프로필 사진 있을 때 - 해당 사진 출력
-							 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-										var context = imagecanvas.getContext("2d")
-							 			profileImage = fileName;
-								 			var img = document.getElementById('img');
-											//img.style.display = "none"
-											img.src = "/profile/" + profileImage
-								 			img.onload = function() {
-												var maxWidth = 250; 
-												var maxHeight = 250;
-												var width = img.width;
-												var height = img.height;
-												
-												if(width > maxWidth){
-													height = height/(width / maxWidth) ;
-													width = maxWidth;
-													
-												}else{
-													if(height > maxHeight){
-														width = width/(height/ maxHeight);
-														height = maxHeight;
-													}//중첩 if ends
-												}//if end 
-												context.drawImage(img, 0, 0, width, height)	
-											} // onload end
-						 			
-									//var imagePath = response.split("/")
-									//var imageName = imagePath[imagePath.length-1]
-					//	 			profileImage = '/profile/'
-					//	 			profileImage += imageName
-					
-								}//else end
-								
-								//getProfileImage(profileImage)
-								
-								//sessionStorage.setItem("updateProfileImg", profileImage)
-							}, //success end 
-							error: function(request, status, error){
-								//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
-							} //error end 
-							
-						});//ajax end 
-				
-					} //showProfileImage() end
-				
-			
-			});//document ready end
-			
+// 		var getLink = location.search
+// 		var getPostId = getLink.split("=")
+// 		var getOnlyId = getPostId[1]
+		//console.log(getOnlyId)
+		//alert(getOnlyId)
+// 		var getId = decodeURI(getOnlyId)
+// 		getHtml(getId);
+//		console.log(getId)
 		
 		var user = sessionStorage.getItem("user")
-		var profileUser = sessionStorage.getItem("profileUser")	
-		//var profileimgSrc = document.getElementById('img').src
-// 				var getLink = location.search
-// 				var getPostId = getLink.split("=")
-// 				var getOnlyId = getPostId[1]
-// 				console.log(getOnlyId)	//undefined		
-// 				alert(getOnlyId) //undefined or id 
-		
+// 		var profileUser = sessionStorage.getItem("profileUser")
+ 		// 			profile?id=아이디
+		// 			profile?name=이름
+			
+			//검색에서 넘어온 url에서 아이디 타인, 자신 구분 
+			var getLink = location.search
+			var getPostAccount = getLink.split("=") //[id=아이디], [name=이름]
+			var getProperty = getPostAccount[0] 
+			//console.log(getProperty) //?id, ?name
+			var getOnlyAccount = getPostAccount[1] //아이디, 이름	- 2가지로 구분 
+	 		//console.log(getOnlyAccount)			
+	 		//alert(getOnlyAccount) //해당url의 이름
 
-//function getProfileImage(profileImage) {
-	$.ajax({
+if ( getProperty == "?id" || getProperty == "?name" ) { //url에서 id거나 name일 때	
+
+	if ( getOnlyAccount != user) { //url 아이디나 이름이 유저와 다를 때 
+			//alert("현재 타인의 프로필 페이지를 유지합니다!")
+
+		$.ajax({
 			type: 'get',
-			url: '/oneProfileUser',
+			url: '/othersProfileUser',
 			dataType: 'json',
 			success: function(response){
-				console.log(response) //array
-				var user0 = response[3].id
-				console.log(user0) //eunsu
-			// 0: {id: "admin", password: "admin", email: "admin@naver.com", name: "administrator", telephone: "010-1234-5678", …}
-			// 1: {id: "admin2", password: "admin2", email: "admin2@naver.com", name: "administrator2", telephone: "010-2345-7890", …}
-			// 2: {id: "elin", password: "12345678", email: "elincreator2126@gmail.com", name: "하은", telephone: "010-8888-9999", …}
-			// 3: {id: "eunsu", password: "eunsu", email: "eunsu@gmail.com", name: "은수", telephone: "010-0000-7890", …}
-			// length: 4							
- 				var userno = response[0].userno
- 				console.log(userno) //1
-//  				var userNumber = response[i].userno
-//  				console.log(userNumber) 
-					for (var i=0; i < response.length; i++){
-						var userId = response[i].id
-						console.log(userId) //[" "]
-						
-						if (userId == user) { //자신의 프로필 접속 가능 
-							alert("자신의 프로필 접속을 유지합니다!")
-							meProfile(userId)
-							//location.href = "/profile"
-							 
-						} else  { //타인 프로필 접속 가능 
-							//alert("타인의 프로필로 접속합니다!")
-							//location.href = "/profile/account?id=" + userId
-							//otherProfile(userId)		
-								
-						} //else end 
-						
-					} //for end 
-			},
+				//console.log(response)
+					//for (var i=0; i < response.length; i++){
+					//var userId = response[i].id
+					//console.log(userId)
+					//var userName = response[i].name
+					//console.log(userName)
+
+					//} //for end 				
+			}, 
 			error: function(request, status, error){
 				console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 			}
 			
-		}); //ajax end 		
-//} //getProfileImage(profileImage) end 		
-
+		}); //ajax end 			
+						
+	
 		
-
-	if (user == null) {
-			if (confirm("로그인해주세요!")) {
-				location.href = "/login"
-					}
-	}else { //자신 프로필 접속, 타인 프로필 접속 구분
-			//meProfile(userId)
-// 					function otherProfile(userId) {
-// 						sessionStorage.getItem("user")	
-// 								if (userId != user) {
-// 									//alert("타인 프로필로 접속 성공")
-// 									//location.href = "/profile/account?id=" + userId
-// 									}//if end 
-						 			
-// 							} //function end
-							
-var user = sessionStorage.getItem("user")
-					
-function meProfile(userId) {
-			/*  프로필 사진 저장 - 이미지 파일형식 변환  */
-			function saveProfileImage() { //프로필 사진 업로드 클릭 시 
-				var $canvas = document.getElementById('imagecanvas');
-				var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
-				
-				var blobBin = atob(imgDataUrl.split(',')[1]); // base64 데이터 디코딩
-				var array = [];
-				for (var i = 0; i < blobBin.length; i++) {
-					array.push(blobBin.charCodeAt(i));
-				}
-				      var file = new Blob([new Uint8Array(array)], {
-				          name: '$("#inputProfile")[0].files[0]',
-				          type: 'image/png'
-				      }); // Blob 생성					
-				var formdata = new FormData(); // formData 생성
-				var fileValue = $("#inputProfile").val().split("\\");
-				var fileName = fileValue[fileValue.length - 1];
-				formdata.append("file", file, fileName);	// file data 추가
-				
-				$.ajax({
-					type: 'post',
-					url: '/saveProfileImage',
-					data: formdata,
-					dataType: "json",
-					processData: false,	// data 파라미터 강제 string 변환 방지!!
-					contentType: false,	// application/x-www-form-urlencoded; 방지!!
-					success: function (response) {
-						//console.log(response) //{filename: "eunsu.jpg"}
-						var fileName = response.filename
-						console.log(fileName)
-						//sessionStorage.setItem("updateProfileImg", fileName)
-						
-// 						var json = JSON.parse(response)
-// 						var fileName = json.fileName
-// 						console.log(json.fileName);  //undefined
-						
-					}
-				
-				}); //ajax end 	
-				
-				updateProfileImage(fileName)
-				
-			} //saveProfileImage() function end		
-
+		$(document).ready(function(){
+			//var user = sessionStorage.getItem("user")
+			var getLink = location.search
+			var getPostAccount = getLink.split("=") //[id=아이디], [name=이름]
+			var property = getPostAccount[0] //id, name
+			var getOnlyAccount = getPostAccount[1] //아이디, 이름	- 2가지로 구분 
 			
-		/*  프로필 사진 저장 - user DB에 프로필 이미지 추가 업데이트 */
-		function updateProfileImage(fileName) {
-			$.ajax({
-				type: 'post',
-				url: '/updateUserProfileData',
-				data: {
-					"id": userId,
-					"profileImage" : fileName 
-					},
-				success: function (response) {
-							alert("프로필 사진을 저장했습니다!")
-							sessionImage(fileName)
-				},
-				error: function (request, status, error) {
-					//alert("success에 실패 했습니다.");
-					alert("프로필 이미지를 등록해주세요!")
-					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); //200에러 
-				}
-			});	//ajax end
-			
+		/* 게시물 업로드 - 포스트 작성으로 이동불가 */ 
+		$('#postfont').click(function(e){
+			e.preventDefault()
+			//alert("타인의 계정으로 게시물 업로드가 불가합니다.")	
+		});
+		
+		/* 프로필 이미지 업로드 불가 */ 	
+		$("#upload").click(function(event){
+			event.preventDefault()
+			//alert("타인의 프로필 사진은 업로드 불가합니다.")	
+		});
+	}); //document ready end 
 
-		} //updateProfileImage() end
-
-
-			/* 프로필 유저 이미지 유지 */
-		function sessionImage(fileName) {
-			$.ajax({ 
-				url:'/getProfileUser',
-				type:'post',
-				data: {"profileImage": fileName},		
-				dataType: "json",
-				success: function(response){
-					console.log(response) //{id: "eunsu", password: "eunsu", email: "eunsu@gmail.com", name: "은수", telephone: "010-0000-7890", …}
-// 					email: "eunsu@gmail.com"
-// 						id: "eunsu"
-// 						name: "은수"
-// 						password: "eunsu"
-// 						profileImage: "eunsu.jpg"
-// 						telephone: "010-0000-7890"
-// 						userno: 43
-				
-					console.log(response.profileImage)
-					sessionStorage.setItem("profileUser", response.profileImage)
-					
-				},
-				error: function(request, status, error){
-					alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
-				} //error end 
-			});//ajax end
-		} //sessionImage(fileName) end	
-
-		var profileUser = sessionStorage.getItem("profileUser")		
+var profileUser = sessionStorage.getItem("profileUser")		
 
 			/* 회원아이디, 게시물 수 불러오기 1*/ 
 			$.ajax({ 
 			url: '/postsCount',
 			type: 'post',
-			data: {"id": userId},
+			data: {"id": getOnlyAccount},
 			dataType: "json",
 			success: function(response){
-				//console.log(response) // Array(response.length) 
+				console.log(response) // Array(response.length) 
 				//console.log(response.length)
 				var postsCount = response.length //게시물 개수
 				var postId = response[0].id
-				//console.log(postId)
+				console.log(postId)
 				var postsWord = $('#profileposts').text(); 
 				$('#profileposts').text(postsWord + "\n" + "\n" + postsCount + "\n"); //게시물 + 갯수
-				$('#accountId').text("\n" + userId + "\n"); //회원아이디
-				
+				$('#accountId').text("\n" + getOnlyAccount + "\n"); //회원아이디
+				//getPost(postId)
 			}, //success end 
 			error:function(request,status,error){
 				alert("회원 아이디와 게시물 수를 불러오기에 실패했습니다.")
@@ -371,7 +111,7 @@ function meProfile(userId) {
 			$.ajax({ //로그인한 상태로 들어오면 자동 출력
 				url:'/postsImage',
 				type:'post',
-				data: {"id": userId},
+				data: {"id": getOnlyAccount},
 				dataType: "json",
 				success: function(response){
 					console.log(response) //array(접속 회원 아이디의 포스트 개수)
@@ -380,9 +120,7 @@ function meProfile(userId) {
 							var onePost = response[i];
 							//console.log(onePost.imagepath.split("/")) //["iu.png"]
 							var imageName = onePost.imagepath
-							//console.log(imageName)
-							var postDate = onePost.postDate 
-							//console.log(postDate)
+							var postDate = onePost.postDate
 							var postNumber = onePost.postNum;
 							//console.log(postNumber)
 	
@@ -420,8 +158,7 @@ function meProfile(userId) {
 					//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
 				} //error end 
 			});//ajax end 
- 
-
+			
 
 // 			<div class="postModal" onclick="postModalClick()">
 // 			<div class="psotModalContent" onclick="postModalContentClick()">
@@ -445,7 +182,7 @@ function clickImage(postNumber){
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 				url: '/posts',
 				type: 'get',
-				data: {"id": userId},
+				data: {"id": getOnlyAccount},
 				dataType: "json",
 				success: function(response){
 					//console.log(response) //arraylist 
@@ -477,7 +214,7 @@ function clickImage(postNumber){
 						if (postNum == postNumber) {
 							
 							$(".postModalContent").append(
-									"<div class='postID'>@"+user+"</div>"+
+									"<div class='postID'>@"+getOnlyAccount+"</div>"+
 									"<div class='onePostContent'><div><img class='postImage' src='/upload/"+imageName+" ' ></div>"+ 
 									"<div class='postContent'>"+postContent+"</div>"+
 									"<div class='hashTag'><a class='hashTagLink' href='https://search.shopping.naver.com/search/all?query="
@@ -500,15 +237,18 @@ function clickImage(postNumber){
 
 function postModalClick(){
 	$(".postModal").fadeOut();	
-}//postModalClick() end
-
-} //meProfile(userId) end 					
-
-			
-		} // else end 	
-			
+		}//postModalClick() end
 		
-		var contents = ""; //팔로워 저장하는 리스트
+
+
+			
+	} else { //url의 아이디나 이름이 유저(로그인자)였을 때
+		alert("자신의 프로필 페이지로 이동합니다!")
+		location.href = "/profile" 	//자신의 프로필 - main으로 이동 
+			}  //if end	
+	} //if end 					
+	
+		var contents = ""; //팔로워 저장하는 리스트 */
 
 </script>	
 </head>
@@ -544,9 +284,10 @@ function postModalClick(){
 
 									<div id="uploadSettingBox">
 										<canvas id="imagecanvas" width=250 height=250></canvas>
-<!-- 									<img id="unnamed_2" src="unnamed_2.png" srcset="unnamed_2.png 1x, unnamed_2@2x.png 2x"> -->								
-										<span><img id="upload" src="/profileImage/uploadicon.png" ></span>
-										<span><button id="settingprofile" onclick="saveProfileImage()"><img id="save" src="/profileImage/saveicon.png" ></button></span>
+<!-- 									<img id="unnamed_2" src="unnamed_2.png" srcset="unnamed_2.png 1x, unnamed_2@2x.png 2x"> -->
+										<img id="img" src=" " >									
+<!-- 										<span><img id="upload" src="/profileImage/uploadicon.png" ></span> -->
+<!-- 										<span><button id="settingprofile" onclick="saveProfileImage()"><img id="save" src="/profileImage/saveicon.png" ></button></span> -->
 									
 							
 							<!-- 캔버스 -->
@@ -565,11 +306,11 @@ function postModalClick(){
 							
 							
 							<!-- 이미지 업로드 구현 -->	
-							<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" method="post">
-								<label id="fileimage" for="inputProfile"><img id="plus" src="/profileImage/plus.png"></label>
-								<input name="file" type="file" id="inputProfile" style="display:none;" ><br>
-								<input type="hidden" name ="target_url">
-							</form>
+<!-- 							<form name="imageform" id="imageform" ENCTYPE="multipart/form-data" method="post"> -->
+<!-- 								<label id="fileimage" for="inputProfile"><img id="plus" src="/profileImage/plus.png"></label> -->
+<!-- 								<input name="file" type="file" id="inputProfile" style="display:none;" ><br> -->
+<!-- 								<input type="hidden" name ="target_url"> -->
+<!-- 							</form> -->
 							
 							</div>
 						</div>
@@ -586,7 +327,7 @@ function postModalClick(){
 							<!-- 회원아이디, 프로필 편집 줄 --> 	
 									<div id="accountBox">
 										<span id="accountId"> &nbsp; </span>
-        								<span><button type="button" id="profileedit" onclick="location.href='profile/editform'">&nbsp;프로필 편집</button></span>
+        								<span><button type="button" id="profileedit" >&nbsp;프로필 편집</button></span>
 									</div>
 									
 							<!-- 게시물 | 팔로워 | 팔로우 수는 저장된 데이터의 수 그대로 불러오기 -->

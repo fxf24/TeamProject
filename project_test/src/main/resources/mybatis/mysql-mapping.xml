@@ -56,6 +56,14 @@ select * from comments where postNum=#{postNum} order by commentsDate DESC
 select profileImage from users where id=#{id}
 </select>
 
+<select id="getOneProfileUser" resultType="userVO">
+select * from users 
+</select>
+
+<select id="getOthersProfileUser" resultType="userVO">
+select * from users 
+</select>
+
 <select id="getProfileUser" parameterType="String" resultType="userVO">
 select * from users where id= #{id}
 </select>

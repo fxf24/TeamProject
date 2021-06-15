@@ -151,6 +151,11 @@ public class MainController {
 	public String profile() {
 		return "main/profile/main";
 	}
+	
+	@RequestMapping("/profile/account")
+	public String othersProfile() {
+		return "main/profile/othersmain";
+	}
 		
 	//회원아이디 주소창에 표시
 	@RequestMapping(value="/profileAccount", method=RequestMethod.GET)
@@ -160,16 +165,18 @@ public class MainController {
 	}
 	
 	//유저정보 불러오기 
-	@RequestMapping(value = "/oneProfileUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/oneProfileUser", method=RequestMethod.GET)
 	@ResponseBody
-	public String oneProfileUser(String id, String profileImage) {
-		UserVO user = new UserVO();
-		user.setId(id);
-		user.setProfileImage(profileImage);
-		if (profileImage == null || profileImage =="") {
-			hhService.insertUserData(user);
-		}
-		return "{\"data\":\"유저 불러오기 완료\"}";
+	public List<UserVO> getOneProfileUser() {
+		List<UserVO> oneProfileUser = hhService.getOneProfileUser();
+		return oneProfileUser;
+	}
+	
+	@RequestMapping(value = "/othersProfileUser", method=RequestMethod.GET)
+	@ResponseBody
+	public List<UserVO> getOthersProfileUser() {
+		List<UserVO> othersProfileUser = hhService.getOthersProfileUser();
+		return othersProfileUser;
 	}
 	
 	//프로필 유저 정보 가져오기 - 정상작동
@@ -196,7 +203,7 @@ public class MainController {
 	
 	@RequestMapping(value="/uploadProfileImage", method=RequestMethod.GET)
 	public String uploadprofileimageform() {
-		return "main/profile/main";
+		return "main/profile/othersmain";
 	}
 	
 	//프로필 업로드 - 정상작동 
@@ -242,7 +249,7 @@ public class MainController {
 		user.setProfileImage(profileImage);
 		hhService.updateUserProfileData(id, profileImage);
 	}
-		
+	
 	//게시물 수 불러오기 1 
 	@RequestMapping(value="/postsCount", method=RequestMethod.POST)
 	@ResponseBody
