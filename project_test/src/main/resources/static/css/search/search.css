@@ -121,6 +121,7 @@ a:hover {
     width: 100%;
     display: block;
 	justify-content: center;
+	padding-bottom: 4vh;
 }
 
 @keyframes blink-effect {
@@ -228,11 +229,12 @@ select {
 	margin-top: -0.7vh;
 }
 #inputPBox{
-	left: -3vh;
     position: fixed;
     display: flex;
     justify-content: flex-end;
+	left: -3vh;
     width: 100%;
+    margin-top: 2vh;
 }
 #searchIconBox{
 	display: inline-flex;

@@ -386,6 +386,8 @@ function moveToName(value){
 <button id="namebutton">이름</button>
 <button id="hashtagbutton">해시태그</button><br>  셀렉트 박스로 변경했어요 - 다현-->
 <!-- 색상은 구분을 위해 임시 지정 , css 스타일 적용 필요 -->
+</div></div>
+<div id=main>
 <div id="messageWindow">
 	<div id=resultSortPBox><div id=resultSortBox1><div id="spanbefore">#</div><span id="result"></span><div id="spanafter">&nbsp검색결과</div></div><div id=resultSortBox2><div class="resultnum">총&nbsp</div><span id="resultNum" class="resultnum"></span><div class="resultnum">개 결과가 나왔습니다.</div></div></div>
 	<div id="idSearch"> <!-- default view -->
@@ -398,7 +400,7 @@ function moveToName(value){
 		<div class=hashtagSearchList></div>
 	</div>
 </div>
-
+</div>
 <i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
 </body>
 </html>	
