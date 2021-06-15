@@ -386,7 +386,7 @@ function FunctionGetProfileImage(commentList, i){
 			else {
 				var imagePath = response.split("/")
 				var imageName = imagePath[imagePath.length-1]
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			}//else end
 			
@@ -538,7 +538,7 @@ function FunctionGetContentProfileImage(postID){
 				//console.log("경로 : "+ imagePath)
 				var imageName = imagePath[imagePath.length-1]
 				//console.log("이미지이름 : "+ imageName)
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			} // else end
 		},
@@ -1016,6 +1016,11 @@ function ClickReplyThumbsup(replyNum, i){
 </script>
 </head>
 <body>
+<<<<<<< HEAD
+=======
+<div id="main"style="position: relative;padding-bottom:100vh";>
+<h1>해시태그 검색 리스트</h1>
+>>>>>>> f879570bb23615437406f1ddeaf4dbd3f73954c2
 <form action="/search" method="post" name="searchForm" accept-charset="utf-8">
 <div class="bar">
 	<input type="text" id=searchbar name="searchWord" value='#<%=hashtag %>'>
@@ -1062,5 +1067,6 @@ function ClickReplyThumbsup(replyNum, i){
 </div>
 
 <i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
+</div>
 </body>
 </html>
