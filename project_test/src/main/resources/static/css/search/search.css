@@ -121,6 +121,7 @@ a:hover {
     width: 100%;
     display: block;
 	justify-content: center;
+	padding-bottom: 4vh;
 }
 
 @keyframes blink-effect {
