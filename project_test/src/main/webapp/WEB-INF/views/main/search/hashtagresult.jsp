@@ -386,7 +386,7 @@ function FunctionGetProfileImage(commentList, i){
 			else {
 				var imagePath = response.split("/")
 				var imageName = imagePath[imagePath.length-1]
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			}//else end
 			
@@ -538,7 +538,7 @@ function FunctionGetContentProfileImage(postID){
 				//console.log("경로 : "+ imagePath)
 				var imageName = imagePath[imagePath.length-1]
 				//console.log("이미지이름 : "+ imageName)
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			} // else end
 		},
