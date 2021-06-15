@@ -182,8 +182,6 @@
 
 	ContentSource.prototype = {
 		fetch: function(count) {
-			// Fetch at least 30 or count more objects for display.
-			count = Math.max(30, count);
 			return new Promise(function(resolve, reject) {
 			// Assume 50 ms per item.
 			setTimeout(function() {

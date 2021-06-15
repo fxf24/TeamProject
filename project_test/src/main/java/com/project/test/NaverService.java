@@ -74,7 +74,7 @@ public class NaverService {
 				response.append(inputLine);
 			}
 			br.close();
-			System.out.println(response.toString());
+//			System.out.println(response.toString());
 		} catch (Exception e) {
 			System.out.println(e);
 			return e.toString();
@@ -139,7 +139,7 @@ public class NaverService {
 			    response.append(inputLine);
 			}
 			br.close();
-			System.out.println(response.toString());
+//			System.out.println(response.toString());
         } catch (Exception e) {
             System.out.println(e);
             return e.toString();

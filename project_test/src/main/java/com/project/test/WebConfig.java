@@ -14,12 +14,10 @@ public class WebConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/upload/**")//url 설정
 //                .addResourceLocations("file:/usr/mydir/upload/");//실제경로
         registry.addResourceHandler("/upload/**")//url 설정
-        		.addResourceLocations("file:///c:/upload/");//실제경로
+        		.addResourceLocations("file:///C:/upload/");//실제경로
 //        registry.addResourceHandler("/profile/**")//url 설정
 //				.addResourceLocations("file:/usr/mydir/profile/");//실제경로
         registry.addResourceHandler("/profile/**")//url 설정
-        		.addResourceLocations("file:///c:/profile/");//실제경로
+        		.addResourceLocations("file:///C:/profile/");//실제경로
     }
 }
-
-

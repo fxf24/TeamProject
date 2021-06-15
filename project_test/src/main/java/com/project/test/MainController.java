@@ -302,11 +302,6 @@ public class MainController {
 	// return "search/main";
 	// }
 
-	@RequestMapping("/mainscroll")
-	public String mainscroll() {
-		return "main/infinite/mainscroll";
-	}
-
 	@RequestMapping("/button")
 	public String button() {
 		return "main/button/button";

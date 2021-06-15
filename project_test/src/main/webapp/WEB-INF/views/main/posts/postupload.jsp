@@ -14,7 +14,9 @@
 		<!-- Bootstrap -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
 			integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0"/>
+		<meta http-equiv="Pragma" content="no-cache"/>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
 		<script src="/jquery-3.2.1.min.js"></script>
@@ -22,15 +24,14 @@
 			$(document).ready(function () {
 				var user = sessionStorage.getItem("user")
 				
-				/////////////////////////
-				var input = document.querySelector('input');
-				input.style.opacity = 0;
-				// 이미지 분석
-				var button = document.querySelector('button');
-				// button.style.opacity = 0;
 				$("#fileUpload").on('click', function(event) {
 					event.preventDefault()
 
+					var input = document.querySelector('input');
+					input.style.opacity = 0;
+					// 이미지 분석
+					var button = document.querySelector('button');
+					// button.style.opacity = 0;
 					var form = $("#fileForm")[0]
 					var formData = new FormData(form)
 					formData.append("file", $("#selectedFile")[0].files[0])
@@ -57,23 +58,18 @@
 							//이미지 로드
 							var image = new Image()
 							image.src = "/upload/" + filename
+							
 							image.onload = function() { //(하은)
-								var maxWidth = 400; 
-								var maxHeight = 400;
 								var width = image.width;
 								var height = image.height;
 								
-								if(width > maxWidth){
-									height = height/(width / maxWidth) ;
-									width = maxWidth;
-									
-								}
-								else{
-									if(height > maxHeight){
-										width = width/(height/ maxHeight);
-										height = maxHeight;
-									}//중첩 if ends
-								}//if end 
+								imagecanvas.width = image.width
+								imagecanvas.height = image.height 
+								
+								
+								console.log(image.width)
+								console.log(image.height)
+								
 								context.drawImage(image, 0, 0, width, height)
 
 								//od json
@@ -210,10 +206,10 @@
 	<body>
 		<div class="container">
 			<div class="row">
-				<form id="fileForm" method=post enctype="multipart/form-data" class="col-4">
+				<form id="fileForm"	method=post enctype="multipart/form-data" class="col-4">
 					<canvas id="imagecanvas" width=400 height=400 style="border: 2px solid pink"></canvas>
 					<div>
-						<button id="fileUpload">이미지 분석</button>
+						<button type=button id="fileUpload">이미지 분석</button>
 						<label for="selectedFile"><i class="far fa-images fa-2x"></i></label>
 						<input id="selectedFile" type="file" name="file"><br>
 					</div>
