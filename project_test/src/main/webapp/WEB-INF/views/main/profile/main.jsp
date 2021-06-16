@@ -13,7 +13,7 @@
 var user = sessionStorage.getItem("user")
 $(document).ready(function(){
 
-if (getParam('id')== null){
+if (getParam('id')== ""){
 	user = sessionStorage.getItem("user")	
 }
 else{
@@ -231,6 +231,7 @@ function getParam(sname) {
 
         if ([temp[0]] == sname) { sval = temp[1]; }
     }
+    console.log(sval)
     return sval;
 }	
 
