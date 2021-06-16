@@ -151,11 +151,6 @@ public class MainController {
 	public String profile() {
 		return "main/profile/main";
 	}
-	
-	@RequestMapping("/profile/account")
-	public String othersProfile() {
-		return "main/profile/othersmain";
-	}
 		
 	//회원아이디 주소창에 표시
 	@RequestMapping(value="/profileAccount", method=RequestMethod.GET)

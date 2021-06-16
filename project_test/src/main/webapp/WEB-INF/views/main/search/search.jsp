@@ -81,14 +81,14 @@ $(document).ready(function(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");	
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						}//else end
 					}// for end
 				} 
@@ -125,14 +125,14 @@ $(document).ready(function(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");	
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
 						}//else end
 					}// for end
 				}  //else end
@@ -232,7 +232,7 @@ function search(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} else {
 							var userImagepath = userImage.split("/")
 							//console.log(userImagepath)
@@ -240,7 +240,7 @@ function search(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} // else end
 					}// for end
 				}// else end 
@@ -278,14 +278,14 @@ function search(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");	
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");
+							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
 						}//else end					
 					}// for end
 				} // else end
@@ -373,12 +373,12 @@ function enterkey(){
 	
 function moveToID(value){
 	console.log(value)
-	var url = "/profile/account?id="+value;
+	var url = "/profile?id="+value;
 	location.href = url;
 }
 function moveToName(value){
 	console.log(value)
-	var url = "/profile/account?name="+value;
+	var url = "/profile?name="+value;
 	location.href = url;
 }
 </script>
