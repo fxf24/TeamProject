@@ -120,19 +120,20 @@ $(document).ready(function(){
 					for(var i in list){ //결과 반환
 						var userImage = list[i].profileImage
 						var userName = list[i].name
+						var userID = list[i].id
 						if(userImage==null){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");
 						}//else end
 					}// for end
 				}  //else end
@@ -273,19 +274,20 @@ function search(){
 						$(".nameSearchList").append
 						var userImage = list[i].profileImage
 						var userName = list[i].name
+						var userID = list[i].id
 						if(userImage==null){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");	
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");
 						}//else end					
 					}// for end
 				} // else end
