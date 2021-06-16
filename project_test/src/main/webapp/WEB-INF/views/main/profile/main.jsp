@@ -275,8 +275,6 @@ function meProfile(userId) {
 				//console.log(response) // Array(response.length) 
 				//console.log(response.length)
 				var postsCount = response.length //게시물 개수
-				var postId = response[0].id
-				//console.log(postId)
 				var postsWord = $('#profileposts').text(); 
 				$('#profileposts').text(postsWord + "\n" + "\n" + postsCount + "\n"); //게시물 + 갯수
 				$('#accountId').text("\n" + userId + "\n"); //회원아이디
