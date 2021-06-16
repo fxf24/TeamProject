@@ -18,6 +18,11 @@ if (getParam('id')== ""){
 }
 else{
 	user = getParam("id")
+	$('#profileedit').hide();
+	$('#plus').hide();
+	$('#upload').hide();
+	$('#settingprofile').hide();
+	$('#postfont').hide();
 }
 
 console.log(user)
