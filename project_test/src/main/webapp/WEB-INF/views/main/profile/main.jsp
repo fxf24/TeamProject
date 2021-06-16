@@ -104,10 +104,10 @@ console.log(user)
 function showProfileImage(fileName) {
 	var profileImage = fileName;
 	console.log("profileImage" + profileImage)
+	var img = new Image();
 	if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
 		var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 		var context = imagecanvas.getContext("2d")
-			var img = document.getElementById('img');
 			img.src = "/images/basicprofileimage.jpg"
  			img.onload = function() {
 				var maxWidth = 250; 
@@ -130,11 +130,10 @@ function showProfileImage(fileName) {
 		
 	} else { //저장된 프로필 사진 있을 때 - 해당 사진 출력
  			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-			var context = imagecanvas.getContext("2d")
-	 		var img = document.getElementById('img');
+			var context = imagecanvas.getContext("2d");
 				//img.style.display = "none"
-				console.log("/profile/" + profileImage)
-				img.src = "/profile/" + profileImage
+				console.log("/profile/" + profileImage);
+				img.src = "/profile/"+profileImage;
 	 			img.onload = function() {
 					var maxWidth = 250; 
 					var maxHeight = 250;
