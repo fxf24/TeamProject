@@ -80,13 +80,8 @@ public class HHserviceImpl implements HHservice{
 	}
 
 	@Override
-	public List<UserVO> getOthersProfileUser() {
-		return hhdao.getOthersProfileUser();
-	}
-
-	@Override
-	public UserVO getProfileUser(String profileImage) {
-		UserVO result = hhdao.getProfileUser(profileImage);
+	public UserVO getProfileUser(String id) {
+		UserVO result = hhdao.getProfileUser(id);
 		return result;
 	}
 
@@ -179,6 +174,17 @@ public class HHserviceImpl implements HHservice{
 	@Override
 	public void replyThumbsMinus(int replyNum, String id) {
 		hhdao.replyThumbsMinus(replyNum, id);
+	}
+
+	public void insertFollowData(String from_user, String to_user) {
+		// TODO Auto-generated method stub
+		hhdao.insertFollowData(from_user, to_user);
+	}
+
+	@Override
+	public List<String> getFollowData(String fromUser) {
+		// TODO Auto-generated method stub
+		return hhdao.getFollowData(fromUser);
 	}
 	
 }

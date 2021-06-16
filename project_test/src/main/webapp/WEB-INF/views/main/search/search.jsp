@@ -81,14 +81,14 @@ $(document).ready(function(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");	
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						}//else end
 					}// for end
 				} 
@@ -120,19 +120,20 @@ $(document).ready(function(){
 					for(var i in list){ //결과 반환
 						var userImage = list[i].profileImage
 						var userName = list[i].name
+						var userID = list[i].id
 						if(userImage==null){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");	
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");
 						}//else end
 					}// for end
 				}  //else end
@@ -176,7 +177,7 @@ $(document).ready(function(){
 					} else {
 						var hashSet = new Set(hashtagArr)
 						$(".hashtagresultSortPBox").css("display", "flex");
-						document.getElementById("hashtagresultNum").innerHTML = hashtagSet.size;
+						document.getElementById("hashtagresultNum").innerHTML = hashSet.size;
 						for(var i in hashtagArr){ //결과 반환
 							$(".hashtagSearchList").append
 							("<p><a class=hashtagList href='hashtagresult?hashtag="+hashtagArr[i]+"'>"+"#"+hashtagArr[i]+"</a></p>");		
@@ -232,15 +233,15 @@ function search(){
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
 							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} else {
 							var userImagepath = userImage.split("/")
 							//console.log(userImagepath)
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
-							"<p class=profileList><a href='profile/account?id="+userID+"'>"+userID+"</a></p></div>");
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} // else end
 					}// for end
 				}// else end 
@@ -273,19 +274,20 @@ function search(){
 						$(".nameSearchList").append
 						var userImage = list[i].profileImage
 						var userName = list[i].name
+						var userID = list[i].id
 						if(userImage==null){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");	
+							"<img class='profileimage' src='/images/basicprofileimage.jpg' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");	
 						} else {
 							var userImagepath = userImage.split("/")
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
-							"<p class=profileList><a href='profile/account?name="+userName+"'>"+userName+"</a></p></div>");
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<p class=profileList><a href='profile?id="+userID+"'>"+userName+"</a></p></div>");
 						}//else end					
 					}// for end
 				} // else end
@@ -373,14 +375,10 @@ function enterkey(){
 	
 function moveToID(value){
 	console.log(value)
-	var url = "/profile/account?id="+value;
+	var url = "/profile?id="+value;
 	location.href = url;
 }
-function moveToName(value){
-	console.log(value)
-	var url = "/profile/account?name="+value;
-	location.href = url;
-}
+
 </script>
 </head>
 <body>

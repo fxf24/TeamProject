@@ -765,32 +765,32 @@
 	order: 2;	
 	}
 	
-	.postID {
-	position: absolute;
-/* 	background: yellow; */
-	display: flex;
-	width: 10.729vw;
-	height: 2.529vw;	
-	top: 2.579vw;
-	left:2.657vw;
-	order: 1;
-	font-family: fantasy;
-	font-size: xx-large; 
-	word-spacing: 5vw;
-	line-height: 3vw;
-	}
+/* 	.postID { */
+/* 	position: absolute; */
+/*  	background: yellow; */ 
+/* 	display: flex; */
+/* 	width: 10.729vw; */
+/* 	height: 2.529vw;	 */
+/* 	top: 2.579vw; */
+/* 	left:2.657vw; */
+/* 	order: 1; */
+/* 	font-family: fantasy; */
+/* 	font-size: xx-large;  */
+/* 	word-spacing: 5vw; */
+/* 	line-height: 3vw; */
+/* 	} */
 	
-	.postImage {
-	position: absolute;
-/* 	background: yellow; */
-	display: flex;
-	width: 25.729vw;
-	height: 25.729vw;	
-	top: 0;
-	order: 1;
-	left:1.657vw;
-	border: 0.204vw solid silver;
-	}
+/* 	.postImage { */
+/* 	position: absolute; */
+/*  	background: yellow; */ 
+/* 	display: flex; */
+/* 	width: 25.729vw; */
+/* 	height: 25.729vw;	 */
+/* 	top: 0; */
+/* 	order: 1; */
+/* 	left:1.657vw; */
+/* 	border: 0.204vw solid silver; */
+/* 	} */
 	
 	.postContent {
 	position: absolute;
@@ -820,15 +820,15 @@
 	font-size: medium;		
 	}
 	
-	.postDate {
-	position: absolute;
-/* 	background: yellow; */
-	display: flex;
-	width: 15.729vw;
-	height: 1.534vw;	
-	top: 24.342vw;
-	order: 1;
-	left:28.347vw;	
-	font-weight: bold;
-	font-size: small;			
-	}
+/* 	.postDate { */
+/* 	position: absolute; */
+/*  	background: yellow;  */
+/* 	display: flex; */
+/* 	width: 15.729vw; */
+/* 	height: 1.534vw;	 */
+/* 	top: 24.342vw; */
+/* 	order: 1; */
+/* 	left:28.347vw;	 */
+/* 	font-weight: bold; */
+/* 	font-size: small;			 */
+/* 	} */

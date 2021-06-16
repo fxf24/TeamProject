@@ -60,10 +60,6 @@ select profileImage from users where id=#{id}
 select * from users 
 </select>
 
-<select id="getOthersProfileUser" resultType="userVO">
-select * from users 
-</select>
-
 <select id="getProfileUser" parameterType="String" resultType="userVO">
 select * from users where id= #{id}
 </select>
@@ -144,6 +140,14 @@ insert into replyThumbsup(id, replyNum) values(#{id}, #{replyNum})
 <delete id="replyThumbsMinus" parameterType="replythumbsupVO">
 delete from replyThumbsup where replyNum=#{replyNum} and id=#{id}
 </delete>
+
+<insert id="insertFollowData" parameterType="String">
+insert into follower(fromUser, toUser) values(#{from_user},#{to_user})
+</insert>
+
+<select id="getFollowData" parameterType="String" resultType="String">
+select toUser from follower where fromUser = #{fromUser}
+</select>
 </mapper>
 
 

@@ -3,6 +3,8 @@ package com.project.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,11 +153,6 @@ public class MainController {
 	public String profile() {
 		return "main/profile/main";
 	}
-	
-	@RequestMapping("/profile/account")
-	public String othersProfile() {
-		return "main/profile/othersmain";
-	}
 		
 	//회원아이디 주소창에 표시
 	@RequestMapping(value="/profileAccount", method=RequestMethod.GET)
@@ -172,18 +169,11 @@ public class MainController {
 		return oneProfileUser;
 	}
 	
-	@RequestMapping(value = "/othersProfileUser", method=RequestMethod.GET)
-	@ResponseBody
-	public List<UserVO> getOthersProfileUser() {
-		List<UserVO> othersProfileUser = hhService.getOthersProfileUser();
-		return othersProfileUser;
-	}
-	
 	//프로필 유저 정보 가져오기 - 정상작동
 	@RequestMapping(value = "/getProfileUser", method = RequestMethod.POST)
 	@ResponseBody
-	public UserVO getProfileUser(String profileImage) {
-		UserVO profileUser = hhService.getProfileUser(profileImage);
+	public UserVO getProfileUser(String id) {
+		UserVO profileUser = hhService.getProfileUser(id);
 		//System.out.println("유저의 프로필 이미지 : " + profileUser);
 		return profileUser;
 	}
@@ -318,9 +308,32 @@ public class MainController {
 	@ResponseBody
 	public List<PostVO> showPosts(String user){
 		List<PostVO> list = null;
+		
+		
 		if(user != null) {
+			List<String> follower = hhService.getFollowData(user);
+			
 			list = hhService.getUserPosts(user);
+			for(String f : follower) {
+				list.addAll(hhService.getUserPosts(f));
+			}
 		}
+		Collections.sort(list, new Comparator<PostVO>() {
+		    @Override
+		    public int compare(PostVO o1, PostVO o2) {
+		        return o2.postDate.compareTo(o1.postDate);
+		    }
+		    
+		});
 		return list;
 	}
+	
+	@RequestMapping(value = "/follow", method = RequestMethod.POST)
+	@ResponseBody
+	public String follow(String from_user, String to_user){
+		hhService.insertFollowData(from_user, to_user);
+		return  "{\"data\":\"팔로우 저장 완료\"}";
+	}
+	
+	
 }

@@ -5,11 +5,14 @@ html, body{
 	padding: 0;
 	overflow-x:hidden;
 	font-family: 'Nanum Gothic', sans-serif;
-	
+}
+
+html{
+	overflow-y:hidden;
 }
 
 body{
-	overflow-y:hidden;
+	overflow-y:scroll;
 }
 
 
