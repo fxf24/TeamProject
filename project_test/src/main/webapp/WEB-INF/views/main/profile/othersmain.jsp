@@ -70,14 +70,15 @@ if ( getProperty == "?id" || getProperty == "?name" ) { //url에서 id거나 nam
 		/* 게시물 업로드 - 포스트 작성으로 이동불가 */ 
 		$('#postfont').click(function(e){
 			e.preventDefault()
-			//alert("타인의 계정으로 게시물 업로드가 불가합니다.")	
+
 		});
-		
+			//alert("타인의 계정으로 게시물 업로드가 불가합니다.")	
 		/* 프로필 이미지 업로드 불가 */ 	
 		$("#upload").click(function(event){
 			event.preventDefault()
-			//alert("타인의 프로필 사진은 업로드 불가합니다.")	
+
 		});
+		//alert("타인의 프로필 사진은 업로드 불가합니다.")	
 	}); //document ready end 
 
 var profileUser = sessionStorage.getItem("profileUser")		
