@@ -468,7 +468,7 @@ $.ajax({
 	type: 'post',
 	url: '/updateUserProfileData',
 	data: {
-		"id": userId,
+		"id": user,
 		"profileImage" : fileName 
 		},
 	success: function (response) {
