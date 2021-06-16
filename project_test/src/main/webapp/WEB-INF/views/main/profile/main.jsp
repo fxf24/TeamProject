@@ -4,6 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<meta http-equiv="Pragma" content="no-cache" />
 <title>Insert title here</title>
  	<link href="/css/profile/mainprofile.css" rel="stylesheet" type="text/css">
   	<link href="/css/profile/postmodal.css" rel="stylesheet" type="text/css">	
@@ -473,7 +476,6 @@ $.ajax({
 		},
 	success: function (response) {
 				alert("프로필 사진을 저장했습니다!")
-				sessionImage(fileName)
 	},
 	error: function (request, status, error) {
 		//alert("success에 실패 했습니다.");
