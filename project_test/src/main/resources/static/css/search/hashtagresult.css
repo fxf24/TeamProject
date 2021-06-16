@@ -8,8 +8,12 @@ html, body{
 	
 }
 
-body{
+html{
 	overflow-y:hidden;
+}
+
+body{
+	overflow-y:scroll;
 }
 
 
