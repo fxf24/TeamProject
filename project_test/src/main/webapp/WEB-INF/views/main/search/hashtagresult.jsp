@@ -18,6 +18,10 @@
 <script src="/jquery-3.2.1.min.js"></script>
 <script>
 $(document).ready(function(){
+	$("#goToTopBtn").on("click", function(event){
+		var offset = $("#main").offset();
+		$("body").animate({scrollTop:offset.top}, 1500);
+	});
 	//좋아요순, 최신순 화면 출력
 	$("#favoriteBtn").on('click', function(){
 		$("#thumbsupView").css("display", "block");
@@ -1062,7 +1066,8 @@ function ClickReplyThumbsup(replyNum, i){
   <div id='updateMyReply'></div> <!-- 0.5초 또는 1초 있다가 나오게 변경해야할듯 -->
 </div>
 
-<i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn" onclick="window.scrollTo(0,0)"></i>
+<i class="fas fa-arrow-circle-up fa-3x" id="goToTopBtn"></i> 
+<!-- onclick="window.scrollTo(0,0)" -->
 </div>
 </body>
 </html>
