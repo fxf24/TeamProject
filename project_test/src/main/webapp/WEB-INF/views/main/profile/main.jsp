@@ -366,13 +366,13 @@ var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
 
 
-function clickImage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
+function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").css("display","flex")
 	$(".modal").fadeIn();
 	$("body").css("overflow-y", "hidden")
-	$("html").css("overflow-y", "hidden")
+// 	$("html").css("overflow-y", "hidden")
 	$(".modalContent").text("")
-	var postNum = parseInt(postNumber);
+	postNum = parseInt(postNumber);
 	
 	$.ajax({ //전달받은 postNum 조회
 		url :"/postnumsearch",
@@ -463,7 +463,7 @@ var editmodalState = 0;
 function modalClick(){
 	if(modalStatus==0){
 		$("body").css("overflow-y", "scroll")
-		$("html").css("overflow-y", "scroll")
+// 		$("html").css("overflow-y", "scroll")
 		$(".modal").fadeOut();
 		$("#cedit").fadeIn();
 		$("#cdelete").fadeIn();
@@ -658,7 +658,7 @@ function FunctionGetProfileImage(commentList, i){
 			else {
 				var imagePath = response.split("/")
 				var imageName = imagePath[imagePath.length-1]
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			}//else end
 			
@@ -810,7 +810,7 @@ function FunctionGetContentProfileImage(postID){
 				//console.log("경로 : "+ imagePath)
 				var imageName = imagePath[imagePath.length-1]
 				//console.log("이미지이름 : "+ imageName)
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			} // else end
 		},
