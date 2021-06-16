@@ -181,6 +181,7 @@ console.log(user)
 					} //showProfileImage() end
 				
 					meProfile(user)
+					showProfileImage(user)
 });//document ready end
 			
 function getProfileImage(profileImage) {
@@ -423,7 +424,7 @@ function meProfile(userId) {
 					//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
 				} //error end 
 			});//ajax end 
- 
+ 			
 
 
 } //meProfile(userId) end 					
