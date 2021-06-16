@@ -364,7 +364,7 @@ var totalThumbs = 0; // 총 좋아요 개수 저장
 var contents = []; // 좋아요 누른 사람을 저장하는 리스트
 
 
-function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
+function clickImage(postNumber){ // 이미지 클릭시 게시글 모달창으로 나타냄
 	$(".modal").css("display","flex")
 	$(".modal").fadeIn();
 	$("body").css("overflow-y", "hidden")
