@@ -172,18 +172,11 @@ public class MainController {
 		return oneProfileUser;
 	}
 	
-	@RequestMapping(value = "/othersProfileUser", method=RequestMethod.GET)
-	@ResponseBody
-	public List<UserVO> getOthersProfileUser() {
-		List<UserVO> othersProfileUser = hhService.getOthersProfileUser();
-		return othersProfileUser;
-	}
-	
 	//프로필 유저 정보 가져오기 - 정상작동
 	@RequestMapping(value = "/getProfileUser", method = RequestMethod.POST)
 	@ResponseBody
-	public UserVO getProfileUser(String profileImage) {
-		UserVO profileUser = hhService.getProfileUser(profileImage);
+	public UserVO getProfileUser(String id) {
+		UserVO profileUser = hhService.getProfileUser(id);
 		//System.out.println("유저의 프로필 이미지 : " + profileUser);
 		return profileUser;
 	}

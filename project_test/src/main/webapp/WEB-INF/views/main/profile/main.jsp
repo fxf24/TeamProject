@@ -10,8 +10,7 @@
   	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
-		var profileUser = sessionStorage.getItem("profileUser")
-		$(document).ready(function(){
+	$(document).ready(function(){
 			var user = sessionStorage.getItem("user")
 
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
@@ -172,16 +171,9 @@
 			
 		
 		var user = sessionStorage.getItem("user")
-		var profileUser = sessionStorage.getItem("profileUser")	
-		//var profileimgSrc = document.getElementById('img').src
-// 				var getLink = location.search
-// 				var getPostId = getLink.split("=")
-// 				var getOnlyId = getPostId[1]
-// 				console.log(getOnlyId)	//undefined		
-// 				alert(getOnlyId) //undefined or id 
-		
 
-//function getProfileImage(profileImage) {
+
+function getProfileImage(profileImage) {
 	$.ajax({
 			type: 'get',
 			url: '/oneProfileUser',
@@ -204,7 +196,6 @@
 						console.log(userId) //[" "]
 						
 						if (userId == user) { //자신의 프로필 접속 가능 
-							alert("자신의 프로필 접속을 유지합니다!")
 							meProfile(userId)
 							//location.href = "/profile"
 							 
@@ -222,26 +213,35 @@
 			}
 			
 		}); //ajax end 		
-//} //getProfileImage(profileImage) end 		
+} //getProfileImage(profileImage) end 		
 
-		
+function getParam(sname) {
+    var params = location.search.substr(location.search.indexOf("?") + 1);
+
+    var sval = "";
+    params = params.split("&");
+    for (var i = 0; i < params.length; i++) {
+
+        temp = params[i].split("=");
+
+        if ([temp[0]] == sname) { sval = temp[1]; }
+    }
+    return sval;
+}	
+
+if (getParam('id')== null){
+	user = sessionStorage.getItem("user")	
+}
+else{
+	user = getParam("id")
+	console.log(user)
+}
 
 	if (user == null) {
 			if (confirm("로그인해주세요!")) {
 				location.href = "/login"
 					}
-	}else { //자신 프로필 접속, 타인 프로필 접속 구분
-			//meProfile(userId)
-// 					function otherProfile(userId) {
-// 						sessionStorage.getItem("user")	
-// 								if (userId != user) {
-// 									//alert("타인 프로필로 접속 성공")
-// 									//location.href = "/profile/account?id=" + userId
-// 									}//if end 
-						 			
-// 							} //function end
-							
-var user = sessionStorage.getItem("user")
+	}else { 							
 					
 function meProfile(userId) {
 			/*  프로필 사진 저장 - 이미지 파일형식 변환  */
@@ -340,8 +340,6 @@ function meProfile(userId) {
 			});//ajax end
 		} //sessionImage(fileName) end	
 
-		var profileUser = sessionStorage.getItem("profileUser")		
-
 			/* 회원아이디, 게시물 수 불러오기 1*/ 
 			$.ajax({ 
 			url: '/postsCount',
@@ -423,92 +421,84 @@ function meProfile(userId) {
  
 
 
-// 			<div class="postModal" onclick="postModalClick()">
-// 			<div class="psotModalContent" onclick="postModalContentClick()">
-// 			</div>
-// 		</div>
-
-var imageName = ""
-var postContent = ""
-var hashTag = ""
-var postDate = ""
-
-	/* 포스트 전체 불러오기 3 - */
-function clickImage(postNumber){
-		
-	/* 포스트 모달창 띄우기 */
-//	console.log("준비")
-	$(".postModal").fadeIn();
-	$("body").css("overflow-y", "hidden")
-	$("html").css("overflow-y", "hidden")
-	$(".postModalContent").text("")		
-			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
-				url: '/posts',
-				type: 'get',
-				data: {"id": userId},
-				dataType: "json",
-				success: function(response){
-					//console.log(response) //arraylist 
-					
-// 						contents: "자연스러운 드라마 짤"
-// 						hashtag: "#handbag #handbag #tie #최강희"
-// 						id: "admin"
-// 						imagepath: "gangheebag.jpg"
-// 						postDate: "2021-06-13 01:53:16"
-// 						postNum: 77
-
-					//console.log(response[0].id) //list의 id 값 불러오기
-					for (var i in response){
-
-						var onePost = response[i]; //포스트 하나의 내용 
-						console.log(onePost) //array로 i개만큼 
-
-						//console.log(onePost.imagepath.split("/")) //["iu.png"]
-						//var id = onePost.id.split("/"); 
-						var imageName = onePost.imagepath.split("/")[0]; 
-						var postContent = onePost.contents.split("/")[0]; 
-						var hashTag = onePost.hashtag.split("/")[0]; 
-						console.log(hashTag)
-						var postDate = onePost.postDate.split("/")[0]; 
-						//console.log(postDate) //array로 i개만큼 
-						var postNum = onePost.postNum; 
-						//console.log(postNum) //모든 게시물 번호 
-							
-						if (postNum == postNumber) {
-							
-							$(".postModalContent").append(
-									"<div class='postID'>@"+user+"</div>"+
-									"<div class='onePostContent'><div><img class='postImage' src='/upload/"+imageName+" ' ></div>"+ 
-									"<div class='postContent'>"+postContent+"</div>"+
-									"<div class='hashTag'><a class='hashTagLink' href='https://search.shopping.naver.com/search/all?query="
-										+hashTag+"&cat_id=&frm=NVSHATC' target='_blank'>"+hashTag+"</a>&nbsp</div>"+
-		 							"<div class='postDate'>"+postDate+"</div></div>")
-	 	 							
-						} //if end
-						
-					} //for end  
-
-				}, //success end 
- 				error: function(request, status, error){
-// 					alert("포스트 내용 불러오기에 실패했습니다.")
-// 					request, status, error
- 					console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
- 				} //error end 
-				
-			});//ajax end
-		} //clickimage() end	
-
-function postModalClick(){
-	$(".postModal").fadeOut();	
-}//postModalClick() end
-
 } //meProfile(userId) end 					
 
 			
-		} // else end 	
-			
+} // else end 	
+		var imageName = ""
+			var postContent = ""
+			var hashTag = ""
+			var postDate = ""
+
+				/* 포스트 전체 불러오기 3 - */
+function clickImage(postNumber){	
+			/* 포스트 모달창 띄우기 */
+//			console.log("준비")
+			$(".postModal").fadeIn();
+			$("body").css("overflow-y", "hidden")
+			$("html").css("overflow-y", "hidden")
+			$(".postModalContent").text("")		
+			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
+						url: '/posts',
+						type: 'get',
+						data: {"id": userId},
+						dataType: "json",
+						success: function(response){
+							//console.log(response) //arraylist 
+							
+//		 						contents: "자연스러운 드라마 짤"
+//		 						hashtag: "#handbag #handbag #tie #최강희"
+//		 						id: "admin"
+//		 						imagepath: "gangheebag.jpg"
+//		 						postDate: "2021-06-13 01:53:16"
+//		 						postNum: 77
+
+							//console.log(response[0].id) //list의 id 값 불러오기
+							for (var i in response){
+
+								var onePost = response[i]; //포스트 하나의 내용 
+								console.log(onePost) //array로 i개만큼 
+
+								//console.log(onePost.imagepath.split("/")) //["iu.png"]
+								//var id = onePost.id.split("/"); 
+								var imageName = onePost.imagepath.split("/")[0]; 
+								var postContent = onePost.contents.split("/")[0]; 
+								var hashTag = onePost.hashtag.split("/")[0]; 
+								console.log(hashTag)
+								var postDate = onePost.postDate.split("/")[0]; 
+								//console.log(postDate) //array로 i개만큼 
+								var postNum = onePost.postNum; 
+								//console.log(postNum) //모든 게시물 번호 
+									
+								if (postNum == postNumber) {
+									
+									$(".postModalContent").append(
+											"<div class='postID'>@"+user+"</div>"+
+											"<div class='onePostContent'><div><img class='postImage' src='/upload/"+imageName+" ' ></div>"+ 
+											"<div class='postContent'>"+postContent+"</div>"+
+											"<div class='hashTag'><a class='hashTagLink' href='https://search.shopping.naver.com/search/all?query="
+												+hashTag+"&cat_id=&frm=NVSHATC' target='_blank'>"+hashTag+"</a>&nbsp</div>"+
+				 							"<div class='postDate'>"+postDate+"</div></div>")
+			 	 							
+								} //if end
+								
+							} //for end  
+
+						}, //success end 
+		 				error: function(request, status, error){
+//		 					alert("포스트 내용 불러오기에 실패했습니다.")
+//		 					request, status, error
+		 					console.log("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
+		 				} //error end 
+						
+			});//ajax end
+			} //clickimage() end	
+
+			function postModalClick(){
+				$(".postModal").fadeOut();	
+			}//postModalClick() end	
 		
-		var contents = ""; //팔로워 저장하는 리스트
+var contents = ""; //팔로워 저장하는 리스트
 
 </script>	
 </head>

@@ -80,13 +80,8 @@ public class HHserviceImpl implements HHservice{
 	}
 
 	@Override
-	public List<UserVO> getOthersProfileUser() {
-		return hhdao.getOthersProfileUser();
-	}
-
-	@Override
-	public UserVO getProfileUser(String profileImage) {
-		UserVO result = hhdao.getProfileUser(profileImage);
+	public UserVO getProfileUser(String id) {
+		UserVO result = hhdao.getProfileUser(id);
 		return result;
 	}
 

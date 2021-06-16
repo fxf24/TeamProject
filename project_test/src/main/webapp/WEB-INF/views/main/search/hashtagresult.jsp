@@ -130,12 +130,12 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 					"<div class=Header1>"+
 						"<div class=Header1-1>"+
 							"<div class='postProfileImage'>"+
-								"<img class=postImage src='"+profileImagePath+"' onclick=location.href='/profile/account?id="+contents.id+"'>"+
+								"<img class=postImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+contents.id+"'>"+
 							"</div>"+ 						
 						"</div>"+ //header1-1
 						"<div class=Header1-2>"+
 							"<div class=postIDX>"+
-								"<div class='postID'><a id=postID href='/profile/account?id="+contents.id+"'>"+contents.id+"</a></div>"+
+								"<div class='postID'><a id=postID href='/profile?id="+contents.id+"'>"+contents.id+"</a></div>"+
 								"<div class='windowClose'><i class='far fa-window-close fa-2x' onclick='modalClick()'></i></div>"+
 							"</div>"+ //postIDx
 							"<div class='postDate'>"+
@@ -412,13 +412,13 @@ function FunctionGetProfileImage(commentList, i){
 				        "<div class=Comment1>"+
 				        	"<div class=Comment1-1>"+
 				            	"<div class=oneCommentProfileImage>"+
-				            		"<image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile/account?id="+commentList.id+"'>"+
+				            		"<image class='commentImage' src='"+profileImage+"' onclick=location.href='/profile?id="+commentList.id+"'>"+
 				           		"</div>"+
 				           	"</div>"+ //Comment1-1
 				           	"<div class=Comment1-2>"+
 					            "<div class=CommentIDX>"+
 					                "<div class=CommentID>"+
-					                	"<a id=CommentID onclick=location.href='/profile/account?id="+commentList.id+"'> "+commentList.id+"</a>"+
+					                	"<a id=CommentID onclick=location.href='/profile?id="+commentList.id+"'> "+commentList.id+"</a>"+
 					                "</div>"+
 					                "<div class=CommentSet onclick='FunctionEditComment(\""+commentList.id+"\", "+commentList.commentNum+", "+cnt+")'>"+
 					                	"<i class='fas fa-ellipsis-h' id=CommentSet></i>"+
@@ -704,13 +704,13 @@ function FunctionGetReply(commentNum, cnt){
 					"<div class=Reply1>"+
 						"<div class=Reply1-1>"+
 				            "<div class=oneReplyProfileImage>"+
-				            	"<img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile/account?id="+list[i].id+"'>"+
+				            	"<img class=commentImage src='"+profileImagePath+"' onclick=location.href='/profile?id="+list[i].id+"'>"+
 				            "</div>"+
 			            "</div>"+ // Reply1-1
 			            "<div class=Reply1-2>"+
 				            "<div class=ReplyIDX>"+
 				                "<div class=ReplyID>"+
-				             	   "<p id=ReplyID onclick=location.href='/profile/account?id="+list[i].id+"'>"+list[i].id+"</p>"+
+				             	   "<p id=ReplyID onclick=location.href='/profile?id="+list[i].id+"'>"+list[i].id+"</p>"+
 				                "</div>"+
 				                "<div class=ReplySet onclick='FunctionEditReply(\""+list[i].id+"\", "+list[i].replyNum+", "+cnt+", "+list[i].commentNum+", "+i+")'>"+
 				                	"<i class='fas fa-ellipsis-h' id=ReplySet></i>"+

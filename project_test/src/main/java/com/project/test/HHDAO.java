@@ -22,8 +22,7 @@ public interface HHDAO {
 	List<CommentsVO> getComments(int postNum); // 작성한 댓글 불러오기
 	String getProfileImage(String id); // 프로필 사진만 불러오기
 	List<UserVO> getOneProfileUser();
-	List<UserVO> getOthersProfileUser();
-	UserVO getProfileUser(String profileImage); //프로필 유저 한 명 불러오기
+	UserVO getProfileUser(String id); //프로필 유저 한 명 불러오기
 	void updateUserProfileData(String id, String profileImage); //회원의 프로필 수정 저장
 	List<UserVO> getOneProfileImage(String id); //회원의 프로필 사진 불러오기
 	List<PostVO> getPostsCount(String id); //프로필 게시물 수 불러오기
