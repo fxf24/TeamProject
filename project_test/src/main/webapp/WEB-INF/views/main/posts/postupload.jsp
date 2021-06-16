@@ -168,7 +168,7 @@
                     'id': user,
                     'content': $("#contents").val(),
                     'image': fileName,
-                    'hashtag': $("#hashtags").text() + $("#names").val()
+                    'hashtag': $("#hashtags").text() + $("#hash_names").val()
                 },
                 dataType: 'json',
                 success: function (response) {
