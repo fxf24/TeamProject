@@ -107,9 +107,8 @@ function showProfileImage(fileName) {
 	if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
 		var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 		var context = imagecanvas.getContext("2d")
-			profileImage = 'basicprofileimage.jpg';
 			var img = document.getElementById('img');
-			img.src = "/profile/" + profileImage
+			img.src = "/images/basicprofileimage.jpg"
  			img.onload = function() {
 				var maxWidth = 250; 
 				var maxHeight = 250;
