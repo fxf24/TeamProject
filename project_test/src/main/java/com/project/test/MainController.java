@@ -3,6 +3,8 @@ package com.project.test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -306,9 +308,23 @@ public class MainController {
 	@ResponseBody
 	public List<PostVO> showPosts(String user){
 		List<PostVO> list = null;
+		
+		
 		if(user != null) {
+			List<String> follower = hhService.getFollowData(user);
+			
 			list = hhService.getUserPosts(user);
+			for(String f : follower) {
+				list.addAll(hhService.getUserPosts(f));
+			}
 		}
+		Collections.sort(list, new Comparator<PostVO>() {
+		    @Override
+		    public int compare(PostVO o1, PostVO o2) {
+		        return o2.postDate.compareTo(o1.postDate);
+		    }
+		    
+		});
 		return list;
 	}
 	
@@ -318,4 +334,6 @@ public class MainController {
 		hhService.insertFollowData(from_user, to_user);
 		return  "{\"data\":\"팔로우 저장 완료\"}";
 	}
+	
+	
 }

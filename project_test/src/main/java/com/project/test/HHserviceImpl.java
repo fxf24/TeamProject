@@ -180,5 +180,11 @@ public class HHserviceImpl implements HHservice{
 		// TODO Auto-generated method stub
 		hhdao.insertFollowData(from_user, to_user);
 	}
+
+	@Override
+	public List<String> getFollowData(String fromUser) {
+		// TODO Auto-generated method stub
+		return hhdao.getFollowData(fromUser);
+	}
 	
 }

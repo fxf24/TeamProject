@@ -144,6 +144,10 @@ delete from replyThumbsup where replyNum=#{replyNum} and id=#{id}
 <insert id="insertFollowData" parameterType="String">
 insert into follower(fromUser, toUser) values(#{from_user},#{to_user})
 </insert>
+
+<select id="getFollowData" parameterType="String" resultType="String">
+select toUser from follower where fromUser = #{fromUser}
+</select>
 </mapper>
 
 
