@@ -497,6 +497,7 @@ function clickImage(postNumber){
 			function postModalClick(){
 				$(".postModal").fadeOut();
 				$("body").css("overflow-y", "scroll")
+				$("html").css("overflow-y", "scroll")
 			}//postModalClick() end	
 		
 var contents = ""; //팔로워 저장하는 리스트
