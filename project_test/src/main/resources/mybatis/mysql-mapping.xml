@@ -140,6 +140,10 @@ insert into replyThumbsup(id, replyNum) values(#{id}, #{replyNum})
 <delete id="replyThumbsMinus" parameterType="replythumbsupVO">
 delete from replyThumbsup where replyNum=#{replyNum} and id=#{id}
 </delete>
+
+<insert id="insertFollowData" parameterType="String">
+insert into follower(fromUser, toUser) values(#{from_user},#{to_user})
+</insert>
 </mapper>
 
 

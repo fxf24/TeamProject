@@ -14,7 +14,8 @@ var user = sessionStorage.getItem("user")
 $(document).ready(function(){
 
 if (getParam('id')== ""){
-	user = sessionStorage.getItem("user")	
+	user = sessionStorage.getItem("user")
+	$("#follow").hide();
 }
 else{
 	user = getParam("id")
@@ -483,6 +484,20 @@ function clickImage(postNumber){
 		
 var contents = ""; //팔로워 저장하는 리스트
 
+function follow(){
+	var from_user = sessionStorage.getItem("user")
+	var to_user = getParam("id")
+	
+	$.ajax({
+		url: '/follow',
+		type: 'post',
+		data: {"from_user": from_user, "to_user": to_user},
+		dataType: "json",
+		success: function(response){
+			alert(response.data)
+		}
+	})
+}
 </script>	
 </head>
 <body>
@@ -566,7 +581,7 @@ var contents = ""; //팔로워 저장하는 리스트
 									<div id="pff">
 										<span class="secondline" id="profileposts">&nbsp;게시물&nbsp; </span>
 				        				<span class="secondline" id="follower">&nbsp;팔로워 &nbsp; </span>
-				        				<span class="secondline" id="follow">&nbsp;팔로우 &nbsp; </span>
+				        				<span onclick="follow()" class="secondline" id="follow">&nbsp;팔로우 &nbsp; </span>
 									</div>
 									
 							<!-- 게시물 업로드 줄 -->

@@ -175,5 +175,10 @@ public class HHserviceImpl implements HHservice{
 	public void replyThumbsMinus(int replyNum, String id) {
 		hhdao.replyThumbsMinus(replyNum, id);
 	}
+
+	public void insertFollowData(String from_user, String to_user) {
+		// TODO Auto-generated method stub
+		hhdao.insertFollowData(from_user, to_user);
+	}
 	
 }

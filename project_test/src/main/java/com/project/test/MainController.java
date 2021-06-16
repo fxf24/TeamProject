@@ -311,4 +311,11 @@ public class MainController {
 		}
 		return list;
 	}
+	
+	@RequestMapping(value = "/follow", method = RequestMethod.POST)
+	@ResponseBody
+	public String follow(String from_user, String to_user){
+		hhService.insertFollowData(from_user, to_user);
+		return  "{\"data\":\"팔로우 저장 완료\"}";
+	}
 }

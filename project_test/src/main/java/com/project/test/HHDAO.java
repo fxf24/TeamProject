@@ -41,4 +41,5 @@ public interface HHDAO {
 	List<ReplyThumbsupVO> getReplyThumbsup(int replyNum); //답글에 눌린 좋아요 불러오기
 	void replyThumbsPlus(int replyNum, String id); //답글 좋아요 누르기
 	void replyThumbsMinus(int replyNum, String id); //답글 좋아요 취소
+	void insertFollowData(String from_user, String to_user);
 }

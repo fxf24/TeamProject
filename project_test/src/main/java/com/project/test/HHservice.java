@@ -36,5 +36,5 @@ public interface HHservice {
 	List<ReplyThumbsupVO> getReplyThumbsup(int replyNum);
 	void replyThumbsPlus(int replyNum, String id);
 	void replyThumbsMinus(int replyNum, String id);
-	
+	void insertFollowData(String from_user, String to_user);
 }
