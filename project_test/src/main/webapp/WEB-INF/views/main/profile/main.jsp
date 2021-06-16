@@ -102,87 +102,66 @@ console.log(user)
 });//document ready end
 /* 업로드 - 프로필 사진 출력 - 유지 */ //Cannot write uploaded file to disk!
 function showProfileImage(fileName) {
-	$.ajax({ 
-		url:'/getOneProfileImage',
-		type:'post',
-		data: { "id": user },
-		dataType: "json",
-		success: function(response){
-			console.log(response) //1의 행
-			var profileImage = response[0].profileImage
-			console.log(profileImage) //null or 이미지파일명
-			//var userNo = response[0].userNo
-			//console.log(userNo)
-		 		
-			if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
-		 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-					var context = imagecanvas.getContext("2d")
-		 			profileImage = 'basicprofileimage.jpg';
-						var img = document.getElementById('img');
-						img.src = "/profile/" + profileImage
-			 			img.onload = function() {
-							var maxWidth = 250; 
-							var maxHeight = 250;
-							var width = img.width;
-							var height = img.height;
-							
-							if(width > maxWidth){
-								height = height/(width / maxWidth) ;
-								width = maxWidth;
-								
-							}else{
-								if(height > maxHeight){
-									width = width/(height/ maxHeight);
-									height = maxHeight;
-								}//중첩 if ends
-							}//if end 
-							context.drawImage(img, 0, 0, width, height)	
-						} //onload end 
-		 		
-				} else { //저장된 프로필 사진 있을 때 - 해당 사진 출력
-			 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
-						var context = imagecanvas.getContext("2d")
-			 			profileImage = fileName;
-				 			var img = document.getElementById('img');
-							//img.style.display = "none"
-							img.src = "/profile/" + profileImage
-				 			img.onload = function() {
-								var maxWidth = 250; 
-								var maxHeight = 250;
-								var width = img.width;
-								var height = img.height;
-								
-								if(width > maxWidth){
-									height = height/(width / maxWidth) ;
-									width = maxWidth;
-									
-								}else{
-									if(height > maxHeight){
-										width = width/(height/ maxHeight);
-										height = maxHeight;
-									}//중첩 if ends
-								}//if end 
-								context.drawImage(img, 0, 0, width, height)	
-							} // onload end
-		 			
-					//var imagePath = response.split("/")
-					//var imageName = imagePath[imagePath.length-1]
-	//	 			profileImage = '/profile/'
-	//	 			profileImage += imageName
+	var profileImage = fileName;
 	
-				}//else end
+	if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
+		var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
+		var context = imagecanvas.getContext("2d")
+			profileImage = 'basicprofileimage.jpg';
+			var img = document.getElementById('img');
+			img.src = "/profile/" + profileImage
+ 			img.onload = function() {
+				var maxWidth = 250; 
+				var maxHeight = 250;
+				var width = img.width;
+				var height = img.height;
 				
-				//getProfileImage(profileImage)
-				
-				//sessionStorage.setItem("updateProfileImg", profileImage)
-			}, //success end 
-			error: function(request, status, error){
-				//alert("status : " + request.status + ", message : " + request.responseText + ", error : " + error); 
-			} //error end 
+				if(width > maxWidth){
+					height = height/(width / maxWidth) ;
+					width = maxWidth;
+					
+				}else{
+					if(height > maxHeight){
+						width = width/(height/ maxHeight);
+						height = maxHeight;
+					}//중첩 if ends
+				}//if end 
+				context.drawImage(img, 0, 0, width, height)	
+			} //onload end 
+		
+	} else { //저장된 프로필 사진 있을 때 - 해당 사진 출력
+ 			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
+			var context = imagecanvas.getContext("2d")
+ 			profileImage = fileName;
+	 			var img = document.getElementById('img');
+				//img.style.display = "none"
+				img.src = "/profile/" + profileImage
+	 			img.onload = function() {
+					var maxWidth = 250; 
+					var maxHeight = 250;
+					var width = img.width;
+					var height = img.height;
+					
+					if(width > maxWidth){
+						height = height/(width / maxWidth) ;
+						width = maxWidth;
+						
+					}else{
+						if(height > maxHeight){
+							width = width/(height/ maxHeight);
+							height = maxHeight;
+						}//중첩 if ends
+					}//if end 
+					context.drawImage(img, 0, 0, width, height)	
+				} // onload end
 			
-		});//ajax end 
+		//var imagePath = response.split("/")
+		//var imageName = imagePath[imagePath.length-1]
+//	 			profileImage = '/profile/'
+//	 			profileImage += imageName
 
-	} //showProfileImage() end
+	}//else end
+} //showProfileImage() end
 	
 function getProfileImage(profileImage) {
 	$.ajax({
