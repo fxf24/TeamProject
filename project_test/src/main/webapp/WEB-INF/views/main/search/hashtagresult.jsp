@@ -98,7 +98,7 @@ function clickimage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 	$(".modal").css("display","flex")
 	$(".modal").fadeIn();
 	$("body").css("overflow-y", "hidden")
-	$("html").css("overflow-y", "hidden")
+// 	$("html").css("overflow-y", "hidden")
 	$(".modalContent").text("")
 	postNum = parseInt(postNumber);
 	
@@ -191,7 +191,7 @@ var editmodalState = 0;
 function modalClick(){
 	if(modalStatus==0){
 		$("body").css("overflow-y", "scroll")
-		$("html").css("overflow-y", "scroll")
+// 		$("html").css("overflow-y", "scroll")
 		$(".modal").fadeOut();
 		$("#cedit").fadeIn();
 		$("#cdelete").fadeIn();
