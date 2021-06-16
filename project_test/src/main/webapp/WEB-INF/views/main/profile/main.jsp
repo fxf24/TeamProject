@@ -10,15 +10,18 @@
   	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
-$(document).ready(function(){
 var user = sessionStorage.getItem("user")
+$(document).ready(function(){
+
 if (getParam('id')== null){
 	user = sessionStorage.getItem("user")	
 }
 else{
 	user = getParam("id")
 }
+
 console.log(user)
+
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
 		$('#postfont').click(function(){
 			location.href = "/postupload"
@@ -175,10 +178,6 @@ console.log(user)
 					meProfile(user)
 });//document ready end
 			
-		
-var user = sessionStorage.getItem("user")
-
-
 function getProfileImage(profileImage) {
 	$.ajax({
 			type: 'get',
