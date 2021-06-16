@@ -275,8 +275,6 @@ function meProfile(userId) {
 				//console.log(response) // Array(response.length) 
 				//console.log(response.length)
 				var postsCount = response.length //게시물 개수
-				var postId = response[0].id
-				//console.log(postId)
 				var postsWord = $('#profileposts').text(); 
 				$('#profileposts').text(postsWord + "\n" + "\n" + postsCount + "\n"); //게시물 + 갯수
 				$('#accountId').text("\n" + userId + "\n"); //회원아이디
@@ -370,9 +368,9 @@ function clickImage(postNumber){ // 이미지 클릭시 게시글 모달창으�
 	$(".modal").css("display","flex")
 	$(".modal").fadeIn();
 	$("body").css("overflow-y", "hidden")
-	$("html").css("overflow-y", "hidden")
+// 	$("html").css("overflow-y", "hidden")
 	$(".modalContent").text("")
-	var postNum = parseInt(postNumber);
+	postNum = parseInt(postNumber);
 	
 	$.ajax({ //전달받은 postNum 조회
 		url :"/postnumsearch",
@@ -463,7 +461,7 @@ var editmodalState = 0;
 function modalClick(){
 	if(modalStatus==0){
 		$("body").css("overflow-y", "scroll")
-		$("html").css("overflow-y", "scroll")
+// 		$("html").css("overflow-y", "scroll")
 		$(".modal").fadeOut();
 		$("#cedit").fadeIn();
 		$("#cdelete").fadeIn();
@@ -658,7 +656,7 @@ function FunctionGetProfileImage(commentList, i){
 			else {
 				var imagePath = response.split("/")
 				var imageName = imagePath[imagePath.length-1]
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			}//else end
 			
@@ -810,7 +808,7 @@ function FunctionGetContentProfileImage(postID){
 				//console.log("경로 : "+ imagePath)
 				var imageName = imagePath[imagePath.length-1]
 				//console.log("이미지이름 : "+ imageName)
-				profileImage = '/upload/'
+				profileImage = '/profile/'
 				profileImage += imageName
 			} // else end
 		},
