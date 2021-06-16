@@ -103,7 +103,7 @@ console.log(user)
 /* 업로드 - 프로필 사진 출력 - 유지 */ //Cannot write uploaded file to disk!
 function showProfileImage(fileName) {
 	var profileImage = fileName;
-	
+	console.log("profileImage" + profileImage)
 	if(profileImage == null){ //프로필 사진이 없을 때 - 기본이미지 출력 - 미작동 
 		var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 		var context = imagecanvas.getContext("2d")
@@ -132,8 +132,7 @@ function showProfileImage(fileName) {
 	} else { //저장된 프로필 사진 있을 때 - 해당 사진 출력
  			var imagecanvas = document.getElementById("imagecanvas")//htmlobject타입
 			var context = imagecanvas.getContext("2d")
- 			profileImage = fileName;
-	 			var img = document.getElementById('img');
+	 		var img = document.getElementById('img');
 				//img.style.display = "none"
 				img.src = "/profile/" + profileImage
 	 			img.onload = function() {
