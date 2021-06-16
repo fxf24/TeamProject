@@ -228,73 +228,7 @@ if (user == null) {
 }else { 							
 					
 function meProfile(userId) {
-			/*  프로필 사진 저장 - 이미지 파일형식 변환  */
-			function saveProfileImage() { //프로필 사진 업로드 클릭 시 
-				var $canvas = document.getElementById('imagecanvas');
-				var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
-				
-				var blobBin = atob(imgDataUrl.split(',')[1]); // base64 데이터 디코딩
-				var array = [];
-				for (var i = 0; i < blobBin.length; i++) {
-					array.push(blobBin.charCodeAt(i));
-				}
-				      var file = new Blob([new Uint8Array(array)], {
-				          name: '$("#inputProfile")[0].files[0]',
-				          type: 'image/png'
-				      }); // Blob 생성					
-				var formdata = new FormData(); // formData 생성
-				var fileValue = $("#inputProfile").val().split("\\");
-				var fileName = fileValue[fileValue.length - 1];
-				formdata.append("file", file, fileName);	// file data 추가
-				
-				$.ajax({
-					type: 'post',
-					url: '/saveProfileImage',
-					data: formdata,
-					dataType: "json",
-					processData: false,	// data 파라미터 강제 string 변환 방지!!
-					contentType: false,	// application/x-www-form-urlencoded; 방지!!
-					success: function (response) {
-						//console.log(response) //{filename: "eunsu.jpg"}
-						var fileName = response.filename
-						console.log(fileName)
-						//sessionStorage.setItem("updateProfileImg", fileName)
-						
-// 						var json = JSON.parse(response)
-// 						var fileName = json.fileName
-// 						console.log(json.fileName);  //undefined
-						
-					}
-				
-				}); //ajax end 	
-				
-				updateProfileImage(fileName)
-				
-			} //saveProfileImage() function end		
-
 			
-		/*  프로필 사진 저장 - user DB에 프로필 이미지 추가 업데이트 */
-		function updateProfileImage(fileName) {
-			$.ajax({
-				type: 'post',
-				url: '/updateUserProfileData',
-				data: {
-					"id": userId,
-					"profileImage" : fileName 
-					},
-				success: function (response) {
-							alert("프로필 사진을 저장했습니다!")
-							sessionImage(fileName)
-				},
-				error: function (request, status, error) {
-					//alert("success에 실패 했습니다.");
-					alert("프로필 이미지를 등록해주세요!")
-					console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); //200에러 
-				}
-			});	//ajax end
-			
-
-		} //updateProfileImage() end
 
 
 			/* 프로필 유저 이미지 유지 */
@@ -483,7 +417,73 @@ function clickImage(postNumber){
 			}//postModalClick() end	
 		
 var contents = ""; //팔로워 저장하는 리스트
+/*  프로필 사진 저장 - 이미지 파일형식 변환  */
+function saveProfileImage() { //프로필 사진 업로드 클릭 시 
+	var $canvas = document.getElementById('imagecanvas');
+	var imgDataUrl = $canvas.toDataURL('image/png', 1.0)
+	
+	var blobBin = atob(imgDataUrl.split(',')[1]); // base64 데이터 디코딩
+	var array = [];
+	for (var i = 0; i < blobBin.length; i++) {
+		array.push(blobBin.charCodeAt(i));
+	}
+	      var file = new Blob([new Uint8Array(array)], {
+	          name: '$("#inputProfile")[0].files[0]',
+	          type: 'image/png'
+	      }); // Blob 생성					
+	var formdata = new FormData(); // formData 생성
+	var fileValue = $("#inputProfile").val().split("\\");
+	var fileName = fileValue[fileValue.length - 1];
+	formdata.append("file", file, fileName);	// file data 추가
+	
+	$.ajax({
+		type: 'post',
+		url: '/saveProfileImage',
+		data: formdata,
+		dataType: "json",
+		processData: false,	// data 파라미터 강제 string 변환 방지!!
+		contentType: false,	// application/x-www-form-urlencoded; 방지!!
+		success: function (response) {
+			//console.log(response) //{filename: "eunsu.jpg"}
+			var fileName = response.filename
+			console.log(fileName)
+			//sessionStorage.setItem("updateProfileImg", fileName)
+			
+//				var json = JSON.parse(response)
+//				var fileName = json.fileName
+//				console.log(json.fileName);  //undefined
+			
+		}
+	
+	}); //ajax end 	
+	
+	updateProfileImage(fileName)
+	
+} //saveProfileImage() function end		
 
+
+/*  프로필 사진 저장 - user DB에 프로필 이미지 추가 업데이트 */
+function updateProfileImage(fileName) {
+$.ajax({
+	type: 'post',
+	url: '/updateUserProfileData',
+	data: {
+		"id": userId,
+		"profileImage" : fileName 
+		},
+	success: function (response) {
+				alert("프로필 사진을 저장했습니다!")
+				sessionImage(fileName)
+	},
+	error: function (request, status, error) {
+		//alert("success에 실패 했습니다.");
+		alert("프로필 이미지를 등록해주세요!")
+		console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); //200에러 
+	}
+});	//ajax end
+
+
+} //updateProfileImage() end
 function follow(){
 	var from_user = sessionStorage.getItem("user")
 	var to_user = getParam("id")
