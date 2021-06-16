@@ -237,11 +237,11 @@ else{
 	console.log(user)
 }
 
-	if (user == null) {
-			if (confirm("로그인해주세요!")) {
+if (user == null) {
+		if (confirm("로그인해주세요!")) {
 				location.href = "/login"
 					}
-	}else { 							
+}else { 							
 					
 function meProfile(userId) {
 			/*  프로필 사진 저장 - 이미지 파일형식 변환  */
