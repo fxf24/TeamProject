@@ -133,6 +133,7 @@ function showProfileImage(fileName) {
 			var context = imagecanvas.getContext("2d")
 	 		var img = document.getElementById('img');
 				//img.style.display = "none"
+				console.log("/profile/" + profileImage)
 				img.src = "/profile/" + profileImage
 	 			img.onload = function() {
 					var maxWidth = 250; 
