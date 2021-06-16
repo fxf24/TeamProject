@@ -172,7 +172,7 @@ console.log(user)
 				
 					} //showProfileImage() end
 				
-					meProfile(userId)
+					meProfile(user)
 });//document ready end
 			
 		
