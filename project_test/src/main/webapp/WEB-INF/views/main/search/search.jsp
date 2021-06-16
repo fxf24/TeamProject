@@ -87,7 +87,7 @@ $(document).ready(function(){
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
 							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						}//else end
 					}// for end
@@ -131,7 +131,7 @@ $(document).ready(function(){
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
 							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
 						}//else end
 					}// for end
@@ -239,7 +239,7 @@ function search(){
 							$(".idSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToID('"+userID+"')></div>"+
 							"<p class=profileList><a href='profile?id="+userID+"'>"+userID+"</a></p></div>");
 						} // else end
 					}// for end
@@ -284,7 +284,7 @@ function search(){
 							$(".nameSearchList").append
 							("<div class=oneProfile>"+
 							"<div class=profileImage>"+
-							"<img class='profileimage' src='/upload/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
+							"<img class='profileimage' src='/profile/"+userImagepath[userImagepath.length-1]+"' onclick=moveToName('"+userName+"')></div>"+
 							"<p class=profileList><a href='profile?name="+userName+"'>"+userName+"</a></p></div>");
 						}//else end					
 					}// for end
