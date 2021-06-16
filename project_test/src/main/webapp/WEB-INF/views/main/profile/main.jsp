@@ -441,7 +441,7 @@ function clickImage(postNumber){
 			$.ajax({ //부적합한 열 유형 1111 => 값이 null이므로 => postupload에서 값 받아오는게 안됨
 						url: '/posts',
 						type: 'get',
-						data: {"id": userId},
+						data: {"id": user},
 						dataType: "json",
 						success: function(response){
 							//console.log(response) //arraylist 
