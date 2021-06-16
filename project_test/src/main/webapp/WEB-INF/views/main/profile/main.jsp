@@ -323,7 +323,7 @@ function meProfile(userId) {
 			$.ajax({ 
 				url:'/getProfileUser',
 				type:'post',
-				data: {"profileImage": fileName},		
+				data: {"id": userId},		
 				dataType: "json",
 				success: function(response){
 					console.log(response) //{id: "eunsu", password: "eunsu", email: "eunsu@gmail.com", name: "은수", telephone: "010-0000-7890", …}
