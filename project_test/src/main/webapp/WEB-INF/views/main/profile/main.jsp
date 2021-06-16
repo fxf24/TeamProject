@@ -10,9 +10,15 @@
   	
 <script type="text/javascript" src="/jquery-3.2.1.min.js"></script>
 		<script>
-	$(document).ready(function(){
-			var user = sessionStorage.getItem("user")
-
+$(document).ready(function(){
+var user = sessionStorage.getItem("user")
+if (getParam('id')== null){
+	user = sessionStorage.getItem("user")	
+}
+else{
+	user = getParam("id")
+}
+console.log(user)
 		/* 게시물 업로드 - 포스트 작성으로 이동 */ 
 		$('#postfont').click(function(){
 			location.href = "/postupload"
@@ -166,11 +172,11 @@
 				
 					} //showProfileImage() end
 				
-			
-			});//document ready end
+					meProfile(userId)
+});//document ready end
 			
 		
-		var user = sessionStorage.getItem("user")
+var user = sessionStorage.getItem("user")
 
 
 function getProfileImage(profileImage) {
@@ -229,13 +235,7 @@ function getParam(sname) {
     return sval;
 }	
 
-if (getParam('id')== null){
-	user = sessionStorage.getItem("user")	
-}
-else{
-	user = getParam("id")
-	console.log(user)
-}
+
 
 if (user == null) {
 		if (confirm("로그인해주세요!")) {
