@@ -3,7 +3,8 @@
 ## Main
 
 * [메인 화면](./project_test/src/main/webapp/WEB-INF/views/main/infinite/mainscroll.jsp) - jsp
-* 
+
+![img](md-images/o47Dt_XKRPQ0C48ecdXjOLn4xa9IZdTp24E5ITj6VNaVOjzbx9q3ILNPyRJNPeqN5aWtBzRLlEzFNxy8Br9RycBS67Q6gJSmWcp-TRk0YRHNMrRugbrf4ILaqW9OANigjHSiRFSk87w)
 
 ## Login
 
@@ -41,3 +42,10 @@
 
 ![img](md-images/wFHihTABGRm9wRqL3l_gVvAF-ZPGl-m13639H0zlXq4nvggEW4YG65wmluEJfXnmUdGxsRIv7Rg3xqUv5-E2tuRUdD7M_XcYq2JNdl-mheJqwcN76s3Hpb95P2_6aFmaVfgFUyCA-AI)![img](md-images/E-krFmlzj5x5ojalVE0Sp2jVr-NEKEmL2lkZ87H4oMF7RynwARFmyBvJfrAWOBkoZkdy9HpWk1girlHmiVZXoEC6BFm11c2GGsNGXLBZ8-8ejufWaaF8aqyzlqq3Pu3cBWhUBlKU3Wo)
 
+## DB_Mapping
+
+* [MysqlDB mapping](./project_test/src/main/resources/mybatis/mysql-mapping.xml)
+* [OracleDB mapping](./project_test/src/main/resources/mybatis/sql-mapping.xml)
+* DB Diagram
+
+![img](md-images/gJiTLr9CXqXOjtDhLD0EXmuf6UhCAzlfBKH00P_dx49JUyHX0WpvrRjv3UOlGnTvEsxmIOSr6eKpprJQhwJ6vS1O1iHZ1nA-dqsabt0kiB282zkld56q0ax_uHPI4inAl25A01SX_Xw)
